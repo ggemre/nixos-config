@@ -1,14 +1,9 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
     ];
 
   # Bootloader.
@@ -80,7 +75,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd 'WLR_RENDERER_ALLOW_SOFTWARE=1 Hyprland'";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd /home/dme/scripts/start";
 	user = "dme";
       };
     };
@@ -121,22 +116,12 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.users.dme = { pkgs, ... }: let
-    flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
-    hyprland = (import flake-compat {
-      src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
-    }).defaultNix;
-  in {
-    imports = [
-      hyprland.homeManagerModules.default
-    ];
-    home.stateVersion = "23.05";
-    # wayland.windowManager.hyprland = {
-    #   enable = true;
-    #   xwayland.enable = true;
-    #   systemdIntegration = true;
-    # };
+  systemd.services.my_hello_service = {
+    description = "Test";
+    wantedBy = [ "multi-user.target" ];
+    script = ''
+    #!/user/bin/env sh
+    echo hello > /home/dme/TEST.txt
+    '';
   };
-
 }
