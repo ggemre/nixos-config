@@ -64,11 +64,18 @@
     neovim
     curl
     wayland
-    alacritty
-    librewolf
     waybar
     wofi
   ];
+
+  programs.zsh = {
+    enable = true;
+    syntaxHighlighting.enable = true;
+    enableCompletion = true;
+    ohMyZsh.enable = true;
+    ohMyZsh.theme = "gentoo";
+  };
+  users.defaultUserShell = pkgs.zsh;
 
   programs.hyprland.enable = true;
   services.greetd = {
@@ -122,6 +129,35 @@
       enable = true;
       userName = "ggemre";
       userEmail = "gmoore1@byu.edu";
+    };
+    programs.alacritty = {
+      enable = true;
+      settings = {
+        env.TERM = "xterm-256color";
+        window = {
+	  padding.x = 8;
+	  padding.y = 8;
+        };
+	font = {
+	  normal = {
+	    family = "Fira Code";
+	    style = "Regular";
+	  };
+	  bold = {
+	    family = "Fira Code";
+	    style = "Bold";
+	  };
+	  italic = {
+	    family = "Fira Code";
+	    style = "Italic";
+	  };
+	  bold_italic = {
+	    family = "Fira Code";
+	    style = "Bold Italic";
+	  };
+	  size = 11;
+	};
+      };
     };
     home.file.".config/hypr/hyprland.conf".text = ''
 	# See https://wiki.hyprland.org/Configuring/Monitors/
