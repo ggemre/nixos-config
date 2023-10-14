@@ -1,6 +1,37 @@
 { config, pkgs, ... }:
 
-{
+let theme = {
+  font = "Fira Code";
+  color = {
+    rosewater = "f5e0dc";
+    flamingo = "f2cdcd";
+    pink = "f5c2e7";
+    mauve = "cba6f7";
+    red = "f38ba8";
+    maroon = "eba0ac";
+    peach = "fab387";
+    yellow = "f9e2af";
+    green = "a6e3a1";
+    teal = "94e2d5";
+    sky = "94e2d5";
+    saphire = "74c7ec";
+    blue = "89b4fa";
+    lavender = "b4befe";
+    text = "cdd6f4";
+    subtext1 = "bac2de";
+    subtext0 = "a6adc8";
+    overlay2 = "9399b2";
+    overlay1 = "7f849c";
+    overlay0 = "6c7086";
+    surface2 = "585b70";
+    surface1 = "45475a";
+    surface0 = "313244";
+    base = "1e1e2e";
+    mantle = "181825";
+    crust = "11111b";
+  };
+}; 
+in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -64,7 +95,7 @@
     curl
     wayland
     wofi
-    pure-prompt
+    acpi
   ];
 
   programs.zsh = {
@@ -75,9 +106,11 @@
       sudo = "sudo ";
       vim = "nvim";
     };
-    promptInit = ''
-      autoload -U promptinit; promptinit
-      prompt pure
+    shellInit = ''
+      parse_git_branch() {
+        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+      }
+      PROMPT='%B%F{183}%m%f%F{111}[%f%F{158}%~%f%F{111}]%f%F{111}$(parse_git_branch)%f %F{183}>%f%f%b '
     '';
   };
   users.defaultUserShell = pkgs.zsh;
@@ -137,7 +170,7 @@
     programs.git = {
       enable = true;
       userName = "ggemre";
-      userEmail = "gmoore1@byu.edu";
+      userEmail = "";
     };
     programs.neovim = {
       enable = true;
@@ -153,61 +186,134 @@
         };
 	font = {
 	  normal = {
-	    family = "Fira Code";
+	    family = theme.font;
 	    style = "Regular";
 	  };
 	  bold = {
-	    family = "Fira Code";
+	    family = theme.font;
 	    style = "Bold";
 	  };
 	  italic = {
-	    family = "Fira Code";
+	    family = theme.font;
 	    style = "Italic";
 	  };
 	  bold_italic = {
-	    family = "Fira Code";
+	    family = theme.font;
 	    style = "Bold Italic";
 	  };
-	  size = 11;
+	  size = 9;
+	};
+	colors = {
+	  primary = {
+	    background = "#${theme.color.base}";
+	    foreground = "#${theme.color.text}";
+	    dim_foreground = "#${theme.color.text}";
+	    bright_foreground = "#${theme.color.text}";
+	  };
+	  cursor = {
+	    text = "#${theme.color.base}";
+	    cursor = "#${theme.color.rosewater}";
+	  };
+	  vi_mode_cursor = {
+	    text = "#${theme.color.base}";
+	    cursor = "#${theme.color.lavender}";
+	  };
+	  search = {
+	    matches = {
+	      foreground = "#${theme.color.base}";
+	      background = "#${theme.color.subtext0}";
+	    };
+	    focused_match = {
+	      foreground = "#${theme.color.base}";
+	      background = "#${theme.color.green}";
+	    };
+	    footer_bar = {
+	      foreground = "#${theme.color.base}";
+	      background = "#${theme.color.subtext0}";
+	    };
+	  };
+	  hints = {
+	    start = {
+	      foreground = "#${theme.color.base}";
+	      background = "#${theme.color.yellow}";
+	    };
+	    end = {
+	      foreground = "#${theme.color.base}";
+	      background = "#${theme.color.subtext0}";
+	    };
+	  };
+	  selection = {
+	    text = "#${theme.color.base}";
+	    background = "#${theme.color.rosewater}";
+	  };
+	  normal = {
+	    black = "#${theme.color.surface1}";
+	    red = "#${theme.color.red}";
+	    green = "#${theme.color.green}";
+	    yellow = "#${theme.color.yellow}";
+	    blue = "#${theme.color.blue}";
+	    magenta = "#${theme.color.pink}";
+	    cyan = "#${theme.color.teal}";
+	    white = "#${theme.color.subtext1}";
+	  };
+	  bright = {
+	    black = "#${theme.color.surface1}";
+	    red = "#${theme.color.red}";
+	    green = "#${theme.color.green}";
+	    yellow = "#${theme.color.yellow}";
+	    blue = "#${theme.color.blue}";
+	    magenta = "#${theme.color.pink}";
+	    cyan = "#${theme.color.teal}";
+	    white = "#${theme.color.subtext1}";
+	  };
+	  dim = {
+	    black = "#${theme.color.surface1}";
+	    red = "#${theme.color.red}";
+	    green = "#${theme.color.green}";
+	    yellow = "#${theme.color.yellow}";
+	    blue = "#${theme.color.blue}";
+	    magenta = "#${theme.color.pink}";
+	    cyan = "#${theme.color.teal}";
+	    white = "#${theme.color.subtext1}";
+	  };
 	};
       };
     };
     programs.waybar = {
       enable = true;
+      systemd.enable = true;
       settings = {
         main = {
 	  layer = "top";
 	  position = "top";
-	  height = 30;
+	  height = 22;
 	  "modules-left" = [
 	    "hyprland/workspaces"
 	  ];
 	  "modules-center" = [ "clock" ];
 	  "modules-right" = [
+	    "network"
 	    "battery"
-	    "pulseaudio"
 	  ];
 	  "hyprland/workspaces" = {
 	    format = "{name}";
 	  };
 	  clock = {
 	    interval = 1;
-	    format = "{:%I:%M %p}";
+	    format = "{:%H:%M}";
+	    tooltip = true;
+	  };
+	  network = {
+	    format-wifi = "wifi";
+	    format-ethernet = "ether";
+	    format-disconnected = "none";
 	    tooltip = false;
 	  };
 	  battery = {
-	    interval = 10;
-	    states = {
-	      warning = 20;
-	      critical = 10;
-            };
-	    format = "{capacity}%";
-	    tooltip = false;
-	  };
-	  pulseaudio = {
-	    "scroll-step" = 1;
-	    format = "{volume}%";
-	    tooltip = false;
+	    format = "{capacity}";
+	    format-charging = "{capacity}";
+	    format-full = "{capacity}";
+	    bat-compatibility = true;
 	  };
 	};
       };
@@ -215,8 +321,42 @@
         * {
 	  border: none;
 	  border-radius: 8;
-	  font-family: Fira Code;
+	  font-family: ${theme.font};
+	  font-size: 11px;
+	  font-weight: 500;
         }
+	window#waybar {
+	  background: transparent;
+        }
+	#workspaces {
+	  border-radius: 10px;
+	  background-color: #${theme.color.base};
+	  color: #${theme.color.rosewater};
+	  margin-top: 15px;
+	  margin-right: 15px;
+	  padding-top: 1px;
+	  padding-left: 10px;
+	  padding-right: 10px;
+	}
+	#workspaces button {
+	  background-color: #${theme.color.base};
+	  color: #${theme.color.rosewater};
+	  border-bottom: 5px solid #${theme.color.base};
+	  padding: 0;
+	  margin: 0;
+	}
+	#workspaces button.active {
+	  border-bottom: 5px solid #${theme.color.mauve};
+	}
+	#clock, #battery, #network, #pulseaudio {
+	  border-radius: 10px;
+	  background-color: #${theme.color.base};
+	  color: #${theme.color.rosewater};
+	  margin-top: 15px;
+	  padding-left: 10px;
+	  padding-right: 10px;
+	  margin-right: 15px;
+	}
       '';
     };
     home.file.".config/hypr/hyprland.conf".text = ''
@@ -255,8 +395,8 @@
 	    gaps_in = 5
 	    gaps_out = 20
 	    border_size = 2
-	    col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-	    col.inactive_border = rgba(595959aa)
+	    col.active_border = 0xff${theme.color.blue} 0xff${theme.color.lavender} 45deg
+	    col.inactive_border = 0xff${theme.color.overlay2}
 
 	    layout = dwindle
 	}
@@ -275,7 +415,7 @@
 	    drop_shadow = yes
 	    shadow_range = 4
 	    shadow_render_power = 3
-	    col.shadow = rgba(1a1a1aee)
+	    col.shadow = 0xff${theme.color.surface1}
 	}
 
 	animations {
