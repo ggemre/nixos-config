@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let theme = {
   font = "Fira Code";
@@ -55,6 +55,19 @@ in {
   # Set your time zone.
   time.timeZone = "America/Denver";
 
+  hardware.pulseaudio.enable = true;
+  
+  # MacBook specific settings
+  hardware.facetimehd.enable = false;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  boot.kernelParams = [
+    "acpi_backlight=vendor"
+    "acpi_osi="
+  ];
+  services.xserver.deviceSection = lib.mkDefault ''
+    Option "TearFree" "true"
+  '';
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -80,7 +93,7 @@ in {
   users.users.dme = {
     isNormalUser = true;
     description = "dme";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
     packages = with pkgs; [];
   };
 
@@ -89,6 +102,7 @@ in {
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.pulseaudio = true;
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
@@ -96,6 +110,7 @@ in {
     wayland
     wofi
     acpi
+    wbg
   ];
 
   programs.zsh = {
@@ -104,13 +119,13 @@ in {
     syntaxHighlighting.enable = true;
     shellAliases = {
       sudo = "sudo ";
-      vim = "nvim";
     };
     shellInit = ''
       parse_git_branch() {
         git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
       }
-      PROMPT='%B%F{183}%m%f%F{111}[%f%F{158}%~%f%F{111}]%f%F{111}$(parse_git_branch)%f %F{183}>%f%f%b '
+      setopt PROMPT_SUBST
+      PROMPT='%n@%m %~ $(parse_git_branch) '
     '';
   };
   users.defaultUserShell = pkgs.zsh;
@@ -140,11 +155,11 @@ in {
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
@@ -166,23 +181,45 @@ in {
   system.stateVersion = "23.05"; # Did you read the comment?
 
   home-manager.users.dme = { pkgs, ... }: {
-    home.stateVersion = "23.05";
+    home = {
+      stateVersion = "23.05";
+      pointerCursor = {
+        gtk.enable = true;
+        x11.enable = true;
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Classic";
+        size = 10;
+      };
+    };
     programs.git = {
       enable = true;
-      userName = "ggemre";
+      userName = "";
       userEmail = "";
     };
-    programs.neovim = {
+    programs.helix = {
       enable = true;
       defaultEditor = true;
+      settings = {
+        theme = "catppuccin_mocha";
+        keys.normal = {
+      	  j = "move_char_left";
+      	  k = "move_visual_line_down";
+      	  l = "move_visual_line_up";
+      	  ";" = "move_char_right";
+      	  h = "collapse_selection";
+        };
+      };
+    };
+    programs.firefox = {
+      enable = true;
     };
     programs.alacritty = {
       enable = true;
       settings = {
         env.TERM = "xterm-256color";
         window = {
-	  padding.x = 8;
-	  padding.y = 8;
+      	  padding.x = 8;
+      	  padding.y = 8;
         };
 	font = {
 	  normal = {
@@ -284,38 +321,40 @@ in {
       systemd.enable = true;
       settings = {
         main = {
-	  layer = "top";
-	  position = "top";
-	  height = 22;
-	  "modules-left" = [
-	    "hyprland/workspaces"
-	  ];
-	  "modules-center" = [ "clock" ];
-	  "modules-right" = [
-	    "network"
-	    "battery"
-	  ];
-	  "hyprland/workspaces" = {
-	    format = "{name}";
-	  };
-	  clock = {
-	    interval = 1;
-	    format = "{:%H:%M}";
-	    tooltip = true;
-	  };
-	  network = {
-	    format-wifi = "wifi";
-	    format-ethernet = "ether";
-	    format-disconnected = "none";
-	    tooltip = false;
-	  };
-	  battery = {
-	    format = "{capacity}";
-	    format-charging = "{capacity}";
-	    format-full = "{capacity}";
-	    bat-compatibility = true;
-	  };
-	};
+      	  layer = "top";
+      	  position = "top";
+      	  height = 22;
+      	  "modules-left" = [
+      	    "hyprland/workspaces"
+      	  ];
+      	  "modules-center" = [ "clock" ];
+      	  "modules-right" = [
+      	    "network"
+      	    "pulseaudio"
+      	    "cpu"
+      	    "battery"
+      	  ];
+      	  "hyprland/workspaces" = {
+      	    format = "{name}";
+      	  };
+      	  clock = {
+      	    interval = 1;
+      	    format = "{:%H:%M}";
+      	    tooltip = true;
+      	  };
+      	  network = {
+      	    format-wifi = "wifi";
+      	    format-ethernet = "ether";
+      	    format-disconnected = "none";
+      	    tooltip = false;
+      	  };
+      	  battery = {
+      	    format = "{capacity}";
+      	    format-charging = "{capacity}";
+      	    format-full = "{capacity}";
+      	    bat-compatibility = true;
+      	  };
+      	};
       };
       style = ''
         * {
@@ -348,7 +387,7 @@ in {
 	#workspaces button.active {
 	  border-bottom: 5px solid #${theme.color.mauve};
 	}
-	#clock, #battery, #network, #pulseaudio {
+	#clock, #battery, #network, #pulseaudio, #cpu {
 	  border-radius: 10px;
 	  background-color: #${theme.color.base};
 	  color: #${theme.color.rosewater};
@@ -364,7 +403,7 @@ in {
 	monitor=,preferred,auto,auto
 
 	# Execute your favorite apps at launch
-	exec-once = waybar # & hyprpaper & firefox
+	exec-once = waybar & wbg 'find $HOME/media/images/wallpapers | shuf -n 1'
 
 	# Source a file (multi-file configs)
 	# source = ~/.config/hypr/myColors.conf
@@ -467,6 +506,7 @@ in {
 
 	# Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 	bind = $mainMod, T, exec, alacritty
+  bind = $mainMod, B, exec, firefox
 	bind = $mainMod, C, killactive, 
 	bind = $mainMod, M, exit, 
 	bind = $mainMod, V, togglefloating, 
