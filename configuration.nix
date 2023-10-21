@@ -55,6 +55,7 @@ in {
   # Set your time zone.
   time.timeZone = "America/Denver";
 
+  # Audio settings
   hardware.pulseaudio.enable = true;
 
   # MacBook specific settings
@@ -81,6 +82,13 @@ in {
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Generation garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than-7d";
+  };
+
   # Configure keymap in X11
   # services.xserver = {
   #   layout = "us";
@@ -92,7 +100,7 @@ in {
     isNormalUser = true;
     description = "dme";
     extraGroups = [ "networkmanager" "wheel" "audio" ];
-    packages = with pkgs; [ ];
+    # packages = with pkgs; [ ];
   };
 
   # Enable automatic login for the user.
@@ -102,20 +110,17 @@ in {
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.pulseaudio = true;
 
-  # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [ curl wayland wofi acpi wbg ];
+  # List packages installed in system profile.
+  environment.systemPackages = with pkgs; [ curl wayland wofi acpi wbg pure-prompt ];
 
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     shellAliases = { sudo = "sudo "; };
-    shellInit = ''
-      parse_git_branch() {
-        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-      }
-      setopt PROMPT_SUBST
-      PROMPT='%n@%m %~ $(parse_git_branch) '
+    promptInit = ''
+      autoload -U promptinit; promptinit
+      prompt pure 
     '';
   };
   users.defaultUserShell = pkgs.zsh;
@@ -130,7 +135,7 @@ in {
     settings = {
       default_session = {
         command =
-          "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd /home/dme/scripts/start";
+          "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
         user = "dme";
       };
     };
@@ -179,7 +184,7 @@ in {
         x11.enable = true;
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Classic";
-        size = 10;
+        size = 20;
       };
     };
     programs.git = {
@@ -383,13 +388,15 @@ in {
       	monitor=,preferred,auto,auto
 
       	# Execute your favorite apps at launch
-      	exec-once = waybar & wbg 'find $HOME/media/images/wallpapers | shuf -n 1'
+      	exec-once = waybar & find $HOME/media/images/wallpapers -type f | shuf -n 1 | xargs wbg
 
       	# Source a file (multi-file configs)
       	# source = ~/.config/hypr/myColors.conf
 
       	# Some default env vars.
-      	env = XCURSOR_SIZE,24
+      	env = XCURSOR_SIZE,14
+        env = WLR_NO_HARDWARE_CURSORS,1
+        env = WLR_RENDERER_ALLOW_SOFTWARE,1
 
       	# For all categories, see https://wiki.hyprland.org/Configuring/Variables/
       	input {
@@ -414,7 +421,7 @@ in {
       	    gaps_in = 5
       	    gaps_out = 20
       	    border_size = 2
-      	    col.active_border = 0xff${theme.color.blue} 0xff${theme.color.lavender} 45deg
+      	    col.active_border = 0xff${theme.color.maroon} 0xff${theme.color.lavender} 45deg
       	    col.inactive_border = 0xff${theme.color.overlay2}
 
       	    layout = dwindle
@@ -492,13 +499,17 @@ in {
       	bind = $mainMod, V, togglefloating, 
       	bind = $mainMod, R, exec, wofi --show drun
       	bind = $mainMod, P, pseudo, # dwindle
-      	bind = $mainMod, J, togglesplit, # dwindle
+      	bind = $mainMod, H, togglesplit, # dwindle
 
-      	# Move focus with mainMod + arrow keys
+      	# Move focus with mainMod + arrow/hx keys
       	bind = $mainMod, left, movefocus, l
       	bind = $mainMod, right, movefocus, r
       	bind = $mainMod, up, movefocus, u
       	bind = $mainMod, down, movefocus, d
+        bind = $mainMod, J, movefocus, l
+        bind = $mainMod, K, movefocus, d
+        bind = $mainMod, L, movefocus, u
+        bind = $mainMod, semicolon, movefocus, r
 
       	# Switch workspaces with mainMod + [0-9]
       	bind = $mainMod, 1, workspace, 1
