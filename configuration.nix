@@ -146,6 +146,7 @@ in {
     noto-fonts-cjk
     noto-fonts-emoji
     fira-code
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
     fira-code-symbols
   ];
 
@@ -179,12 +180,15 @@ in {
   home-manager.users.dme = { pkgs, ... }: {
     home = {
       stateVersion = "23.05";
+      sessionVariables = {
+        MOZ_ENABLE_WAYLAND = 1;
+      };
       pointerCursor = {
         gtk.enable = true;
         x11.enable = true;
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Classic";
-        size = 20;
+        size = 10;
       };
     };
     programs.git = {
@@ -206,7 +210,43 @@ in {
         };
       };
     };
-    programs.firefox = { enable = true; };
+    programs.firefox = { 
+      enable = true; 
+      package = pkgs.firefox-wayland;
+      profiles = {
+        main = {
+          id = 0;
+          name = "main";
+          search = {
+            force = true;
+            default = "DuckDuckGo";
+            engines = {
+              "Nix Packages" = {
+                urls = [{
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    { name = "type"; value = "packages"; }
+                    { name = "query"; value = "{searchTerms}"; }
+                  ];
+                }];
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                definedAliases = [ "@np" ];
+              };
+            };
+          };
+          settings = {
+            "general.smoothScroll" = true;
+          };
+          userChrome = ''
+            #TabsToolbar { visibility: collapse !important; }
+            #sidebar-header { visibility: collapse !important; }
+            #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] {
+              visibility: collapse !important;
+            }
+          '';
+        };
+      };
+    };
     programs.alacritty = {
       enable = true;
       settings = {
@@ -318,20 +358,38 @@ in {
           layer = "top";
           position = "top";
           height = 22;
-          "modules-left" = [ "hyprland/workspaces" ];
-          "modules-center" = [ "clock" ];
-          "modules-right" = [ "network" "pulseaudio" "cpu" "battery" ];
+          margin-top = 0;
+          margin-bottom = 3;
+          modules-left = [ "hyprland/workspaces" ];
+          modules-center = [ "clock" ];
+          modules-right = [ "network" "pulseaudio" "cpu" "battery" ];
           "hyprland/workspaces" = { format = "{name}"; };
           clock = {
-            interval = 1;
-            format = "{:%H:%M}";
-            tooltip = true;
+            interval = 60;
+            format = "{:%I:%M %p}";
+            format-alt = "{:%a %b %d}";
+            tooltip = false;
           };
           network = {
-            format-wifi = "wifi";
-            format-ethernet = "ether";
-            format-disconnected = "none";
+            format-wifi = "󰖩";
+            format-ethernet = "󰖩";
+            format-disconnected = "󰖪";
             tooltip = false;
+          };
+          pulseaudio = {
+            format = "{icon} {volume}%";
+            format-icons = {
+              default = [
+                "󰕿"
+                "󰖀"
+                "󰕾"
+              ];
+            };
+          };
+          cpu = {
+            interval = 10;
+            format = "  {}%";
+            max-length = 10;
           };
           battery = {
             format = "{capacity}";
@@ -342,23 +400,20 @@ in {
         };
       };
       style = ''
-                * {
+          * {
         	  border: none;
-        	  border-radius: 8;
         	  font-family: ${theme.font};
         	  font-size: 11px;
-        	  font-weight: 500;
-                }
+        	  font-weight: 400;
+          }
         	window#waybar {
-        	  background: transparent;
-                }
+        	  background: rgba(43, 48, 59, 0.5);
+          }
         	#workspaces {
-        	  border-radius: 10px;
+        	  border-radius: 20px;
         	  background-color: #${theme.color.base};
         	  color: #${theme.color.rosewater};
-        	  margin-top: 15px;
-        	  margin-right: 15px;
-        	  padding-top: 1px;
+        	  margin-left: 8px;
         	  padding-left: 10px;
         	  padding-right: 10px;
         	}
@@ -373,14 +428,27 @@ in {
         	  border-bottom: 5px solid #${theme.color.mauve};
         	}
         	#clock, #battery, #network, #pulseaudio, #cpu {
-        	  border-radius: 10px;
+        	  border-radius: 20px;
         	  background-color: #${theme.color.base};
         	  color: #${theme.color.rosewater};
-        	  margin-top: 15px;
         	  padding-left: 10px;
         	  padding-right: 10px;
-        	  margin-right: 15px;
+        	  margin-right: 8px;
         	}
+          #clock {
+            background: transparent;
+            color: #${theme.color.text}; 
+            font-weight: 500;
+          }
+          #network {
+            color: #${theme.color.sky};
+          }
+          #pulseaudio {
+            color: #${theme.color.peach};
+          }
+          #cpu {
+            color: #${theme.color.yellow};
+          }
       '';
     };
     home.file.".config/hypr/hyprland.conf".text = ''
@@ -394,7 +462,7 @@ in {
       	# source = ~/.config/hypr/myColors.conf
 
       	# Some default env vars.
-      	env = XCURSOR_SIZE,14
+      	env = XCURSOR_SIZE,10
         env = WLR_NO_HARDWARE_CURSORS,1
         env = WLR_RENDERER_ALLOW_SOFTWARE,1
 
@@ -419,7 +487,7 @@ in {
       	    # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
       	    gaps_in = 5
-      	    gaps_out = 20
+      	    gaps_out = 5
       	    border_size = 2
       	    col.active_border = 0xff${theme.color.maroon} 0xff${theme.color.lavender} 45deg
       	    col.inactive_border = 0xff${theme.color.overlay2}
@@ -491,7 +559,6 @@ in {
       	# See https://wiki.hyprland.org/Configuring/Keywords/ for more
       	$mainMod = SUPER
 
-      	# Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       	bind = $mainMod, T, exec, alacritty
         bind = $mainMod, B, exec, firefox
       	bind = $mainMod, C, killactive, 
@@ -500,6 +567,7 @@ in {
       	bind = $mainMod, R, exec, wofi --show drun
       	bind = $mainMod, P, pseudo, # dwindle
       	bind = $mainMod, H, togglesplit, # dwindle
+        bind = $mainMod SHIFT, W, exec, find $HOME/media/images/wallpapers -type f | shuf -n 1 | xargs wbg
 
       	# Move focus with mainMod + arrow/hx keys
       	bind = $mainMod, left, movefocus, l
