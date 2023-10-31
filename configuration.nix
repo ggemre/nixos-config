@@ -111,7 +111,7 @@ in {
   nixpkgs.config.pulseaudio = true;
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [ curl wayland wofi acpi wbg pure-prompt ];
+  environment.systemPackages = with pkgs; [ curl wayland acpi wbg wtype pure-prompt ];
 
   programs.zsh = {
     enable = true;
@@ -207,8 +207,160 @@ in {
           l = "move_visual_line_up";
           ";" = "move_char_right";
           h = "collapse_selection";
+          "A-h" = "flip_selections";
+          "A-j" = "select_prev_sibling";
+          "A-k" = "shrink_selection";
+          "A-l" = "expand_selection";
+          "A-;" = "select_next_sibling";
+          z = { k = "scroll_down"; l = "scroll_up"; };
+          g = { j = "goto_line_start"; ";" = "goto_line_end"; };
+          "C-w" = { 
+            j = "jump_view_left";
+            "C-j" = "jump_view_left";
+            k = "jump_view_down";
+            "C-k" = "jump_view_down";
+            l = "jump_view_up";
+            "C-l" = "jump_view_up";
+            ";" = "jump_view_right";
+            "C-;" = "jump_view_right";
+          };
+        };
+        keys.select = {
+          j = "extend_char_left";
+          k = "extend_visual_line_down";
+          l = "extend_visual_line_up";
+          ";" = "extend_char_right";
+          h = "collapse_selection";
+          "A-h" = "flip_selections";
+          "A-j" = "select_prev_sibling";
+          "A-k" = "shrink_selection";
+          "A-l" = "expand_selection";
+          "A-;" = "select_next_sibling";
+          z = { k = "scroll_down"; l = "scroll_up"; };
+          g = { j = "goto_line_start"; ";" = "goto_line_end"; };
+          "C-w" = { 
+            j = "jump_view_left";
+            "C-j" = "jump_view_left";
+            k = "jump_view_down";
+            "C-k" = "jump_view_down";
+            l = "jump_view_up";
+            "C-l" = "jump_view_up";
+            ";" = "jump_view_right";
+            "C-;" = "jump_view_right";
+          };
         };
       };
+    };
+    programs.rofi = {
+      enable = true;
+      package = pkgs.rofi-wayland;
+      font = theme.font;
+      plugins = with pkgs; [
+        rofi-calc
+        rofi-emoji
+      ];
+      theme = builtins.toString (pkgs.writeText "rofi-theme" ''
+          * {
+            transparent: #11111B;
+            bg-col:  #181825;
+            bg-col-light: #181825;
+            border-col: #181825;
+            selected-col: #1E1D2F;
+            blue: #7aa2f7;
+            blue-transparent: #7aa2f7;
+            fg-col: #D9E0EE;
+            fg-col2: #F28FAD;
+            grey: #D9E0EE;
+            width: 600;
+            font: "${theme.font} 14";
+          }
+          element-text, element-icon , mode-switcher {
+            background-color: @transparent;
+            text-color:       inherit;
+          }
+          window {
+            transparency: "real";
+            location: center;
+            anchor: center;
+            orientation: vertical;
+            height: 350px;
+            width: 600px;
+            border: 3px;
+            border-color: @border-col;
+            background-color: @bg-col;
+            border-radius: 12px;
+          }
+          mainbox {
+            background-color: @transparent;
+            children: [mode-switcher, message, inputbar, listview];
+          }
+          mode-switcher {
+            spacing: 0;
+          }
+          button selected {
+            background-color: @blue;
+            text-color: @selected-col;
+          }
+          message {
+            background-color: @blue-transparent;
+            padding: 16px 0px 20px;
+          }
+          textbox {
+            /* left-padding = 25px + 5px. 25px is the icon size. */
+            padding: 5px 5px 5px 30px;
+            background-color: @transparent;
+            text-color: @fg-col;
+          }
+          inputbar {
+            children: [entry];
+            background-color: @transparent;
+            border-radius: 5px;
+            padding: 2px;
+          }
+          prompt {
+            background-color: @blue;
+            padding: 6px;
+            text-color: @bg-col;
+            border-radius: 3px;
+            margin: 20px 0px 0px 20px;
+          }
+          textbox-prompt-colon {
+            expand: false;
+            str: ":";
+          }
+          entry {
+            padding: 6px;
+            margin: 20px 0px 0px 10px;
+            text-color: @fg-col;
+            background-color: @transparent;
+          }
+          listview {
+            border: 0px 0px 0px;
+            padding: 6px 0px 0px;
+            margin: 10px 0px 0px 20px;
+            columns: 1;
+            background-color: @transparent;
+          }
+          element {
+            padding: 5px;
+            background-color: @transparent;
+            text-color: @fg-col  ;
+          }
+          element-icon {
+            size: 25px;
+          }
+          element selected {
+            background-color: @selected-col ;
+            text-color: @fg-col2  ;
+          }
+          button {
+            padding: 10px;
+            background-color: @transparent;
+            text-color: @grey;
+            vertical-align: 0.5;
+            horizontal-align: 0.5;
+          }
+      '');
     };
     programs.firefox = { 
       enable = true; 
@@ -555,7 +707,6 @@ in {
       	# windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
       	# See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 
-
       	# See https://wiki.hyprland.org/Configuring/Keywords/ for more
       	$mainMod = SUPER
 
@@ -564,10 +715,13 @@ in {
       	bind = $mainMod, C, killactive, 
       	bind = $mainMod, M, exit, 
       	bind = $mainMod, V, togglefloating, 
-      	bind = $mainMod, R, exec, wofi --show drun
       	bind = $mainMod, P, pseudo, # dwindle
       	bind = $mainMod, H, togglesplit, # dwindle
         bind = $mainMod SHIFT, W, exec, find $HOME/media/images/wallpapers -type f | shuf -n 1 | xargs wbg
+
+        bind = $mainMod, SPACE, exec, rofi -show drun
+        bind = $mainMod, K, exec, rofi -show calc -modi calc -no-show-match -no-sort
+        bind = $mainMod, E, exec, rofi -show emoji -modi emoji -emoji-mode insert
 
       	# Move focus with mainMod + arrow/hx keys
       	bind = $mainMod, left, movefocus, l
