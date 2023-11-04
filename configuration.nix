@@ -111,7 +111,7 @@ in {
   nixpkgs.config.pulseaudio = true;
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [ curl wayland acpi wbg wtype pure-prompt ];
+  environment.systemPackages = with pkgs; [ curl wayland acpi wbg wtype wl-clipboard pure-prompt bemoji rofi-power-menu ];
 
   programs.zsh = {
     enable = true;
@@ -257,26 +257,14 @@ in {
       font = theme.font;
       plugins = with pkgs; [
         rofi-calc
-        rofi-emoji
       ];
       theme = builtins.toString (pkgs.writeText "rofi-theme" ''
           * {
-            transparent: #11111B;
-            bg-col:  #181825;
-            bg-col-light: #181825;
-            border-col: #181825;
-            selected-col: #1E1D2F;
-            blue: #7aa2f7;
-            blue-transparent: #7aa2f7;
-            fg-col: #D9E0EE;
-            fg-col2: #F28FAD;
-            grey: #D9E0EE;
-            width: 600;
-            font: "${theme.font} 14";
+            font: "${theme.font} 10";
           }
           element-text, element-icon , mode-switcher {
-            background-color: @transparent;
-            text-color:       inherit;
+            background-color: #${theme.color.base};
+            text-color: inherit;
           }
           window {
             transparency: "real";
@@ -284,43 +272,42 @@ in {
             anchor: center;
             orientation: vertical;
             height: 350px;
-            width: 600px;
+            width: 500px;
             border: 3px;
-            border-color: @border-col;
-            background-color: @bg-col;
+            border-color: #${theme.color.lavender};
+            background-color: #${theme.color.surface0};
             border-radius: 12px;
           }
           mainbox {
-            background-color: @transparent;
+            background-color: #${theme.color.base};
             children: [mode-switcher, message, inputbar, listview];
           }
           mode-switcher {
             spacing: 0;
           }
           button selected {
-            background-color: @blue;
-            text-color: @selected-col;
+            background-color: #${theme.color.blue};
+            text-color: #${theme.color.surface2};
           }
           message {
-            background-color: @blue-transparent;
-            padding: 16px 0px 20px;
+            background-color: #${theme.color.base};
+            padding: 2px 0px 2px;
           }
           textbox {
-            /* left-padding = 25px + 5px. 25px is the icon size. */
             padding: 5px 5px 5px 30px;
-            background-color: @transparent;
-            text-color: @fg-col;
+            background-color: #${theme.color.base};
+            text-color: #${theme.color.rosewater};
           }
           inputbar {
             children: [entry];
-            background-color: @transparent;
+            background-color: #${theme.color.base};
             border-radius: 5px;
             padding: 2px;
           }
           prompt {
-            background-color: @blue;
+            background-color: #${theme.color.surface0};
             padding: 6px;
-            text-color: @bg-col;
+            text-color: #${theme.color.text};
             border-radius: 3px;
             margin: 20px 0px 0px 20px;
           }
@@ -329,34 +316,34 @@ in {
             str: ":";
           }
           entry {
-            padding: 6px;
-            margin: 20px 0px 0px 10px;
-            text-color: @fg-col;
-            background-color: @transparent;
+            padding: 6px 0px 0px;
+            margin: 10px 0px 0px 10px;
+            text-color: #${theme.color.rosewater};
+            background-color: #${theme.color.base};
           }
           listview {
             border: 0px 0px 0px;
             padding: 6px 0px 0px;
-            margin: 10px 0px 0px 20px;
+            margin: 10px 0px 0px 10px;
             columns: 1;
-            background-color: @transparent;
+            background-color: #${theme.color.base};
           }
           element {
             padding: 5px;
-            background-color: @transparent;
-            text-color: @fg-col  ;
+            background-color: #${theme.color.base};
+            text-color: #${theme.color.rosewater} ;
           }
           element-icon {
             size: 25px;
           }
           element selected {
-            background-color: @selected-col ;
-            text-color: @fg-col2  ;
+            background-color: #${theme.color.surface2};
+            text-color: #${theme.color.rosewater};
           }
           button {
             padding: 10px;
-            background-color: @transparent;
-            text-color: @grey;
+            background-color: #${theme.color.base};
+            text-color: #${theme.color.text};
             vertical-align: 0.5;
             horizontal-align: 0.5;
           }
@@ -388,6 +375,35 @@ in {
           };
           settings = {
             "general.smoothScroll" = true;
+            "devtools.theme" = "dark";
+            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+            "toolkit.telemetry.enabled" = false;
+            "toolkit.telemetry.unified" = false;
+            "toolkit.telemetry.archive.enabled" = false;
+            "experiments.supported" = false;
+            "experiments.enabled" = false;
+            "datareporting.healthreport.uploadEnabled" = false;
+            "datareporting.healthreport.service.enabled" = false;
+            "datareporting.policy.dataSubmissionEnabled" = false;
+            "signon.rememberSignons" = false;
+            "browser.shell.checkDefaultBrowser" = false;
+            "browser.newtabpage.enabled" = false;
+            "browser.newtabpage.activity-stream.enabled" = false;
+            "browser.newtabpage.enhanced" = false;
+            "browser.newtab.preload" = false;
+            "browser.newtabpage.directory.ping" = "";
+            "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
+            "extensions.htmlaboutaddons.recommendations.enabled" = false;
+            "extensions.htmlaboutaddons.discover.enabled" = false;
+            "extensions.pocket.enabled" = false;
+            "app.normandy.enabled" = false;
+            "app.normandy.api_url" = "";
+            "extensions.shield-recipe-client.enabled" = false;
+            "app.shield.optoutstudies.enabled" = false;
+            "dom.battery.enabled" = false;
+            "beacon.enabled" = false;
+            "browser.send_pings" = false;
+            "browser.fixup.alternate.enabled" = false;
           };
           userChrome = ''
             #TabsToolbar { visibility: collapse !important; }
@@ -514,8 +530,8 @@ in {
           margin-bottom = 3;
           modules-left = [ "hyprland/workspaces" ];
           modules-center = [ "clock" ];
-          modules-right = [ "network" "pulseaudio" "cpu" "battery" ];
-          "hyprland/workspaces" = { format = "{name}"; };
+          modules-right = [ "network" "pulseaudio" "cpu" "battery" "custom/power" ];
+          "hyprland/workspaces" = { format = ""; };
           clock = {
             interval = 60;
             format = "{:%I:%M %p}";
@@ -549,6 +565,11 @@ in {
             format-full = "{capacity}";
             bat-compatibility = true;
           };
+          "custom/power" = {
+            format = "⏻";
+            on-click = "rofi -show p -modi p:'rofi-power-menu --no-symbols'";
+            tooltip = false;
+          };
         };
       };
       style = ''
@@ -564,10 +585,11 @@ in {
         	#workspaces {
         	  border-radius: 20px;
         	  background-color: #${theme.color.base};
-        	  color: #${theme.color.rosewater};
+        	  color: #${theme.color.subtext1};
         	  margin-left: 8px;
-        	  padding-left: 10px;
-        	  padding-right: 10px;
+        	  padding-left: 7px;
+        	  padding-right: 7px;
+            font-size: 7px;
         	}
         	#workspaces button {
         	  background-color: #${theme.color.base};
@@ -576,15 +598,18 @@ in {
         	  padding: 0;
         	  margin: 0;
         	}
+          #workspaces:hover {
+            color: #${theme.color.text};
+          }
         	#workspaces button.active {
-        	  border-bottom: 5px solid #${theme.color.mauve};
+        	  color: #${theme.color.green};
         	}
-        	#clock, #battery, #network, #pulseaudio, #cpu {
+        	#clock, #battery, #network, #pulseaudio, #cpu, #custom-power {
         	  border-radius: 20px;
         	  background-color: #${theme.color.base};
         	  color: #${theme.color.rosewater};
         	  padding-left: 10px;
-        	  padding-right: 10px;
+        	  padding-right: 12px;
         	  margin-right: 8px;
         	}
           #clock {
@@ -600,6 +625,9 @@ in {
           }
           #cpu {
             color: #${theme.color.yellow};
+          }
+          #custom-power {
+            color: #${theme.color.rosewater};
           }
       '';
     };
@@ -712,7 +740,7 @@ in {
 
       	bind = $mainMod, T, exec, alacritty
         bind = $mainMod, B, exec, firefox
-      	bind = $mainMod, C, killactive, 
+      	bind = $mainMod, Q, killactive, 
       	bind = $mainMod, M, exit, 
       	bind = $mainMod, V, togglefloating, 
       	bind = $mainMod, P, pseudo, # dwindle
@@ -720,9 +748,9 @@ in {
         bind = $mainMod SHIFT, W, exec, find $HOME/media/images/wallpapers -type f | shuf -n 1 | xargs wbg
 
         bind = $mainMod, SPACE, exec, rofi -show drun
-        bind = $mainMod, K, exec, rofi -show calc -modi calc -no-show-match -no-sort
-        bind = $mainMod, E, exec, rofi -show emoji -modi emoji -emoji-mode insert
-
+        bind = $mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -no-persist-history -hint-welcome "" > /dev/null
+        bind = $mainMod, E, exec, bemoji -t -n
+                
       	# Move focus with mainMod + arrow/hx keys
       	bind = $mainMod, left, movefocus, l
       	bind = $mainMod, right, movefocus, r
