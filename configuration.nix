@@ -89,12 +89,6 @@ in {
     options = "--delete-older-than-7d";
   };
 
-  # Configure keymap in X11
-  # services.xserver = {
-  #   layout = "us";
-  #   xkbVariant = "";
-  # };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dme = {
     isNormalUser = true;
@@ -113,20 +107,41 @@ in {
   };
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [ curl wayland acpi wbg wtype wl-clipboard pure-prompt bemoji rofi-power-menu ];
+  environment.systemPackages = with pkgs; [ 
+    curl 
+    wayland 
+    acpi 
+    wbg 
+    wtype 
+    wl-clipboard 
+    bat
+    ripgrep
+    eza
+    pure-prompt
+  ];
 
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
     syntaxHighlighting.enable = true;
-    shellAliases = { sudo = "sudo "; };
+    enableCompletion = true;
+    histSize = 5000;
+    shellAliases = {
+      cat = "bat";
+      grep = "ripgrep";
+      ls = "eza";
+    };
     promptInit = ''
       autoload -U promptinit; promptinit
-      prompt pure 
+      prompt pure
     '';
   };
   users.defaultUserShell = pkgs.zsh;
-  environment.shells = with pkgs; [ zsh ];
+  environment = {
+    shells = with pkgs; [ zsh ];
+    variables = {
+      LESSKEY = "$HOME/.less";
+    };
+  };
 
   programs.hyprland = {
     enable = true;
@@ -178,6 +193,17 @@ in {
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
+
+  # system.activationScripts = {
+  #   cleanSystem = ''
+
+  #   '';
+  # };
+  system.userActivationScripts = {
+    lesskey = ''
+      /run/current-system/sw/bin/lesskey $HOME/.config/less/lesskey
+    '';
+  };
 
   home-manager.users.dme = { pkgs, ... }: {
     nixpkgs.config = {
@@ -389,35 +415,157 @@ in {
           ];
           settings = {
             "general.smoothScroll" = true;
-            "devtools.theme" = "dark";
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-            "toolkit.telemetry.enabled" = false;
-            "toolkit.telemetry.unified" = false;
-            "toolkit.telemetry.archive.enabled" = false;
-            "experiments.supported" = false;
-            "experiments.enabled" = false;
-            "datareporting.healthreport.uploadEnabled" = false;
-            "datareporting.healthreport.service.enabled" = false;
-            "datareporting.policy.dataSubmissionEnabled" = false;
-            "signon.rememberSignons" = false;
-            "browser.shell.checkDefaultBrowser" = false;
+            # Startup settings
+            "browser.aboutConfig.showWarning" = false;
+            "browser.startup.page" = 1;
+            "browser.startup.homepage" = "about:home";
             "browser.newtabpage.enabled" = false;
-            "browser.newtabpage.activity-stream.enabled" = false;
-            "browser.newtabpage.enhanced" = false;
             "browser.newtab.preload" = false;
-            "browser.newtabpage.directory.ping" = "";
-            "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
+            "browser.newtabpage.activity-stream.feeds.telemetry" = false;
+            "browser.newtabpage.activity-stream.telemetry" = false;
+            "browser.newtabpage.activity-stream.feeds.snippets" = false;
+            "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+            "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+            "browser.newtabpage.activity-stream.feeds.discoverystreamfeed" = false;
+            "browser.newtabpage.activity-stream.showSponsored" = false;
+            "browser.newtabpage.activity-stream.default.sites" = "";
+            # Geolocation settings.
+            "geo.provider.network.url" = "https://location.services.mozilla.com/v1/geolocate?key=%MOZILA_API_KEY%";
+            "geo.provider.use_gpsd" = false;
+            "geo.provider.use_geoclue" = false;
+            "browser.region.network.url" = "";
+            "browser.region.update.enabled" = false;
+            # Language settings
+            "intl.accept_languages" = "en-US, en";
+            "javascript.use_us_english_locale" = true;
+            # Disable auto-updates and recommendations
+            "app.update.background.scheduling.enabled" = false;
+            "app.update.auto" = false;
+            "extensions.getAddons.showPane" = false;
             "extensions.htmlaboutaddons.recommendations.enabled" = false;
-            "extensions.htmlaboutaddons.discover.enabled" = false;
-            "extensions.pocket.enabled" = false;
+            "browser.discovery.enabled" = false;
+            # Telemetry settings
+            "datareporting.policy.dataSubmissionEnabled" = false;
+            "datareporting.healthreport.uploadEnabled" = false;
+            "toolkit.telemetry.enabled" = false;
+            "toolkit.telemtry.unified" = false;
+            "toolkit.telemetry.unified" = false;
+            "toolkit.telemetry.server" = "data:,";
+            "toolkit.telemetry.archive.enabled" = false;
+            "toolkit.telemetry.newProfilePing.enabled" = false;
+            "toolkit.telemetry.shutdownPingSender.enabled" = false;
+            "toolkit.telemetry.updatePing.enabled" = false;
+            "toolkit.telemetry.bhrPing.enabled" = false;
+            "toolkit.telemetry.firstShutdownPing.enabled" = false;
+            "toolkit.telemetry.coverage.opt-out" = true;
+            "toolkit.coverage.opt-out" = true;
+            "toolkit.coverage.endpoint.base" = "";
+            "toolkit.ping-centre.telemetry" = false;
+            "beacon.enabled" = false;
+            "app.shield.optoutstudies.enabled" = false;
             "app.normandy.enabled" = false;
             "app.normandy.api_url" = "";
-            "extensions.shield-recipe-client.enabled" = false;
-            "app.shield.optoutstudies.enabled" = false;
-            "dom.battery.enabled" = false;
-            "beacon.enabled" = false;
-            "browser.send_pings" = false;
+            "breakpad.reportURL" = "";
+            "browser.tabs.crashReporting.sendReport" = false;
+            "captivedetect.canonicalURL" = "";
+            "network.captive-portal-service.enabled" = false;
+            "network.connectivity-service.enabled" = false;
+            # Networking settings
+            "network.prefetch-next" = false;
+            "network.dns.disablePrefetch" = true;
+            "network.predictor.enabled" = false;
+            "network.http.speculative-parallel-limit" = 0;
+            "browser.places.speculativeConnect.enabled" = false;
+            "network.dns.disableIPv6" = true;
+            "network.gio.supported-protocols" = "";
+            "network.file.disable_unc_paths" = true;
+            "permissions.manager.defaultsUrl" = "";
+            "network.IDN_show_punycode" = true;
+            # Search settings
+            "browser.search.suggest.enabled" = false;
+            "browser.urlbar.suggest.searches" = false;
             "browser.fixup.alternate.enabled" = false;
+            "browser.urlbar.trimURLs" = false;
+            "browser.urlbar.speculativeConnect.enabled" = false;
+            "browser.formfill.enable" = false;
+            "extensions.formautofill.addresses.enabled" = false;
+            "extensions.formautofill.available" = "off";
+            "extensions.formautofill.creditCards.available" = false;
+            "extensions.formautofill.creditCards.enabled" = false;
+            "extensions.formautofill.heuristics.enabled" = false;
+            "browser.urlbar.quicksuggest.scenario" = "history";
+            "browser.urlbar.quicksuggest.enabled" = false;
+            "browser.urlbar.suggest.quicksuggest.nonsponsored" = false;
+            "browser.urlbar.suggest.quicksuggest.sponsored" = false;
+            # Password settings
+            "signon.rememberSignons" = false;
+            "signon.autofillForms" = false;
+            "signon.formlessCapture.enabled" = false;
+            "network.auth.subresource-http-auth-allow" = 1;
+            # Disk cache and Memory
+            "browser.cache.disk.enable" = false;
+            "browser.sessionstore.privacy_level" = 2;
+            "browser.sessionstore.resume_from_crash" = false;
+            "browser.pagethumbnails.capturing_disabled" = true;
+            "browser.shell.shortcutFavicons" = false;
+            "browser.helperApps.deleteTempFileOnExit" = true;
+            # TLS-related settings
+            "dom.security.https_only_mode" = true;
+            "dom.security.https_only_mode_send_http_background_request" = false;
+            "browser.xul.error_pages.expert_bad_cert" = true;
+            "security.tls.enable_0rtt_data" = false;
+            "security.OCSP.require" = true;
+            "security.pki.sha1_enforcement_level" = 1;
+            "security.cert_pinning.enforcement_level" = 2;
+            "security.remote_settings.crlite_filters.enabled" = true;
+            "security.pki.crlite_mode" = 2;
+            "network.http.referer.XOriginPolicy" = 2;
+            "network.http.referer.XOriginTrimmingPolicy" = 2;
+            # WebRTC, WebGL, and DRM
+            "media.peerconnection.enabled" = false;
+            "media.peerconnection.ice.proxy_only_if_behind_proxy" = true;
+            "media.peerconnection.ice.default_address_only" = true;
+            "media.peerconnection.ice.no_host" = true;
+            "webgl.disabled" = true;
+            "media.autoplay.default" = 5;
+            "media.eme.enabled" = false;
+            "browser.download.useDownloadDir" = false;
+            "browser.download.manager.addToRecentDocs" = false;
+            # Cookies
+            "browser.contentblocking.category" = "strict";
+            "privacy.partition.serviceWorkers" = true;
+            "privacy.partition.always_partition_third_party_non_cookie_storage" = true;
+            "privacy.partition.always_partition_third_party_non_cookie_storage.exempt_sessionstorage" = true;
+            # UI features
+            "dom.disable_open_during_load" = true;
+            "dom.popup_allowed_events" = "click dblclick mousedown pointerdown";
+            "extensions.pocket.enabled" = false;
+            "extensions.Screenshots.disabled" = true;
+            "pdfjs.enabledScripting" = false;
+            "privacy.userContext.enabled" = true;
+            "extensions.enabledScopes" = 5;
+            "extensions.webextensions.restrictedDomains" = "";
+            "extensions.postDownloadThirdPartyPrompt" = false;
+            # Firefox amnesia
+            "network.cookie.lifetimePolicy" = 2;
+            "privacy.sanitize.sanitizeOnShutdown" = true;
+            "privacy.clearOnShutdown.cache" = true;
+            "privacy.clearOnShutdown.cookies" = true;
+            "privacy.clearOnShutdown.downloads" = true;
+            "privacy.clearOnShutdown.formdata" = true;
+            "privacy.clearOnShutdown.history" = true;
+            "privacy.clearOnShutdown.offlineApps" = true;
+            "privacy.clearOnShutdown.sessions" = true;
+            "privacy.clearOnShutdown.sitesettings" = false;
+            "privacy.sanitize.timeSpan" = 0;
+            # Mitigate fingerprinting
+            "privacy.resistFingerprinting" = true;
+            "privacy.window.maxInnerWidth" = 1600;
+            "privacy.window.maxInnerHeight" = 900;
+            "privacy.resistFingerprinting.block_mozAddonManager" = true;
+            "browser.startup.blankWindow" = false;
+            "browser.display.use_system_colors" = false;
           };
           userChrome = ''
             @media (prefers-color-scheme: dark) {
@@ -968,6 +1116,12 @@ in {
           }
       '';
     };
+    home.file.".config/less/lesskey".text = ''
+      j left-scroll
+      k forw-line
+      l back-line
+      ; right-scroll
+    '';
     home.file.".config/hypr/hyprland.conf".text = ''
       	# See https://wiki.hyprland.org/Configuring/Monitors/
       	monitor=,preferred,auto,auto
@@ -1019,7 +1173,7 @@ in {
       	    # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
       	    rounding = 10
-      	    
+    	    
       	    blur {
       		enabled = true
       		size = 3
@@ -1090,7 +1244,7 @@ in {
         bind = $mainMod, SPACE, exec, rofi -show drun
         bind = $mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -no-persist-history -hint-welcome "" > /dev/null
         bind = $mainMod, E, exec, bemoji -t -n
-                
+              
       	# Move focus with mainMod + arrow/hx keys
       	bind = $mainMod, left, movefocus, l
       	bind = $mainMod, right, movefocus, r
