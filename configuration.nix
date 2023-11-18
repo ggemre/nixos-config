@@ -140,6 +140,7 @@ in {
     shells = with pkgs; [ zsh ];
     variables = {
       LESSKEY = "$HOME/.less";
+      EDITOR = "hx";
     };
   };
 
@@ -195,15 +196,17 @@ in {
   system.stateVersion = "23.05"; # Did you read the comment?
 
   # system.activationScripts = {
-  #   cleanSystem = ''
-
+  #   lesskey = ''
+  #     mkdir -p /home/dme/.config/less
+  #     echo '
+  #     j left-scroll
+  #     k forw-line
+  #     l back-line
+  #     ; right-scroll
+  #     ' > /home/dme/.config/less/lesskey
+  #     /run/current-system/sw/bin/lesskey /home/dme/.config/less/lesskey
   #   '';
   # };
-  system.userActivationScripts = {
-    lesskey = ''
-      /run/current-system/sw/bin/lesskey $HOME/.config/less/lesskey
-    '';
-  };
 
   home-manager.users.dme = { pkgs, ... }: {
     nixpkgs.config = {
@@ -1116,12 +1119,6 @@ in {
           }
       '';
     };
-    home.file.".config/less/lesskey".text = ''
-      j left-scroll
-      k forw-line
-      l back-line
-      ; right-scroll
-    '';
     home.file.".config/hypr/hyprland.conf".text = ''
       	# See https://wiki.hyprland.org/Configuring/Monitors/
       	monitor=,preferred,auto,auto
