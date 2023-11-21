@@ -33,7 +33,7 @@ let
     };
   };
 in {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
     ./hardware-configuration.nix
     <home-manager/nixos>
   ];
@@ -42,20 +42,15 @@ in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
+  # Network settings.
+  networking.hostName = "nixos";
+  # networking.wireless.enable = true;
   networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Denver";
 
-  # Audio settings
+  # Audio settings.
   hardware.pulseaudio.enable = true;
 
   # MacBook specific settings
@@ -69,7 +64,6 @@ in {
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -89,15 +83,12 @@ in {
     options = "--delete-older-than-7d";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Setup user account.
   users.users.dme = {
     isNormalUser = true;
     description = "dme";
     extraGroups = [ "networkmanager" "wheel" "audio" ];
-    # packages = with pkgs; [ ];
   };
-
-  # Enable automatic login for the user.
   services.getty.autologinUser = "dme";
 
   # Update nix packages.
@@ -106,7 +97,7 @@ in {
     pulseaudio = true;
   };
 
-  # List packages installed in system profile.
+  # Package settings.
   environment.systemPackages = with pkgs; [ 
     curl 
     wayland 
@@ -120,6 +111,7 @@ in {
     pure-prompt
   ];
 
+  # Configure zsh (at system level so we can set as default).
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
@@ -127,7 +119,7 @@ in {
     histSize = 5000;
     shellAliases = {
       cat = "bat";
-      grep = "ripgrep";
+      grep = "rg";
       ls = "eza";
     };
     promptInit = ''
@@ -144,10 +136,13 @@ in {
     };
   };
 
+  # Configure hyprland (at system level because home manager broke it).
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
+
+  # Configure greeter.
   services.greetd = {
     enable = true;
     settings = {
@@ -159,6 +154,7 @@ in {
     };
   };
 
+  # Font settings.
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk
@@ -168,46 +164,17 @@ in {
     fira-code-symbols
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
+  # Some programs need SUID wrappers.
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
+  # System version for syncing. Do not change.
+  system.stateVersion = "23.05";
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
-
-  # system.activationScripts = {
-  #   lesskey = ''
-  #     mkdir -p /home/dme/.config/less
-  #     echo '
-  #     j left-scroll
-  #     k forw-line
-  #     l back-line
-  #     ; right-scroll
-  #     ' > /home/dme/.config/less/lesskey
-  #     /run/current-system/sw/bin/lesskey /home/dme/.config/less/lesskey
-  #   '';
-  # };
-
+  # The rest is devoted to home manager.
   home-manager.users.dme = { pkgs, ... }: {
     nixpkgs.config = {
       packageOverrides = pkgs: {
@@ -228,6 +195,10 @@ in {
         name = "Bibata-Modern-Classic";
         size = 10;
       };
+    };
+    programs.direnv = {
+      enable = true;
+      enableZshIntegration = true;      
     };
     programs.git = {
       enable = true;
@@ -1013,9 +984,9 @@ in {
         main = {
           layer = "top";
           position = "top";
-          height = 22;
-          margin-top = 0;
-          margin-bottom = 3;
+          # height = 8;
+          # margin-top = 0;
+          # margin-bottom = 0;
           modules-left = [ "hyprland/workspaces" ];
           modules-center = [ "clock" ];
           modules-right = [ "network" "pulseaudio" "cpu" "battery" "custom/power" ];
@@ -1044,7 +1015,7 @@ in {
           };
           cpu = {
             interval = 10;
-            format = "  {}%";
+            format = "  {usage}%";
             max-length = 10;
           };
           battery = {
@@ -1066,39 +1037,39 @@ in {
         	  font-family: ${theme.font};
         	  font-size: 11px;
         	  font-weight: 400;
+            padding: 0px 0px 0px 0px;
           }
         	window#waybar {
         	  background: rgba(43, 48, 59, 0.5);
           }
         	#workspaces {
-        	  border-radius: 20px;
+        	  border-radius: 10px;
         	  background-color: #${theme.color.base};
         	  color: #${theme.color.subtext1};
-        	  margin-left: 8px;
-        	  padding-left: 7px;
-        	  padding-right: 7px;
             font-size: 7px;
+            margin: 5px 0px 5px 8px;
+            padding: 0px 10px 0px 10px;
         	}
         	#workspaces button {
         	  background-color: #${theme.color.base};
         	  color: #${theme.color.rosewater};
-        	  border-bottom: 5px solid #${theme.color.base};
+        	  /* border-bottom: 5px solid #${theme.color.base}; */
         	  padding: 0;
-        	  margin: 0;
+        	  margin-top: 0;
         	}
           #workspaces:hover {
             color: #${theme.color.text};
+            background-color: #${theme.color.base};
           }
         	#workspaces button.active {
         	  color: #${theme.color.green};
         	}
         	#clock, #battery, #network, #pulseaudio, #cpu, #custom-power {
-        	  border-radius: 20px;
+        	  border-radius: 10px;
         	  background-color: #${theme.color.base};
         	  color: #${theme.color.rosewater};
-        	  padding-left: 10px;
-        	  padding-right: 12px;
-        	  margin-right: 8px;
+            margin: 5px 8px 5px 0px;
+            padding: 0px 10px 0px 10px;
         	}
           #clock {
             background: transparent;
@@ -1110,12 +1081,17 @@ in {
           }
           #pulseaudio {
             color: #${theme.color.peach};
+            margin-right: 0px;
+            border-radius: 10px 0px 0px 10px;
           }
           #cpu {
             color: #${theme.color.yellow};
+            border-radius: 0px 10px 10px 0px;
           }
           #custom-power {
-            color: #${theme.color.rosewater};
+            color: #${theme.color.surface0};
+            background-color: #${theme.color.red};
+            font-weight: 500;
           }
       '';
     };
@@ -1231,15 +1207,18 @@ in {
 
       	bind = $mainMod, T, exec, alacritty
         bind = $mainMod, B, exec, firefox
-      	bind = $mainMod, Q, killactive, 
-      	bind = $mainMod, M, exit, 
-      	bind = $mainMod, V, togglefloating, 
+      	bind = $mainMod, Q, killactive
+      	bind = $mainMod, M, exit
+      	bind = $mainMod, V, togglefloating
       	bind = $mainMod, P, pseudo, # dwindle
       	bind = $mainMod, H, togglesplit, # dwindle
+        bind = $mainMod, S, togglespecialworkspace
+        bind = $mainMod, F, fullscreen, 0
+        bind = $mainMod SHIFT, S, movetoworkspace, special
         bind = $mainMod SHIFT, W, exec, find $HOME/media/images/wallpapers -type f | shuf -n 1 | xargs wbg
 
         bind = $mainMod, SPACE, exec, rofi -show drun
-        bind = $mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -no-persist-history -hint-welcome "" > /dev/null
+        bind = $mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -no-persist-history -hint-welcome "" -calc-command "wtype {result}"> /dev/null
         bind = $mainMod, E, exec, bemoji -t -n
               
       	# Move focus with mainMod + arrow/hx keys
