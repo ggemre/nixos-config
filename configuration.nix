@@ -383,13 +383,15 @@ in {
             };
           };
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-            bitwarden
             ublock-origin
-            tabcenter-reborn
           ];
           settings = {
             "general.smoothScroll" = true;
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+            "browser.download.folderList" = 2;
+            "browser.download.dir" = "/home/dme/tmp";
+            "browser.download.lastDir" = "/home/dme/tmp";
+            "browser.download.useDownloadDir" = true;
             # Startup settings
             "browser.aboutConfig.showWarning" = false;
             "browser.startup.page" = 1;
@@ -448,7 +450,6 @@ in {
             # Networking settings
             "network.prefetch-next" = false;
             "network.dns.disablePrefetch" = true;
-            "network.predictor.enabled" = false;
             "network.http.speculative-parallel-limit" = 0;
             "browser.places.speculativeConnect.enabled" = false;
             "network.dns.disableIPv6" = true;
@@ -504,7 +505,6 @@ in {
             "webgl.disabled" = true;
             "media.autoplay.default" = 5;
             "media.eme.enabled" = false;
-            "browser.download.useDownloadDir" = false;
             "browser.download.manager.addToRecentDocs" = false;
             # Cookies
             "browser.contentblocking.category" = "strict";
@@ -540,336 +540,21 @@ in {
             "privacy.resistFingerprinting.block_mozAddonManager" = true;
             "browser.startup.blankWindow" = false;
             "browser.display.use_system_colors" = false;
+            # Performance optimization
+            "content.notify.interval" = 100000;
+            "browser.cache.jsbc_compression_level" = 3;
+            "media.memory_cache_max_size" = 65536;
+            "media.cache_readahead_limit" = 7200;
+            "media.cache_resume_threshold" = 3600;
+            "image.mem.decode_bytes_at_a_time" = 32768;
+            "network.buffer.cache.size" = 262144;
+            "network.buffer.cache.count" = 128;
+            "network.http.max-connections" = 1800;
+            "network.http.max-persistent-connections-per-server" = 10;
+            "network.http.max-urgent-start-excessive-connections-per-host" = 5;
+            "network.predictor.enabled" = false;
           };
           userChrome = ''
-            @media (prefers-color-scheme: dark) {
-              :root {
-                  --uc-identity-colour-blue: #7ED6DF;
-                  --uc-identity-colour-turquoise: #55E6C1;
-                  --uc-identity-colour-green: #B8E994;
-                  --uc-identity-colour-yellow: #F7D794;
-                  --uc-identity-colour-orange: #F19066;
-                  --uc-identity-colour-red: #FC5C65;
-                  --uc-identity-colour-pink: #F78FB3;
-                  --uc-identity-colour-purple: #786FA6;
-                  --uc-base-colour: #1E2021;
-                  --uc-highlight-colour: #191B1C;
-                  --uc-inverted-colour: #FAFAFC;
-                  --uc-muted-colour: #AAAAAC;
-                  --uc-accent-colour: var(--uc-identity-colour-purple);
-              }
-          }
-          @media (prefers-color-scheme: light) {
-              :root {
-                  --uc-identity-colour-blue: #1D65F5;
-                  --uc-identity-colour-turquoise: #209FB5;
-                  --uc-identity-colour-green: #40A02B;
-                  --uc-identity-colour-yellow: #E49320;
-                  --uc-identity-colour-orange: #FE640B;
-                  --uc-identity-colour-red: #FC5C65;
-                  --uc-identity-colour-pink: #EC83D0;
-                  --uc-identity-colour-purple: #822FEE;
-                  --uc-base-colour: #FAFAFC;
-                  --uc-highlight-colour: #DADADC;
-                  --uc-inverted-colour: #1E2021;
-                  --uc-muted-colour: #191B1C;
-                  --uc-accent-colour: var(--uc-identity-colour-purple);
-              }
-          }
-          :root {
-              --lwt-frame: var(--uc-base-colour) !important;
-              --lwt-accent-color: var(--lwt-frame) !important;
-              --lwt-text-color: var(--uc-inverted-colour) !important;
-              --toolbar-field-color: var(--uc-inverted-colour) !important;
-              --toolbar-field-focus-color: var(--uc-inverted-colour) !important;
-              --toolbar-field-focus-background-color: var(--uc-highlight-colour) !important;
-              --toolbar-field-focus-border-color: transparent !important;
-              --toolbar-field-background-color: var(--lwt-frame) !important;
-              --lwt-toolbar-field-highlight: var(--uc-inverted-colour) !important;
-              --lwt-toolbar-field-highlight-text: var(--uc-highlight-colour) !important;
-              --urlbar-popup-url-color: var(--uc-accent-colour) !important;
-              --lwt-tab-text: var(--lwt-text-colour) !important;
-              --lwt-selected-tab-background-color: var(--uc-highlight-colour) !important;
-              --toolbar-bgcolor: var(--lwt-frame) !important;
-              --toolbar-color: var(--lwt-text-color) !important;
-              --toolbarseparator-color: var(--uc-accent-colour) !important;
-              --toolbarbutton-hover-background: var(--uc-highlight-colour) !important;
-              --toolbarbutton-active-background: var(--toolbarbutton-hover-background) !important;
-              --lwt-sidebar-background-color: var(--lwt-frame) !important;
-              --sidebar-background-color: var(--lwt-sidebar-background-color) !important;
-              --urlbar-box-bgcolor: var(--uc-highlight-colour) !important;
-              --urlbar-box-text-color: var(--uc-muted-colour) !important;
-              --urlbar-box-hover-bgcolor: var(--uc-highlight-colour) !important;
-              --urlbar-box-hover-text-color: var(--uc-inverted-colour) !important;
-              --urlbar-box-focus-bgcolor: var(--uc-highlight-colour) !important;
-          }
-          .identity-color-blue {
-              --identity-tab-color: var(--uc-identity-colour-blue) !important;
-              --identity-icon-color: var(--uc-identity-colour-blue) !important;
-          }
-          .identity-color-turquoise {
-              --identity-tab-color: var(--uc-identity-colour-turquoise) !important;
-              --identity-icon-color: var(--uc-identity-colour-turquoise) !important;
-          }
-          .identity-color-green {
-              --identity-tab-color: var(--uc-identity-colour-green) !important;
-              --identity-icon-color: var(--uc-identity-colour-green) !important;
-          }
-          .identity-color-yellow {
-              --identity-tab-color: var(--uc-identity-colour-yellow) !important;
-              --identity-icon-color: var(--uc-identity-colour-yellow) !important;
-          }
-          .identity-color-orange {
-              --identity-tab-color: var(--uc-identity-colour-orange) !important;
-              --identity-icon-color: var(--uc-identity-colour-orange) !important;
-          }
-          .identity-color-red {
-              --identity-tab-color: var(--uc-identity-colour-red) !important;
-              --identity-icon-color: var(--uc-identity-colour-red) !important;
-          }
-          .identity-color-pink {
-              --identity-tab-color: var(--uc-identity-colour-pink) !important;
-              --identity-icon-color: var(--uc-identity-colour-pink) !important;
-          }
-          .identity-color-purple {
-              --identity-tab-color: var(--uc-identity-colour-purple) !important;
-              --identity-icon-color: var(--uc-identity-colour-purple) !important;
-          }
-          :root {
-              --uc-border-radius: 0;
-              --uc-status-panel-spacing: 12px;
-              --uc-page-action-margin: 7px;
-          }
-          .titlebar-buttonbox-container { display: none !important; }
-          #pageActionButton { display: none !important; }
-          :root { --uc-toolbar-position: 0; }
-          @media (prefers-color-scheme: dark) { :root { --uc-darken-toolbar: 0.2; }}
-          @media (prefers-color-scheme: light) { :root { --uc-darken-toolbar: 0; }}
-          :root {
-              --uc-urlbar-min-width: 35vw;
-              --uc-urlbar-max-width: 35vw;
-              --uc-urlbar-position: 1;
-          }
-          #back-button, #forward-button { display: none !important; }
-          #identity-permission-box { display: none !important; }
-          .urlbar-page-action > image { margin-top: var(--uc-page-action-margin) !important; }
-          #userContext-icons { display: none !important; }
-          #urlbar-go-button { display: none !important; }
-          #unified-extensions-button { display: none !important; }
-          #alltabs-button { margin-top: 5px !important; }
-          :root {
-              --uc-active-tab-width: clamp(100px, 30vw, 300px);
-              --uc-inactive-tab-width: clamp(100px, 20vw, 200px);
-              --show-tab-close-button: none;
-              --show-tab-close-button-hover: -moz-inline-block;
-              --container-tabs-indicator-margin: 10px;
-              --uc-identity-glow: 0 1px 10px 1px;
-          }
-          .tab-secondary-label { display: none !important; }
-          :root {
-              --uc-border-radius: 0;
-              --uc-status-panel-spacing: 12px;
-          }
-          .titlebar-buttonbox-container { display: none !important; }
-          #pageActionButton { display: none !important; }
-          #PanelUI-menu-button { padding: 0 !important; }
-          #PanelUI-menu-button .toolbarbutton-icon { width: 1px !important; }
-          #PanelUI-menu-button .toolbarbutton-badge-stack { padding: 0 !important; }
-          :root { --uc-toolbar-position: 0; }
-          @media (prefers-color-scheme: dark) { :root { --uc-darken-toolbar: 0.2; }}
-          @media (prefers-color-scheme: light) { :root { --uc-darken-toolbar: 0; }}
-          :root {
-              --uc-urlbar-min-width: 35vw;
-              --uc-urlbar-max-width: 35vw;
-              --uc-urlbar-position: 1;
-              --uc-urlbar-top-spacing: 1px;
-          }
-          #back-button, #forward-button { display: none !important; }
-          /* #tracking-protection-icon-container { display: none !important; } */
-          #identity-permission-box { display: none !important; }
-          /* #identity-box { display: none !important } */
-          /* #page-action-buttons > :not(#urlbar-zoom-button) { display: none !important; } */
-          #urlbar-go-button { display: none !important; }
-          #unified-extensions-button { display: none !important; }
-          :root {
-              --uc-active-tab-width: clamp(100px, 30vw, 300px);
-              --uc-inactive-tab-width: clamp(100px, 20vw, 200px);
-              --show-tab-close-button: none;
-              --show-tab-close-button-hover: none;
-              --uc-show-all-tabs-button: none;
-              --container-tabs-indicator-margin: 10px;
-              --uc-identity-glow: 0 1px 10px 1px;
-          }
-          .tab-secondary-label { display: none !important; }
-          #statuspanel #statuspanel-label { margin: 0 0 var(--uc-status-panel-spacing) var(--uc-status-panel-spacing) !important; }
-          :root {
-              --toolbarbutton-border-radius: var(--uc-border-radius) !important;
-              --tab-border-radius: var(--uc-border-radius) !important;
-              --arrowpanel-border-radius: var(--uc-border-radius) !important;
-          }
-          #TabsToolbar, #main-window, #nav-bar, #navigator-toolbox, #sidebar-box, #toolbar-menubar { box-shadow: none !important; }
-          #PersonalToolbar, #TabsToolbar, #main-window, #nav-bar, #navigator-toolbox, #sidebar-box, #toolbar-menubar { border: none !important; }
-          .titlebar-spacer { display: none !important; }
-          #urlbar-input-container[pageproxystate="valid"] > #tracking-protection-icon-container > #tracking-protection-icon-box > #tracking-protection-icon { padding-bottom: 1px; }
-          #PersonalToolbar {
-              padding: 6px !important;
-              box-shadow: inset 0 0 50vh rgba(0, 0, 0, var(--uc-darken-toolbar)) !important;
-          }
-          #statuspanel #statuspanel-label {
-              border: none !important;
-              border-radius: var(--uc-border-radius) !important;
-          }
-          #navigator-toolbox:not(:-moz-lwtheme) { background: var(--toolbar-field-background-color) !important; }
-          #nav-bar {
-              padding-block-start: 0 !important;
-              border: none !important;
-              box-shadow: none !important;
-              background: transparent !important;
-          }
-          #urlbar, #urlbar * {
-              padding-block-start: var(--uc-urlbar-top-spacing) !important;
-              outline: none !important;
-              box-shadow: none !important;
-          }
-          #urlbar-background { border: transparent !important; }
-          #urlbar[focused='true'] > #urlbar-background,
-          #urlbar:not([open]) > #urlbar-background { background: var(--toolbar-field-background-color) !important; }
-          #urlbar[open] > #urlbar-background { background: var(--toolbar-field-background-color) !important; }
-          .urlbarView-row:hover > .urlbarView-row-inner,
-          .urlbarView-row[selected] > .urlbarView-row-inner { background: var(--toolbar-field-focus-background-color) !important; }
-          #urlbar-go-button, .urlbar-icon { margin: auto; }
-          .urlbar-page-action { padding: 0 inherit !important; }
-          .urlbar-page-action .urlbar-icon { margin-top: 6px !important; }
-          @media (min-width: 1000px) {
-              #nav-bar { margin: calc((var(--urlbar-min-height) * -1) - 12px) calc(100vw - var(--uc-urlbar-min-width)) 0 0 !important; }
-              #titlebar { margin-inline-start: var(--uc-urlbar-min-width) !important; }
-              #navigator-toolbox:focus-within #nav-bar { margin: calc((var(--urlbar-min-height) * -1) - 12px) calc(100vw - var(--uc-urlbar-max-width)) 0 0 !important; }
-              #navigator-toolbox:focus-within #titlebar { margin-inline-start: var(--uc-urlbar-max-width) !important; }
-          }
-          @media (min-width: 1000px) {
-              #navigator-toolbox {
-                  display: flex;
-                  flex-wrap: wrap;
-                  flex-direction: row;
-              }
-              #nav-bar {
-                  order: var(--uc-urlbar-position);
-                  width: var(--uc-urlbar-min-width);
-              }
-              #nav-bar #urlbar-container {
-                  min-width: 0 !important;
-                  width: auto !important;
-              }
-              #titlebar {
-                  order: 2;
-                  width: calc(100vw - var(--uc-urlbar-min-width) - 1px);
-              }
-              #PersonalToolbar {
-                  order: var(--uc-toolbar-position);
-                  width: 100%;
-              }
-              #navigator-toolbox:focus-within #nav-bar { width: var(--uc-urlbar-max-width); }
-              #navigator-toolbox:focus-within #titlebar { width: calc(100vw - var(--uc-urlbar-max-width) - 1px); }
-          }
-          #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab:nth-child(1 of :not([pinned], [hidden])) { margin-inline-start: 0 !important; }
-          #alltabs-button { display: var(--uc-show-all-tabs-button) !important; }
-          .tabbrowser-tab > .tab-stack > .tab-background { box-shadow: none !important; }
-          #tabbrowser-tabs:not([noshadowfortests]) .tabbrowser-tab:is([multiselected]) > .tab-stack > .tab-background:-moz-lwtheme { outline-color: var(--toolbarseparator-color) !important; }
-          .tabbrowser-tab:not([pinned]) .tab-close-button { display: var(--show-tab-close-button) !important; }
-          .tabbrowser-tab:not([pinned]):hover .tab-close-button { display: var(--show-tab-close-button-hover) !important; }
-          .tabbrowser-tab[selected][fadein]:not([pinned]) { max-width: var(--uc-active-tab-width) !important; }
-          .tabbrowser-tab[fadein]:not([selected]):not([pinned]) { max-width: var(--uc-inactive-tab-width) !important; }
-          .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
-              margin: -1px var(--container-tabs-indicator-margin) 0 var(--container-tabs-indicator-margin) !important;
-              height: 1px !important;
-              box-shadow: var(--uc-identity-glow) var(--identity-tab-color) !important;
-          }
-          .tab-icon-image:not([pinned]) { opacity: 1 !important; }
-          .tab-icon-overlay:not([crashed]), .tab-icon-overlay[pinned][crashed][selected] {
-              top: 5px !important;
-              z-index: 1 !important;
-              padding: 1.5px !important;
-              inset-inline-end: -8px !important;
-              width: 16px !important;
-              height: 16px !important;
-              border-radius: 10px !important;
-          }
-          .tab-icon-overlay:not([sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
-              stroke: transparent !important;
-              background: transparent !important;
-              opacity: 1 !important;
-              fill-opacity: 0.8 !important;
-              color: currentColor !important;
-              stroke: var(--toolbar-bgcolor) !important;
-              background-color: var(--toolbar-bgcolor) !important;
-          }
-          .tabbrowser-tab[selected] .tab-icon-overlay:not([sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
-              stroke: var(--toolbar-bgcolor) !important;
-              background-color: var(--toolbar-bgcolor) !important;
-          }
-          .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) { margin-inline-end: 9.5px !important; }
-          .tabbrowser-tab:not([image]) .tab-icon-overlay:not([pinned], [sharing], [crashed]) {
-              top: 0 !important;
-              padding: 0 !important;
-              margin-inline-end: 5.5px !important;
-              inset-inline-end: 0 !important;
-          }
-          .tab-icon-overlay:not([crashed])[activemedia-blocked]:hover,
-          .tab-icon-overlay:not([crashed])[muted]:hover,
-          .tab-icon-overlay:not([crashed])[soundplaying]:hover {
-              color: currentColor !important;
-              stroke: var(--toolbar-color) !important;
-              background-color: var(--toolbar-color) !important;
-              fill-opacity: 0.95 !important;
-          }
-          .tabbrowser-tab[selected] .tab-icon-overlay:not([crashed])[activemedia-blocked]:hover,
-          .tabbrowser-tab[selected] .tab-icon-overlay:not([crashed])[muted]:hover,
-          .tabbrowser-tab[selected] .tab-icon-overlay:not([crashed])[soundplaying]:hover {
-              color: currentColor !important;
-              stroke: var(--toolbar-color) !important;
-              background-color: var(--toolbar-color) !important;
-              fill-opacity: 0.95 !important;
-          }
-          #TabsToolbar .tab-icon-overlay:not([crashed])[activemedia-blocked],
-          #TabsToolbar .tab-icon-overlay:not([crashed])[muted],
-          #TabsToolbar .tab-icon-overlay:not([crashed])[soundplaying] {
-              color: var(--toolbar-color) !important;
-          }
-          #TabsToolbar .tab-icon-overlay:not([crashed])[activemedia-blocked]:hover,
-          #TabsToolbar .tab-icon-overlay:not([crashed])[muted]:hover,
-          #TabsToolbar .tab-icon-overlay:not([crashed])[soundplaying]:hover {
-              color: var(--toolbar-bgcolor) !important;
-          }
-          #TabsToolbar { display: none !important; }
-          #nav-bar { width: 100vw !important; }
-          #browser { position: relative; }
-          #sidebar-box[sidebarcommand*="tabcenter"] #sidebar-header { display: none; }
-          #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden]) {
-              display: block;
-              position: absolute;
-              top: 0;
-              bottom: 0;
-              z-index: 1;
-              min-width: 50px !important;
-              max-width: 50px !important;
-              border-right: none;
-              transition: all 0.2s ease;
-              overflow: hidden;
-          }
-          [sidebarcommand*="tabcenter"] #sidebar,
-          #sidebar-box[sidebarcommand*="tabcenter"]:hover {
-              min-width: 10vw !important;
-              width: 30vw !important;
-              max-width: 250px !important;
-          }
-          [sidebarcommand*="tabcenter"] #sidebar {
-              height: 100%;
-              max-height: 100%;
-          }
-          #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden]) ~ #appcontent { margin-left: 50px; }
-          #main-window[inFullscreen][inDOMFullscreen] #appcontent { margin-left: 0; }
-          #sidebar-box[sidebarcommand="tabcenter-reborn_ariasuni-sidebar-action"] #sidebar-header,
-          #sidebar-box[sidebarcommand="tabcenter-reborn_ariasuni-sidebar-action"] ~ #sidebar-splitter { display: none; }
           '';
         };
       };
@@ -1081,12 +766,14 @@ in {
           }
           #pulseaudio {
             color: #${theme.color.peach};
-            margin-right: 0px;
             border-radius: 10px 0px 0px 10px;
+            margin-right: 0;
+            padding-right: 12px;
           }
           #cpu {
             color: #${theme.color.yellow};
             border-radius: 0px 10px 10px 0px;
+            padding-left: 0;
           }
           #custom-power {
             color: #${theme.color.surface0};
@@ -1112,6 +799,10 @@ in {
         env = XDG_CURRENT_DESKTOP,Hyprland
         env = XDG_SESSION_TYPE,wayland
         env = XDG_SESSION_DESKTOP,Hyprland
+
+        misc {
+          disable_hyprland_logo = true
+        }
 
       	# For all categories, see https://wiki.hyprland.org/Configuring/Variables/
       	input {
