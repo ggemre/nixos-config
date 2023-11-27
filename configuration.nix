@@ -394,9 +394,10 @@ in {
             "browser.download.useDownloadDir" = true;
             # Startup settings
             "browser.aboutConfig.showWarning" = false;
-            "browser.startup.page" = 1;
-            "browser.startup.homepage" = "about:home";
+            "browser.startup.page" = 0;
+            "browser.startup.homepage" = "about:blank";
             "browser.newtabpage.enabled" = false;
+            "browser.newtab.url" = "about:blank";
             "browser.newtab.preload" = false;
             "browser.newtabpage.activity-stream.feeds.telemetry" = false;
             "browser.newtabpage.activity-stream.telemetry" = false;
@@ -555,6 +556,421 @@ in {
             "network.predictor.enabled" = false;
           };
           userChrome = ''
+            .tab-line{ background-color: transparent !important; }
+            toolbarseparator {
+              appearance: auto;
+              -moz-default-appearance: separator;
+              margin: 3px 4px;
+              display: none !important;
+            }
+            #alltabs-button { display: none !important; }
+            #identity-popup-permissions-content > description, #protections-popup-content > description { color: #${theme.color.red} !important; }
+            #identity-box[pageproxystate="valid"].notSecureText > .identity-box-button, #identity-box[pageproxystate="valid"].chromeUI > .identity-box-button, #identity-box[pageproxystate="valid"].extensionPage > .identity-box-button, #urlbar-label-box {
+                background-color: transparent !important;
+            }
+            #identity-box[pageproxystate="valid"].notSecureText > .identity-box-button:hover:not([open]), #identity-box[pageproxystate="valid"].chromeUI > .identity-box-button:hover:not([open]), #identity-box[pageproxystate="valid"].extensionPage > .identity-box-button:hover:not([open]) {
+                background-color: transparent !important;
+            }
+            #identity-box[pageproxystate="valid"].notSecureText > .identity-box-button:hover:active, #identity-box[pageproxystate="valid"].notSecureText > .identity-box-button[open="true"], #identity-box[pageproxystate="valid"].chromeUI > .identity-box-button:hover:active, #identity-box[pageproxystate="valid"].chromeUI > .identity-box-button[open="true"], #identity-box[pageproxystate="valid"].extensionPage > .identity-box-button:hover:active, #identity-box[pageproxystate="valid"].extensionPage > .identity-box-button[open="true"] {
+                background-color: transparent !important;
+            }
+            #urlbar[open] > .urlbarView > .urlbarView-body-outer > .urlbarView-body-inner { border-top: none !important; }
+            .urlbarView-results { padding-block: 0px !important; }
+            .urlbarView:not([noresults]) > .search-one-offs:not([hidden]) { border-top: none !important; }
+            #urlbar .search-one-offs:not([hidden]) { padding-block: 0px !important; }
+            #urlbar-zoom-button {
+              border: 1px solid #${theme.color.red} !important;
+              padding: 0px 7px !important;
+            }
+            #PersonalToolbar {
+              visibility: collapse !important;
+              margin-bottom: -20px !important;
+              transition: all .4s ease .5s !important;
+            }
+            #navigator-toolbox:hover > #PersonalToolbar {
+              visibility: visible !important;
+              margin-bottom: 0px !important;
+              transition: all .4s ease .5s !important;
+            }
+            #urlbar[breakout], #urlbar[breakout][breakout-extend] {
+              --urlbar-height: 28px !important;
+              --urlbar-toolbar-height: 30px !important;
+              width: 100% !important;
+              top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
+              left: 0 !important;
+            }
+            #urlbar[focused="true"]:not([suppress-focus-border]) > #urlbar-background, #searchbar:focus-within {
+              outline-color: #${theme.color.red} !important;
+              border-color: transparent;
+            }
+            #urlbar[breakout][breakout-extend] > #urlbar-input-container, #urlbar-input-container {
+              height: var(--urlbar-height) !important;
+              width: 100% !important;
+              padding-block: unset !important;
+              padding-inline: unset !important;
+              transition: none !important;
+            }
+            #confirmation-hint { display: none !important; }
+            .urlbarView-url {
+              overflow: hidden;
+              color: #${theme.color.maroon} !important;
+            }
+            .text-link { color: #${theme.color.red} !important; }
+            .urlbarView-title:not(:empty) ~ .urlbarView-action { color: #${theme.color.maroon} !important; }
+            .urlbarView-row:not([type="tip"], [type="dynamic"], [has-help]):hover > .urlbarView-row-inner, .urlbarView-row[has-help] > .urlbarView-row-inner:not([selected]):hover {
+                background-color: transparent !important;
+            }
+            .urlbarView-row:not([type="tip"], [type="dynamic"], [has-help]):hover > .urlbarView-row-inner, .urlbarView-row[has-help] > .urlbarView-row-inner:not([selected]) {
+                background-color: transparent !important;
+            }
+            .urlbarView-row:not([type="tip"], [type="dynamic"])[selected] > .urlbarView-row-inner, .urlbarView-row-inner[selected] {
+                background-color: transparent !important;
+                color: #${theme.color.red} !important;
+            }
+            .searchbar-engine-one-off-item:not([selected]):hover {
+                background-color: transparent !important;
+                color: inherit;
+            }
+            :root:not(:-moz-lwtheme) #urlbar:not([focused="true"]) { --urlbar-box-bgcolor: #${theme.color.surface1} !important; }
+            #urlbar:is([focused="true"], [open]) > #urlbar-background, #searchbar:focus-within { background-color: #${theme.color.surface1} !important; }
+            ::selection {
+            	background: #${theme.color.red} !important;
+            	color: #${theme.color.base} !important;
+            }
+            #PlacesToolbarItems{ -moz-box-pack: center }
+            #tabbrowser-tabs { background-color: #none !important; }
+            #tabbrowser-arrowscrollbox::part(scrollbutton-up), #tabbrowser-arrowscrollbox::part(scrollbutton-down) { fill: #${theme.color.red} !important; }
+            #star-button { fill: #${theme.color.red} !important; }
+            #star-button[starred][animate] + #star-button-animatable-box > #star-button-animatable-image {
+              stroke: #${theme.color.red} !important;
+              fill: #${theme.color.red} !important;
+              color: #${theme.color.red} !important;
+            }
+            /* .tab-close-button { display: none !important; } */
+            .titlebar-buttonbox-container { display: none !important; }
+            #firefox-view-button { display: none !important; }
+            #unified-extensions-button { display: none !important; }
+            #ublock0_raymondhill_net-browser-action .toolbarbutton-badge-stack { 
+              filter: grayscale(100%) invert(71%) sepia(9%) saturate(2979%) hue-rotate(300deg) brightness(98%) contrast(94%) !important;
+            }
+            .toolbarbutton-badge { display: none !important; }
+            .tabbrowser-tab .tab-loading-burst { display: none !important; }
+            .tab-content[selected="true"] {
+              border-radius: 9px !important;
+              border: solid #${theme.color.crust} !important;
+            	background-color: #${theme.color.surface1} !important;
+            	font-weight: bold !important;
+            	color: #${theme.color.red} !important;
+            }
+            #tabbrowser-tabs { --tab-loading-fill: #${theme.color.red} !important; }
+            .titlebar-buttonbox {
+              margin-left: 12px !important;
+              margin-right: 12px !important;
+            }
+            toolbar#TabsToolbar {
+            	-moz-appearance: none !important;
+            	background-color: #${theme.color.crust} !important;
+            }
+            #TabsToolbar .toolbarbutton-1 {
+                margin: 0 0 var(--tabs-navbar-shadow-size) !important;
+                padding: 2px !important;
+            }
+            #TabsToolbar .toolbarbutton-1:hover {
+                margin: 0 0 var(--tabs-navbar-shadow-size) !important;
+                padding: 2px !important;
+                background-color: #${theme.color.crust} !important;
+            }
+            .titlebar-spacer[type="pre-tabs"], .titlebar-spacer[type="post-tabs"] {
+            	display: none !important;
+            	width: 0px !important;
+            	max-width: 0px !important;
+            }
+            #urlbar {
+            	box-shadow: none !important;
+            	background-color: #${theme.color.red} !important;
+            	background: #${theme.color.surface1} !important;
+            	border: none !important;
+            	color : #${theme.color.red} !important;
+            	font-weight: bold !important;
+            }
+            #nav-bar {
+            	box-shadow: none !important;
+            	border-top: none !important;
+            }
+            .tabbrowser-tab[label^="New Tab"] .tab-icon-image {
+            	list-style-image: none !important;
+            	width: 0 !important;
+            	padding-left: 16px !important;
+            	background-size: 16px 16px !important;
+            	background-repeat: no-repeat !important;
+            }
+            .tabbrowser-tab[label^="Private Browsing"] .tab-icon-image {
+            	list-style-image: none !important;
+            	width: 0 !important;
+            	padding-left: 16px !important;
+            	background-size: 16px 16px !important;
+            	background-repeat: no-repeat !important;
+            }
+            #PersonalToolbar {
+              background-color: #${theme.color.surface1} !important;
+              color: #${theme.color.red} !important;
+            }
+            #PersonalToolbar .toolbarbutton-1:not([disabled="true"], [checked], [open], :active):hover, #tabbrowser-arrowscrollbox:not([scrolledtostart="true"])::part(scrollbutton-up):hover, #tabbrowser-arrowscrollbox:not([scrolledtoend="true"])::part(scrollbutton-down):hover, toolbarbutton.bookmark-item:not(.subviewbutton, [disabled="true"], [open]):hover, toolbar .toolbarbutton-1:not([disabled="true"], [checked], [open], :active):hover > .toolbarbutton-icon, toolbar .toolbarbutton-1:not([disabled="true"], [checked], [open], :active):hover > .toolbarbutton-text, toolbar .toolbarbutton-1:not([disabled="true"], [checked], [open], :active):hover > .toolbarbutton-badge-stack {
+              background-color: #${theme.color.green};
+              color: inherit;
+            }
+            #PersonalToolbar .toolbarbutton-1:not([disabled="true"], [checked], [open], :active):hover, #tabbrowser-arrowscrollbox:not([scrolledtostart="true"])::part(scrollbutton-up):hover, #tabbrowser-arrowscrollbox:not([scrolledtoend="true"])::part(scrollbutton-down):hover, toolbarbutton.bookmark-item:not(.subviewbutton, [disabled="true"], [open]):hover, toolbar .toolbarbutton-1:not([disabled="true"], [checked], [open], :active):hover > .toolbarbutton-icon, toolbar .toolbarbutton-1:not([disabled="true"], [checked], [open], :active):hover > .toolbarbutton-text, toolbar .toolbarbutton-1:not([disabled="true"], [checked], [open], :active):hover > .toolbarbutton-badge-stack {
+              background-color: #${theme.color.surface1} !important;
+              color: #${theme.color.red} !important;
+            }
+            #PersonalToolbar .toolbarbutton-1:not([disabled="true"]):is([open], [checked], :hover:active), #tabbrowser-arrowscrollbox:not([scrolledtostart="true"])::part(scrollbutton-up):hover:active, #tabbrowser-arrowscrollbox:not([scrolledtoend="true"])::part(scrollbutton-down):hover:active, toolbarbutton.bookmark-item:hover:active:not(.subviewbutton, [disabled="true"]), toolbarbutton.bookmark-item[open="true"], toolbar .toolbarbutton-1:not([disabled="true"]):is([open], [checked], :hover:active) > .toolbarbutton-icon, toolbar .toolbarbutton-1:not([disabled="true"]):is([open], [checked], :hover:active) > .toolbarbutton-text, toolbar .toolbarbutton-1:not([disabled="true"]):is([open], [checked], :hover:active) > .toolbarbutton-badge-stack {
+              background-color: #${theme.color.surface1} !important;
+              color: #${theme.color.red} !important;
+            }
+            .urlbarView-row[type=bookmark] > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-type-icon { fill: #${theme.color.red} !important; }
+            #browser vbox#appcontent tabbrowser, #content, #tabbrowser-tabpanels, browser[type=content-primary], browser[type=content] > html{ background: #${theme.color.surface1} !important; }
+            #PanelUI-button {
+            	border:none !important;
+            	margin-inline-start: 0px !important;
+            	padding-inline-start: 0px !important;
+            }
+            .urlbar-icon, .urlbar-icon-wrapper, #tabbrowser-tabs toolbarbutton, toolbar toolbarbutton > .toolbarbutton-icon, toolbar toolbarbutton > .toolbarbutton-badge-stack,
+            .titlebar-button, #identity-box, #tracking-protection-icon-container, .findbar-textbox~toolbarbutton, toolbarbutton.scrollbutton-up,
+            toolbarbutton.scrollbutton-down { background-color: transparent !important; }
+            #navigator-toolbox { border: none !important; }
+            #urlbar-background { background-color: #${theme.color.surface1} !important; border-color:#${theme.color.red} !important; }
+            #urlbar-input-container { color: #${theme.color.red} !important; }
+            #urlbar { background-color: #${theme.color.surface1} !important; }
+            .toolbarbutton-animatable-box, .toolbarbutton-1 { fill: #${theme.color.red} !important; }
+            .tab-background { display: none !important; }
+            .tabbrowser-tab::before, .tabbrowser-tab::after{ display: none !important; }
+            :root:not([lwtheme-mozlightdark]) #TabsToolbar:not([brighttext]) #tabbrowser-tabs:not([noshadowfortests]) .tabbrowser-tab:is([visuallyselected="true"], [multiselected]) > .tab-stack > .tab-background:-moz-lwtheme {
+              display: none;
+            }
+            #TabsToolbar:not([brighttext]) #tabbrowser-tabs:not([noshadowfortests]) .tabbrowser-tab:is([visuallyselected="true"], [multiselected]) > .tab-stack > .tab-background {
+              display: none;
+            }
+            .tabbrowser-tab { padding-inline: 0 !important; }
+            .tabbrowser-tab {
+            	--tab-line-color: #${theme.color.red} !important; 
+            	color: #${theme.color.red} !important;
+            }
+            #tabbrowser-tabs { background-color: #${theme.color.crust} !important; }
+            .toolbarbutton-1 {
+            	fill: #${theme.color.red} !important;
+            	background-color: #${theme.color.surface1} !important;
+            }
+            #downloads-button[attention="success"]>.toolbarbutton-badge-stack>#downloads-indicator-anchor>#downloads-indicator-icon,
+            #downloads-button[attention="success"]>.toolbarbutton-badge-stack>#downloads-indicator-anchor>#downloads-indicator-progress-outer {
+            	fill: #${theme.color.red} !important;
+            }
+            #downloads-button[notification="start"]>.toolbarbutton-badge-stack>#downloads-indicator-anchor>#downloads-indicator-icon,
+            #downloads-notification-anchor[notification="start"]>#downloads-indicator-notification {
+            	fill: #${theme.color.red} !important;
+            }
+            #downloads-button[progress]>.toolbarbutton-badge-stack>#downloads-indicator-anchor>#downloads-indicator-icon,
+            #downloads-button[progress]>#downloads-indicator-anchor>#downloads-indicator-progress-outer {
+            	fill: #${theme.color.red} !important;
+            }
+            #downloads-button>.toolbarbutton-badge-stack>#downloads-indicator-anchor>#downloads-indicator-progress-outer>#downloads-indicator-progress-inner {
+            	fill: red !important;
+            	border: 1px !important;
+            	border-color: #${theme.color.red} !important;
+            }
+            .panel-footer > xul|button {
+              border-top: 1px solid none !important;
+              color: #${theme.color.red} !important;
+            }
+            .panel-footer {
+              background-color: #${theme.color.surface1} !important;
+              font-weight: bold !important;
+              color: #${theme.color.red} !important;
+            }
+            :root {
+              --arrowpanel-background: #${theme.color.surface1} !important;
+              --arrowpanel-color: #${theme.color.red} !important;
+              --arrowpanel-dimmed: none !important;
+              --arrowpanel-field-background: #${theme.color.surface1} !important;
+              --panel-separator-color: #${theme.color.red} !important;
+              --toolbarbutton-icon-fill-attention: var(--lwt-toolbarbutton-icon-fill-attention, #${theme.color.red}) !important; 
+            }
+            tab {
+            	height:3rem;
+            	background-color: #${theme.color.crust} !important;
+            	font-weight: thin !important;
+            	color: #${theme.color.red} !important;
+            }
+            #nav-bar-customization-target { background-color: #${theme.color.red} !important; }
+            #protections-popup[mainviewshowing][side=top]::part(arrow) { fill: #${theme.color.surface1} !important; }
+            #protections-popup-mainView-panel-header-section {
+              color: #${theme.color.red} !important;
+              background: radial-gradient(circle farthest-side at top right, #${theme.color.overlay0}, #${theme.color.surface1}) !important;
+            }
+            #protections-popup-message {
+              color: #${theme.color.red} !important;
+            }
+            .protections-popup-tp-switch::before { background: #${theme.color.surface1} !important; }
+            .protections-popup-tp-switch {
+              background-color: #${theme.color.red} !important;
+              border: 1px solid #${theme.color.surface1} !important;
+            }
+            .protections-popup-tp-switch::before {
+              background: #${theme.color.surface1} !important;
+              outline: 1px solid #${theme.color.red} !important;
+            }
+            .protections-popup-tp-switch[enabled]:hover { background-color: #${theme.color.red} !important; }
+            .protections-popup-tp-switch[enabled]:hover:active { background-color: #${theme.color.red} !important; }
+            .protections-popup-tp-switch:not([enabled]):hover { background-color: #${theme.color.red} !important; }
+            .protections-popup-tp-switch:not([enabled]):hover:active { background-color: #${theme.color.red} !important; }
+            #protections-popup[hasException] #protections-popup-tp-switch-section {
+              background: repeating-linear-gradient(-56deg, #${theme.color.overlay0}, #${theme.color.overlay0} 10px, transparent 10px, transparent 20px) !important;
+            }
+            :root[lwt-popup-brighttext] #protections-popup[hasException] #protections-popup-tp-switch-section {
+              background: repeating-linear-gradient(-56deg, #${theme.color.overlay0}, #${theme.color.overlay0} 10px, transparent 10px, transparent 20px) !important;
+            }
+            #protections-popup-no-trackers-found-description { color: #${theme.color.red}!important; }
+            #protections-popup-trackers-blocked-counter-description { color: #${theme.color.red} !important; }
+            #protections-popup-footer-protection-type-label { color: #${theme.color.red} !important; }
+            #nav-bar-customization-target { background-color: #${theme.color.surface1} !important; }
+            .PanelUI-subView, .panel-subview-body {
+            	--newtab-search-icon-color: #${theme.color.red};
+            	--arrowpanel-background: none !important;
+            	--arrowpanel-color: #${theme.color.red} !important;
+            	--lwt-accent-color: #${theme.color.red} !important;
+            	--lwt-text-color: #${theme.color.red} !important;
+            	color: #${theme.color.red} !important;
+            	background-color: #${theme.color.surface1} !important;
+            	border: 1px solid #${theme.color.red} !important;
+            }
+            .PanelUI-remotetabs-clientcontainer > label[itemtype="client"] { color: #${theme.color.red} !important; }
+            #fxa-menu-header-description { color: #${theme.color.red} !important; }
+            #fxa-menu-header-title {
+              color: #${theme.color.red} !important;
+              font-weight: bold !important;
+            }
+            .PanelUI-remotetabs-clientcontainer > label[itemtype="client"] { font-weight: bold !important; }
+            .subview-subheader {
+              color: #${theme.color.red} !important;
+              font-weight: bold !important;
+            }
+            #PanelUI-fxa-menu-syncnow-button[syncstatus="active"] > .toolbarbutton-icon, #PanelUI-remotetabs-syncnow[syncstatus="active"] > .toolbarbutton-icon { fill: #${theme.color.red} !important; }
+            .subviewbutton[disabled="true"] { color: #${theme.color.red} !important; }
+            #appMenu-zoomReset-button {
+              min-height: unset;
+              border: none !important;
+              border-radius: 10000px;
+              padding: 1px 8px;
+              background-color: #${theme.color.maroon} !important;
+            }
+            #personal-bookmarks .bookmark-item > .toolbarbutton-text {
+            	text-color: #${theme.color.red} !important;
+            	color: #${theme.color.red} !important;
+            	background-color: none !important
+            }
+            .panel-footer > xul|button:not([disabled])[default] {
+              color: #${theme.color.surface1} !important;
+              background-color: #${theme.color.red} !important;
+            }
+            .panel-footer > xul|button:not([disabled])[default]:hover { background-color: #${theme.color.red} !important; }
+            .panel-footer > xul|button:not([disabled])[default]:hover:active { background-color: #${theme.color.red} !important; }
+            #editBookmarkPanelRows > vbox > html|input, #editBookmarkPanelRows > vbox > hbox > html|input {
+              background-color: #${theme.color.surface1} !important;
+              border: 1px solid #${theme.color.red} !important;
+            }
+            .private-browsing-indicator { display: none !important; }
+          '';
+          userContent = ''
+            body {
+              --main-color: #${theme.color.surface1};
+              --main-accent-color: #${theme.color.red};
+              --glow-color: #${theme.color.flamingo};
+              --newtab-textbox-background-color: var(--main-accent-color);
+            }
+            @-moz-document url(about:privatebrowsing) {
+              #private-browsing-vpn-text { display: none !important; }
+              #private-browsing-vpn-link { display: none !important; }
+              html.private div.showPrivate div.search-inner-wrapper, html.private div.showPrivate div.info { display: none !important; }
+              .info { display: none !important; }
+              .wordmark { fill: var(--main-accent-color) !important; }
+              .logo-and-wordmark {
+                align-items: center !important;
+                display: flex !important;
+                justify-content: center !important;
+                margin-bottom: 49px !important;
+              }
+              html.private { --in-content-page-background: #261010 !important;}
+            }
+            @-moz-document url(about:newtab), url(about:home), url(about:blank) { 
+              .personalize-button { display: none; }
+              .icon { color: var(--main-accent-color) !important; }    
+              .search-wrapper .search-handoff-button, .search-wrapper input {
+                background: #${theme.color.surface1} !important;
+                background-size: 24px;
+                padding-inline-start: 52px;
+                padding-inline-end: 10px;
+                padding-block: 0;
+                width: 100%;
+                box-shadow: none !important;
+                border: 1px solid #${theme.color.red} !important;
+                border-radius: 30px !important;
+              }
+              .search-wrapper .search-handoff-button {
+                color: #${theme.color.red} !important;
+              }
+              .search-handoff-button .fake-textbox {
+                opacity: 1 !important;
+                text-align: center !important;
+             .search-wrapper .search-inner-wrapper:active input, .search-wrapper input:focus {
+                border: 3px solid var(--main-accent-color) !important;
+                box-shadow: 0 0 7px var(--glow-color) !important;
+              }
+              #newtab-search-text {
+                background-color: var(--main-color) !important;
+                color: var(--main-accent-color) !important;
+              }
+              .prefs-button button { fill: var(--main-accent-color) !important; }
+              .prefs-button button:hover, .prefs-button button:focus {
+                background-color:  transparent !important; 
+              }
+              .contentSearchSuggestionTable {display: none !important;}
+              body{ background-color: var(--main-color) !important }
+              .search-wrapper .logo-and-wordmark {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 49px; 
+              }
+              .search-wrapper .search-button:focus, .search-wrapper .search-button:hover {
+                background-color: transparent !important;
+                cursor: pointer !important; 
+              }
+              .search-wrapper .search-button:active { background-color: transparent !important; }
+              .wordmark { fill: var(--main-accent-color) !important; }
+            }
+            #newtab-search-text, #searchSubmit{
+              fill: var(--main-accent-color) !important;
+              border-radius: 48px !important;
+              border-color: var(--main-accent-color) !important;
+              box-shadow: none !important;
+              background-color: none !important;
+              color: none !important;
+              font-family: helvetica !important
+            }
+            .search-wrapper .search-inner-wrapper:active input, .search-wrapper input:focus {
+              border: 3px solid var(--main-accent-color) !important;
+              box-shadow: 0 0 7px var(--glow-color) !important;
+            }
+            #newtab-search-text{
+              background-color: var(--main-color) !important;
+              color: var(--main-accent-color) !important;
+            }
+            .contentSearchSuggestionTable {display: none !important;}
+            .search-wrapper .logo-and-wordmark {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 49px; }
+            }
           '';
         };
       };
