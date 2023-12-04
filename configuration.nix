@@ -1,36 +1,107 @@
 { config, pkgs, lib, ... }:
 
 let
-  theme = {
-    font = "Fira Code";
-    color = {
-      rosewater = "f5e0dc";
-      flamingo = "f2cdcd";
-      pink = "f5c2e7";
-      mauve = "cba6f7";
-      red = "f38ba8";
-      maroon = "eba0ac";
-      peach = "fab387";
-      yellow = "f9e2af";
-      green = "a6e3a1";
-      teal = "94e2d5";
-      sky = "94e2d5";
-      saphire = "74c7ec";
-      blue = "89b4fa";
-      lavender = "b4befe";
-      text = "cdd6f4";
-      subtext1 = "bac2de";
-      subtext0 = "a6adc8";
-      overlay2 = "9399b2";
-      overlay1 = "7f849c";
-      overlay0 = "6c7086";
-      surface2 = "585b70";
-      surface1 = "45475a";
-      surface0 = "313244";
-      base = "1e1e2e";
-      mantle = "181825";
-      crust = "11111b";
+  active_theme = "catppuccin_mocha";
+
+  themes = {
+    catppuccin_latte = {
+      colors = {
+        rosewater = "dc8a78";
+        flamingo = "dd7878";
+        pink = "ea76cb";
+        mauve = "8839ef";
+        red = "d20f39";
+        maroon = "e64553";
+        peach = "fe640b";
+        yellow = "df8e1d";
+        green = "40a02b";
+        teal = "179299";
+        sky = "04a5e5";
+        saphire = "209fb5";
+        blue = "1e66f5";
+        lavender = "7287fd";
+        text = "4c4f69";
+        subtext1 = "5c5f77";
+        subtext0 = "6c6f85";
+        overlay2 = "7c7f93";
+        overlay1 = "8c8fa1";
+        overlay0 = "9ca0b0";
+        surface2 = "acb0be";
+        surface1 = "bcc0cc";
+        surface0 = "ccd0da";
+        base = "eff1f5";
+        mantle = "e6e9ef";
+        crust = "dce0e8";
+      };
+      light = true;
     };
+    catppuccin_mocha = {
+      colors = {
+        rosewater = "f5e0dc";
+        flamingo = "f2cdcd";
+        pink = "f5c2e7";
+        mauve = "cba6f7";
+        red = "f38ba8";
+        maroon = "eba0ac";
+        peach = "fab387";
+        yellow = "f9e2af";
+        green = "a6e3a1";
+        teal = "94e2d5";
+        sky = "94e2d5";
+        saphire = "74c7ec";
+        blue = "89b4fa";
+        lavender = "b4befe";
+        text = "cdd6f4";
+        subtext1 = "bac2de";
+        subtext0 = "a6adc8";
+        overlay2 = "9399b2";
+        overlay1 = "7f849c";
+        overlay0 = "6c7086";
+        surface2 = "585b70";
+        surface1 = "45475a";
+        surface0 = "313244";
+        base = "1e1e2e";
+        mantle = "181825";
+        crust = "11111b";
+      };
+      light = false;
+    };
+    rose_pine = {
+      colors = {
+        rosewater = "ebbcba";
+        pink = "ebbcba";
+        mauve = "c4a7e7";
+        red = "eb6f92";
+        maroon = "eb6f92";
+        peach = "f6c177";
+        yellow = "f6c177";
+        green = "31748f";
+        teal = "9ccfd8";
+        sky = "31748f";
+        saphire = "9ccfd8";
+        blue = "9ccfd8";
+        lavender = "c4a7e7";
+        text = "e0def4";
+        subtext1 = "908caa";
+        subtext0 = "6e6a86";
+        overlay2 = "26233a";
+        overlay1 = "524f67";
+        overlay0 = "403d52";
+        surface2 = "21202e";
+        surface1 = "1f1d2e";
+        surface0 = "1f1d2e";
+        base = "191724";
+        mantle = "191724";
+        crust = "11111b";
+      };
+      light = false;
+    };
+  };
+  theme = {
+    name = active_theme;
+    font = "Fira Code";
+    color = themes.${active_theme}.colors;
+    light = themes.${active_theme}.light;
   };
 in {
   imports = [
@@ -109,6 +180,8 @@ in {
     ripgrep
     eza
     pure-prompt
+    bemoji
+    rofi-power-menu
   ];
 
   # Configure zsh (at system level so we can set as default).
@@ -209,7 +282,7 @@ in {
       enable = true;
       defaultEditor = true;
       settings = {
-        theme = "catppuccin_mocha";
+        theme = theme.name;
         keys.normal = {
           j = "move_char_left";
           k = "move_visual_line_down";
@@ -559,39 +632,20 @@ in {
             "network.predictor.enabled" = false;
           };
           userChrome = ''
-            @media (prefers-color-scheme: dark) {
-              :root {
-                --uc-identity-colour-blue: #89B4FA;
-                --uc-identity-colour-turquoise: #94E2D5;
-                --uc-identity-colour-green: #A6E3A1;
-                --uc-identity-colour-yellow: #F9E2AF;
-                --uc-identity-colour-orange: #FAB387;
-                --uc-identity-colour-red: #F38BA8;
-                --uc-identity-colour-pink: #F5C2E7;
-                --uc-identity-colour-purple: #CBA6F7;
-                --uc-base-colour: #1E1E2E;
-                --uc-highlight-colour: #181825;
-                --uc-inverted-colour: #CDD6F4;
-                --uc-muted-colour: #6C7086;
-                --uc-accent-colour: var(--uc-identity-colour-purple);
-              }
-            }
-            @media (prefers-color-scheme: light) {
-              :root {
-                --uc-identity-colour-blue: #1E66F5;
-                --uc-identity-colour-turquoise: #179299;
-                --uc-identity-colour-green: #40A02B;
-                --uc-identity-colour-yellow: #DF8E1D;
-                --uc-identity-colour-orange: #FE640B;
-                --uc-identity-colour-red: #D20F39;
-                --uc-identity-colour-pink: #D20F39;
-                --uc-identity-colour-purple: #8839EF;
-                --uc-base-colour: #EFF1F5;
-                --uc-highlight-colour: #DCE0E8;
-                --uc-inverted-colour: #4C4F69;
-                --uc-muted-colour: #9CA0B0;
-                --uc-accent-colour: var(--uc-identity-colour-purple);
-              }
+            :root {
+              --uc-identity-colour-blue: #${theme.color.blue};
+              --uc-identity-colour-turquoise: #${theme.color.teal};
+              --uc-identity-colour-green: #${theme.color.green};
+              --uc-identity-colour-yellow: #${theme.color.yellow};
+              --uc-identity-colour-orange: #${theme.color.peach};
+              --uc-identity-colour-red: #${theme.color.red};
+              --uc-identity-colour-pink: #${theme.color.pink};
+              --uc-identity-colour-purple: #${theme.color.mauve};
+              --uc-base-colour: #${theme.color.base};
+              --uc-highlight-colour: #${theme.color.mantle};
+              --uc-inverted-colour: #${theme.color.text};
+              --uc-muted-colour: #${theme.color.overlay0};
+              --uc-accent-colour: #${theme.color.mauve};
             }
             :root {
               --lwt-frame: var(--uc-base-colour) !important;
@@ -1138,7 +1192,7 @@ in {
       	    gaps_out = 5
       	    border_size = 2
       	    col.active_border = 0xff${theme.color.maroon} 0xff${theme.color.lavender} 45deg
-      	    col.inactive_border = 0xff${theme.color.overlay2}
+      	    col.inactive_border = 0xff${theme.color.overlay1}
 
       	    layout = dwindle
       	}
@@ -1219,20 +1273,24 @@ in {
         bind = $mainMod SHIFT, W, exec, find $HOME/media/images/wallpapers -type f | shuf -n 1 | xargs wbg
 
         bind = $mainMod, SPACE, exec, rofi -show drun
-        bind = $mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -no-persist-history -hint-welcome "" -calc-command "wtype {result}"> /dev/null
+        bind = $mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -no-persist-history -hint-welcome "" -calc-command "wtype result" > /dev/null
         bind = $mainMod, E, exec, bemoji -t -n
               
       	# Move focus with mainMod + arrow/hx keys
       	bind = $mainMod, left, movefocus, l
-      	bind = $mainMod, right, movefocus, r
-      	bind = $mainMod, up, movefocus, u
       	bind = $mainMod, down, movefocus, d
+      	bind = $mainMod, up, movefocus, u
+      	bind = $mainMod, right, movefocus, r
         bind = $mainMod, J, movefocus, l
         bind = $mainMod, K, movefocus, d
         bind = $mainMod, L, movefocus, u
         bind = $mainMod, semicolon, movefocus, r
 
         # Swap window in given direction
+        bind = $mainMod SHIFT, left, swapwindow, l
+        bind = $mainMod SHIFT, down, swapwindow, d
+        bind = $mainMod SHIFT, up, swapwindow, u
+        bind = $mainMod SHIFT, right, swapwindow, r
         bind = $mainMod SHIFT, J, swapwindow, l
         bind = $mainMod SHIFT, K, swapwindow, d
         bind = $mainMod SHIFT, L, swapwindow, u
