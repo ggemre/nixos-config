@@ -6,93 +6,64 @@ let
   themes = {
     catppuccin_latte = {
       colors = {
-        rosewater = "dc8a78";
-        flamingo = "dd7878";
-        pink = "ea76cb";
-        mauve = "8839ef";
+        bg = "eff1f5";
+        light_bg = "e6e9ef";
+        sel = "ccd0da";
+        highlight = "bcc0cc";
+        dark_fg = "acb0be";
+        fg = "4c4f69";
+        light_fg = "dc8a78";
+        accent = "7287fd";
         red = "d20f39";
-        maroon = "e64553";
-        peach = "fe640b";
+        orange = "fe640b";
         yellow = "df8e1d";
         green = "40a02b";
-        teal = "179299";
-        sky = "04a5e5";
-        saphire = "209fb5";
+        cyan = "179299";
         blue = "1e66f5";
-        lavender = "7287fd";
-        text = "4c4f69";
-        subtext1 = "5c5f77";
-        subtext0 = "6c6f85";
-        overlay2 = "7c7f93";
-        overlay1 = "8c8fa1";
-        overlay0 = "9ca0b0";
-        surface2 = "acb0be";
-        surface1 = "bcc0cc";
-        surface0 = "ccd0da";
-        base = "eff1f5";
-        mantle = "e6e9ef";
-        crust = "dce0e8";
+        indigo = "8839ef";
+        violet = "dd7878";
       };
       light = true;
     };
     catppuccin_mocha = {
       colors = {
-        rosewater = "f5e0dc";
-        flamingo = "f2cdcd";
-        pink = "f5c2e7";
-        mauve = "cba6f7";
+        bg = "1e1e2e";
+        light_bg = "181825";
+        sel = "313244";
+        highlight = "45475a";
+        dark_fg = "585b70";
+        fg = "cdd6f4";
+        light_fg = "f5e0dc";
+        accent = "b4befe";
         red = "f38ba8";
-        maroon = "eba0ac";
-        peach = "fab387";
+        orange = "fab387";
         yellow = "f9e2af";
         green = "a6e3a1";
-        teal = "94e2d5";
-        sky = "94e2d5";
-        saphire = "74c7ec";
+        cyan = "94e2d5";
         blue = "89b4fa";
-        lavender = "b4befe";
-        text = "cdd6f4";
-        subtext1 = "bac2de";
-        subtext0 = "a6adc8";
-        overlay2 = "9399b2";
-        overlay1 = "7f849c";
-        overlay0 = "6c7086";
-        surface2 = "585b70";
-        surface1 = "45475a";
-        surface0 = "313244";
-        base = "1e1e2e";
-        mantle = "181825";
-        crust = "11111b";
+        indigo = "cba6f7";
+        violet = "f2cdcd";
       };
       light = false;
     };
     rose_pine = {
       colors = {
-        rosewater = "ebbcba";
-        pink = "ebbcba";
-        mauve = "c4a7e7";
+        bg = "191724";
+        light_bg = "1f1d2e";
+        sel = "26233a";
+        highlight = "6e6a86";
+        dark_fg = "908caa";
+        fg = "e0def4";
+        light_fg = "e0def4";
+        accent = "524f67";
         red = "eb6f92";
-        maroon = "eb6f92";
-        peach = "f6c177";
-        yellow = "f6c177";
+        orange = "f6c177";
+        yellow = "ebbcba";
         green = "31748f";
-        teal = "9ccfd8";
-        sky = "31748f";
-        saphire = "9ccfd8";
-        blue = "9ccfd8";
-        lavender = "c4a7e7";
-        text = "e0def4";
-        subtext1 = "908caa";
-        subtext0 = "6e6a86";
-        overlay2 = "26233a";
-        overlay1 = "524f67";
-        overlay0 = "403d52";
-        surface2 = "21202e";
-        surface1 = "1f1d2e";
-        surface0 = "1f1d2e";
-        base = "191724";
-        mantle = "191724";
-        crust = "11111b";
+        cyan = "9ccfd8";
+        blue = "c4a7e7";
+        indigo = "f6c177";
+        violet = "524f67";
       };
       light = false;
     };
@@ -345,7 +316,7 @@ in {
             font: "${theme.font} 10";
           }
           element-text, element-icon , mode-switcher {
-            background-color: #${theme.color.base};
+            background-color: #${theme.color.bg};
             text-color: inherit;
           }
           window {
@@ -356,12 +327,12 @@ in {
             height: 350px;
             width: 500px;
             border: 3px;
-            border-color: #${theme.color.lavender};
-            background-color: #${theme.color.surface0};
+            border-color: #${theme.color.accent};
+            background-color: #${theme.color.sel};
             border-radius: 12px;
           }
           mainbox {
-            background-color: #${theme.color.base};
+            background-color: #${theme.color.bg};
             children: [mode-switcher, message, inputbar, listview];
           }
           mode-switcher {
@@ -369,27 +340,27 @@ in {
           }
           button selected {
             background-color: #${theme.color.blue};
-            text-color: #${theme.color.surface2};
+            text-color: #${theme.color.dark_fg};
           }
           message {
-            background-color: #${theme.color.base};
+            background-color: #${theme.color.bg};
             padding: 2px 0px 2px;
           }
           textbox {
             padding: 5px 5px 5px 30px;
-            background-color: #${theme.color.base};
-            text-color: #${theme.color.rosewater};
+            background-color: #${theme.color.bg};
+            text-color: #${theme.color.light_fg};
           }
           inputbar {
             children: [entry];
-            background-color: #${theme.color.base};
+            background-color: #${theme.color.bg};
             border-radius: 5px;
             padding: 2px;
           }
           prompt {
-            background-color: #${theme.color.surface0};
+            background-color: #${theme.color.sel};
             padding: 6px;
-            text-color: #${theme.color.text};
+            text-color: #${theme.color.fg};
             border-radius: 3px;
             margin: 20px 0px 0px 20px;
           }
@@ -400,32 +371,32 @@ in {
           entry {
             padding: 6px 0px 0px;
             margin: 10px 0px 0px 10px;
-            text-color: #${theme.color.rosewater};
-            background-color: #${theme.color.base};
+            text-color: #${theme.color.light_fg};
+            background-color: #${theme.color.bg};
           }
           listview {
             border: 0px 0px 0px;
             padding: 6px 0px 0px;
             margin: 10px 0px 0px 10px;
             columns: 1;
-            background-color: #${theme.color.base};
+            background-color: #${theme.color.bg};
           }
           element {
             padding: 5px;
-            background-color: #${theme.color.base};
-            text-color: #${theme.color.rosewater} ;
+            background-color: #${theme.color.bg};
+            text-color: #${theme.color.light_fg} ;
           }
           element-icon {
             size: 25px;
           }
           element selected {
-            background-color: #${theme.color.surface2};
-            text-color: #${theme.color.rosewater};
+            background-color: #${theme.color.dark_fg};
+            text-color: #${theme.color.light_fg};
           }
           button {
             padding: 10px;
-            background-color: #${theme.color.base};
-            text-color: #${theme.color.text};
+            background-color: #${theme.color.bg};
+            text-color: #${theme.color.fg};
             vertical-align: 0.5;
             horizontal-align: 0.5;
           }
@@ -634,18 +605,18 @@ in {
           userChrome = ''
             :root {
               --uc-identity-colour-blue: #${theme.color.blue};
-              --uc-identity-colour-turquoise: #${theme.color.teal};
+              --uc-identity-colour-turquoise: #${theme.color.cyan};
               --uc-identity-colour-green: #${theme.color.green};
               --uc-identity-colour-yellow: #${theme.color.yellow};
-              --uc-identity-colour-orange: #${theme.color.peach};
+              --uc-identity-colour-orange: #${theme.color.orange};
               --uc-identity-colour-red: #${theme.color.red};
-              --uc-identity-colour-pink: #${theme.color.pink};
-              --uc-identity-colour-purple: #${theme.color.mauve};
-              --uc-base-colour: #${theme.color.base};
-              --uc-highlight-colour: #${theme.color.mantle};
-              --uc-inverted-colour: #${theme.color.text};
-              --uc-muted-colour: #${theme.color.overlay0};
-              --uc-accent-colour: #${theme.color.mauve};
+              --uc-identity-colour-pink: #${theme.color.violet};
+              --uc-identity-colour-purple: #${theme.color.indigo};
+              --uc-base-colour: #${theme.color.bg};
+              --uc-highlight-colour: #${theme.color.light_bg};
+              --uc-inverted-colour: #${theme.color.fg};
+              --uc-muted-colour: #${theme.color.dark_fg};
+              --uc-accent-colour: #${theme.color.indigo};
             }
             :root {
               --lwt-frame: var(--uc-base-colour) !important;
@@ -952,76 +923,76 @@ in {
         };
         colors = {
           primary = {
-            background = "#${theme.color.base}";
-            foreground = "#${theme.color.text}";
-            dim_foreground = "#${theme.color.text}";
-            bright_foreground = "#${theme.color.text}";
+            background = "#${theme.color.bg}";
+            foreground = "#${theme.color.fg}";
+            dim_foreground = "#${theme.color.fg}";
+            bright_foreground = "#${theme.color.fg}";
           };
           cursor = {
-            text = "#${theme.color.base}";
-            cursor = "#${theme.color.rosewater}";
+            text = "#${theme.color.bg}";
+            cursor = "#${theme.color.light_fg}";
           };
           vi_mode_cursor = {
-            text = "#${theme.color.base}";
-            cursor = "#${theme.color.lavender}";
+            text = "#${theme.color.bg}";
+            cursor = "#${theme.color.accent}";
           };
           search = {
             matches = {
-              foreground = "#${theme.color.base}";
-              background = "#${theme.color.subtext0}";
+              foreground = "#${theme.color.bg}";
+              background = "#${theme.color.fg}";
             };
             focused_match = {
-              foreground = "#${theme.color.base}";
+              foreground = "#${theme.color.bg}";
               background = "#${theme.color.green}";
             };
             footer_bar = {
-              foreground = "#${theme.color.base}";
-              background = "#${theme.color.subtext0}";
+              foreground = "#${theme.color.bg}";
+              background = "#${theme.color.fg}";
             };
           };
           hints = {
             start = {
-              foreground = "#${theme.color.base}";
+              foreground = "#${theme.color.bg}";
               background = "#${theme.color.yellow}";
             };
             end = {
-              foreground = "#${theme.color.base}";
-              background = "#${theme.color.subtext0}";
+              foreground = "#${theme.color.bg}";
+              background = "#${theme.color.fg}";
             };
           };
           selection = {
-            text = "#${theme.color.base}";
-            background = "#${theme.color.rosewater}";
+            text = "#${theme.color.bg}";
+            background = "#${theme.color.light_fg}";
           };
           normal = {
-            black = "#${theme.color.surface1}";
+            black = "#${theme.color.highlight}";
             red = "#${theme.color.red}";
             green = "#${theme.color.green}";
             yellow = "#${theme.color.yellow}";
             blue = "#${theme.color.blue}";
-            magenta = "#${theme.color.pink}";
-            cyan = "#${theme.color.teal}";
-            white = "#${theme.color.subtext1}";
+            magenta = "#${theme.color.violet}";
+            cyan = "#${theme.color.cyan}";
+            white = "#${theme.color.fg}";
           };
           bright = {
-            black = "#${theme.color.surface1}";
+            black = "#${theme.color.highlight}";
             red = "#${theme.color.red}";
             green = "#${theme.color.green}";
             yellow = "#${theme.color.yellow}";
             blue = "#${theme.color.blue}";
-            magenta = "#${theme.color.pink}";
-            cyan = "#${theme.color.teal}";
-            white = "#${theme.color.subtext1}";
+            magenta = "#${theme.color.violet}";
+            cyan = "#${theme.color.cyan}";
+            white = "#${theme.color.fg}";
           };
           dim = {
-            black = "#${theme.color.surface1}";
+            black = "#${theme.color.highlight}";
             red = "#${theme.color.red}";
             green = "#${theme.color.green}";
             yellow = "#${theme.color.yellow}";
             blue = "#${theme.color.blue}";
-            magenta = "#${theme.color.pink}";
-            cyan = "#${theme.color.teal}";
-            white = "#${theme.color.subtext1}";
+            magenta = "#${theme.color.violet}";
+            cyan = "#${theme.color.cyan}";
+            white = "#${theme.color.fg}";
           };
         };
       };
@@ -1093,43 +1064,43 @@ in {
           }
         	#workspaces {
         	  border-radius: 10px;
-        	  background-color: #${theme.color.base};
-        	  color: #${theme.color.subtext1};
+        	  background-color: #${theme.color.bg};
+        	  color: #${theme.color.fg};
             font-size: 7px;
             margin: 5px 0px 5px 8px;
             padding: 0px 10px 0px 10px;
         	}
         	#workspaces button {
-        	  background-color: #${theme.color.base};
-        	  color: #${theme.color.rosewater};
-        	  /* border-bottom: 5px solid #${theme.color.base}; */
+        	  background-color: #${theme.color.bg};
+        	  color: #${theme.color.light_fg};
+        	  /* border-bottom: 5px solid #${theme.color.bg}; */
         	  padding: 0;
         	  margin-top: 0;
         	}
           #workspaces:hover {
-            color: #${theme.color.text};
-            background-color: #${theme.color.base};
+            color: #${theme.color.fg};
+            background-color: #${theme.color.bg};
           }
         	#workspaces button.active {
         	  color: #${theme.color.green};
         	}
         	#clock, #battery, #network, #pulseaudio, #cpu, #custom-power {
         	  border-radius: 10px;
-        	  background-color: #${theme.color.base};
-        	  color: #${theme.color.rosewater};
+        	  background-color: #${theme.color.bg};
+        	  color: #${theme.color.light_fg};
             margin: 5px 8px 5px 0px;
             padding: 0px 10px 0px 10px;
         	}
           #clock {
             background: transparent;
-            color: #${theme.color.text}; 
+            color: #${theme.color.fg}; 
             font-weight: 500;
           }
           #network {
-            color: #${theme.color.sky};
+            color: #${theme.color.blue};
           }
           #pulseaudio {
-            color: #${theme.color.peach};
+            color: #${theme.color.orange};
             border-radius: 10px 0px 0px 10px;
             margin-right: 0;
             padding-right: 12px;
@@ -1140,7 +1111,7 @@ in {
             padding-left: 0;
           }
           #custom-power {
-            color: #${theme.color.surface0};
+            color: #${theme.color.sel};
             background-color: #${theme.color.red};
             font-weight: 500;
           }
@@ -1191,8 +1162,8 @@ in {
       	    gaps_in = 5
       	    gaps_out = 5
       	    border_size = 2
-      	    col.active_border = 0xff${theme.color.maroon} 0xff${theme.color.lavender} 45deg
-      	    col.inactive_border = 0xff${theme.color.overlay1}
+      	    col.active_border = 0xff${theme.color.red} 0xff${theme.color.accent} 45deg
+      	    col.inactive_border = 0xff${theme.color.dark_fg}
 
       	    layout = dwindle
       	}
@@ -1211,7 +1182,7 @@ in {
       	    drop_shadow = yes
       	    shadow_range = 4
       	    shadow_render_power = 3
-      	    col.shadow = 0xff${theme.color.surface1}
+      	    col.shadow = 0xff${theme.color.highlight}
       	}
 
       	animations {
