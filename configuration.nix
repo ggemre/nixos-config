@@ -234,7 +234,7 @@ in {
       };
       pointerCursor = {
         gtk.enable = true;
-        x11.enable = true;
+        # x11.enable = true; # TODO: maybe not needed
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Classic";
         size = 10;
@@ -246,7 +246,7 @@ in {
     };
     programs.git = {
       enable = true;
-      userName = "";
+      userName = ""; # TODO: set soon enough
       userEmail = "";
     };
     programs.helix = {
@@ -437,8 +437,8 @@ in {
             "browser.download.dir" = "/home/dme/tmp";
             "browser.download.lastDir" = "/home/dme/tmp";
             "browser.download.useDownloadDir" = true;
-            "browser.in-content.dark-mode" = true;
-            "ui.systemUsesDarkTheme" = 1;
+            "browser.in-content.dark-mode" = ${toString theme.light};
+            "ui.systemUsesDarkTheme" = ${if theme.light then "0" else "1"};
             # Startup settings
             "browser.aboutConfig.showWarning" = false;
             "browser.startup.page" = 0;
