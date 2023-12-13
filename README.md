@@ -1,5 +1,5 @@
-# My NixOS Configuration File
-**`> ONE FILE TO RULE THEM ALL <`**
+# 🚀 My NixOS Configuration File
+**ONE FILE TO RULE THEM ALL**
 
 ## Justification
 
@@ -13,7 +13,7 @@ In short, don't misconstrue this repo as my ignorance to encapsulation.
 
 ## Overview
 
-First of all, to explain what NixOS is, it's best if I just quote random comments from [DistroWatch](https://distrowatch.com/table.php?distribution=nixos):
+First of all, to explain what NixOS is, here are a couple of random comments from [DistroWatch](https://distrowatch.com/table.php?distribution=nixos):
 
 One NixOS user writes:
 
@@ -23,7 +23,7 @@ One NixOS user writes:
 >
 > It's amazing.
 
-Another gushes:
+Another comments:
 
 > Spanning a tech career over 22 years using macOS to Gentoo I am thrilled to be using NixOS and its's capabilities on all my devices and in all respects I possibly can. It's a distro, it's a package manager, it's a language. I don't even want to compare it to other linux distros because it is simply in a class of its own (not to diminish other OSes and PMs). I am now learning something new every day, taking notes and to reiterate excited about this amazing technology and interested in how the future of compute and human / computer interaction could be changed as this project progresses. Purely Functional.
 
