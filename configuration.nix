@@ -126,12 +126,12 @@ in {
   };
 
   # Setup user account.
-  users.users.dme = {
+  users.users.gge = {
     isNormalUser = true;
-    description = "dme";
+    description = "gge";
     extraGroups = [ "networkmanager" "wheel" "audio" ];
   };
-  services.getty.autologinUser = "dme";
+  services.getty.autologinUser = "gge";
 
   # Update nix packages.
   nixpkgs.config = {
@@ -193,7 +193,7 @@ in {
       default_session = {
         command =
           "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = "dme";
+        user = "gge";
       };
     };
   };
@@ -219,7 +219,7 @@ in {
   system.stateVersion = "23.05";
 
   # The rest is devoted to home manager.
-  home-manager.users.dme = { pkgs, ... }: {
+  home-manager.users.gge = { pkgs, ... }: {
     nixpkgs.config = {
       packageOverrides = pkgs: {
         nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
@@ -246,7 +246,7 @@ in {
     };
     programs.git = {
       enable = true;
-      userName = ""; # TODO: set soon enough
+      userName = "ggemre";
       userEmail = "";
     };
     programs.helix = {
@@ -434,11 +434,11 @@ in {
             "general.smoothScroll" = true;
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
             "browser.download.folderList" = 2;
-            "browser.download.dir" = "/home/dme/tmp";
-            "browser.download.lastDir" = "/home/dme/tmp";
+            "browser.download.dir" = "/home/gge/tmp";
+            "browser.download.lastDir" = "/home/gge/tmp";
             "browser.download.useDownloadDir" = true;
-            "browser.in-content.dark-mode" = ${toString theme.light};
-            "ui.systemUsesDarkTheme" = ${if theme.light then "0" else "1"};
+            "browser.in-content.dark-mode" = true;
+            "ui.systemUsesDarkTheme" = 1;
             # Startup settings
             "browser.aboutConfig.showWarning" = false;
             "browser.startup.page" = 0;
