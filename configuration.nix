@@ -83,26 +83,32 @@ in {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.kernelModules = [ "wl" ];
+  boot.kernelModules= [ "kvm-intel" "wl" "i915" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
   # Network settings.
-  networking.hostName = "nixos";
-  # networking.wireless.enable = true;
+  networking.hostName = "mre";
   networking.networkmanager.enable = true;
+  services.resolved = {
+    enable = true;
+    dnssec = "true";
+    llmnr = "false";
+    extraConfig = ''
+      DNSOverTLS = yes
+      DNS = 1.1.1.1
+      DNS = 8.8.8.8
+      DNS = 1.0.0.1
+      DNS = 8.8.4.4
+      MulticastDNS = true
+    '';
+  };
 
   # Set your time zone.
-  time.timeZone = "America/Denver";
+  time.timeZone = "America/New_York";
 
   # Audio settings.
   hardware.pulseaudio.enable = true;
-
-  # MacBook specific settings
-  hardware.facetimehd.enable = false;
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
-  boot.kernelParams = [ "acpi_backlight=vendor" "acpi_osi=" ];
-  services.xserver.deviceSection = lib.mkDefault ''
-    Option "TearFree" "true"
-  '';
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -144,6 +150,7 @@ in {
     curl 
     wayland 
     acpi 
+    brightnessctl
     wbg 
     wtype 
     wl-clipboard 
@@ -153,6 +160,9 @@ in {
     pure-prompt
     bemoji
     rofi-power-menu
+    libimobiledevice
+    mesa
+    bitwarden-cli
   ];
 
   # Configure zsh (at system level so we can set as default).
@@ -183,7 +193,7 @@ in {
   # Configure hyprland (at system level because home manager broke it).
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    xwayland.enable = false;
   };
 
   # Configure greeter.
@@ -247,7 +257,7 @@ in {
     programs.git = {
       enable = true;
       userName = "ggemre";
-      userEmail = "";
+      userEmail = "ggemre+github@proton.me";
     };
     programs.helix = {
       enable = true;
@@ -1025,6 +1035,7 @@ in {
           };
           pulseaudio = {
             format = "{icon} {volume}%";
+            format-muted = " ";
             format-icons = {
               default = [
                 "󰕿"
@@ -1039,10 +1050,17 @@ in {
             max-length = 10;
           };
           battery = {
-            format = "{capacity}";
-            format-charging = "{capacity}";
-            format-full = "{capacity}";
+            interval = 60;
+            states = {
+                warning = 30;
+                critical = 15;
+            };
+            format = "{icon} {capacity}%";
+            format-icons = [ " " " " " " " " " " ];
             bat-compatibility = true;
+            design-capactiy = true;
+            tooltip = true;
+            tooltip-format = "{timeTo}";
           };
           "custom/power" = {
             format = "⏻";
@@ -1110,6 +1128,9 @@ in {
             border-radius: 0px 10px 10px 0px;
             padding-left: 0;
           }
+          #battery {
+            color: #${theme.color.green};
+          }
           #custom-power {
             color: #${theme.color.sel};
             background-color: #${theme.color.red};
@@ -1122,7 +1143,7 @@ in {
       	monitor=,preferred,auto,auto
 
       	# Execute your favorite apps at launch
-      	exec-once = waybar & find $HOME/media/images/wallpapers -type f | shuf -n 1 | xargs wbg
+      	exec-once = waybar & find $HOME/media/images/wallpapers/${theme.name} -type f | shuf -n 1 | xargs wbg
 
       	# Source a file (multi-file configs)
       	# source = ~/.config/hypr/myColors.conf
@@ -1241,11 +1262,20 @@ in {
         bind = $mainMod, S, togglespecialworkspace
         bind = $mainMod, F, fullscreen, 0
         bind = $mainMod SHIFT, S, movetoworkspace, special
-        bind = $mainMod SHIFT, W, exec, find $HOME/media/images/wallpapers -type f | shuf -n 1 | xargs wbg
+        bind = $mainMod SHIFT, W, exec, find $HOME/media/images/wallpapers/${theme.name} -type f | shuf -n 1 | xargs wbg
 
         bind = $mainMod, SPACE, exec, rofi -show drun
         bind = $mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -no-persist-history -hint-welcome "" -calc-command "wtype result" > /dev/null
         bind = $mainMod, E, exec, bemoji -t -n
+
+        # Macbook functional keys remapping
+        bind = , XF86AudioMute, exec, amixer set Master toggle
+        bind = , XF86AudioLowerVolume, exec, amixer set Master 5%-
+        bind = , XF86AudioRaiseVolume, exec, amixer set Master 5%+
+        bind = , XF86MonBrightnessDown, exec, brightnessctl -d acpi_video0 s 5%-
+        bind = , XF86MonBrightnessUp, exec, brightnessctl -d acpi_video0 s 5%+
+        bind = , XF86KbdBrightnessDown, exec, brightnessctl -d smc::kbd_backlight s 5%-
+        bind = , XF86KbdBrightnessUp, exec, brightnessctl -d smc::kbd_backlight s 5%+
               
       	# Move focus with mainMod + arrow/hx keys
       	bind = $mainMod, left, movefocus, l
