@@ -412,6 +412,49 @@ in {
           }
       '');
     };
+    programs.zathura = {
+      enable = true;
+      mappings = {
+        j = "scroll left";
+        k = "scroll down";
+        l = "scroll up";
+        ";" = "scroll right";
+      };
+      options = {
+        selection-clipboard = "clipboard";
+        recolor = true;
+        recolor-keephue = true;
+        default-fg = "#${theme.color.fg}";
+        default-bg = "#${theme.color.bg}";
+        completion-bg = "#${theme.color.sel}";
+        completion-fg = "#${theme.color.fg}";
+        completion-highlight-bg = "#${theme.color.indigo}";
+        completion-highlight-fg = "#${theme.color.fg}";
+        completion-group-bg = "#${theme.color.sel}";
+        completion-group-fg = "#${theme.color.blue}";
+        statusbar-fg = "#${theme.color.fg}";
+        statusbar-bg = "#${theme.color.sel}";
+        notification-bg = "#${theme.color.sel}";
+        notification-fg = "#${theme.color.fg}";
+        notification-error-bg = "#${theme.color.sel}";
+        notification-error-fg = "#${theme.color.red}";
+        notification-warning-bg = "#${theme.color.sel}";
+        notification-warning-fg = "#${theme.color.orange}";
+        inputbar-bg = "#${theme.color.sel}";
+        inputbar-fg = "#${theme.color.fg}";
+        recolor-lightcolor = "#${theme.color.bg}";
+        recolor-darkcolor = "#${theme.color.fg}";
+        index-fg = "#${theme.color.fg}";
+        index-bg = "#${theme.color.bg}";
+        index-active-fg = "#${theme.color.fg}";
+        index-active-bg = "#${theme.color.sel}";
+        render-loading-bg = "#${theme.color.bg}";
+        render-loading-fg = "#${theme.color.fg}";
+        highlight-color = "#${theme.color.indigo}";
+        highlight-fg = "#${theme.color.light_fg}";
+        highlight-active-color = "#${theme.color.light_fg}";
+      };
+    };
     programs.firefox = { 
       enable = true; 
       package = pkgs.firefox-wayland;
@@ -1029,9 +1072,13 @@ in {
           };
           network = {
             format-wifi = "󰖩";
-            format-ethernet = "󰖩";
+            format-ethernet = "󰈁";
             format-disconnected = "󰖪";
-            tooltip = false;
+            tooltip = true;
+            tooltip-format = "{ifname} via {gwaddr}";
+            tooltip-format-wifi = "{essid} ({signalStrength}%)";
+            tooltip-format-ethernet = "{ifname}";
+            tooltip-format-disconnected = "Disconnected";
           };
           pulseaudio = {
             format = "{icon} {volume}%";
@@ -1056,9 +1103,11 @@ in {
                 critical = 15;
             };
             format = "{icon} {capacity}%";
+            format-charging = "󱐋{icon} {capacity}%";
+            format-full= "󱐋{icon} {capacity}%";
             format-icons = [ " " " " " " " " " " ];
             bat-compatibility = true;
-            design-capactiy = true;
+            full-at = 88;
             tooltip = true;
             tooltip-format = "{timeTo}";
           };
@@ -1130,6 +1179,12 @@ in {
           }
           #battery {
             color: #${theme.color.green};
+          }
+          #battery.warning {
+            color: #${theme.color.yellow};
+          }
+          #battery.critical {
+            color: #${theme.color.red};
           }
           #custom-power {
             color: #${theme.color.sel};
