@@ -124,12 +124,17 @@ in {
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Generation garbage collection
+  # Generation garbage collection.
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than-7d";
   };
+
+  # Prevent shutdown on short power key press.
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+  '';
 
   # Setup user account.
   users.users.gge = {
@@ -151,6 +156,7 @@ in {
     wayland 
     acpi 
     brightnessctl
+    playerctl
     wbg 
     wtype 
     wl-clipboard 
@@ -244,11 +250,13 @@ in {
       };
       pointerCursor = {
         gtk.enable = true;
-        # x11.enable = true; # TODO: maybe not needed
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Classic";
         size = 10;
       };
+      packages = with pkgs.nur.repos; [ 
+
+      ];
     };
     programs.direnv = {
       enable = true;
@@ -424,6 +432,7 @@ in {
         selection-clipboard = "clipboard";
         recolor = true;
         recolor-keephue = true;
+        font = "${theme.font}";
         default-fg = "#${theme.color.fg}";
         default-bg = "#${theme.color.bg}";
         completion-bg = "#${theme.color.sel}";
@@ -623,6 +632,7 @@ in {
             "extensions.webextensions.restrictedDomains" = "";
             "extensions.postDownloadThirdPartyPrompt" = false;
             # Firefox amnesia
+            "places.history.enabled" = true;
             "network.cookie.lifetimePolicy" = 2;
             "privacy.sanitize.sanitizeOnShutdown" = true;
             "privacy.clearOnShutdown.cache" = true;
@@ -633,7 +643,10 @@ in {
             "privacy.clearOnShutdown.offlineApps" = true;
             "privacy.clearOnShutdown.sessions" = true;
             "privacy.clearOnShutdown.sitesettings" = false;
-            "privacy.sanitize.timeSpan" = 0;
+            # "privacy.sanitize.timeSpan" = 0;
+            "browser.history_expire_days" = 30;
+            "browser.history_expire_days_min" = 30;
+            "browser.history_expire_sites" = 30;
             # Mitigate fingerprinting
             "privacy.resistFingerprinting" = true;
             "privacy.window.maxInnerWidth" = 1600;
@@ -1057,22 +1070,41 @@ in {
         main = {
           layer = "top";
           position = "top";
-          # height = 8;
-          # margin-top = 0;
-          # margin-bottom = 0;
-          modules-left = [ "hyprland/workspaces" ];
+          modules-left = [ "hyprland/workspaces" "cava" ];
           modules-center = [ "clock" ];
-          modules-right = [ "network" "pulseaudio" "cpu" "battery" "custom/power" ];
+          modules-right = [ "network" "pulseaudio" "cpu" "memory" "disk" "battery" "custom/power" ];
           "hyprland/workspaces" = { format = ""; };
           clock = {
             interval = 60;
-            format = "{:%I:%M %p}";
-            format-alt = "{:%a %b %d}";
+            format = "{:%I:%M %p %a %b %d}";
+            format-alt = "{:%I:%M %p}";
             tooltip = false;
           };
+          cava = {
+            framerate = 30;
+            autosens = 1;
+            bars = 14;
+            lower_cutoff_freq = 50;
+            higher_cutoff_freq = 10000;
+            sleep_timer = 0;
+            hide_on_silence = true;
+            method = "pulse";
+            source = "auto";
+            stereo = true;
+            reverse = false;
+            bar_delimiter = 0;
+            monstercat = false;
+            waves = false;
+            noise_reduction = 0.87;
+            input_delay = 2;
+            format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
+            actions = {
+              on-click-right = "mode";
+            };
+          };
           network = {
-            format-wifi = "󰖩";
-            format-ethernet = "󰈁";
+            format-wifi = "󰖩 {bandwidthTotalBytes}";
+            format-ethernet = "󰈁 {bandwidthTotalBytes}";
             format-disconnected = "󰖪";
             tooltip = true;
             tooltip-format = "{ifname} via {gwaddr}";
@@ -1093,14 +1125,24 @@ in {
           };
           cpu = {
             interval = 10;
-            format = "  {usage}%";
+            format = " {usage}%";
             max-length = 10;
+          };
+          memory = {
+            interval = 30;
+            format = " {}%";
+            max-length = 10;
+          };
+          disk = { 
+            interval = 120;
+            format = "󰆼 {percentage_used}%";
+            path = "/";
           };
           battery = {
             interval = 60;
             states = {
-                warning = 30;
-                critical = 15;
+                warning = 50;
+                critical = 25;
             };
             format = "{icon} {capacity}%";
             format-charging = "󱐋{icon} {capacity}%";
@@ -1139,19 +1181,18 @@ in {
         	}
         	#workspaces button {
         	  background-color: #${theme.color.bg};
-        	  color: #${theme.color.light_fg};
-        	  /* border-bottom: 5px solid #${theme.color.bg}; */
+        	  color: #${theme.color.dark_fg};
         	  padding: 0;
         	  margin-top: 0;
         	}
-          #workspaces:hover {
+          #workspaces button:hover {
             color: #${theme.color.fg};
             background-color: #${theme.color.bg};
           }
         	#workspaces button.active {
-        	  color: #${theme.color.green};
+        	  color: #${theme.color.light_fg};
         	}
-        	#clock, #battery, #network, #pulseaudio, #cpu, #custom-power {
+        	#clock, #cava, #battery, #network, #pulseaudio, #cpu, #memory, #disk, #custom-power {
         	  border-radius: 10px;
         	  background-color: #${theme.color.bg};
         	  color: #${theme.color.light_fg};
@@ -1159,9 +1200,13 @@ in {
             padding: 0px 10px 0px 10px;
         	}
           #clock {
-            background: transparent;
-            color: #${theme.color.fg}; 
+            color: #${theme.color.cyan}; 
             font-weight: 500;
+            margin-left: 8px;
+          }
+          #cava {
+            color: #${theme.color.accent};
+            margin-left: 5px;
           }
           #network {
             color: #${theme.color.blue};
@@ -1170,12 +1215,24 @@ in {
             color: #${theme.color.orange};
             border-radius: 10px 0px 0px 10px;
             margin-right: 0;
-            padding-right: 12px;
+            padding: 0px 12px 0px 10px;
           }
           #cpu {
             color: #${theme.color.yellow};
+            border-radius: 0;
+            margin-right: 0;
+            padding: 0px 12px 0px 0px;
+          }
+          #memory {
+            color: #${theme.color.violet};
+            border-radius: 0;
+            margin-right: 0;
+            padding: 0px 12px 0px 0px;
+          }
+          #disk {
+            color: #${theme.color.indigo};
             border-radius: 0px 10px 10px 0px;
-            padding-left: 0;
+            padding: 0px 10px 0px 0px;
           }
           #battery {
             color: #${theme.color.green};
@@ -1320,17 +1377,17 @@ in {
         bind = $mainMod SHIFT, W, exec, find $HOME/media/images/wallpapers/${theme.name} -type f | shuf -n 1 | xargs wbg
 
         bind = $mainMod, SPACE, exec, rofi -show drun
-        bind = $mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -no-persist-history -hint-welcome "" -calc-command "wtype result" > /dev/null
+        bind = $mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -no-persist-history -hint-welcome "" > /dev/null
         bind = $mainMod, E, exec, bemoji -t -n
 
         # Macbook functional keys remapping
         bind = , XF86AudioMute, exec, amixer set Master toggle
-        bind = , XF86AudioLowerVolume, exec, amixer set Master 5%-
-        bind = , XF86AudioRaiseVolume, exec, amixer set Master 5%+
-        bind = , XF86MonBrightnessDown, exec, brightnessctl -d acpi_video0 s 5%-
-        bind = , XF86MonBrightnessUp, exec, brightnessctl -d acpi_video0 s 5%+
-        bind = , XF86KbdBrightnessDown, exec, brightnessctl -d smc::kbd_backlight s 5%-
-        bind = , XF86KbdBrightnessUp, exec, brightnessctl -d smc::kbd_backlight s 5%+
+        binde = , XF86AudioLowerVolume, exec, amixer set Master 3%-
+        binde = , XF86AudioRaiseVolume, exec, amixer set Master 3%+
+        binde = , XF86MonBrightnessDown, exec, brightnessctl -d acpi_video0 s 5%-
+        binde = , XF86MonBrightnessUp, exec, brightnessctl -d acpi_video0 s 5%+
+        binde = , XF86KbdBrightnessDown, exec, brightnessctl -d smc::kbd_backlight s 5%-
+        binde = , XF86KbdBrightnessUp, exec, brightnessctl -d smc::kbd_backlight s 5%+
               
       	# Move focus with mainMod + arrow/hx keys
       	bind = $mainMod, left, movefocus, l
