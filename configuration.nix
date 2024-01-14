@@ -81,31 +81,46 @@ in {
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.kernelModules = [ "wl" ];
-  boot.kernelModules= [ "kvm-intel" "wl" "i915" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    kernelParams = [ "acpi_osi=" ];
+    kernelModules= [ "kvm-intel" "i915" ];
+    extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+    kernel.sysctl = {
+      "fs.file-max" = 65536;
+      "net.core.wmem_max" = 12582912;
+      "i915.enable_rc6" = 7;
+    };
+  };
 
   # Network settings.
   networking.hostName = "mre";
-  networking.networkmanager.enable = true;
-  services.resolved = {
+  networking.networkmanager = {
     enable = true;
-    dnssec = "true";
-    llmnr = "false";
-    extraConfig = ''
-      DNSOverTLS = yes
-      DNS = 1.1.1.1
-      DNS = 8.8.8.8
-      DNS = 1.0.0.1
-      DNS = 8.8.4.4
-      MulticastDNS = true
-    '';
+    dns = "default";
+    wifi.powersave = false;
   };
+  security.pam.loginLimits = [{
+    domain = "*";
+    type = "soft";
+    item = "nofile";
+    value = 65536;
+  }];
+
+  # Hardware tweaks.
+  hardware.facetimehd.enable = false;
+  hardware.enableRedistributableFirmware = true;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  services.fstrim.enable = lib.mkDefault true;
+  hardware.opengl.extraPackages = with pkgs; [
+    (if (lib.versionOlder (lib.versions.majorMinor lib.version) "23.11") then vaapiIntel else intel-vaapi-driver)
+    libvdpau-va-gl
+    intel-media-driver
+  ];
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Denver";
 
   # Audio settings.
   hardware.pulseaudio.enable = true;
@@ -140,7 +155,7 @@ in {
   users.users.gge = {
     isNormalUser = true;
     description = "gge";
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
   };
   services.getty.autologinUser = "gge";
 
@@ -148,6 +163,11 @@ in {
   nixpkgs.config = {
     allowUnfree = true;
     pulseaudio = true;
+    packageOverrides = pkgs: {
+      nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+        inherit pkgs;
+      };
+    };
   };
 
   # Package settings.
@@ -199,7 +219,7 @@ in {
   # Configure hyprland (at system level because home manager broke it).
   programs.hyprland = {
     enable = true;
-    xwayland.enable = false;
+    xwayland.enable = true;
   };
 
   # Configure greeter.
@@ -224,29 +244,17 @@ in {
     fira-code-symbols
   ];
 
-  # Some programs need SUID wrappers.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
   # System version for syncing. Do not change.
   system.stateVersion = "23.05";
 
   # The rest is devoted to home manager.
+  home-manager.useGlobalPkgs = true;
   home-manager.users.gge = { pkgs, ... }: {
-    nixpkgs.config = {
-      packageOverrides = pkgs: {
-        nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-          inherit pkgs;
-        };
-      };
-    };
     home = {
       stateVersion = "23.05";
       sessionVariables = {
         MOZ_ENABLE_WAYLAND = 1;
+        NIXOS_OZONE_WL = 1;
       };
       pointerCursor = {
         gtk.enable = true;
@@ -254,9 +262,6 @@ in {
         name = "Bibata-Modern-Classic";
         size = 10;
       };
-      packages = with pkgs.nur.repos; [ 
-
-      ];
     };
     programs.direnv = {
       enable = true;
@@ -466,7 +471,7 @@ in {
     };
     programs.firefox = { 
       enable = true; 
-      package = pkgs.firefox-wayland;
+      package = pkgs.firefox;
       profiles = {
         main = {
           id = 0;
@@ -526,8 +531,8 @@ in {
             "intl.accept_languages" = "en-US, en";
             "javascript.use_us_english_locale" = true;
             # Disable auto-updates and recommendations
-            "app.update.background.scheduling.enabled" = false;
-            "app.update.auto" = false;
+            "app.update.background.scheduling.enabled" = true;
+            "app.update.auto" = true;
             "extensions.getAddons.showPane" = false;
             "extensions.htmlaboutaddons.recommendations.enabled" = false;
             "browser.discovery.enabled" = false;
@@ -558,15 +563,15 @@ in {
             "network.captive-portal-service.enabled" = false;
             "network.connectivity-service.enabled" = false;
             # Networking settings
-            "network.prefetch-next" = false;
-            "network.dns.disablePrefetch" = true;
-            "network.http.speculative-parallel-limit" = 0;
-            "browser.places.speculativeConnect.enabled" = false;
-            "network.dns.disableIPv6" = true;
-            "network.gio.supported-protocols" = "";
-            "network.file.disable_unc_paths" = true;
-            "permissions.manager.defaultsUrl" = "";
-            "network.IDN_show_punycode" = true;
+            # "network.prefetch-next" = false;
+            # "network.dns.disablePrefetch" = true;
+            # "network.http.speculative-parallel-limit" = 0;
+            # "browser.places.speculativeConnect.enabled" = false;
+            # "network.dns.disableIPv6" = true;
+            # "network.gio.supported-protocols" = "";
+            # "network.file.disable_unc_paths" = true;
+            # "permissions.manager.defaultsUrl" = "";
+            # "network.IDN_show_punycode" = true;
             # Search settings
             "browser.search.suggest.enabled" = false;
             "browser.urlbar.suggest.searches" = false;
@@ -587,86 +592,86 @@ in {
             "signon.rememberSignons" = false;
             "signon.autofillForms" = false;
             "signon.formlessCapture.enabled" = false;
-            "network.auth.subresource-http-auth-allow" = 1;
+            # "network.auth.subresource-http-auth-allow" = 1;
             # Disk cache and Memory
-            "browser.cache.disk.enable" = false;
-            "browser.sessionstore.privacy_level" = 2;
-            "browser.sessionstore.resume_from_crash" = false;
-            "browser.pagethumbnails.capturing_disabled" = true;
-            "browser.shell.shortcutFavicons" = false;
-            "browser.helperApps.deleteTempFileOnExit" = true;
+            # "browser.cache.disk.enable" = false;
+            # "browser.sessionstore.privacy_level" = 2;
+            # "browser.sessionstore.resume_from_crash" = false;
+            # "browser.pagethumbnails.capturing_disabled" = true;
+            # "browser.shell.shortcutFavicons" = false;
+            # "browser.helperApps.deleteTempFileOnExit" = true;
             # TLS-related settings
             "dom.security.https_only_mode" = true;
             "dom.security.https_only_mode_send_http_background_request" = false;
-            "browser.xul.error_pages.expert_bad_cert" = true;
-            "security.tls.enable_0rtt_data" = false;
-            "security.OCSP.require" = true;
-            "security.pki.sha1_enforcement_level" = 1;
-            "security.cert_pinning.enforcement_level" = 2;
-            "security.remote_settings.crlite_filters.enabled" = true;
-            "security.pki.crlite_mode" = 2;
-            "network.http.referer.XOriginPolicy" = 2;
-            "network.http.referer.XOriginTrimmingPolicy" = 2;
+            # "browser.xul.error_pages.expert_bad_cert" = true;
+            # "security.tls.enable_0rtt_data" = false;
+            # "security.OCSP.require" = true;
+            # "security.pki.sha1_enforcement_level" = 1;
+            # "security.cert_pinning.enforcement_level" = 2;
+            # "security.remote_settings.crlite_filters.enabled" = true;
+            # "security.pki.crlite_mode" = 2;
+            # "network.http.referer.XOriginPolicy" = 2;
+            # "network.http.referer.XOriginTrimmingPolicy" = 2;
             # WebRTC, WebGL, and DRM
-            "media.peerconnection.enabled" = false;
-            "media.peerconnection.ice.proxy_only_if_behind_proxy" = true;
-            "media.peerconnection.ice.default_address_only" = true;
-            "media.peerconnection.ice.no_host" = true;
-            "webgl.disabled" = true;
-            "media.autoplay.default" = 5;
-            "media.eme.enabled" = false;
-            "browser.download.manager.addToRecentDocs" = false;
+            # "media.peerconnection.enabled" = false;
+            # "media.peerconnection.ice.proxy_only_if_behind_proxy" = true;
+            # "media.peerconnection.ice.default_address_only" = true;
+            # "media.peerconnection.ice.no_host" = true;
+            # "webgl.disabled" = true;
+            # "media.autoplay.default" = 5;
+            # "media.eme.enabled" = false;
+            # "browser.download.manager.addToRecentDocs" = false;
             # Cookies
-            "browser.contentblocking.category" = "strict";
-            "privacy.partition.serviceWorkers" = true;
-            "privacy.partition.always_partition_third_party_non_cookie_storage" = true;
-            "privacy.partition.always_partition_third_party_non_cookie_storage.exempt_sessionstorage" = true;
+            # "browser.contentblocking.category" = "strict";
+            # "privacy.partition.serviceWorkers" = true;
+            # "privacy.partition.always_partition_third_party_non_cookie_storage" = true;
+            # "privacy.partition.always_partition_third_party_non_cookie_storage.exempt_sessionstorage" = true;
             # UI features
-            "dom.disable_open_during_load" = true;
-            "dom.popup_allowed_events" = "click dblclick mousedown pointerdown";
+            # "dom.disable_open_during_load" = true;
+            # "dom.popup_allowed_events" = "click dblclick mousedown pointerdown";
             "extensions.pocket.enabled" = false;
-            "extensions.Screenshots.disabled" = true;
-            "pdfjs.enabledScripting" = false;
-            "privacy.userContext.enabled" = true;
-            "extensions.enabledScopes" = 5;
-            "extensions.webextensions.restrictedDomains" = "";
-            "extensions.postDownloadThirdPartyPrompt" = false;
+            # "extensions.Screenshots.disabled" = true;
+            # "pdfjs.enabledScripting" = false;
+            # "privacy.userContext.enabled" = true;
+            # "extensions.enabledScopes" = 5;
+            # "extensions.webextensions.restrictedDomains" = "";
+            # "extensions.postDownloadThirdPartyPrompt" = false;
             # Firefox amnesia
-            "places.history.enabled" = true;
-            "network.cookie.lifetimePolicy" = 2;
-            "privacy.sanitize.sanitizeOnShutdown" = true;
-            "privacy.clearOnShutdown.cache" = true;
-            "privacy.clearOnShutdown.cookies" = true;
-            "privacy.clearOnShutdown.downloads" = true;
-            "privacy.clearOnShutdown.formdata" = true;
-            "privacy.clearOnShutdown.history" = true;
-            "privacy.clearOnShutdown.offlineApps" = true;
-            "privacy.clearOnShutdown.sessions" = true;
-            "privacy.clearOnShutdown.sitesettings" = false;
+            # "places.history.enabled" = true;
+            # "network.cookie.lifetimePolicy" = 2;
+            # "privacy.sanitize.sanitizeOnShutdown" = true;
+            # "privacy.clearOnShutdown.cache" = true;
+            # "privacy.clearOnShutdown.cookies" = true;
+            # "privacy.clearOnShutdown.downloads" = true;
+            # "privacy.clearOnShutdown.formdata" = true;
+            # "privacy.clearOnShutdown.history" = true;
+            # "privacy.clearOnShutdown.offlineApps" = true;
+            # "privacy.clearOnShutdown.sessions" = true;
+            # "privacy.clearOnShutdown.sitesettings" = false;
             # "privacy.sanitize.timeSpan" = 0;
             "browser.history_expire_days" = 30;
             "browser.history_expire_days_min" = 30;
             "browser.history_expire_sites" = 30;
             # Mitigate fingerprinting
-            "privacy.resistFingerprinting" = true;
-            "privacy.window.maxInnerWidth" = 1600;
-            "privacy.window.maxInnerHeight" = 900;
-            "privacy.resistFingerprinting.block_mozAddonManager" = true;
-            "browser.startup.blankWindow" = false;
-            "browser.display.use_system_colors" = false;
+            # "privacy.resistFingerprinting" = true;
+            # "privacy.window.maxInnerWidth" = 1600;
+            # "privacy.window.maxInnerHeight" = 900;
+            # "privacy.resistFingerprinting.block_mozAddonManager" = true;
+            # "browser.startup.blankWindow" = false;
+            # "browser.display.use_system_colors" = false;
             # Performance optimization
-            "content.notify.interval" = 100000;
-            "browser.cache.jsbc_compression_level" = 3;
-            "media.memory_cache_max_size" = 65536;
-            "media.cache_readahead_limit" = 7200;
-            "media.cache_resume_threshold" = 3600;
-            "image.mem.decode_bytes_at_a_time" = 32768;
-            "network.buffer.cache.size" = 262144;
-            "network.buffer.cache.count" = 128;
-            "network.http.max-connections" = 1800;
-            "network.http.max-persistent-connections-per-server" = 10;
-            "network.http.max-urgent-start-excessive-connections-per-host" = 5;
-            "network.predictor.enabled" = false;
+            # "content.notify.interval" = 100000;
+            # "browser.cache.jsbc_compression_level" = 3;
+            # "media.memory_cache_max_size" = 65536;
+            # "media.cache_readahead_limit" = 7200;
+            # "media.cache_resume_threshold" = 3600;
+            # "image.mem.decode_bytes_at_a_time" = 32768;
+            # "network.buffer.cache.size" = 262144;
+            # "network.buffer.cache.count" = 128;
+            # "network.http.max-connections" = 1800;
+            # "network.http.max-persistent-connections-per-server" = 10;
+            # "network.http.max-urgent-start-excessive-connections-per-host" = 5;
+            # "network.predictor.enabled" = false;
           };
           userChrome = ''
             :root {
@@ -1011,10 +1016,10 @@ in {
               foreground = "#${theme.color.bg}";
               background = "#${theme.color.green}";
             };
-            footer_bar = {
-              foreground = "#${theme.color.bg}";
-              background = "#${theme.color.fg}";
-            };
+            # footer_bar = {
+            #   foreground = "#${theme.color.bg}";
+            #   background = "#${theme.color.fg}";
+            # };
           };
           hints = {
             start = {
@@ -1211,6 +1216,9 @@ in {
           #network {
             color: #${theme.color.blue};
           }
+          #network.disconnected {
+            color: #${theme.color.red};
+          }
           #pulseaudio {
             color: #${theme.color.orange};
             border-radius: 10px 0px 0px 10px;
@@ -1252,7 +1260,8 @@ in {
     };
     home.file.".config/hypr/hyprland.conf".text = ''
       	# See https://wiki.hyprland.org/Configuring/Monitors/
-      	monitor=,preferred,auto,auto
+      	monitor=eDP-1,preferred,auto,auto
+        monitor=HDMI-A-1,preferred,1920x-720,auto
 
       	# Execute your favorite apps at launch
       	exec-once = waybar & find $HOME/media/images/wallpapers/${theme.name} -type f | shuf -n 1 | xargs wbg
