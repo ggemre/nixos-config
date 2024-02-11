@@ -119,7 +119,7 @@ in {
     intel-media-driver
   ];
 
-  # Set your time zone.
+  # Set the time zone.
   time.timeZone = "America/Denver";
 
   # Audio settings.
@@ -174,21 +174,24 @@ in {
   environment.systemPackages = with pkgs; [ 
     curl 
     wayland 
-    acpi 
+    acpi
     brightnessctl
     playerctl
-    wbg 
-    wtype 
+    mako
+    wbg
+    wtype
     wl-clipboard 
+    xdg-desktop-portal-hyprland
     bat
     ripgrep
     eza
     pure-prompt
-    bemoji
-    rofi-power-menu
     libimobiledevice
     mesa
     bitwarden-cli
+    libqalculate
+
+    nur.repos.ggemre.stacklet
   ];
 
   # Configure zsh (at system level so we can set as default).
@@ -206,6 +209,9 @@ in {
       autoload -U promptinit; promptinit
       prompt pure
     '';
+    interactiveShellInit = ''
+      eval "$(direnv hook zsh)"
+    '';
   };
   users.defaultUserShell = pkgs.zsh;
   environment = {
@@ -220,6 +226,7 @@ in {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+    portalPackage = pkgs.xdg-desktop-portal-hyprland;
   };
 
   # Configure greeter.
@@ -228,7 +235,7 @@ in {
     settings = {
       default_session = {
         command =
-          "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+          "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd Hyprland";
         user = "gge";
       };
     };
@@ -263,9 +270,11 @@ in {
         size = 10;
       };
     };
+    
     programs.direnv = {
       enable = true;
       enableZshIntegration = true;      
+      nix-direnv.enable = true;
     };
     programs.git = {
       enable = true;
@@ -331,9 +340,6 @@ in {
       enable = true;
       package = pkgs.rofi-wayland;
       font = theme.font;
-      plugins = with pkgs; [
-        rofi-calc
-      ];
       theme = builtins.toString (pkgs.writeText "rofi-theme" ''
           * {
             font: "${theme.font} 10";
@@ -480,6 +486,7 @@ in {
             force = true;
             default = "DuckDuckGo";
             engines = {
+
               "Nix Packages" = {
                 urls = [{
                   template = "https://search.nixos.org/packages";
@@ -488,9 +495,41 @@ in {
                     { name = "query"; value = "{searchTerms}"; }
                   ];
                 }];
-                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@np" ];
               };
+
+              "NixOS Options" = {
+                urls = [{
+                  template = "https://search.nixos.org/options";
+                  params = [
+                    { name = "channel"; value = "unstable"; }
+                    { name = "query"; value = "{searchTerms}"; }
+                  ];
+                }];
+                definedAliases = [ "@no" ];
+              };
+
+              
+              "Home Manager" = {
+                urls = [{
+                  template = "https://mipmip.github.io/home-manager-option-search";
+                  params = [
+                    { name = "query"; value = "{searchTerms}"; }
+                  ];
+                }];
+                definedAliases = [ "@hm" ];
+              };
+
+              "Invidious" = {
+                urls = [{
+                  template = "https://inv.us.projectsegfau.lt/search";
+                  params = [
+                    { name = "q"; value = "{searchTerms}"; }
+                  ];
+                }];
+                definedAliases = [ "@in" ];
+              };
+
             };
           };
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
@@ -505,6 +544,7 @@ in {
             "browser.download.lastDir" = "/home/gge/tmp";
             "browser.download.useDownloadDir" = true;
             "browser.in-content.dark-mode" = true;
+            "browser.theme.content-theme" = 2;
             "ui.systemUsesDarkTheme" = 1;
             # Startup settings
             "browser.aboutConfig.showWarning" = false;
@@ -562,16 +602,6 @@ in {
             "captivedetect.canonicalURL" = "";
             "network.captive-portal-service.enabled" = false;
             "network.connectivity-service.enabled" = false;
-            # Networking settings
-            # "network.prefetch-next" = false;
-            # "network.dns.disablePrefetch" = true;
-            # "network.http.speculative-parallel-limit" = 0;
-            # "browser.places.speculativeConnect.enabled" = false;
-            # "network.dns.disableIPv6" = true;
-            # "network.gio.supported-protocols" = "";
-            # "network.file.disable_unc_paths" = true;
-            # "permissions.manager.defaultsUrl" = "";
-            # "network.IDN_show_punycode" = true;
             # Search settings
             "browser.search.suggest.enabled" = false;
             "browser.urlbar.suggest.searches" = false;
@@ -592,86 +622,28 @@ in {
             "signon.rememberSignons" = false;
             "signon.autofillForms" = false;
             "signon.formlessCapture.enabled" = false;
-            # "network.auth.subresource-http-auth-allow" = 1;
-            # Disk cache and Memory
-            # "browser.cache.disk.enable" = false;
-            # "browser.sessionstore.privacy_level" = 2;
-            # "browser.sessionstore.resume_from_crash" = false;
-            # "browser.pagethumbnails.capturing_disabled" = true;
-            # "browser.shell.shortcutFavicons" = false;
-            # "browser.helperApps.deleteTempFileOnExit" = true;
             # TLS-related settings
             "dom.security.https_only_mode" = true;
             "dom.security.https_only_mode_send_http_background_request" = false;
-            # "browser.xul.error_pages.expert_bad_cert" = true;
-            # "security.tls.enable_0rtt_data" = false;
-            # "security.OCSP.require" = true;
-            # "security.pki.sha1_enforcement_level" = 1;
-            # "security.cert_pinning.enforcement_level" = 2;
-            # "security.remote_settings.crlite_filters.enabled" = true;
-            # "security.pki.crlite_mode" = 2;
-            # "network.http.referer.XOriginPolicy" = 2;
-            # "network.http.referer.XOriginTrimmingPolicy" = 2;
-            # WebRTC, WebGL, and DRM
-            # "media.peerconnection.enabled" = false;
-            # "media.peerconnection.ice.proxy_only_if_behind_proxy" = true;
-            # "media.peerconnection.ice.default_address_only" = true;
-            # "media.peerconnection.ice.no_host" = true;
-            # "webgl.disabled" = true;
-            # "media.autoplay.default" = 5;
-            # "media.eme.enabled" = false;
-            # "browser.download.manager.addToRecentDocs" = false;
-            # Cookies
-            # "browser.contentblocking.category" = "strict";
-            # "privacy.partition.serviceWorkers" = true;
-            # "privacy.partition.always_partition_third_party_non_cookie_storage" = true;
-            # "privacy.partition.always_partition_third_party_non_cookie_storage.exempt_sessionstorage" = true;
             # UI features
-            # "dom.disable_open_during_load" = true;
-            # "dom.popup_allowed_events" = "click dblclick mousedown pointerdown";
             "extensions.pocket.enabled" = false;
-            # "extensions.Screenshots.disabled" = true;
-            # "pdfjs.enabledScripting" = false;
-            # "privacy.userContext.enabled" = true;
-            # "extensions.enabledScopes" = 5;
-            # "extensions.webextensions.restrictedDomains" = "";
-            # "extensions.postDownloadThirdPartyPrompt" = false;
             # Firefox amnesia
-            # "places.history.enabled" = true;
-            # "network.cookie.lifetimePolicy" = 2;
-            # "privacy.sanitize.sanitizeOnShutdown" = true;
-            # "privacy.clearOnShutdown.cache" = true;
-            # "privacy.clearOnShutdown.cookies" = true;
-            # "privacy.clearOnShutdown.downloads" = true;
-            # "privacy.clearOnShutdown.formdata" = true;
-            # "privacy.clearOnShutdown.history" = true;
-            # "privacy.clearOnShutdown.offlineApps" = true;
-            # "privacy.clearOnShutdown.sessions" = true;
-            # "privacy.clearOnShutdown.sitesettings" = false;
-            # "privacy.sanitize.timeSpan" = 0;
             "browser.history_expire_days" = 30;
             "browser.history_expire_days_min" = 30;
             "browser.history_expire_sites" = 30;
-            # Mitigate fingerprinting
-            # "privacy.resistFingerprinting" = true;
-            # "privacy.window.maxInnerWidth" = 1600;
-            # "privacy.window.maxInnerHeight" = 900;
-            # "privacy.resistFingerprinting.block_mozAddonManager" = true;
-            # "browser.startup.blankWindow" = false;
-            # "browser.display.use_system_colors" = false;
             # Performance optimization
-            # "content.notify.interval" = 100000;
-            # "browser.cache.jsbc_compression_level" = 3;
-            # "media.memory_cache_max_size" = 65536;
-            # "media.cache_readahead_limit" = 7200;
-            # "media.cache_resume_threshold" = 3600;
-            # "image.mem.decode_bytes_at_a_time" = 32768;
-            # "network.buffer.cache.size" = 262144;
-            # "network.buffer.cache.count" = 128;
-            # "network.http.max-connections" = 1800;
-            # "network.http.max-persistent-connections-per-server" = 10;
-            # "network.http.max-urgent-start-excessive-connections-per-host" = 5;
-            # "network.predictor.enabled" = false;
+            "content.notify.interval" = 100000;
+            "browser.cache.jsbc_compression_level" = 3;
+            "media.memory_cache_max_size" = 65536;
+            "media.cache_readahead_limit" = 7200;
+            "media.cache_resume_threshold" = 3600;
+            "image.mem.decode_bytes_at_a_time" = 32768;
+            "network.buffer.cache.size" = 262144;
+            "network.buffer.cache.count" = 128;
+            "network.http.max-connections" = 1800;
+            "network.http.max-persistent-connections-per-server" = 10;
+            "network.http.max-urgent-start-excessive-connections-per-host" = 5;
+            "network.predictor.enabled" = false;
           };
           userChrome = ''
             :root {
@@ -1016,10 +988,6 @@ in {
               foreground = "#${theme.color.bg}";
               background = "#${theme.color.green}";
             };
-            # footer_bar = {
-            #   foreground = "#${theme.color.bg}";
-            #   background = "#${theme.color.fg}";
-            # };
           };
           hints = {
             start = {
@@ -1092,6 +1060,7 @@ in {
             lower_cutoff_freq = 50;
             higher_cutoff_freq = 10000;
             sleep_timer = 0;
+            input_delay = 2;
             hide_on_silence = true;
             method = "pulse";
             source = "auto";
@@ -1101,7 +1070,6 @@ in {
             monstercat = false;
             waves = false;
             noise_reduction = 0.87;
-            input_delay = 2;
             format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
             actions = {
               on-click-right = "mode";
@@ -1385,9 +1353,12 @@ in {
         bind = $mainMod SHIFT, S, movetoworkspace, special
         bind = $mainMod SHIFT, W, exec, find $HOME/media/images/wallpapers/${theme.name} -type f | shuf -n 1 | xargs wbg
 
-        bind = $mainMod, SPACE, exec, rofi -show drun
-        bind = $mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -no-persist-history -hint-welcome "" > /dev/null
-        bind = $mainMod, E, exec, bemoji -t -n
+        # bind = $mainMod, SPACE, exec, rofi -show drun
+        # bind = $mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -no-persist-history -hint-welcome "" > /dev/null
+        # bind = $mainMod, E, exec, bemoji -t -n
+        bind = $mainMod, SPACE, exec, alacritty -T stacklet -o 'cursor.style="Beam"' -o 'font.normal.style="Bold"' -o 'font.size=10' -e stacklet -x /home/gge/scripts/applets/launcher.sh
+        bind = $mainMod, C, exec, alacritty -T stacklet -o 'cursor.style="Beam"' -o 'font.normal.style="Bold"' -o 'font.size=10' -e stacklet -x /home/gge/scripts/applets/calc.sh
+        bind = $mainMod, E, exec, alacritty -T stacklet -o 'cursor.style="Beam"' -o 'font.normal.style="Bold"' -o 'font.size=10' -e stacklet -x /home/gge/scripts/applets/icon.sh
 
         # Macbook functional keys remapping
         bind = , XF86AudioMute, exec, amixer set Master toggle
@@ -1449,6 +1420,14 @@ in {
       	# Move/resize windows      	
         bindm = $mainMod, mouse:272, movewindow
       	bindm = $mainMod, mouse:273, resizewindow
+
+        # Window rules
+        windowrule = float,title:^(stacklet)$
+        windowrule = center,title:^(stacklet)$
+        windowrule = size 35% 45%,title:^(stacklet)$
+        windowrule = dimaround,title:^(stacklet)$
+        windowrule = stayfocused,title:^(stacklet)$
+        windowrule = bordercolor 0xff${theme.color.blue},title:^(stacklet)$
     '';
   };
 }
