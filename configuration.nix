@@ -186,7 +186,7 @@ in {
     ripgrep
     eza
     pure-prompt
-    libimobiledevice
+    # libimobiledevice
     mesa
     bitwarden-cli
     libqalculate
@@ -219,6 +219,7 @@ in {
     variables = {
       LESSKEY = "$HOME/.less";
       EDITOR = "hx";
+      BROWSER = "firefox";
     };
   };
 
@@ -335,101 +336,6 @@ in {
           };
         };
       };
-    };
-    programs.rofi = {
-      enable = true;
-      package = pkgs.rofi-wayland;
-      font = theme.font;
-      theme = builtins.toString (pkgs.writeText "rofi-theme" ''
-          * {
-            font: "${theme.font} 10";
-          }
-          element-text, element-icon , mode-switcher {
-            background-color: #${theme.color.bg};
-            text-color: inherit;
-          }
-          window {
-            transparency: "real";
-            location: center;
-            anchor: center;
-            orientation: vertical;
-            height: 350px;
-            width: 500px;
-            border: 3px;
-            border-color: #${theme.color.accent};
-            background-color: #${theme.color.sel};
-            border-radius: 12px;
-          }
-          mainbox {
-            background-color: #${theme.color.bg};
-            children: [mode-switcher, message, inputbar, listview];
-          }
-          mode-switcher {
-            spacing: 0;
-          }
-          button selected {
-            background-color: #${theme.color.blue};
-            text-color: #${theme.color.dark_fg};
-          }
-          message {
-            background-color: #${theme.color.bg};
-            padding: 2px 0px 2px;
-          }
-          textbox {
-            padding: 5px 5px 5px 30px;
-            background-color: #${theme.color.bg};
-            text-color: #${theme.color.light_fg};
-          }
-          inputbar {
-            children: [entry];
-            background-color: #${theme.color.bg};
-            border-radius: 5px;
-            padding: 2px;
-          }
-          prompt {
-            background-color: #${theme.color.sel};
-            padding: 6px;
-            text-color: #${theme.color.fg};
-            border-radius: 3px;
-            margin: 20px 0px 0px 20px;
-          }
-          textbox-prompt-colon {
-            expand: false;
-            str: ":";
-          }
-          entry {
-            padding: 6px 0px 0px;
-            margin: 10px 0px 0px 10px;
-            text-color: #${theme.color.light_fg};
-            background-color: #${theme.color.bg};
-          }
-          listview {
-            border: 0px 0px 0px;
-            padding: 6px 0px 0px;
-            margin: 10px 0px 0px 10px;
-            columns: 1;
-            background-color: #${theme.color.bg};
-          }
-          element {
-            padding: 5px;
-            background-color: #${theme.color.bg};
-            text-color: #${theme.color.light_fg} ;
-          }
-          element-icon {
-            size: 25px;
-          }
-          element selected {
-            background-color: #${theme.color.dark_fg};
-            text-color: #${theme.color.light_fg};
-          }
-          button {
-            padding: 10px;
-            background-color: #${theme.color.bg};
-            text-color: #${theme.color.fg};
-            vertical-align: 0.5;
-            horizontal-align: 0.5;
-          }
-      '');
     };
     programs.zathura = {
       enable = true;
