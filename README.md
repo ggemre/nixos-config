@@ -1,7 +1,7 @@
 # 🚀 My NixOS Configuration File
 **ONE FILE TO RULE THEM ALL**
 
-[wallpapers](https://youtu.be/CdF5efohGQQ)
+[![Watch the video](https://img.youtube.com/vi/CdF5efohGQQ/hqdefault.jpg)](https://www.youtube.com/embed/CdF5efohGQQ?autoplay=1)
 
 ## Justification
 
