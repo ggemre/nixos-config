@@ -1,7 +1,9 @@
 # 🚀 My NixOS Configuration File
 **ONE FILE TO RULE THEM ALL**
 
-[![Watch the video](https://img.youtube.com/vi/CdF5efohGQQ/hqdefault.jpg)](https://www.youtube.com/embed/CdF5efohGQQ?autoplay=1)
+![working](assets/working.png)
+
+![thinking](assets/thinking.png)
 
 ## Justification
 
@@ -43,4 +45,9 @@ With that in mind, here is why NixOS is my operating system of choice:
 3. Configuration and package management are declarative and functional.
   * Each time I boot up my system, I know what will be installed on it, (it's all listed in the config file). This avoids accidental bloat and keeps you system-aware.
   * If I want to try a new program without installing it on my machine, I can use `nix-shell -p`. This is such a handy feature to test out applications or accomplish a one-time task with a program I'll never need again.
+
+## Demo Videos
+
+[![Watch the video](https://img.youtube.com/vi/4PmGFOYPoE4/hqdefault.jpg)](https://www.youtube.com/embed/4PmGFOYPoE4?autoplay=1)
+[![Watch the video](https://img.youtube.com/vi/CdF5efohGQQ/hqdefault.jpg)](https://www.youtube.com/embed/CdF5efohGQQ?autoplay=1)
 
