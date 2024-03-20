@@ -1,6 +1,8 @@
 # 🚀 My NixOS Configuration File
 **ONE FILE TO RULE THEM ALL**
 
+![wallpapers](https://youtu.be/CdF5efohGQQ)
+
 ## Justification
 
 [NixOS](https://nixos.org/) was introduced to me as a linux distribution in which EVERY part of your system can be configured from a single text-based configuration file.
