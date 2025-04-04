@@ -1,3 +1,7 @@
+>[!NOTE]
+> This repo has been archived because I'm no longer experimenting with this idea. If you're looking for my NixOS config, see [here](https://github.com/ggemre/fleet).
+
+
 # 🚀 My NixOS Configuration File
 **ONE FILE TO RULE THEM ALL**
 
