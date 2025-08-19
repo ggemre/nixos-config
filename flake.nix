@@ -16,8 +16,8 @@
     nixpkgs,
     ...
   }: {
-    nixosModules = import ./flake/modules;
-    nixosConfigurations = import ./flake/hosts inputs;
+    nixosModules = import ./modules;
+    nixosConfigurations = import ./hosts inputs;
     formatter = import ./flake/formatter inputs;
     devShells = import ./flake/shell inputs;
   };
