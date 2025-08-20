@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   nixpkgs = {
     config = {
       allowBroken = false;
