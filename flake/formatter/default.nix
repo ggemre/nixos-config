@@ -1,5 +1,5 @@
 {nixpkgs, ...}: let
-  lib = import ../lib.nix {inherit nixpkgs;};
+  lib = import ../../lib {inherit nixpkgs;};
 in
   lib.forAllSystems (
     system: let
