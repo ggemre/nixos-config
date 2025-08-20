@@ -1,6 +1,7 @@
 {
   imports = [
-    ./helix.nix
+    ./ghostty
+    ./helix
     ./hyprland
   ];
 }
