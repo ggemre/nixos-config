@@ -18,7 +18,7 @@ in {
   windowManagers.dwl.enable = true;
 
   users = {
-    mutableUsers = false;
+    # mutableUsers = false;
     users."${user}" = {
       home = "/home/${user}";
       description = user;
