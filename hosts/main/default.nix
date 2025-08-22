@@ -14,16 +14,20 @@ in {
 
   programs.ghostty.enable = true;
   programs.helix.enable = true;
-  windowManagers.hyprland.enable = true;
+  # windowManagers.hyprland.enable = true;
+  windowManagers.dwl.enable = true;
 
-  users.users."${user}" = {
-    home = "/home/${user}";
-    description = user;
-    shell = pkgs.zsh;
-    isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager"];
-    hashedPassword = "$y$j9T$SLZhlPDME3Dz/8yrAWV.P0$41gHdK02BiDHeATkV0ANls3KtDJF8aIpmqx1RnFHaX8";
-    homeless = true;
+  users = {
+    mutableUsers = false;
+    users."${user}" = {
+      home = "/home/${user}";
+      description = user;
+      shell = pkgs.zsh;
+      isNormalUser = true;
+      extraGroups = ["wheel" "networkmanager"];
+      hashedPassword = "$y$j9T$SLZhlPDME3Dz/8yrAWV.P0$41gHdK02BiDHeATkV0ANls3KtDJF8aIpmqx1RnFHaX8";
+      homeless = true;
+    };
   };
   programs.zsh.enable = true;
 
@@ -43,7 +47,6 @@ in {
     enable = true;
     wifi.backend = "iwd";
   };
-  nixpkgs.config.allowUnfree = true;
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
   system.stateVersion = "25.05";
