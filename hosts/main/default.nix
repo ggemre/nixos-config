@@ -17,6 +17,11 @@ in {
   # windowManagers.hyprland.enable = true;
   windowManagers.dwl.enable = true;
 
+  programs.greetd = {
+    enable = true;
+    command = "dwl";
+  };
+
   users = {
     # mutableUsers = false;
     users."${user}" = {
