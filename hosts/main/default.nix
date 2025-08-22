@@ -51,6 +51,10 @@ in {
   hardware.enableRedistributableFirmware = true;
   system.stateVersion = "25.05";
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "broadcom-sta-6.30.223.271-57-6.12.43"
+  ];
+
   environment.systemPackages = [
     pkgs.custom.hello
   ];
