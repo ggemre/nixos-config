@@ -9,11 +9,6 @@ in {
   options.programs.ghostty = {
     enable = lib.mkEnableOption "ghostty terminal emulator";
     package = lib.mkPackageOption pkgs "ghostty" {example = "pkgs.ghostty";};
-    theme.enable =
-      lib.mkEnableOption "consistent theming"
-      // {
-        default = true;
-      };
   };
 
   config = lib.mkIf cfg.enable {
@@ -23,16 +18,14 @@ in {
       ".config/ghostty/config".text = ''
         app-notifications = no-clipboard-copy
         background-opacity = 1.000000
-        font-family = DejaVu Sans Mono
-        font-family = Noto Color Emoji
         font-size = 12
         link-url = true
-        theme = custom
         window-padding-x = 6
         window-padding-y = 6
+        theme = custom
       '';
 
-      ".config/ghostty/themes/custom".text = lib.mkIf (config.theme.enable && cfg.theme.enable) ''
+      ".config/ghostty/themes/custom".text = ''
         background = ${config.theme.colors.base00}
         cursor-color = ${config.theme.colors.base05}
         foreground = ${config.theme.colors.base05}

@@ -23,6 +23,7 @@
       experimental-features = ["nix-command" "flakes"];
       trusted-users = ["@wheel"];
       auto-optimise-store = true;
+      sandbox = true;
       substituters = [
         "https://nix-community.cachix.org"
         "https://cache.privatevoid.net"

@@ -7,10 +7,7 @@
 }: let
   user = "tmp";
 in {
-  theme = {
-    enable = true;
-    name = "ayu-dark";
-  };
+  theme.name = "catppuccin-mocha";
 
   programs.ghostty.enable = true;
   programs.helix.enable = true;

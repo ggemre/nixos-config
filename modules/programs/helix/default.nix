@@ -63,7 +63,7 @@ in {
       EDITOR = "hx";
     };
 
-    homeless = lib.mkIf (config.theme.enable && cfg.theme.enable) {
+    homeless = lib.mkIf cfg.theme.enable {
       ".config/helix/themes/custom.toml".text = ''
         "attribute" = "base09"
         "comment" = { fg = "base03", modifiers = ["italic"] }
