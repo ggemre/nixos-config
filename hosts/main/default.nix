@@ -9,7 +9,11 @@
 in {
   theme.name = "catppuccin-mocha";
 
-  programs.ghostty.enable = true;
+  # programs.ghostty.enable = true;
+  programs.foot = {
+    enable = true;
+    enableBashIntegration = true;
+  };
   programs.helix.enable = true;
   # windowManagers.hyprland.enable = true;
   windowManagers.dwl.enable = true;
@@ -24,14 +28,14 @@ in {
     users."${user}" = {
       home = "/home/${user}";
       description = user;
-      shell = pkgs.zsh;
+      shell = pkgs.bash;
       isNormalUser = true;
       extraGroups = ["wheel" "networkmanager"];
       hashedPassword = "$y$j9T$SLZhlPDME3Dz/8yrAWV.P0$41gHdK02BiDHeATkV0ANls3KtDJF8aIpmqx1RnFHaX8";
       homeless = true;
     };
   };
-  programs.zsh.enable = true;
+  programs.bash.enable = true;
 
   boot = {
     initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
