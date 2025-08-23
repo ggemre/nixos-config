@@ -12,7 +12,7 @@
 in {
   fonts.packages = defaultFonts;
 
-  fonts.fontConfig = {
+  fonts.fontconfig = {
     enable = true;
     defaultFonts = {
       serif = ["DejaVu Serif"];
