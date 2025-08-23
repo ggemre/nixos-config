@@ -19,7 +19,7 @@ in {
 
   programs.greetd = {
     enable = true;
-    command = "dwl";
+    command = pkgs.dwl;
   };
 
   users = {
