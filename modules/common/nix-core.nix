@@ -1,11 +1,11 @@
-{pkgs, ...}: {
+{pkgs, self, ...}: {
   nixpkgs = {
     config = {
       allowUnfree = true;
       allowBroken = false;
     };
     overlays = [
-      (import ../../pkgs)
+      self.overlays.default
     ];
   };
 

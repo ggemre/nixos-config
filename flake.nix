@@ -7,6 +7,7 @@
     ...
   }: {
     nixosModules = import ./modules;
+    overlays = import ./flake/overlays;
     nixosConfigurations = import ./hosts inputs;
     formatter = import ./flake/formatter inputs;
     devShells = import ./flake/shell inputs;
