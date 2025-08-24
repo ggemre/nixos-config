@@ -4,12 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.windowManagers.hyprland;
+  cfg = config.programs.hyprland;
   generator = import ./generator.nix { inherit lib; };
 in {
-  options.windowManagers.hyprland = {
-    enable = lib.mkEnableOption "hyprland window manager";
-
+  options.programs.hyprland = {
     settings = lib.mkOption {
       type = with lib.types; let
         valueType =
@@ -159,7 +157,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     programs.hyprland = {
-      enable = true;
       xwayland.enable = true;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
       withUWSM = true;

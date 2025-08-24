@@ -5,20 +5,8 @@
 }: let
   cfg = config.programs.foot;
 in {
-  # options.programs.foot = {
-  #   enable = lib.mkEnableOption "foot terminal emulator";
-  #   enableZshIntegration = lib.mkEnableOption "Whether to enable foot zsh integration.";
-  #   enableBashIntegration = lib.mkEnableOption "Whether to enable foot bash integration.";
-  #   enableFishIntegration = lib.mkEnableOption "Whether to enable foot fish integraiton.";
-  # };
-
   config = lib.mkIf cfg.enable {
     programs.foot = {
-      # enable = true;
-      # enableZshIntegration = cfg.enableZshIntegration;
-      # enableBashIntegration = cfg.enableBashIntegration;
-      # enableFishIntegration = cfg.enableFishIntegration;
-
       settings = {
         scrollback.lines = 5000;
         colors = {

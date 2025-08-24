@@ -15,8 +15,8 @@ in {
     enableBashIntegration = true;
   };
   programs.helix.enable = true;
-  # windowManagers.hyprland.enable = true;
-  windowManagers.dwl.enable = true;
+  # programs.hyprland.enable = true;
+  programs.dwl.enable = true;
 
   programs.greetd = {
     enable = true;
