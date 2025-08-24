@@ -8,7 +8,7 @@
   }: {
     lib = import ./lib args;
     nixosModules = import ./modules;
-    overlays = import ./flake/overlays;
+    overlays = import ./overlays;
     nixosConfigurations = import ./hosts args;
     formatter = import ./flake/formatter args;
     devShells = import ./flake/shell args;
