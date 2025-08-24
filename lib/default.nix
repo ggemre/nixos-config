@@ -1,4 +1,4 @@
-{nixpkgs}: let
+{nixpkgs, ...}: let
   # Configure the flake's supported systems
   # I know it's just one for now, but the infrastructure is there to support more
   supportedSystems = [
