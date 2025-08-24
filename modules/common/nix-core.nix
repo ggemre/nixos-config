@@ -15,6 +15,7 @@
 
   nix = {
     package = pkgs.nix;
+    channel.enable = false;
     gc = {
       automatic = true;
       options = "--delete-older-than 7d";
