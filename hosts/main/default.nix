@@ -1,5 +1,4 @@
 {
-  # self,
   pkgs,
   config,
   lib,
@@ -60,6 +59,7 @@ in {
   nixpkgs.config.permittedInsecurePackages = [
     "broadcom-sta-6.30.223.271-57-6.12.43"
   ];
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   environment.systemPackages = [
     pkgs.custom.hello

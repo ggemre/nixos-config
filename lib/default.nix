@@ -17,9 +17,8 @@ in {
     f;
 
   # Function to generate a NixOS configuration
-  mkHost = hostname: system:
+  mkHost = hostname:
     nixpkgs.lib.nixosSystem {
-      inherit system;
       specialArgs = {
         inherit self;
         inherit (self) inputs;
@@ -31,10 +30,7 @@ in {
         self.nixosModules.homeless
         self.nixosModules.theme
         {
-          config = {
-            networking.hostName = hostname;
-            nixpkgs.hostPlatform = system;
-          };
+          config.networking.hostName = hostname;
         }
         ../hosts/${hostname}
       ];
