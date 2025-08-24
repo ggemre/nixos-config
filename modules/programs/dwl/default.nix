@@ -8,7 +8,7 @@
 in {
   options.windowManagers.dwl = {
     enable = lib.mkEnableOption "dwl window manager";
-    terminal = lib.mkPackageOption pkgs "foot";
+    terminal = lib.mkPackageOption pkgs "foot" {};
   };
 
   config = lib.mkIf cfg.enable {
@@ -17,9 +17,8 @@ in {
       package =
         (pkgs.dwl.override {
           enableXWayland = true;
-          configH = pkgs.substituteAll {
-            src = ./config.h;
-            terminal = "${cfg.terminal}";
+          configH = pkgs.replaceVars ./config.h {
+            terminal = "${lib.getExe cfg.terminal}";
           };
         }).overrideAttrs (oldAttrs: {
           # buildInputs =
