@@ -1,4 +1,4 @@
-{nixpkgs, ...}: let
+{nixpkgs, self,}: let
   # Configure the flake's supported systems
   # I know it's just one for now, but the infrastructure is there to support more
   supportedSystems = [
@@ -14,7 +14,7 @@ in {
     f;
 
   # Function to generate a NixOS configuration
-  mkHost = hostname: system: self:
+  mkHost = hostname: system:
     nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
