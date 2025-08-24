@@ -21,8 +21,8 @@
       options = "--delete-older-than 7d";
     };
     settings = {
-      experimental-features = ["nix-command" "flakes"];
-      trusted-users = ["@wheel"];
+      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "@wheel" ];
       auto-optimise-store = true;
       sandbox = true;
       substituters = [

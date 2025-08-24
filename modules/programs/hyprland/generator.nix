@@ -3,7 +3,7 @@
 {lib}: {
   toHyprConf = attrs: let
     indentLevel = 0;
-    importantPrefixes = ["$" "bezier" "name"];
+    importantPrefixes = [ "$" "bezier" "name" ];
     inherit
       (lib)
       all

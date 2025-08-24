@@ -30,7 +30,7 @@ in {
       description = user;
       shell = pkgs.bash;
       isNormalUser = true;
-      extraGroups = ["wheel" "networkmanager"];
+      extraGroups = [ "wheel" "networkmanager" ];
       hashedPassword = "$y$j9T$SLZhlPDME3Dz/8yrAWV.P0$41gHdK02BiDHeATkV0ANls3KtDJF8aIpmqx1RnFHaX8";
       homeless = true;
     };
@@ -38,10 +38,10 @@ in {
   programs.bash.enable = true;
 
   boot = {
-    initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
     initrd.kernelModules = [];
-    kernelModules = ["kvm-intel" "wl"];
-    extraModulePackages = [config.boot.kernelPackages.broadcom_sta];
+    kernelModules = [ "kvm-intel" "wl" ];
+    extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
     loader = {
       grub.enable = false;
       systemd-boot.enable = true;
@@ -75,7 +75,7 @@ in {
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/6CA9-BC70";
     fsType = "vfat";
-    options = ["fmask=0077" "dmask=0077"];
+    options = [ "fmask=0077" "dmask=0077" ];
   };
 
   swapDevices = [];

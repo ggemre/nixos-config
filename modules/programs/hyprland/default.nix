@@ -5,7 +5,7 @@
   ...
 }: let
   cfg = config.windowManagers.hyprland;
-  generator = import ./generator.nix {inherit lib;};
+  generator = import ./generator.nix { inherit lib; };
 in {
   options.windowManagers.hyprland = {
     enable = lib.mkEnableOption "hyprland window manager";

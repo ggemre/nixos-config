@@ -36,7 +36,7 @@
           path = lib.mkDefault name;
           source = lib.mkIf (config.text != null) (
             let
-              name' = "homeless-" + lib.replaceStrings ["/"] ["-"] name;
+              name' = "homeless-" + lib.replaceStrings [ "/" ] [ "-" ] name;
             in
               lib.mkDerivedConfig options.text (pkgs.writeText name')
           );
@@ -76,7 +76,7 @@
     mkService = user: {
       name = "homeless-${user}";
       value = {
-        wantedBy = ["multi-user.target"];
+        wantedBy = [ "multi-user.target" ];
         description = "Setup home environment for ${user}.";
         serviceConfig = {
           Type = "oneshot";

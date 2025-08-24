@@ -15,10 +15,10 @@ in {
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      serif = ["DejaVu Serif"];
-      sansSerif = ["DejaVu Sans"];
-      monospace = ["DejaVu Sans Mono"];
-      emoji = ["Noto Color Emoji"];
+      serif = [ "DejaVu Serif" ];
+      sansSerif = [ "DejaVu Sans" ];
+      monospace = [ "DejaVu Sans Mono" ];
+      emoji = [ "Noto Color Emoji" ];
     };
     allowBitmaps = true;
   };

@@ -8,11 +8,11 @@
 in {
   options.programs.ghostty = {
     enable = lib.mkEnableOption "ghostty terminal emulator";
-    package = lib.mkPackageOption pkgs "ghostty" {example = "pkgs.ghostty";};
+    package = lib.mkPackageOption pkgs "ghostty" { example = "pkgs.ghostty"; };
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [cfg.package];
+    environment.systemPackages = [ cfg.package ];
 
     homeless = {
       ".config/ghostty/config".text = ''

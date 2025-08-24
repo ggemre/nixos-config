@@ -7,12 +7,12 @@
   cfg = config.programs.helix;
   tomlFormat = pkgs.formats.toml {};
 
-  finalSettings = cfg.settings // lib.optionalAttrs cfg.theme.enable {theme = "custom";};
+  finalSettings = cfg.settings // lib.optionalAttrs cfg.theme.enable { theme = "custom"; };
   wrappedHelix = pkgs.symlinkJoin {
     name = "${lib.getName cfg.package}-wrapped-${lib.getVersion cfg.package}";
-    paths = [cfg.package];
+    paths = [ cfg.package ];
     preferLocalBuild = true;
-    nativeBuildInputs = [pkgs.makeWrapper];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
     postBuild =
       if cfg.extraPackages != []
       then ''
@@ -28,7 +28,7 @@
 in {
   options.programs.helix = {
     enable = lib.mkEnableOption "helix text editor";
-    package = lib.mkPackageOption pkgs "helix" {example = "pkgs.evil-helix";};
+    package = lib.mkPackageOption pkgs "helix" { example = "pkgs.evil-helix"; };
     extraPackages = lib.mkOption {
       type = with lib.types; listOf package;
       default = [];
@@ -57,7 +57,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [wrappedHelix];
+    environment.systemPackages = [ wrappedHelix ];
 
     environment.variables = lib.mkIf cfg.defaultEditor {
       EDITOR = "hx";
