@@ -2,28 +2,26 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkOption types mkEnableOption mapAttrs removePrefix mkIf;
-in {
+}: {
   options.theme = {
-    name = mkOption {
-      type = types.str;
+    name = lib.mkOption {
+      type = lib.types.str;
       default = "catppuccin-mocha";
       description = "Name of the TOML theme file (without extension).";
     };
 
-    colors = mkOption {
-      type = types.attrsOf types.str;
+    colors = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
       readOnly = true;
     };
 
-    colorsWithHashtag = mkOption {
-      type = types.attrsOf types.str;
+    colorsWithHashtag = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
       readOnly = true;
     };
 
-    variant = mkOption {
-      type = types.str;
+    variant = lib.mkOption {
+      type = lib.types.str;
       readOnly = true;
     };
   };
@@ -31,10 +29,12 @@ in {
   config = let
     themePath = ./themes/${config.theme.name}.toml;
     rawTheme = builtins.fromTOML (builtins.readFile themePath);
-    palette = rawTheme.palette;
+    inherit (rawTheme) palette;
   in {
-    theme.colors = mapAttrs (_: v: removePrefix "#" v) palette;
-    theme.colorsWithHashtag = palette;
-    theme.variant = rawTheme.variant;
+    theme = {
+      colors = lib.mapAttrs (_: v: lib.removePrefix "#" v) palette;
+      colorsWithHashtag = palette;
+      inherit (rawTheme) variant;
+    };
   };
 }
