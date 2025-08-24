@@ -14,8 +14,11 @@ in {
     enableBashIntegration = true;
   };
   programs.helix.enable = true;
-  # programs.hyprland.enable = true;
-  programs.dwl.enable = true;
+  # programs.hyprland = {
+  #   enable = true;
+  #   terminal = pkgs.foot;
+  # };
+  # programs.dwl.enable = true;
 
   programs.greetd = {
     enable = true;
