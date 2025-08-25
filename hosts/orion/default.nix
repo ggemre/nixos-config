@@ -43,7 +43,6 @@ in {
       shell = pkgs.bash;
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ];
-      hashedPassword = "$y$j9T$SLZhlPDME3Dz/8yrAWV.P0$41gHdK02BiDHeATkV0ANls3KtDJF8aIpmqx1RnFHaX8";
       homeless = true;
     };
   };

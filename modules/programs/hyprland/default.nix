@@ -10,7 +10,7 @@ in {
     variant = lib.mkOption {
       type = lib.types.str;
       description = "The specific config of Hyprland to install.";
-      default = "standard";
+      default = "amethyst";
     };
     # TODO: should these have a parent option?
     # TODO: Should they have suboptions e.g. package & extraArgs?
