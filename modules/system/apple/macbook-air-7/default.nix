@@ -4,22 +4,29 @@
   config,
   ...
 }: {
-  boot = {
-    kernelParams = [
-      "hid_apple.iso_layout=0"
-    ];
-    blacklistedKernelModules = lib.optionals (!config.hardware.enableRedistributableFirmware) [
-      "ath3k"
-    ];
-  };
+  # boot = {
+  #   kernelParams = [
+  #     "hid_apple.iso_layout=0"
+  #   ];
+  #   blacklistedKernelModules = [
+  #     "bdc_pci"
+  #   ];
+  # };
 
-  hardware = {
-    facetimehd.enable = lib.mkDefault (config.nixpkgs.config.allowUnfree or false);
-    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  };
+  # hardware = {
+  #   facetimehd.enable = true;
+  #   cpu.intel.updateMicrocode = true;
+  # };
 
-  services = {
-    mbpfan.enable = lib.mkDefault true;
-    fstrim.enable = lib.mkDefault true;
-  };
+  # services = {
+  #   mbpfan.enable = true;
+  #   fstrim.enable = true;
+  # };
+
+  warnings = [
+    ''
+      Not one setting in this module works with the current linux kernel version and I'm not willing to downgrade.
+      For now, functionality is disabled until something changes, (doesn't work with the nixos-hardware module either).
+    ''
+  ];
 }

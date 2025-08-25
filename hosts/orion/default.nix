@@ -9,7 +9,6 @@
 in {
   imports = [
     ./hardware.nix
-    (selfModulesPath + "/system/apple/macbook-air-7")
     (selfModulesPath + "/system/laptop")
   ];
 
@@ -34,6 +33,8 @@ in {
     };
 
     bash.enable = true;
+
+    git.enable = true;
   };
 
   users = {
@@ -56,6 +57,12 @@ in {
     };
   };
 
+  # TODO: move to common module
+  time.timeZone = "Asia/Phnom_Penh";
+  networking.networkmanager = {
+    enable = true;
+    wifi.backend = "iwd";
+  };
   nixpkgs.config.permittedInsecurePackages = [
     "broadcom-sta-6.30.223.271-57-6.12.43"
   ];

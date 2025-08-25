@@ -12,6 +12,7 @@ self.lib.forAllSystems (
         pkgs.statix
         pkgs.deadnix
         pkgs.disko
+        pkgs.just
       ];
     };
   }

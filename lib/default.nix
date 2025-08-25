@@ -22,7 +22,6 @@ in {
       specialArgs = {
         inherit self;
         selfModulesPath = ../modules;
-        # inherit (self) inputs;
       };
       modules = [
         self.nixosModules.common
