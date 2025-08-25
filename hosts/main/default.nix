@@ -2,10 +2,15 @@
   pkgs,
   config,
   lib,
+  selfModulesPath,
   ...
 }: let
   user = "tmp";
 in {
+  imports = [
+    (selfModulesPath + "/system/apple/macbook-air-7.nix")
+  ];
+
   theme.name = "catppuccin-mocha";
 
   # programs.ghostty.enable = true;
