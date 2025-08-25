@@ -9,6 +9,7 @@
 in {
   imports = [
     (selfModulesPath + "/system/apple/macbook-air-7.nix")
+    (selfModulesPath + "/system/laptop")
   ];
 
   theme.name = "catppuccin-mocha";

@@ -27,7 +27,6 @@ in {
       modules = [
         self.nixosModules.common
         self.nixosModules.programs
-        self.nixosModules.system
         self.nixosModules.homeless
         self.nixosModules.theme
         {

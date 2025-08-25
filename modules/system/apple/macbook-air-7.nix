@@ -1,5 +1,9 @@
 # Mostly uses https://github.com/NixOS/nixos-hardware/blob/master/apple/macbook-air/7/default.nix as a reference
-{lib, ...}: {
+{
+  lib,
+  config,
+  ...
+}: {
   boot = {
     kernelParams = [
       "hid_apple.iso_layout=0"
