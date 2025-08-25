@@ -18,7 +18,7 @@ in {
   #   enable = true;
   #   terminal = pkgs.foot;
   # };
-  # programs.dwl.enable = true;
+  programs.dwl.enable = true;
 
   programs.greetd = {
     enable = true;
