@@ -1,3 +1,3 @@
 {self, ...}: {
-  main = self.lib.mkHost "main";
+  orion = self.lib.mkHost "orion";
 }

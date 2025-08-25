@@ -7,10 +7,11 @@ self.lib.forAllSystems (
     pkgs = import nixpkgs { inherit system; };
   in {
     default = pkgs.mkShell {
-      name = "Fleet dev shell";
+      name = "Flake dev shell";
       packages = [
         pkgs.statix
         pkgs.deadnix
+        pkgs.disko
       ];
     };
   }

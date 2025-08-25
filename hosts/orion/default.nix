@@ -8,6 +8,7 @@
   user = "gge";
 in {
   imports = [
+    ./hardware.nix
     (selfModulesPath + "/system/apple/macbook-air-7")
     (selfModulesPath + "/system/laptop")
   ];
@@ -46,4 +47,21 @@ in {
       homeless = true;
     };
   };
+
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      timeout = 0; # mash spacebar to select a previous generation
+    };
+  };
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "broadcom-sta-6.30.223.271-57-6.12.43"
+  ];
+
+  # Most users should never change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  # https://mynixos.com/nixpkgs/option/system.stateVersion
+  system.stateVersion = "25.05";
 }
