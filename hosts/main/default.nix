@@ -8,7 +8,7 @@
   user = "tmp";
 in {
   imports = [
-    (selfModulesPath + "/system/apple/macbook-air-7.nix")
+    (selfModulesPath + "/system/apple/macbook-air-7")
     (selfModulesPath + "/system/laptop")
   ];
 
