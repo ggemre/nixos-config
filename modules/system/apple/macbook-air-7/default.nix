@@ -12,11 +12,15 @@
     blacklistedKernelModules = [
       "bdc_pci"
     ];
+
+    initrd.kernelModules = lib.mkForce [ "kvm-intel" "wl" ];
+    kernelModules = lib.mkForce [ "kvm-intel" "wl" ];
+    extraModulePackages = lib.mkForce [ config.boot.kernelPackages.broadcom_sta ];
   };
 
   hardware = {
-    facetimehd.enable = true;
-    cpu.intel.updateMicrocode = true;
+    facetimehd.enable = lib.mkForce true;
+    cpu.intel.updateMicrocode = lib.mkForce true;
   };
 
   services = {
@@ -26,5 +30,16 @@
 
   environment.systemPackages = [
     pkgs.brightnessctl
+  ];
+
+  nixpkgs.config.permittedInsecurePackages = [ config.boot.kernelPackages.broadcom_sta.name ];
+
+  warnings = [
+    ''
+      Installing ${config.boot.kernelPackages.broadcom_sta.name}, which is marked as insecure.
+      Known issues:
+      - CVE-2019-9501: heap buffer overflow, potentially allowing remote code execution by sending specially-crafted WiFi packets
+      - CVE-2019-9502: heap buffer overflow, potentially allowing remote code execution by sending specially-crafted WiFi packets
+    ''
   ];
 }
