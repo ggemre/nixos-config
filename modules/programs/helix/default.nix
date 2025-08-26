@@ -30,7 +30,7 @@ in {
     enable = lib.mkEnableOption "helix text editor";
     package = lib.mkPackageOption pkgs "helix" { example = "pkgs.evil-helix"; };
     extraPackages = lib.mkOption {
-      type = with lib.types; listOf package;
+      type = lib.types.listOf lib.types.package;
       default = [];
       example = "[ pkgs.marksman ]";
       description = "Extra packages available to hx.";
