@@ -28,6 +28,7 @@
     fstrim.enable = true;
   };
 
+  # TODO: move to common module
   environment.systemPackages = [
     pkgs.brightnessctl
   ];
