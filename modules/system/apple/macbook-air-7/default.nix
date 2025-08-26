@@ -13,14 +13,14 @@
       "bdc_pci"
     ];
 
-    initrd.kernelModules = lib.mkForce [ "kvm-intel" "wl" ];
-    kernelModules = lib.mkForce [ "kvm-intel" "wl" ];
-    extraModulePackages = lib.mkForce [ config.boot.kernelPackages.broadcom_sta ];
+    initrd.kernelModules = [ "kvm-intel" "wl" ];
+    kernelModules = [ "wl" ];
+    extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
   };
 
   hardware = {
-    facetimehd.enable = lib.mkForce true;
-    cpu.intel.updateMicrocode = lib.mkForce true;
+    facetimehd.enable = true;
+    cpu.intel.updateMicrocode = true;
   };
 
   services = {
