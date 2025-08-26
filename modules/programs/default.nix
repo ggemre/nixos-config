@@ -7,5 +7,6 @@
     ./greetd
     ./helix
     ./hyprland
+    ./ly
   ];
 }

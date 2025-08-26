@@ -23,14 +23,11 @@ in {
 
     helix.enable = true;
 
-    hyprland = {
-      enable = true;
-      terminal = pkgs.foot;
-    };
+    hyprland.enable = true;
 
-    greetd = {
+    ly = {
       enable = true;
-      command = pkgs.hyprland;
+      waylandCompositor = pkgs.hyprland;
     };
 
     bash.enable = true;

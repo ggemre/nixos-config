@@ -7,7 +7,7 @@
   cfg = config.programs.greetd;
 in {
   options.programs.greetd = {
-    enable = lib.mkEnableOption "dwl window manager";
+    enable = lib.mkEnableOption "greetd display manager";
     command = lib.mkOption {
       type = lib.types.package;
       default = pkgs.bash;
