@@ -35,9 +35,7 @@ in {
 
     bash.enable = true;
 
-    git = {
-      enable = true;
-    };
+    git.enable = true;
   };
 
   users = {

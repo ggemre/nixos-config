@@ -2,6 +2,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: {
   boot = {
@@ -22,4 +23,8 @@
     mbpfan.enable = true;
     fstrim.enable = true;
   };
+
+  environment.systemPackages = [
+    pkgs.brightnessctl
+  ];
 }
