@@ -8,9 +8,6 @@
       allowUnfree = true;
       allowBroken = false;
     };
-    overlays = [
-      self.overlays.default
-    ];
   };
 
   nix = {

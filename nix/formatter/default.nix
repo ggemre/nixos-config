@@ -6,8 +6,7 @@ self.lib.forAllSystems (
   system: let
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ self.overlays.default ];
     };
   in
-    pkgs.patched.alejandra
+    self.packages.${system}.alejandra-patched
 )

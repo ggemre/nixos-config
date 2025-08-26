@@ -7,10 +7,10 @@
     ...
   }: {
     nixosModules = import ./modules;
-    overlays = import ./overlays;
     lib = import ./lib inputs;
     nixosConfigurations = import ./hosts inputs;
     formatter = import ./nix/formatter inputs;
     devShells = import ./nix/shell inputs;
+    packages = import ./pkgs inputs;
   };
 }
