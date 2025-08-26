@@ -9,6 +9,7 @@
 in {
   imports = [
     ./hardware.nix
+    (selfModulesPath + "/system/apple/macbook-air-7")
     (selfModulesPath + "/system/laptop")
   ];
 
@@ -34,7 +35,9 @@ in {
 
     bash.enable = true;
 
-    git.enable = true;
+    git = {
+      enable = true;
+    };
   };
 
   users = {

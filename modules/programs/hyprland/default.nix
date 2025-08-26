@@ -16,7 +16,7 @@ in {
     # TODO: Should they have suboptions e.g. package & extraArgs?
     terminal = lib.mkPackageOption pkgs "foot" {};
     browser = lib.mkPackageOption pkgs "firefox" {};
-    launcher = lib.mkPackageOption pkgs "wofi" {};
+    launcher = lib.mkPackageOption pkgs "wofi" {}; # e.g. wofi needs ``--show drun`
     bar = lib.mkPackageOption pkgs "waybar" {};
   };
 

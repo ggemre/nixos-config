@@ -4,24 +4,24 @@
   config,
   ...
 }: {
-  # boot = {
-  #   kernelParams = [
-  #     "hid_apple.iso_layout=0"
-  #   ];
-  #   blacklistedKernelModules = [
-  #     "bdc_pci"
-  #   ];
-  # };
+  boot = {
+    kernelParams = [
+      "hid_apple.iso_layout=0"
+    ];
+    blacklistedKernelModules = [
+      "bdc_pci"
+    ];
+  };
 
-  # hardware = {
-  #   facetimehd.enable = true;
-  #   cpu.intel.updateMicrocode = true;
-  # };
+  hardware = {
+    # facetimehd.enable = true;
+    cpu.intel.updateMicrocode = true;
+  };
 
-  # services = {
-  #   mbpfan.enable = true;
-  #   fstrim.enable = true;
-  # };
+  services = {
+    mbpfan.enable = true;
+    fstrim.enable = true;
+  };
 
   warnings = [
     ''
