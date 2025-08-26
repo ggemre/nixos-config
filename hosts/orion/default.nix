@@ -64,9 +64,6 @@ in {
     enable = true;
     wifi.backend = "iwd";
   };
-  nixpkgs.config.permittedInsecurePackages = [
-    "broadcom-sta-6.30.223.271-57-6.12.43"
-  ];
 
   # Most users should never change this value after the initial install, for any reason,
   # even if you've upgraded your system to a new NixOS release.
