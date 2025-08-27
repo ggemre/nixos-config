@@ -9,8 +9,9 @@
 in {
   imports = [
     ./hardware.nix
-    (selfModulesPath + "/system/apple/macbook-air-7")
-    (selfModulesPath + "/system/laptop")
+    (selfModulesPath + "/profiles/apple/macbook-air-7")
+    (selfModulesPath + "/profiles/laptop")
+    (selfModulesPath + "/profiles/graphical")
   ];
 
   theme.name = "catppuccin-mocha";
@@ -43,19 +44,18 @@ in {
     };
   };
 
+  common.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 25;
+  };
+
   boot = {
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
       timeout = 0; # mash spacebar to select a previous generation
     };
-  };
-
-  # TODO: move to common module
-  time.timeZone = "Asia/Phnom_Penh";
-  networking.networkmanager = {
-    enable = true;
-    wifi.backend = "iwd";
   };
 
   # Most users should never change this value after the initial install, for any reason,

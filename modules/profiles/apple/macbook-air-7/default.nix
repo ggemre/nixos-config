@@ -28,11 +28,6 @@
     fstrim.enable = true;
   };
 
-  # TODO: move to common module
-  environment.systemPackages = [
-    pkgs.brightnessctl
-  ];
-
   nixpkgs.config.permittedInsecurePackages = [ config.boot.kernelPackages.broadcom_sta.name ];
 
   warnings = [
