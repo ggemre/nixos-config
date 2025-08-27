@@ -4,10 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.programs.greetd;
+  cfg = config.services.greetd;
 in {
-  options.programs.greetd = {
-    enable = lib.mkEnableOption "greetd display manager";
+  options.services.greetd = {
     command = lib.mkOption {
       type = lib.types.package;
       default = pkgs.bash;
@@ -17,7 +16,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.greetd = {
-      enable = true;
       useTextGreeter = true;
       settings = {
         default_session = {

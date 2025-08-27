@@ -4,11 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.programs.ly;
+  cfg = config.services.displayManager.ly;
   waylandSessionsPath = "${cfg.waylandCompositor}/share/wayland-sessions";
 in {
-  options.programs.ly = {
-    enable = lib.mkEnableOption "ly display manager";
+  options.services.displayManager.ly = {
     waylandCompositor = lib.mkOption {
       type = lib.types.package;
       description = "Command to launch after logging in.";
@@ -27,7 +26,6 @@ in {
     ];
 
     services.displayManager.ly = {
-      enable = true;
       settings = {
         save = true;
         waylandsessions = waylandSessionsPath;

@@ -20,19 +20,15 @@ in {
       enable = true;
       enableBashIntegration = true;
     };
-
     helix.enable = true;
-
     hyprland.enable = true;
-
-    ly = {
-      enable = true;
-      waylandCompositor = pkgs.hyprland;
-    };
-
     bash.enable = true;
-
     git.enable = true;
+  };
+
+  services.displayManager.ly = {
+    enable = true;
+    waylandCompositor = pkgs.hyprland;
   };
 
   users = {
