@@ -31,7 +31,7 @@ in {
         waylandsessions = waylandSessionsPath;
         # none, doom, matrix, colormix, or gameoflife
         animation = "matrix";
-        session_log = "null";
+        session_log = "/tmp/ly-session.log";
       };
     };
   };
