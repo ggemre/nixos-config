@@ -53,7 +53,7 @@ in {
     };
 
     # TODO: theming
-    homeless.".config/hypr/hyprland.conf".source = pkgs.replaceVars ./variants/${cfg.variant}/hyprland.conf {
+    environment.etc."xdg/hypr/hyprland.conf".source = pkgs.replaceVars ./variants/${cfg.variant}/hyprland.conf {
       terminal = lib.getExe cfg.terminal;
       browser = lib.getExe cfg.browser;
       launcher = lib.getExe cfg.launcher;
