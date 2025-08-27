@@ -17,6 +17,7 @@ in {
   theme.name = "catppuccin-mocha";
 
   programs = {
+    firefox.enable = true;
     foot = {
       enable = true;
       enableBashIntegration = true;

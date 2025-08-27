@@ -1,6 +1,7 @@
 {
   imports = [
     ./dwl
+    ./firefox
     ./foot
     ./ghostty
     ./git
