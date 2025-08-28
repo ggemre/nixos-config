@@ -20,13 +20,14 @@ in {
     bar = lib.mkPackageOption pkgs "waybar" {};
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     environment.variables = {
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_DESKTOP = "Hyprland";
     };
 
     programs.hyprland = {
+      enable = true;
       xwayland.enable = true;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
       withUWSM = true;

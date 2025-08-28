@@ -7,11 +7,10 @@
   cfg = config.programs.ghostty;
 in {
   options.programs.ghostty = {
-    enable = lib.mkEnableOption "ghostty terminal emulator";
     package = lib.mkPackageOption pkgs "ghostty" { example = "pkgs.ghostty"; };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     environment.systemPackages = [ cfg.package ];
 
     homeless = {

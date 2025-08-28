@@ -2,11 +2,10 @@
   lib,
   config,
   ...
-}: let
-  cfg = config.programs.foot;
-in {
-  config = lib.mkIf cfg.enable {
+}: {
+  config = {
     programs.foot = {
+      enable = true;
       settings = {
         scrollback.lines = 5000;
         colors = {

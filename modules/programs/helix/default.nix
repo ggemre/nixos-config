@@ -27,7 +27,6 @@
   };
 in {
   options.programs.helix = {
-    enable = lib.mkEnableOption "helix text editor";
     package = lib.mkPackageOption pkgs "helix" { example = "pkgs.evil-helix"; };
     extraPackages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
@@ -56,7 +55,7 @@ in {
       };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     environment.systemPackages = [ wrappedHelix ];
 
     environment.variables = lib.mkIf cfg.defaultEditor {
