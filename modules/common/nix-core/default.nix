@@ -26,7 +26,7 @@ in {
     nix = {
       package =
         if cfg.withLix
-        then pkgs.lixPackageSets.latest.nix
+        then pkgs.lixPackageSets.latest.lix
         else pkgs.nix;
       channel.enable = false;
       gc = {
