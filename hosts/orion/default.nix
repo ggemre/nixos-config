@@ -3,6 +3,7 @@
     ./configuration.nix
     ./hardware.nix
 
+    self.nixosModules.programs.direnv
     self.nixosModules.programs.foot
     self.nixosModules.programs.firefox
     self.nixosModules.programs.git
