@@ -9,6 +9,8 @@
     self.nixosModules.programs.helix
     self.nixosModules.programs.hyprland
 
+    self.nixosModules.services.ly
+
     self.nixosModules.profiles.apple.macbook-air-7
     self.nixosModules.profiles.graphical
     self.nixosModules.profiles.laptop
