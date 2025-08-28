@@ -1,14 +1,5 @@
 {
-  # imports = [
-  #   ./dwl
-  #   ./firefox
-  #   ./foot
-  #   ./ghostty
-  #   ./git
-  #   ./helix
-  #   ./hyprland
-  # ];
-
+  direnv = import ./direnv;
   dwl = import ./dwl;
   firefox = import ./firefox;
   foot = import ./foot;

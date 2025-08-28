@@ -4,9 +4,8 @@ in {
   theme.name = "catppuccin-mocha";
 
   programs = {
-    foot = {
-      enableBashIntegration = true;
-    };
+    foot.enableBashIntegration = true;
+    direnv.enableBashIntegration = true;
   };
 
   services.displayManager.ly = {

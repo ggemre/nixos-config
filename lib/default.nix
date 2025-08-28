@@ -21,7 +21,6 @@ in {
     nixpkgs.lib.nixosSystem {
       specialArgs = {
         inherit self;
-        selfModulesPath = ../modules;
       };
       modules = [
         self.nixosModules.common
