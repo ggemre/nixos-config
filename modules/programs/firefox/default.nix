@@ -5,6 +5,7 @@
   ...
 }: let
   cfg = config.programs.firefox;
+  searchJson = builtins.readFile ./search.json;
 in {
   config = lib.mkIf cfg.enable {
     programs.firefox = {
@@ -14,12 +15,16 @@ in {
         "general.smoothScroll" = true;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "browser.download.folderList" = 2;
-        "browser.download.dir" = "$HOME/tmp"; # TODO: not certain firefox recognizes $HOME
-        "browser.download.lastDir" = "$HOME/tmp";
         "browser.download.useDownloadDir" = true;
         "browser.in-content.dark-mode" = true;
-        "browser.theme.content-theme" = 2;
-        "ui.systemUsesDarkTheme" = 1;
+        "browser.theme.content-theme" =
+          if config.theme.variant == "dark"
+          then 0
+          else 1;
+        "browser.theme.toolbar-theme" =
+          if config.theme.variant == "dark"
+          then 0
+          else 1;
         # Startup settings
         "browser.aboutConfig.showWarning" = false;
         "browser.startup.page" = 0;
@@ -123,6 +128,45 @@ in {
         "browser.ml.chat.enabled" = false;
       };
       policies = {
+        DisableAccounts = true;
+        OverrideFirstRunPage = "";
+        OverridePostUpdatePage = "";
+        DontCheckDefaultBrowser = true;
+        DisplayBookmarksToolbar = "never";
+        DefaultDownloadDirectory = "$HOME/tmp"; # TODO: link to upcoming xdg module
+        DownloadDirectory = "$HOME/tmp";
+        PromptForDownloadLocation = true;
+
+        AutofillAddressEnabled = false;
+        AutofillCreditCardEnabled = false;
+        DisableFeedbackCommands = true;
+        DisableFirefoxAccounts = true;
+        DisableFirefoxStudies = true;
+        DisableFormHistory = true;
+        DisablePocket = true;
+        DisableSetDesktopBackground = true;
+        DisableTelemetry = true;
+        NoDefaultBookmarks = true;
+        OfferToSaveLogins = false;
+        PasswordManagerEnabled = false;
+        SearchSuggestEnable = false;
+        UserMessaging = {
+          WhatsNew = false;
+          ExtensionRecommendations = false;
+          FeatureRecommendations = false;
+          UrlbarInterventions = false;
+          SkipOnboarding = true;
+          MoreFromMozilla = false;
+          FirefoxLabs = false;
+          Locked = true;
+        };
+        FirefoxSuggest = {
+          WebSuggestions = false;
+          SponsoredSuggestions = false;
+          ImproveSuggest = false;
+          Locked = true;
+        };
+
         ExtensionSettings = {
           # uBlock Origin:
           "uBlock0@raymondhill.net" = {
@@ -130,7 +174,43 @@ in {
             installation_mode = "force_installed";
           };
         };
+        # "Homepage" = {
+        #   "URL" = "https://kagi.com";
+        # };
       };
     };
+
+    # TODO: an XDG common module
+    # .config/user-dirs.dirs:
+    # XDG_DOWNLOAD_DIR="$HOME/tmp"
+
+    # --- TODO:
+    system.userActivationScripts.generateFirefoxSearch.text = ''
+      echo "Updating Firefox search engines for $USER..."
+
+      PROFILE_INI="$HOME/.mozilla/firefox/profiles.ini"
+      if [ ! -f "$PROFILE_INI" ]; then
+        echo "No Firefox profile found for $USER"
+        exit 0
+      fi
+
+      PROFILE=$(grep 'Path=' "$PROFILE_INI" | head -n1 | cut -d= -f2)
+      if [ -z "$PROFILE" ]; then
+        echo "No profile path detected for $USER"
+        exit 0
+      fi
+
+      PROFILE_DIR="$HOME/.mozilla/firefox/$PROFILE"
+      JSON_TMP="$PROFILE_DIR/search.json.tmp"
+      MOZLZ4="$PROFILE_DIR/search.json.mozlz4"
+
+      mkdir -p "$PROFILE_DIR"
+      cat > "$JSON_TMP" <<EOF
+      ${searchJson}
+      EOF
+
+      ${pkgs.mozlz4a}/bin/mozlz4a "$JSON_TMP" > "$MOZLZ4"
+      echo "Firefox search configuration updated for $USER."
+    '';
   };
 }
