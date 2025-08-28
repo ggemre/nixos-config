@@ -5,7 +5,6 @@
   ...
 }: let
   cfg = config.programs.firefox;
-  searchJson = builtins.readFile ./search.json;
 in {
   config = lib.mkIf cfg.enable {
     programs.firefox = {
@@ -174,9 +173,6 @@ in {
             installation_mode = "force_installed";
           };
         };
-        # "Homepage" = {
-        #   "URL" = "https://kagi.com";
-        # };
       };
     };
 
@@ -184,33 +180,30 @@ in {
     # .config/user-dirs.dirs:
     # XDG_DOWNLOAD_DIR="$HOME/tmp"
 
-    # --- TODO:
-    system.userActivationScripts.generateFirefoxSearch.text = ''
-      echo "Updating Firefox search engines for $USER..."
+    homeless = {
+      ".mozilla/firefox/profiles.ini".text = ''
+        [Profile0]
+        Name=main
+        IsRelative=1
+        Path=main
+        Default=1
 
-      PROFILE_INI="$HOME/.mozilla/firefox/profiles.ini"
-      if [ ! -f "$PROFILE_INI" ]; then
-        echo "No Firefox profile found for $USER"
-        exit 0
-      fi
+        [General]
+        StartWithLastProfile=1
+        Version=2
+      '';
 
-      PROFILE=$(grep 'Path=' "$PROFILE_INI" | head -n1 | cut -d= -f2)
-      if [ -z "$PROFILE" ]; then
-        echo "No profile path detected for $USER"
-        exit 0
-      fi
-
-      PROFILE_DIR="$HOME/.mozilla/firefox/$PROFILE"
-      JSON_TMP="$PROFILE_DIR/search.json.tmp"
-      MOZLZ4="$PROFILE_DIR/search.json.mozlz4"
-
-      mkdir -p "$PROFILE_DIR"
-      cat > "$JSON_TMP" <<EOF
-      ${searchJson}
-      EOF
-
-      ${pkgs.mozlz4a}/bin/mozlz4a "$JSON_TMP" > "$MOZLZ4"
-      echo "Firefox search configuration updated for $USER."
-    '';
+      ".mozilla/firefox/main/search.json.mozlz4".source =
+        pkgs.runCommand "search.json.mozlz4"
+        {
+          nativeBuildInputs = [
+            pkgs.mozlz4a
+          ];
+          json = builtins.readFile ./search.json;
+        }
+        ''
+          mozlz4a <(echo "$json") "$out"
+        '';
+    };
   };
 }
