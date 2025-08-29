@@ -1,4 +1,5 @@
 {
+  brave = import ./brave;
   direnv = import ./direnv;
   dwl = import ./dwl;
   firefox = import ./firefox;
