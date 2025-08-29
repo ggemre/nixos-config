@@ -202,6 +202,11 @@
         ''
           mozlz4a <(echo "$json") "$out"
         '';
+
+      ".mozilla/firefox/main/chrome/userChrome.css".text = ''
+        .titlebar-buttonbox-container { display: none !important; }
+        .titlebar-spacer { display:none !important; }
+      '';
     };
   };
 }
