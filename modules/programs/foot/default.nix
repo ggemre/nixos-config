@@ -7,6 +7,10 @@
     programs.foot = {
       enable = true;
       settings = {
+        main = {
+          font = "monospace:size=9";
+          pad = "4x4 center";
+        };
         scrollback.lines = 5000;
         colors = {
           foreground = config.theme.colors.base05;
