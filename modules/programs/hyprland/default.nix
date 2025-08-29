@@ -5,6 +5,14 @@
   ...
 }: let
   cfg = config.programs.hyprland;
+  generator = import ./generator.nix { inherit lib; };
+
+  variants = {
+    amethyst = import ./variants/amethyst;
+  };
+
+  context = builtins.mapAttrs (_: v: lib.getExe v.package) cfg.context;
+  selectedVariant = variants.${cfg.variant} context;
 in {
   options.programs.hyprland = {
     variant = lib.mkOption {
@@ -12,12 +20,18 @@ in {
       description = "The specific config of Hyprland to install.";
       default = "amethyst";
     };
-    # TODO: should these have a parent option?
-    # TODO: Should they have suboptions e.g. package & extraArgs?
-    terminal = lib.mkPackageOption pkgs "foot" {};
-    browser = lib.mkPackageOption pkgs "firefox" {};
-    launcher = lib.mkPackageOption pkgs "wofi" {}; # e.g. wofi needs ``--show drun`
-    bar = lib.mkPackageOption pkgs "waybar" {};
+
+    context = {
+      terminal.package = lib.mkPackageOption pkgs "foot" {};
+      browser.package = lib.mkPackageOption pkgs "firefox" {};
+      launcher.package = lib.mkPackageOption pkgs "wofi" {};
+      launcher.extraArgs = lib.mkOption {
+        type = lib.types.str;
+        default = "--show drun";
+        description = "Extra arguments passed to the launcher.";
+      };
+      bar.package = lib.mkPackageOption pkgs "waybar" {};
+    };
   };
 
   config = {
@@ -34,11 +48,6 @@ in {
     };
 
     # TODO: theming
-    environment.etc."xdg/hypr/hyprland.conf".source = pkgs.replaceVars ./variants/${cfg.variant}/hyprland.conf {
-      terminal = lib.getExe cfg.terminal;
-      browser = lib.getExe cfg.browser;
-      launcher = lib.getExe cfg.launcher;
-      bar = lib.getExe cfg.bar;
-    };
+    environment.etc."xdg/hypr/hyprland.conf".text = generator.toHyprConf selectedVariant;
   };
 }
