@@ -11,8 +11,8 @@ self.lib.forAllSystems (
       packages = [
         pkgs.statix
         pkgs.deadnix
-        pkgs.disko
         pkgs.just
+        self.packages.${system}.alejandra-patched
       ];
     };
   }
