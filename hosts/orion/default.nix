@@ -3,13 +3,13 @@
     ./configuration.nix
     ./hardware.nix
 
-    self.nixosModules.programs.brave
-    self.nixosModules.programs.direnv
-    self.nixosModules.programs.foot
-    self.nixosModules.programs.firefox
-    self.nixosModules.programs.git
-    self.nixosModules.programs.helix
-    self.nixosModules.programs.hyprland
+    self.nixosModules.config.bash
+    self.nixosModules.config.brave
+    self.nixosModules.config.direnv
+    self.nixosModules.config.foot
+    self.nixosModules.config.git
+    self.nixosModules.config.helix
+    self.nixosModules.config.hyprland
 
     self.nixosModules.services.ly
 

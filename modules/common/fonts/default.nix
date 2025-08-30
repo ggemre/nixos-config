@@ -8,6 +8,7 @@
     pkgs.liberation_ttf
     pkgs.unifont
     pkgs.noto-fonts-color-emoji
+    pkgs.nerd-fonts.symbols-only
   ];
 in {
   fonts.packages = defaultFonts;

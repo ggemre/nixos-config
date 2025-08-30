@@ -32,4 +32,9 @@ in {
         ../hosts/${hostname}
       ];
     };
+
+  # Functions for generating different configuration formats from nix attrs
+  generators = {
+    hyprconf = import ./generators/hyprconf.nix { inherit (nixpkgs) lib; };
+  };
 }

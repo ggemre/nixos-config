@@ -1,26 +1,35 @@
 {
   config,
+  lib,
   pkgs,
   ...
-}: {
-  environment.systemPackages = [
-    pkgs.brave
-  ];
+}: let
+  cfg = config.programs.brave;
+in {
+  options.programs.brave = {
+    enable = lib.mkEnableOption "Whether to enable the Brave browser.";
 
-  programs.chromium = {
-    enable = true;
-
-    extraOpts = {
-      BrowserSignin = 0;
-      SyncDisabled = true;
-      PasswordManagerEnabled = false;
-      SpellcheckEnabled = false;
-      BrowserThemeColor = config.theme.colorsWithHashtag.base00;
-      OsColorMode = config.theme.variant;
+    extraOpts = lib.mkOption {
+      type = lib.types.attrs;
+      default = {};
+      description = "Extra brave policy options.";
     };
 
-    extensions = [
-      "mnjggcdmjocbbbhaepdhchncahnbgone" # sponsor block
+    extensions = lib.mkOption {
+      type = lib.types.nullOr (lib.types.listOf lib.types.str);
+      default = null;
+      description = "List of chromium extensions to install.";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = [
+      pkgs.brave
     ];
+
+    programs.chromium = {
+      enable = true;
+      inherit (cfg) extraOpts extensions;
+    };
   };
 }

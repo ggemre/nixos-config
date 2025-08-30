@@ -1,6 +1,7 @@
 {
   # Modules for my NixOS Configurations:
   common = import ./common; # Settings that ALL NixOS hosts import (sans configuration)
+  config = import ./config;
   programs = import ./programs; # Possible programs to install (with sane defaults)
   services = import ./services; # Possible services to enable
   profiles = import ./profiles; # Possible NixOS configuration options
