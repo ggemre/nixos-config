@@ -33,6 +33,12 @@ in {
       ];
     };
 
+  # Basic color formatting functions for theming
+  colors = {
+    rgb = color: "rgb(${color})";
+    rgba = color: alpha: "rgba(${color}${alpha})";
+  };
+
   # Functions for generating different configuration formats from nix attrs
   generators = {
     hyprconf = import ./generators/hyprconf.nix { inherit (nixpkgs) lib; };

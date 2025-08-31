@@ -1,5 +1,28 @@
-_: {
+{
+  config,
+  self,
+  ...
+}: {
   programs.hyprland.settings = {
+    general = {
+      "col.active_border" = self.lib.colors.rgb config.theme.colors.base0D;
+      "col.inactive_border" = self.lib.colors.rgb config.theme.colors.base03;
+      gaps_in = 5;
+      gaps_out = 5;
+      border_size = 2;
+      layout = "dwindle";
+    };
+    group = {
+      "col.border_inactive" = self.lib.colors.rgb config.theme.colors.base03;
+      "col.border_active" = self.lib.colors.rgb config.theme.colors.base0D;
+      "col.border_locked_active" = self.lib.colors.rgb config.theme.colors.base0C;
+
+      groupbar = {
+        text_color = self.lib.colors.rgb config.theme.colors.base05;
+        "col.active" = self.lib.colors.rgb config.theme.colors.base0D;
+        "col.inactive" = self.lib.colors.rgb config.theme.colors.base03;
+      };
+    };
     decoration = {
       rounding = 10;
       blur = {
@@ -9,6 +32,7 @@ _: {
       };
       shadow = {
         enabled = true;
+        color = self.lib.colors.rgba config.theme.colors.base00 "99";
         range = 4;
         render_power = 3;
       };

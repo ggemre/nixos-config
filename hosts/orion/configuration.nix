@@ -17,7 +17,7 @@ in {
     useTextGreeter = true;
     settings = {
       default_session = {
-        command = "${lib.getExe pkgs.tuigreet} --time --remember --asterisks --cmd 'uwsm start default'";
+        command = "${lib.getExe pkgs.tuigreet} --time --remember --asterisks --cmd ${lib.getExe pkgs.hyprland}";
       };
     };
   };
