@@ -11,7 +11,8 @@
     self.nixosModules.config.helix
     self.nixosModules.config.hyprland
 
-    self.nixosModules.services.ly
+    # TODO: please replace me...
+    self.nixosModules.programs.firefox
 
     self.nixosModules.profiles.apple.macbook-air-7
     self.nixosModules.profiles.graphical

@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   user = "gge";
 in {
   theme.name = "catppuccin-mocha";
@@ -8,9 +12,14 @@ in {
     direnv.enableBashIntegration = true;
   };
 
-  services.displayManager.ly = {
+  services.greetd = {
     enable = true;
-    waylandCompositor = pkgs.hyprland;
+    useTextGreeter = true;
+    settings = {
+      default_session = {
+        command = "${lib.getExe pkgs.tuigreet} --time --remember --asterisks --cmd 'uwsm start default'";
+      };
+    };
   };
 
   users = {
