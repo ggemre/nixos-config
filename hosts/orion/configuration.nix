@@ -37,7 +37,9 @@ in {
   };
 
   common.userDirs = {
+    documents = "$HOME/docs";
     download = "$HOME/tmp";
+    pictures = "$HOME/media/pictures";
   };
 
   boot = {
