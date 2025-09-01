@@ -1,5 +1,5 @@
 {
-  description = "Insanely optimized Nix flake for all my NixOS systems.";
+  description = "Optimized Nix flake for all my NixOS systems.";
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable?shallow=1";
   outputs = inputs @ {
     self,
@@ -7,10 +7,10 @@
     ...
   }: {
     nixosModules = import ./modules;
-    lib = import ./lib inputs;
     nixosConfigurations = import ./hosts inputs;
     formatter = import ./nix/formatter inputs;
     devShells = import ./nix/shell inputs;
     packages = import ./pkgs inputs;
+    lib = import ./lib inputs;
   };
 }

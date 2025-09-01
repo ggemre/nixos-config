@@ -1,10 +1,9 @@
 {
   # Modules for my NixOS Configurations:
   common = import ./common; # Settings that ALL NixOS hosts import (sans configuration)
-  config = import ./config;
-  programs = import ./programs; # Possible programs to install (with sane defaults)
-  services = import ./services; # Possible services to enable
-  profiles = import ./profiles; # Possible NixOS configuration options
+  config = import ./config; # Configuration settings for programs
+  programs = import ./programs; # Options for programs to be configured
+  profiles = import ./profiles; # Settings for specific kinds of systems
 
   # Internally-used modules that are shared amongst programs:
   homeless = import ./shared/homeless; # Simple and idempotent home management (unlike HomeManager)
