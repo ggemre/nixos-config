@@ -1,7 +1,8 @@
 _: {
   services = {
     thermald.enable = true;
-    tlp.enable = true;
+    # Disable for now, rather aggressive on Hyprland
+    # tlp.enable = true;
     auto-cpufreq = {
       enable = true;
       settings = {

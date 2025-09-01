@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
+{pkgs, ...}: let
   user = "gge";
 in {
   theme.name = "catppuccin-mocha";
@@ -12,13 +8,13 @@ in {
     direnv.enableBashIntegration = true;
   };
 
-  services.greetd = {
+  services.displayManager.ly = {
     enable = true;
-    useTextGreeter = true;
     settings = {
-      default_session = {
-        command = "${lib.getExe pkgs.tuigreet} --time --remember --asterisks --cmd ${lib.getExe pkgs.hyprland}";
-      };
+      save = true;
+      waylandsessions = "${pkgs.hyprland}/share/wayland-sessions";
+      animation = "matrix";
+      session_log = "/tmp/ly-session.log";
     };
   };
 
