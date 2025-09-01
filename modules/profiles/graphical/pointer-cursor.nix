@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  cfg = config.common.pointerCursor;
+  cfg = config.graphical.pointerCursor;
   defaultIndexThemePackage = pkgs.writeTextFile {
     name = "index.theme";
     destination = "/share/icons/default/index.theme";
@@ -16,7 +16,7 @@
     '';
   };
 in {
-  options.common.pointerCursor = {
+  options.graphical.pointerCursor = {
     package = lib.mkOption {
       type = lib.types.package;
       description = "Package providing the cursor theme.";

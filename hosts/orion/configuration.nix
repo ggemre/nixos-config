@@ -30,7 +30,7 @@ in {
     };
   };
 
-  common.pointerCursor = {
+  graphical.pointerCursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
     size = 25;
