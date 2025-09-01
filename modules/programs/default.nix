@@ -1,4 +1,5 @@
 {
+  ashell = import ./ashell;
   brave = import ./brave;
   dwl = import ./dwl;
   firefox = import ./firefox;

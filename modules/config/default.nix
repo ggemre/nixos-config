@@ -1,4 +1,5 @@
 {
+  ashell = import ./ashell;
   bash = import ./bash;
   brave = import ./brave;
   direnv = import ./direnv;

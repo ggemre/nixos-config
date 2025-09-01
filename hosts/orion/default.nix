@@ -3,6 +3,7 @@
     ./configuration.nix
     ./hardware.nix
 
+    self.nixosModules.config.ashell
     self.nixosModules.config.bash
     self.nixosModules.config.brave
     self.nixosModules.config.direnv
