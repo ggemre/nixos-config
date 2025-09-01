@@ -37,6 +37,7 @@ in {
         trusted-users = [ "@wheel" ];
         auto-optimise-store = true;
         sandbox = true;
+        allow-import-from-derivation = false;
         substituters = [
           "https://nix-community.cachix.org"
           "https://cache.privatevoid.net"
