@@ -20,7 +20,7 @@ in {
   };
 
   config = let
-    directories = lib.filterAttrs (_: v: !isNull v) {
+    directories = lib.filterAttrs (_: v: v != null) {
       XDG_DOCUMENTS_DIR = cfg.documents;
       XDG_DOWNLOAD_DIR = cfg.download;
     };
