@@ -40,6 +40,10 @@ in {
     size = 25;
   };
 
+  common.userDirs = {
+    download = "$HOME/tmp";
+  };
+
   boot = {
     loader = {
       systemd-boot.enable = true;
