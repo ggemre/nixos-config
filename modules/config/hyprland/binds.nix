@@ -12,10 +12,10 @@
       "$mod, SPACE, exec, ${lib.getExe pkgs.wofi} --show drun"
       "$mod, Q, killactive"
       "$mod, M, exit"
-      "$mod SHIFT, L, exec, hyprlock"
+      "$mod SHIFT, L, exec, ${lib.getExe pkgs.hyprlock}"
       "$mod, V, togglefloating"
       "$mod, P, pseudo, # dwindle"
-      "$mod, H, togglesplit, # dwindle"
+      "$mod, semicolon, togglesplit,"
       "$mod, S, togglespecialworkspace"
       "$mod, F, fullscreen, 0"
       "$mod SHIFT, S, movetoworkspace, special"
@@ -27,20 +27,20 @@
       "$mod, down, movefocus, d"
       "$mod, up, movefocus, u"
       "$mod, right, movefocus, r"
-      "$mod, J, movefocus, l"
-      "$mod, K, movefocus, d"
-      "$mod, L, movefocus, u"
-      "$mod, semicolon, movefocus, r"
+      "$mod, H, movefocus, l"
+      "$mod, J, movefocus, d"
+      "$mod, K, movefocus, u"
+      "$mod, L, movefocus, r"
 
       # Swap window in given direction
       "$mod SHIFT, left, swapwindow, l"
       "$mod SHIFT, down, swapwindow, d"
       "$mod SHIFT, up, swapwindow, u"
       "$mod SHIFT, right, swapwindow, r"
-      "$mod SHIFT, J, swapwindow, l"
-      "$mod SHIFT, K, swapwindow, d"
-      "$mod SHIFT, L, swapwindow, u"
-      "$mod SHIFT, semicolon, swapwindow, r"
+      "$mod SHIFT, H, swapwindow, l"
+      "$mod SHIFT, J, swapwindow, d"
+      "$mod SHIFT, K, swapwindow, u"
+      "$mod SHIFT, L, swapwindow, r"
 
       # Switch workspaces with mainMod + [0-9]
       "$mod, 1, workspace, 1"
@@ -69,6 +69,16 @@
       # Scroll through existing workspaces with mainMod + scroll
       "$mod, mouse_down, workspace, e+1"
       "$mod, mouse_up, workspace, e-1"
+
+      # Resize windows
+      "$mod ALT, left, resizeactive, -40 0"
+      "$mod ALT, down, resizeactive, 0 40"
+      "$mod ALT, up, resizeactive, 0 -40"
+      "$mod ALT, right, resizeactive, 40 0"
+      "$mod ALT, H, resizeactive, -40 0"
+      "$mod ALT, J, resizeactive, 0 40"
+      "$mod ALT, K, resizeactive, 0 -40"
+      "$mod ALT, L, resizeactive, 40 0"
     ];
 
     binde = [
