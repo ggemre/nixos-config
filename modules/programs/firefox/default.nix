@@ -14,6 +14,19 @@ in {
       default = "";
       description = "User chrome css for Firefox.";
     };
+
+    searchJsonArchive = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
+      default = null;
+      description = ''
+        Search engines settings in the ``.mozlz4` format.
+        To generate this file, you can:
+        1. Configure the search engines imperatively and then copy
+           ~/.mozilla/firefox/<profile>/search.json.mozlz4 to your config.
+        2. Write your own `search.json` file (see templates online) and then use
+           `mozlz4a` to compress it.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -42,7 +55,9 @@ in {
       );
 
       # The only non-IFD way to get custom search engines. Docs to come.
-      ".mozilla/firefox/main/search.json.mozlz4".source = ./search.json.mozlz4;
+      ".mozilla/firefox/main/search.json.mozlz4" = lib.mkIf (cfg.searchJsonArchive != null) {
+        source = cfg.searchJsonArchive;
+      };
     };
   };
 }

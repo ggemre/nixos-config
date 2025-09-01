@@ -9,5 +9,6 @@
     enable = true;
     preferencesStatus = "locked";
     userChrome = ./userChrome.css;
+    searchJsonArchive = ./search.json.mozlz4;
   };
 }
