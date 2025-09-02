@@ -17,7 +17,7 @@
     settings = {
       exec-once = [
         "${lib.getExe pkgs.ashell}"
-        "${lib.getExe pkgs.wbg} $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
+        "${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
       ];
       misc = {
         disable_hyprland_logo = true;
