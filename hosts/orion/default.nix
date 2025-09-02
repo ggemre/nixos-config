@@ -12,6 +12,7 @@
     self.nixosModules.config.git
     self.nixosModules.config.helix
     self.nixosModules.config.hyprland
+    self.nixosModules.config.hyprlock
 
     self.nixosModules.profiles.apple.macbook-air-7
     self.nixosModules.profiles.graphical

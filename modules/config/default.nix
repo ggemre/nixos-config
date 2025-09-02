@@ -8,4 +8,5 @@
   git = import ./git;
   helix = import ./helix;
   hyprland = import ./hyprland;
+  hyprlock = import ./hyprlock;
 }

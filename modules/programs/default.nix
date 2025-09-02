@@ -6,4 +6,5 @@
   ghostty = import ./ghostty;
   helix = import ./helix;
   hyprland = import ./hyprland;
+  hyprlock = import ./hyprlock;
 }
