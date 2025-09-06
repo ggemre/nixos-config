@@ -19,7 +19,7 @@ in {
       type = lib.types.nullOr lib.types.path;
       default = null;
       description = ''
-        Search engines settings in the ``.mozlz4` format.
+        Search engines settings in the `.mozlz4` format.
         To generate this file, you can:
         1. Configure the search engines imperatively and then copy
            ~/.mozilla/firefox/<profile>/search.json.mozlz4 to your config.
@@ -54,7 +54,7 @@ in {
         }
       );
 
-      # The only non-IFD way to get custom search engines. Docs to come.
+      # The only non-IFD way to get custom search engines.
       ".mozilla/firefox/main/search.json.mozlz4" = lib.mkIf (cfg.searchJsonArchive != null) {
         source = cfg.searchJsonArchive;
       };

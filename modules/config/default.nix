@@ -9,4 +9,5 @@
   helix = import ./helix;
   hyprland = import ./hyprland;
   hyprlock = import ./hyprlock;
+  zen = import ./zen;
 }

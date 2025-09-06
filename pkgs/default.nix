@@ -8,5 +8,6 @@ self.lib.forAllSystems (
   in {
     hello = pkgs.callPackage ./hello {};
     alejandra-patched = pkgs.callPackage ./alejandra-patched {};
+    zen-browser-unwrapped = pkgs.callPackage ./zen-browser {};
   }
 )
