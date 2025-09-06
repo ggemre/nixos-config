@@ -2,7 +2,7 @@
 # Credit goes to @0xc000022070, thanks!
 {
   pkgs,
-  name ? "beta", # beta, twilight, or twilight-official
+  name ? "beta", # beta or twilight
   policies ? {},
   lib,
   stdenv,
@@ -29,39 +29,14 @@
 }: let
   variant = (builtins.fromJSON (builtins.readFile ./sources.json)).${name}.${pkgs.stdenv.hostPlatform.system};
 
-  applicationName = "Zen Browser (Beta)";
+  applicationName = "Zen Browser (${name})";
   binaryName = "zen-${name}";
   libName = "zen-bin-${variant.version}";
 
   mozillaPlatforms = {
     x86_64-linux = "linux-x86_64";
-    # aarch64-linux = "linux-aarch64";
-    # aarch64-darwin = "darwin-aarch64";
+    aarch64-linux = "linux-aarch64";
   };
-
-  # firefoxPolicies =
-  #   (config.firefox.policies or {})
-  #   // policies;
-
-  # firefoxPolicies = {
-  #   Preferences = {
-  #     "browser.theme.content-theme" = {
-  #       Status = "locked";
-  #       Value = 0;
-  #     };
-  #     "browser.theme.toolbar-theme" = {
-  #       Status = "locked";
-  #       Value = 0;
-  #     };
-  #   };
-  #   ExtensionSettings = {
-  #     # uBlock Origin:
-  #     "uBlock0@raymondhill.net" = {
-  #       install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-  #       installation_mode = "force_installed";
-  #     };
-  #   };
-  # };
 
   policiesJson = writeText "firefox-policies.json" (builtins.toJSON { inherit policies; });
 

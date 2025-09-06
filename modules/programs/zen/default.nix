@@ -11,7 +11,7 @@ in {
     enable = lib.mkEnableOption "Whether to enable the Zen browser.";
 
     version = lib.mkOption {
-      type = lib.types.enum [ "beta" "twilight" "twilight-official" ];
+      type = lib.types.enum [ "beta" "twilight" ];
       default = "beta";
       description = "The version of Zen to install";
     };
