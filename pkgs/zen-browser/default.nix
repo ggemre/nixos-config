@@ -5,8 +5,6 @@
   name ? "beta", # beta or twilight
   policies ? {},
   lib,
-  stdenv,
-  config,
   wrapGAppsHook3,
   autoPatchelfHook,
   alsa-lib,
@@ -19,9 +17,7 @@
   pciutils,
   pipewire,
   adwaita-icon-theme,
-  undmg,
   writeText,
-  fetchurl,
   fetchzip,
   makeDesktopItem,
   copyDesktopItems,
@@ -152,10 +148,9 @@ in
     '';
 
     passthru = {
-      inherit applicationName binaryName libName;
+      inherit applicationName binaryName libName gtk3;
       ffmpegSupport = true;
       gssSupport = true;
-      gtk3 = gtk3;
     };
 
     meta = {

@@ -17,7 +17,7 @@ in {
     };
 
     policies = lib.mkOption {
-      type = (pkgs.formats.json {}).type;
+      inherit (pkgs.formats.json {}) type;
       default = {};
       description = "Policies to pass to Zen.";
     };
