@@ -5,10 +5,11 @@
 
     plymouth = {
       enable = true;
-      theme = "catppuccin-mocha";
+      theme = "loader_2";
       themePackages = [
-        (pkgs.catppuccin-plymouth.override {
-          variant = "mocha";
+        # https://github.com/adi1090x/plymouth-themes
+        (pkgs.adi1090x-plymouth-themes.override {
+          selected_themes = [ "loader_2" ];
         })
       ];
     };
