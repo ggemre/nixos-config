@@ -31,6 +31,8 @@
         truncate_title_after_length = 75;
       };
 
+      clock.format = "%a %d %b %l:%M %p";
+
       appearance = {
         background_color = config.theme.colorsWithHashtag.base00;
         primary_color = config.theme.colorsWithHashtag.base0D;

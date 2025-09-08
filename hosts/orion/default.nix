@@ -3,7 +3,6 @@
     ./configuration.nix
     ./hardware.nix
 
-    self.nixosModules.config.ashell
     self.nixosModules.config.bash
     self.nixosModules.config.brave
     self.nixosModules.config.direnv
@@ -11,10 +10,8 @@
     self.nixosModules.config.foot
     self.nixosModules.config.git
     self.nixosModules.config.helix
-    self.nixosModules.config.hypridle
-    self.nixosModules.config.hyprland
-    self.nixosModules.config.hyprlock
 
+    self.nixosModules.profiles.desktop.amethyst
     self.nixosModules.profiles.apple.macbook-air-7
     self.nixosModules.profiles.graphical
     self.nixosModules.profiles.laptop
