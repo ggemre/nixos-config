@@ -3,12 +3,12 @@
     self.nixosModules.programs.firefox
     ./preferences.nix
     ./policies.nix
+    ./user-chrome.nix
   ];
 
   programs.firefox = {
     enable = true;
     preferencesStatus = "locked";
-    userChrome = ./userChrome.css;
     searchJsonArchive = ./search.json.mozlz4;
   };
 }
