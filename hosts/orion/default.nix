@@ -10,6 +10,7 @@
     self.nixosModules.config.foot
     self.nixosModules.config.git
     self.nixosModules.config.helix
+    self.nixosModules.config.starship
 
     self.nixosModules.profiles.desktop.amethyst
     self.nixosModules.profiles.apple.macbook-air-7

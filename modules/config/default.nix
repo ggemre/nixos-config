@@ -10,5 +10,6 @@
   hypridle = import ./hypridle;
   hyprland = import ./hyprland;
   hyprlock = import ./hyprlock;
+  starship = import ./starship;
   zen = import ./zen;
 }
