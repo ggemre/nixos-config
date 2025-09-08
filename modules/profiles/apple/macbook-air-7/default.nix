@@ -1,5 +1,9 @@
 # Mostly uses https://github.com/NixOS/nixos-hardware/blob/master/apple/macbook-air/7/default.nix as a reference
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   boot = {
     kernelParams = [
       "hid_apple.iso_layout=0"
@@ -8,7 +12,7 @@
       "bdc_pci"
     ];
 
-    initrd.kernelModules = [ "kvm-intel" "wl" ];
+    initrd.kernelModules = [ "kvm-intel" "wl" "i915" ];
     kernelModules = [ "wl" ];
     extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
   };
@@ -16,6 +20,15 @@
   hardware = {
     facetimehd.enable = true;
     cpu.intel.updateMicrocode = true;
+    graphics = {
+      extraPackages = [
+        pkgs.intel-vaapi-driver
+        pkgs.intel-ocl
+      ];
+      extraPackages32 = [
+        pkgs.driversi686Linux.intel-vaapi-driver
+      ];
+    };
   };
 
   services = {
