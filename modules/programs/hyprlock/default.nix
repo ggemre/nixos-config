@@ -11,7 +11,7 @@ in {
     settings = lib.mkOption {
       type = lib.types.attrs;
       default = {};
-      description = "Settings to apply to the Hyprland configuration.";
+      description = "Settings to apply to the Hyprlock configuration.";
     };
   };
 

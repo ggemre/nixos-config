@@ -1,0 +1,3 @@
+{
+  hypridle = import ./hypridle;
+}

@@ -11,6 +11,7 @@
     self.nixosModules.config.foot
     self.nixosModules.config.git
     self.nixosModules.config.helix
+    self.nixosModules.config.hypridle
     self.nixosModules.config.hyprland
     self.nixosModules.config.hyprlock
 
