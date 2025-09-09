@@ -7,5 +7,6 @@
   helix = import ./helix;
   hyprland = import ./hyprland;
   hyprlock = import ./hyprlock;
+  wmenu = import ./wmenu;
   zen = import ./zen;
 }

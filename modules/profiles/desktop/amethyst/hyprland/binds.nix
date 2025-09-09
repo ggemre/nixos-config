@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -9,7 +10,7 @@
     bind = [
       "$mod, T, exec, ${lib.getExe pkgs.foot}"
       "$mod, B, exec, ${lib.getExe pkgs.firefox}"
-      "$mod, SPACE, exec, ${lib.getExe pkgs.wofi} --show drun"
+      "$mod, SPACE, exec, ${config.programs.wmenu.runner}"
       "$mod, Q, killactive"
       "$mod SHIFT, M, exit"
       "$mod, M, exec, ${lib.getExe pkgs.hyprlock}"

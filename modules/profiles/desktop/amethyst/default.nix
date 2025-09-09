@@ -4,5 +4,6 @@
     ./hypridle
     ./hyprland
     ./hyprlock
+    ./wmenu
   ];
 }
