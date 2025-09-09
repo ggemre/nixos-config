@@ -41,11 +41,12 @@ in {
         allow-import-from-derivation = false;
 
         substituters = [
-          "https://cache.nixos.org?priority=1"
-          "https://nix-community.cachix.org?priority=2"
+          "https://nix-community.cachix.org"
+          "https://cache.privatevoid.net"
         ];
         trusted-public-keys = [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "cache.privatevoid.net:SErQ8bvNWANeAvtsOESUwVYr2VJynfuc9JRwlzTTkVg="
         ];
 
         # Fallback quickly if substituters are not available
