@@ -1,6 +1,8 @@
-_: {
+{pkgs, ...}: {
   programs.git = {
     enable = true;
+    package = pkgs.gitMinimal;
+
     config = {
       user = {
         email = "ggemre+github@proton.me";

@@ -21,6 +21,7 @@
     facetimehd.enable = true;
     cpu.intel.updateMicrocode = true;
     graphics = {
+      enable = true;
       extraPackages = [
         pkgs.intel-vaapi-driver
         pkgs.intel-ocl
