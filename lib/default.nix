@@ -42,5 +42,6 @@ in {
   # Functions for generating different configuration formats from nix attrs
   generators = {
     hyprconf = import ./generators/hyprconf.nix { inherit (nixpkgs) lib; };
+    kdl = import ./generators/kdl.nix { inherit (nixpkgs) lib; };
   };
 }
