@@ -1,12 +1,6 @@
+# Heavily modified adaptation of function `toKdl` from
+# https://github.com/nix-community/home-manager/blob/master/modules/lib/generators.nix
 {lib}: let
-  inherit
-    (lib)
-    concatStringsSep
-    mapAttrsToList
-    any
-    ;
-  inherit (builtins) typeOf replaceStrings elem;
-
   # ListOf String -> String
   indentStrings = let
     # Although the input of this function is a list of strings,
@@ -14,35 +8,29 @@
     # to normalize the list by joining and resplitting them.
     unlines = lib.splitString "\n";
     lines = lib.concatStringsSep "\n";
-    indentAll = lines: concatStringsSep "\n" (map (x: "	" + x) lines);
+    indentAll = lines: lib.concatStringsSep "\n" (map (x: "	" + x) lines);
   in
     stringsWithNewlines: indentAll (unlines (lines stringsWithNewlines));
 
   # String -> String
-  sanitizeString = replaceStrings [ "\n" ''"'' ] [ "\\n" ''\"'' ];
+  sanitizeString = builtins.replaceStrings [ "\n" ''"'' ] [ "\\n" ''\"'' ];
 
   # OneOf [Int Float String Bool Null] -> String
-  literalValueToString = element:
-    lib.throwIfNot
-    (elem (typeOf element) [
-      "int"
-      "float"
-      "string"
-      "bool"
-      "null"
-    ])
-    "Cannot convert value of type ${typeOf element} to KDL literal."
-    (
-      if typeOf element == "null"
-      then "null"
-      else if element == false
-      then "false"
-      else if element == true
+  literalValueToString = value: let
+    vType = builtins.typeOf value;
+  in
+    if vType == "null"
+    then "null"
+    else if vType == "bool"
+    then
+      if value
       then "true"
-      else if typeOf element == "string"
-      then ''"${sanitizeString element}"''
-      else toString element
-    );
+      else "false"
+    else if vType == "int" || vType == "float"
+    then toString value
+    else if vType == "string"
+    then ''"${sanitizeString element}"''
+    else throw "Cannot convert type ${vType} to KDL literal";
 
   # Attrset Conversion
   # String -> AttrsOf Anything -> String
@@ -53,19 +41,19 @@
     );
 
     orderedChildren = lib.pipe (attrs._children or []) [
-      (map (child: mapAttrsToList convertAttributeToKDL child))
+      (map (child: lib.mapAttrsToList convertAttributeToKDL child))
       lib.flatten
     ];
     unorderedChildren = lib.pipe attrs [
       (lib.filterAttrs (
         name: _:
-          !(elem name [
+          !(builtins.elem name [
             "_args"
             "_props"
             "_children"
           ])
       ))
-      (mapAttrsToList convertAttributeToKDL)
+      (lib.mapAttrsToList convertAttributeToKDL)
     ];
     children = orderedChildren ++ unorderedChildren;
     optChildren = lib.optional (children != []) ''
@@ -79,7 +67,7 @@
   # String -> ListOf (OneOf [Int Float String Bool Null])  -> String
   convertListOfFlatAttrsToKDL = name: list: let
     flatElements = map literalValueToString list;
-  in "${name} ${concatStringsSep " " flatElements}";
+  in "${name} ${lib.concatStringsSep " " flatElements}";
 
   # String -> ListOf Anything -> String
   convertListOfNonFlatAttrsToKDL = name: list: ''
@@ -90,9 +78,9 @@
   # String -> ListOf Anything  -> String
   convertListToKDL = name: list: let
     elementsAreFlat =
-      !any (
+      !lib.any (
         el:
-          elem (typeOf el) [
+          builtins.elem (builtins.typeOf el) [
             "list"
             "set"
           ]
@@ -106,16 +94,16 @@
   # Combined Conversion
   # String -> Anything  -> String
   convertAttributeToKDL = name: value: let
-    vType = typeOf value;
+    vType = builtins.typeOf value;
   in
     if name == "window-rules" && vType == "list"
-    then concatStringsSep "\n" (map (convertAttrsToKDL "window-rule") value)
+    then lib.concatStringsSep "\n" (map (convertAttrsToKDL "window-rule") value)
     else if vType == "bool"
     then
       if value
       then name
       else ""
-    else if elem vType [ "int" "float" "string" "null" ]
+    else if builtins.elem vType [ "int" "float" "string" "null" ]
     then "${name} ${literalValueToString value}"
     else if vType == "set"
     then convertAttrsToKDL name value
@@ -123,10 +111,10 @@
     then convertListToKDL name value
     else
       throw ''
-        Cannot convert type `(${typeOf value})` to KDL:
+        Cannot convert type `(${builtins.typeOf value})` to KDL:
           ${name} = ${toString value}
       '';
 in
   attrs: ''
-    ${concatStringsSep "\n" (lib.filter (x: x != "") (mapAttrsToList convertAttributeToKDL attrs))}
+    ${lib.concatStringsSep "\n" (lib.filter (x: x != "") (lib.mapAttrsToList convertAttributeToKDL attrs))}
   ''
