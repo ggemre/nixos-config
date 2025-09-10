@@ -1,7 +1,5 @@
 {
-  apple.macbook-air-7 = import ./apple/macbook-air-7;
-  desktop.amethyst = import ./desktop/amethyst;
-  desktop.bornite = import ./desktop/bornite;
+  hardware.apple-macbook-air-7 = import ./hardware/apple-macbook-air-7;
   graphical = import ./graphical;
   laptop = import ./laptop;
 }

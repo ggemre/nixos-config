@@ -12,8 +12,9 @@
     self.nixosModules.config.helix
     self.nixosModules.config.starship
 
-    self.nixosModules.profiles.desktop.amethyst
-    self.nixosModules.profiles.apple.macbook-air-7
+    self.nixosModules.desktop.amethyst
+
+    self.nixosModules.profiles.hardware.apple-macbook-air-7
     self.nixosModules.profiles.graphical
     self.nixosModules.profiles.laptop
   ];
