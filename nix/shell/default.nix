@@ -12,6 +12,7 @@ self.lib.forAllSystems (
         pkgs.statix
         pkgs.deadnix
         pkgs.just
+        pkgs.nil
         self.packages.${system}.alejandra-patched
       ];
     };
