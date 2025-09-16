@@ -29,7 +29,7 @@
     else if vType == "int" || vType == "float"
     then toString value
     else if vType == "string"
-    then ''"${sanitizeString element}"''
+    then ''"${sanitizeString value}"''
     else throw "Cannot convert type ${vType} to KDL literal";
 
   # Attrset Conversion

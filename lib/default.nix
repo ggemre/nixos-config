@@ -37,11 +37,13 @@ in {
   colors = {
     rgb = color: "rgb(${color})";
     rgba = color: alpha: "rgba(${color}${alpha})";
+    ron = import ./hex2rgba.nix { inherit (nixpkgs) lib; };
   };
 
   # Functions for generating different configuration formats from nix attrs
   generators = {
     hyprconf = import ./generators/hyprconf.nix { inherit (nixpkgs) lib; };
     kdl = import ./generators/kdl.nix { inherit (nixpkgs) lib; };
+    ron = import ./generators/ron.nix { inherit (nixpkgs) lib; };
   };
 }
