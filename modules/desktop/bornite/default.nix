@@ -1,5 +1,6 @@
 {
   imports = [
+    ./ly
     ./niri
     ./waybar
   ];

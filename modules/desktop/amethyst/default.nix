@@ -5,6 +5,7 @@
     ./hyprland
     ./hyprlock
     ./hyprsunset
+    ./ly
     ./wmenu
   ];
 }
