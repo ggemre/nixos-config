@@ -13,8 +13,8 @@ hex: alpha: let
   b = lib.trivial.fromHexString (lib.substring 4 2 hexStr);
   normalize = x: x / 255.0;
 in {
+  inherit alpha;
   red = normalize r;
   green = normalize g;
   blue = normalize b;
-  alpha = alpha;
 }
