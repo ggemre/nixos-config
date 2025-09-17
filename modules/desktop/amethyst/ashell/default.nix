@@ -1,5 +1,7 @@
 {
   config,
+  lib,
+  pkgs,
   self,
   ...
 }: {
@@ -28,10 +30,12 @@
 
       window_title = {
         mode = "Title";
-        truncate_title_after_length = 75;
+        truncate_title_after_length = 45;
       };
 
       clock.format = "%a %d %b %l:%M %p";
+
+      settings.lock_cmd = "${lib.getExe pkgs.hyprlock} &";
 
       appearance = {
         background_color = config.theme.colorsWithHashtag.base00;
