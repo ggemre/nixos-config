@@ -19,5 +19,8 @@ _: {
     # Application specifics
     MOZ_ENABLE_WAYLAND = 1;
     NIXOS_OZONE_WL = 1;
+
+    # Free up home
+    XCOMPOSECACHE = "/tmp/.compose-cache";
   };
 }
