@@ -41,8 +41,9 @@ in {
         allow-import-from-derivation = false;
 
         substituters = [
-          "https://nix-community.cachix.org"
-          "https://cache.privatevoid.net"
+          "https://cache.nixos.org?priority=3"
+          "https://nix-community.cachix.org?priority=2"
+          "https://cache.privatevoid.net?priority=1"
         ];
         trusted-public-keys = [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
