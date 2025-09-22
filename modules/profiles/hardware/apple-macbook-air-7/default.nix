@@ -20,14 +20,21 @@
   hardware = {
     facetimehd.enable = true;
     cpu.intel.updateMicrocode = true;
+
     graphics = {
       enable = true;
+      enable32Bit = true;
       extraPackages = [
         pkgs.intel-vaapi-driver
         pkgs.intel-ocl
+
+        pkgs.intel-media-driver
+        pkgs.intel-compute-runtime
+        pkgs.vpl-gpu-rt
       ];
       extraPackages32 = [
         pkgs.driversi686Linux.intel-vaapi-driver
+        pkgs.driversi686Linux.intel-media-driver
       ];
     };
   };
