@@ -41,14 +41,20 @@ in {
         allow-import-from-derivation = false;
 
         substituters = [
-          "https://cache.nixos.org?priority=3"
-          "https://nix-community.cachix.org?priority=2"
-          "https://cache.privatevoid.net?priority=1"
+          # status: https://mirror.sjtu.edu.cn/
+          "https://mirror.sjtu.edu.cn/nix-channels/store?priority=1"
+
+          "https://cache.privatevoid.net?priority=2"
+          "https://nix-community.cachix.org?priority=3"
         ];
         trusted-public-keys = [
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "cache.privatevoid.net:SErQ8bvNWANeAvtsOESUwVYr2VJynfuc9JRwlzTTkVg="
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         ];
+
+        http-connections = 64;
+        max-substitution-jobs = 32;
+        builders-use-substitutes = true;
 
         # Fallback quickly if substituters are not available
         connect-timeout = 5;
