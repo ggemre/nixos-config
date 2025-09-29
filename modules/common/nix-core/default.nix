@@ -42,7 +42,8 @@ in {
 
         substituters = [
           # status: https://mirror.sjtu.edu.cn/
-          "https://mirror.sjtu.edu.cn/nix-channels/store?priority=1"
+          # Stopped working...
+          # "https://mirror.sjtu.edu.cn/nix-channels/store?priority=10"
 
           "https://cache.privatevoid.net?priority=2"
           "https://nix-community.cachix.org?priority=3"
