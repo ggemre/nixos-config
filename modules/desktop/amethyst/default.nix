@@ -1,11 +1,11 @@
 {
   imports = [
     ./ashell
+    ./greetd
     ./hypridle
     ./hyprland
     ./hyprlock
     ./hyprsunset
-    ./ly
     ./wmenu
   ];
 }

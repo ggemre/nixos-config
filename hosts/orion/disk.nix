@@ -8,7 +8,7 @@
           type = "gpt";
           partitions = {
             ESP = {
-              size = "1G";
+              size = "500M";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -18,18 +18,24 @@
               };
             };
             swap = {
-              size = "4G";
+              size = "2G";
               content = {
                 type = "swap";
                 discardPolicy = "both";
               };
             };
-            root = {
+            luks = {
               size = "100%";
               content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/";
+                type = "luks";
+                name = "crypt";
+                askPassword = true;
+                settings.allowDiscards = true;
+                content = {
+                  type = "filesystem";
+                  format = "ext4";
+                  mountpoint = "/";
+                };
               };
             };
           };
