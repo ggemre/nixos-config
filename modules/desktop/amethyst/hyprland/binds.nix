@@ -3,17 +3,19 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  uwsm = lib.getExe pkgs.uwsm;
+in {
   programs.hyprland.settings = {
     "$mod" = "SUPER";
 
     bind = [
-      "$mod, T, exec, ${lib.getExe pkgs.foot}"
-      "$mod, B, exec, ${lib.getExe pkgs.firefox}"
-      "$mod, SPACE, exec, ${config.programs.wmenu.runner}"
+      "$mod, T, exec, ${uwsm} app -- ${lib.getExe pkgs.foot}"
+      "$mod, B, exec, ${uwsm} app -- ${lib.getExe pkgs.firefox}"
+      "$mod, SPACE, exec, ${uwsm} app -- ${config.programs.wmenu.runner}"
       "$mod, Q, killactive"
       "$mod SHIFT, M, exit"
-      "$mod, M, exec, ${lib.getExe pkgs.hyprlock}"
+      "$mod, M, exec, ${uwsm} app -- ${lib.getExe pkgs.hyprlock}"
       "$mod, V, togglefloating"
       "$mod, P, pseudo, # dwindle"
       "$mod, semicolon, togglesplit,"

@@ -4,7 +4,9 @@
   lib,
   self,
   ...
-}: {
+}: let
+  uwsm = lib.getExe pkgs.uwsm;
+in {
   imports = [
     self.nixosModules.programs.hyprland
     ./binds.nix
@@ -16,11 +18,10 @@
 
     settings = {
       exec-once = [
-        # TODO: use uwsm instead
-        "${lib.getExe pkgs.ashell}"
-        "${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
-        "${lib.getExe pkgs.hypridle}"
-        "${lib.getExe pkgs.hyprsunset}"
+        "${uwsm} app -- ${lib.getExe pkgs.ashell}"
+        "${uwsm} app -- ${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
+        "${uwsm} app -- ${lib.getExe pkgs.hypridle}"
+        "${uwsm} app -- ${lib.getExe pkgs.hyprsunset}"
       ];
       misc = {
         disable_hyprland_logo = true;
