@@ -37,10 +37,8 @@ in {
     };
     defaultEditor = lib.mkOption {
       type = lib.types.bool;
-      default = true;
-      description = ''
-        Set the default editor to `hx`.
-      '';
+      default = false;
+      description = "Set the default editor to helix.";
     };
     settings = lib.mkOption {
       inherit (tomlFormat) type;
@@ -60,7 +58,11 @@ in {
     environment.systemPackages = [ wrappedHelix ];
 
     environment.variables = lib.mkIf cfg.defaultEditor {
-      EDITOR = "hx";
+      EDITOR = cfg.package;
+    };
+
+    common.mime = lib.mkIf cfg.defaultEditor {
+      editor = "Helix.desktop";
     };
 
     homeless = lib.mkIf cfg.theme.enable {

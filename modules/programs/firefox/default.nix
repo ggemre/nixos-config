@@ -27,6 +27,12 @@ in {
            `mozlz4a` to compress it.
       '';
     };
+
+    defaultBrowser = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Set the default browser to Firefox.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -58,6 +64,14 @@ in {
       ".mozilla/firefox/main/search.json.mozlz4" = lib.mkIf (cfg.searchJsonArchive != null) {
         source = cfg.searchJsonArchive;
       };
+    };
+
+    environment.variables = lib.mkIf cfg.defaultBrowser {
+      BROWSER = cfg.package;
+    };
+
+    common.mime = lib.mkIf cfg.defaultBrowser {
+      browser = "firefox.desktop";
     };
   };
 }
