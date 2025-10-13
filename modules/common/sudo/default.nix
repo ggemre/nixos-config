@@ -1,11 +1,11 @@
 _: {
   security = {
-    sudo.enable = false;
-    sudo-rs = {
+    sudo = {
       enable = true;
-      extraConfig = ''
+      configFile = ''
         Defaults timestamp_timeout=30
         Defaults !lecture
+        Defaults pwfeedback
       '';
     };
   };
