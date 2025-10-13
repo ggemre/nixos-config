@@ -48,7 +48,7 @@
       "Mod+Shift+Slash" = { show-hotkey-overlay = true; };
       "Mod+T" = {
         _props = { hotkey-overlay-title = "Open a Terminal: foot"; };
-        spawn = "${lib.getExe pkgs.foot}";
+        spawn = "${lib.getExe config.programs.foot.package}";
       };
       # "Super+Alt+L" = {
       #   _props = { hotkey-overlay-title = "Lock the Screen: swaylock"; };

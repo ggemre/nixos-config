@@ -10,6 +10,8 @@ in {
   options.programs.ashell = {
     enable = lib.mkEnableOption "Whether to enable the ashell status bar.";
 
+    package = lib.mkPackageOption pkgs "ashell" {};
+
     settings = lib.mkOption {
       type = lib.types.nullOr tomlFormat.type;
       default = {};

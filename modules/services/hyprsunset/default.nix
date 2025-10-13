@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   self,
   ...
 }: let
@@ -8,6 +9,8 @@
 in {
   options.services.hyprsunset = {
     enable = lib.mkEnableOption "Whether to enable the Hyprsunset service.";
+
+    package = lib.mkPackageOption pkgs "hyprsunset" {};
 
     settings = lib.mkOption {
       type = lib.types.attrs;
@@ -17,6 +20,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.etc."xdg/hypr/hyprsunset.conf".text = self.lib.generators.hyprconf cfg.settings;
+    environment = {
+      systemPackages = [ cfg.package ];
+      etc."xdg/hypr/hyprsunset.conf".text = self.lib.generators.hyprconf cfg.settings;
+    };
   };
 }

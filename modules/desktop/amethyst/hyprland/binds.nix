@@ -10,12 +10,12 @@ in {
     "$mod" = "SUPER";
 
     bind = [
-      "$mod, T, exec, ${uwsm} app -- ${lib.getExe pkgs.foot}"
-      "$mod, B, exec, ${uwsm} app -- ${lib.getExe pkgs.firefox}"
+      "$mod, T, exec, ${uwsm} app -- ${lib.getExe config.programs.foot.package}"
+      "$mod, B, exec, ${uwsm} app -- ${lib.getExe config.programs.firefox.package}"
       "$mod, SPACE, exec, ${uwsm} app -- ${config.programs.wmenu.runner}"
       "$mod, Q, killactive"
       "$mod SHIFT, M, exit"
-      "$mod, M, exec, ${uwsm} app -- ${lib.getExe pkgs.hyprlock}"
+      "$mod, M, exec, ${uwsm} app -- ${lib.getExe config.programs.hyprlock.package}"
       "$mod, V, togglefloating"
       "$mod, P, pseudo, # dwindle"
       "$mod, semicolon, togglesplit,"
