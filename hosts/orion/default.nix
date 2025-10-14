@@ -4,12 +4,14 @@
     ./hardware.nix
 
     self.nixosModules.config.bash
+    self.nixosModules.config.bat
     self.nixosModules.config.brave
     self.nixosModules.config.direnv
     self.nixosModules.config.firefox
     self.nixosModules.config.foot
     self.nixosModules.config.git
     self.nixosModules.config.helix
+    self.nixosModules.config.ripgrep
     self.nixosModules.config.starship
 
     self.nixosModules.desktop.amethyst

@@ -8,6 +8,7 @@
   hyprland = import ./hyprland;
   hyprlock = import ./hyprlock;
   niri = import ./niri;
+  ripgrep = import ./ripgrep;
   waybar = import ./waybar;
   wmenu = import ./wmenu;
   zen = import ./zen;
