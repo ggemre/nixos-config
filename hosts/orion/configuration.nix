@@ -1,7 +1,7 @@
 {pkgs, ...}: let
   user = "gge";
 in {
-  theme.name = "rose-pine";
+  theme.name = "rose-pine-moon";
 
   programs = {
     foot.enableBashIntegration = true;
