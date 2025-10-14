@@ -1,8 +1,8 @@
 # Thanks to @llakala for the module that inspired this one.
 # https://github.com/llakala/nixos/blob/205ad64708e5f29a1a8f47a448e3a5f097132493/various/nixosModules/mimetypes.nix
 {
-  lib,
   config,
+  lib,
   ...
 }: let
   cfg = config.common.mime;

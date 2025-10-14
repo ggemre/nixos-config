@@ -1,6 +1,6 @@
 {
-  self,
   config,
+  self,
   ...
 }: {
   services.desktopManager.cosmic.settings."com.system76.CosmicTheme.Dark".v1 = {

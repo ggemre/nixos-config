@@ -1,7 +1,7 @@
 {
+  config,
   lib,
   self,
-  config,
   ...
 }: let
   cfg = config.services.desktopManager.cosmic;
