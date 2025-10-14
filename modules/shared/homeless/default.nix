@@ -36,7 +36,7 @@
           path = lib.mkDefault name;
           source = lib.mkIf (config.text != null) (
             let
-              name' = "homeless-" + lib.replaceStrings [ "/" ] [ "-" ] name;
+              name' = "homeless-" + builtins.replaceStrings [ "/" ] [ "-" ] name;
             in
               lib.mkDerivedConfig options.text (pkgs.writeText name')
           );
