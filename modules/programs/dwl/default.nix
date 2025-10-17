@@ -7,28 +7,35 @@
   cfg = config.programs.dwl;
 in {
   options.programs.dwl = {
-    terminal = lib.mkPackageOption pkgs "foot" {};
+    configFile = lib.mkOption {
+      type = lib.types.path;
+      description = "Path to the config header file.";
+    };
+
+    patches = lib.mkOption {
+      type = lib.types.listOf lib.types.path;
+      default = [];
+      description = "List of patches to apply to dwl.";
+    };
+
+    buildInputs = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = [];
+      description = "List of additional build inputs.";
+    };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     programs.dwl = {
-      enable = true;
       package =
         (pkgs.dwl.override {
           enableXWayland = true;
-          configH = pkgs.replaceVars ./config.h {
-            terminal = "${lib.getExe cfg.terminal}";
-          };
+          configH = cfg.configFile;
         }).overrideAttrs (oldAttrs: {
-          # buildInputs =
-          #   oldAttrs.buildInputs or []
-          #   ++ [
-          #     pkgs.libdrm
-          #     pkgs.fcft
-          #   ];
-          # patches = oldAttrs.patches or [] ++ [
-          #   ./bar-0.7.patch
-          # ];
+          buildInputs =
+            oldAttrs.buildInputs or []
+            ++ cfg.buildInputs;
+          patches = oldAttrs.patches or [] ++ cfg.patches;
         });
     };
   };

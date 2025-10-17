@@ -14,7 +14,7 @@
     self.nixosModules.config.ripgrep
     self.nixosModules.config.starship
 
-    self.nixosModules.desktop.amethyst
+    self.nixosModules.desktop.onyx
 
     self.nixosModules.profiles.hardware.apple-macbook-air-7
     self.nixosModules.profiles.graphical
