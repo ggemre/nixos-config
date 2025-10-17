@@ -6,8 +6,9 @@ self.lib.forAllSystems (
   system: let
     pkgs = import nixpkgs { inherit system; };
   in {
-    hello = pkgs.callPackage ./hello {};
     alejandra-patched = pkgs.callPackage ./alejandra-patched {};
+    dwl = pkgs.callPackage ./dwl {};
+    hello = pkgs.callPackage ./hello {};
     zen-browser-unwrapped = pkgs.callPackage ./zen-browser {};
   }
 )
