@@ -1,6 +1,8 @@
 {
   config,
   lib,
+  pkgs,
+  self,
   ...
 }: let
   # Find the first "normal" user for autologin.
@@ -9,12 +11,13 @@
     lib.filterAttrs (_: u: u.isNormalUser or false) config.users.users;
   firstUser =
     lib.head (lib.attrNames normalUsers);
+  slstatus = lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.slstatus;
 in {
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "/run/current-system/sw/bin/dwl";
+        command = "${slstatus} -s | /run/current-system/sw/bin/dwl";
         user = firstUser;
       };
     };

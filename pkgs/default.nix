@@ -9,6 +9,7 @@ self.lib.forAllSystems (
     alejandra-patched = pkgs.callPackage ./alejandra-patched {};
     dwl = pkgs.callPackage ./dwl {};
     hello = pkgs.callPackage ./hello {};
+    slstatus = pkgs.callPackage ./slstatus {};
     zen-browser-unwrapped = pkgs.callPackage ./zen-browser {};
   }
 )

@@ -66,7 +66,7 @@ static const struct xkb_rule_names xkb_rules = {
 	.options = NULL,
 };
 
-static const int repeat_rate = 60;
+static const int repeat_rate = 20;
 static const int repeat_delay = 200;
 
 /* Trackpad */
@@ -122,7 +122,8 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 	{ MODKEY|WLR_MODIFIER_CTRL|WLR_MODIFIER_SHIFT,SKEY,toggletag, {.ui = 1 << TAG} }
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NLL } }
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+// #define SHCMD(cmd) { .v = { "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
 static const char *termcmd[] = { "foot", NULL };
@@ -165,6 +166,15 @@ static const Key keys[] = {
 	TAGKEYS(          XKB_KEY_8, XKB_KEY_asterisk,                   7),
 	TAGKEYS(          XKB_KEY_9, XKB_KEY_parenleft,                  8),
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Q,          quit,           {0} },
+
+	{ 0,						XKB_KEY_XF86AudioMute,		     spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle") },
+	{ 0,						XKB_KEY_XF86AudioLowerVolume,	 spawn,		SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.03-") },
+	{ 0,						XKB_KEY_XF86AudioRaiseVolume,	 spawn,		SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.03+") },
+	{ 0,            XKB_KEY_XF86MonBrightnessDown, spawn,   SHCMD("brightnessctl -d intel_backlight s 5%-") },
+	{ 0,            XKB_KEY_XF86MonBrightnessUp,   spawn,   SHCMD("brightnessctl -d intel_backlight s 5%+") },
+	{ 0,            XKB_KEY_XF86KbdBrightnessDown, spawn,   SHCMD("brightnessctl -d smc::kbd_backlight s 5%-") },
+	{ 0,            XKB_KEY_XF86KbdBrightnessUp,   spawn,   SHCMD("brightnessctl -d smc::kbd_backlight s 5%+") },
+	
 
 	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
