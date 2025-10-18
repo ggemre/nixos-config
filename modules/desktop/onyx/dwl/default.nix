@@ -12,4 +12,6 @@
   environment.systemPackages = [
     pkgs.brightnessctl
   ];
+
+  security.rtkit.enable = true;
 }
