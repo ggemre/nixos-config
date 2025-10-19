@@ -19,17 +19,19 @@ in {
   options.graphical.pointerCursor = {
     package = lib.mkOption {
       type = lib.types.package;
+      default = pkgs.bibata-cursors;
       description = "Package providing the cursor theme.";
     };
 
     name = lib.mkOption {
       type = lib.types.str;
+      default = "Bibata-Modern-Classic";
       description = "The cursor name within the package.";
     };
 
     size = lib.mkOption {
       type = lib.types.int;
-      default = 32;
+      default = 25;
       description = "The cursor size.";
     };
 

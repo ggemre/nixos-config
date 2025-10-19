@@ -1,20 +1,12 @@
-{
-  config,
-  lib,
-  ...
-}: {
+_: {
   programs.firefox.policies = {
     DisableAccounts = true;
     OverrideFirstRunPage = "";
     OverridePostUpdatePage = "";
     DontCheckDefaultBrowser = true;
     DisplayBookmarksToolbar = "never";
-    DefaultDownloadDirectory =
-      lib.mkIf (config.common.userDirs.download != null)
-      config.common.userDirs.download;
-    DownloadDirectory =
-      lib.mkIf (config.common.userDirs.download != null)
-      config.common.userDirs.download;
+    DefaultDownloadDirectory = "$XDG_DOWNLOAD_DIR";
+    DownloadDirectory = "$XDG_DOWNLOAD_DIR";
     PromptForDownloadLocation = true;
 
     AutofillAddressEnabled = false;

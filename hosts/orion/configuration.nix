@@ -20,18 +20,6 @@ in {
     };
   };
 
-  graphical.pointerCursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 25;
-  };
-
-  common.userDirs = {
-    documents = "$HOME/docs";
-    download = "$HOME/tmp";
-    pictures = "$HOME/media/pictures";
-  };
-
   boot = {
     loader = {
       systemd-boot.enable = true;

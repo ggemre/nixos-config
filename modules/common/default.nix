@@ -6,6 +6,5 @@
     ./networking
     ./nix-core
     ./sudo
-    ./user-dirs
   ];
 }
