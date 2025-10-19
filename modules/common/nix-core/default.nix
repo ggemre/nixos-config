@@ -55,7 +55,6 @@ in {
 
         http-connections = 64;
         max-substitution-jobs = 32;
-        builders-use-substitutes = true;
 
         # Fallback quickly if substituters are not available
         connect-timeout = 5;
