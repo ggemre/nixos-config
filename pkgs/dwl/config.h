@@ -9,15 +9,16 @@ static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will
 static const unsigned int borderpx         = 1;  /* border pixel of windows */
 static const int showbar                   = 1; /* 0 means no bar */
 static const int topbar                    = 1; /* 0 means bottom bar */
-static const char *fonts[]                 = {"JetBrainsMono Nerd Font:size=10"};
-static const float rootcolor[]             = COLOR(0x000000ff);
+static const char *fonts[]                 = {"DejaVu Sans Mono Font:size=10"};
+static const float rootcolor[]             = COLOR(0x393552ff);
+static const float focuscolor[]            = COLOR(0xea9a97ff);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
 static const float fullscreen_bg[]         = {0.0f, 0.0f, 0.0f, 1.0f}; /* You can also use glsl colors */
 static uint32_t colors[][3]                = {
 	/*               fg          bg          border    */
-	[SchemeNorm] = { 0xbbbbbbff, 0x222222ff, 0x444444ff },
-	[SchemeSel]  = { 0xeeeeeeff, 0x005577ff, 0x005577ff },
-	[SchemeUrg]  = { 0,          0,          0x770000ff },
+	[SchemeNorm] = { 0xe0def4ff, 0x232136ff, 0x56526eff },
+	[SchemeSel]  = { 0xe0def4ff, 0x44415aff, 0x3e8fb0ff },
+	[SchemeUrg]  = { 0x393552ff, 0xeb6f92ff, 0x56526eff },
 };
 
 /* tagging */
@@ -127,7 +128,8 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 
 /* commands */
 static const char *termcmd[] = { "foot", NULL };
-static const char *menucmd[] = { "wmenu-run", NULL };
+static const char *menucmd[] = { "wmenu-run", "-N", "232136ff",
+	"-n", "e0def4ff", "-S", "44415aff", "-s", "e0def4ff", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
 
 static const Key keys[] = {

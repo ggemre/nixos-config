@@ -65,11 +65,11 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format     argument */
-	{ run_command,       "VOL %s | ",      "/run/current-system/sw/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/Volume://'" },
+	{ run_command,       " VOL %s | ",     "/run/current-system/sw/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/Volume://'" },
 	{ run_command,       "TMP %sC | ",     "expr $(cat /sys/class/thermal/thermal_zone0/temp) / 1000" },
 	{ netspeed_rx,       "NET %s | ",      "eth0" },
 	{ disk_perc,         "DSK %s% | ",     "/" },
 	{ ram_perc,          "RAM %s% | ",     NULL },
 	{ battery_perc,      "BAT %s%% | ",    "BAT0" },
-	{ datetime,          "%s",             "%T %F" }
+	{ datetime,          "%s ",            "%T %F" }
 };
