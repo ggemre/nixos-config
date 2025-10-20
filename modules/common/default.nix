@@ -1,5 +1,6 @@
 {
   imports = [
+    ./documentation
     ./fonts
     ./i18n
     ./mime

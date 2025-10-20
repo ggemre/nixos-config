@@ -10,5 +10,6 @@
   helix = import ./helix;
   ripgrep = import ./ripgrep;
   starship = import ./starship;
+  yazi = import ./yazi;
   zen = import ./zen;
 }
