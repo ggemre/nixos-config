@@ -24,7 +24,7 @@ in {
       pkgs.ashell
     ];
 
-    homeless.".config/ashell/config.toml" = lib.mkIf (cfg.settings != {}) {
+    home.".config/ashell/config.toml" = lib.mkIf (cfg.settings != {}) {
       source = tomlFormat.generate "ashell-config" cfg.settings;
     };
   };

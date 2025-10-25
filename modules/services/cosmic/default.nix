@@ -16,6 +16,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    homeless = genConfigTree cfg.settings;
+    home = genConfigTree cfg.settings;
   };
 }

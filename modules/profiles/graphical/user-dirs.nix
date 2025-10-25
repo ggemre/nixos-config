@@ -12,7 +12,7 @@
 
   formattedDirectories = lib.mapAttrs (_: value: ''"${value}"'') directories;
 in {
-  homeless.".config/user-dirs.dirs".text = lib.generators.toKeyValue {} formattedDirectories;
+  home.".config/user-dirs.dirs".text = lib.generators.toKeyValue {} formattedDirectories;
 
   environment.variables = directories;
 }

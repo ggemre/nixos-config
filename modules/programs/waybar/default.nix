@@ -21,11 +21,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    homeless.".config/waybar/config" = lib.mkIf (cfg.settings != {}) {
+    home.".config/waybar/config" = lib.mkIf (cfg.settings != {}) {
       source = (pkgs.formats.json {}).generate "waybar-config.json" cfg.settings;
     };
 
-    homeless.".config/waybar/style.css" = lib.mkIf (cfg.style != null) {
+    home.".config/waybar/style.css" = lib.mkIf (cfg.style != null) {
       source = pkgs.writeText "waybar-style.css" cfg.style;
     };
   };

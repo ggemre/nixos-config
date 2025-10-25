@@ -24,7 +24,7 @@ in {
       };
       modules = [
         self.nixosModules.common
-        self.nixosModules.homeless
+        self.nixosModules.home
         self.nixosModules.theme
         {
           config.networking.hostName = hostname;

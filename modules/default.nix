@@ -8,6 +8,6 @@
   profiles = import ./profiles; # Settings for specific kinds of systems
 
   # Internally-used modules that are shared amongst programs:
-  homeless = import ./shared/homeless; # Simple and idempotent home management (unlike HomeManager)
+  home = import ./shared/home; # Simple and idempotent home management (unlike HomeManager)
   theme = import ./shared/theme; # Set consistent themes for use elsewhere
 }

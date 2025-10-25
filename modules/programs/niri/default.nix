@@ -20,6 +20,6 @@ in {
       XDG_SESSION_DESKTOP = "niri";
     };
 
-    homeless.".config/niri/config.kdl".text = self.lib.generators.kdl cfg.settings;
+    home.".config/niri/config.kdl".text = self.lib.generators.kdl cfg.settings;
   };
 }

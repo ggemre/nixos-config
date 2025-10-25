@@ -23,7 +23,6 @@ in {
       "$mod, F, fullscreen, 0"
       "$mod SHIFT, S, movetoworkspace, special"
       "$mod, G, exec, ${lib.getExe pkgs.grim}"
-      "$mod SHIFT, B, exec, ${uwsm} app -- ${lib.getExe pkgs.bitwarden-desktop}"
 
       ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 

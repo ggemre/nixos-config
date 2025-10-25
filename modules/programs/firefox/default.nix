@@ -36,7 +36,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    homeless = {
+    home = {
       ".mozilla/firefox/profiles.ini".text = ''
         [Profile0]
         Name=main

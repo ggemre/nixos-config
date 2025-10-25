@@ -16,7 +16,7 @@ in {
       shell = pkgs.bash;
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ];
-      homeless = true;
+      manageHome = true;
     };
   };
 

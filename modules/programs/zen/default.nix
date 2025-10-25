@@ -57,7 +57,7 @@ in {
       )
     ];
 
-    homeless = {
+    home = {
       ".zen/profiles.ini".text = ''
         [Profile0]
         Name=main

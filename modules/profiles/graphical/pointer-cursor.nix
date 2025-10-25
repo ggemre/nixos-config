@@ -53,7 +53,7 @@ in {
       };
     };
 
-    homeless =
+    home =
       {
         ".local/share/icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
         ".local/share/icons/${cfg.name}".source = "${cfg.package}/share/icons/${cfg.name}";

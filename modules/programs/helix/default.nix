@@ -36,7 +36,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
-    homeless.".config/helix/config.toml".source = tomlFormat.generate "helix.toml" finalSettings;
+    home.".config/helix/config.toml".source = tomlFormat.generate "helix.toml" finalSettings;
 
     environment.variables = lib.mkIf cfg.defaultEditor {
       EDITOR = lib.getExe cfg.package;
