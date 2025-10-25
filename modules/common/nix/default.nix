@@ -1,11 +1,8 @@
 {
-  config,
   lib,
   pkgs,
   ...
-}: let
-  cfg = config.common.nix;
-in {
+}: {
   options.common.nix = {
     withLix = lib.mkOption {
       type = lib.types.bool;
@@ -23,15 +20,10 @@ in {
     };
 
     nix = {
-      package =
-        if cfg.withLix
-        then pkgs.lixPackageSets.latest.lix
-        else pkgs.nix;
+      package = pkgs.lixPackageSets.latest.lix;
       channel.enable = false;
-      gc = {
-        automatic = true;
-        options = "--delete-older-than 7d";
-      };
+      gc.automatic = false;
+
       settings = {
         experimental-features = [ "nix-command" "flakes" ];
         trusted-users = [ "@wheel" ];
@@ -41,10 +33,6 @@ in {
         allow-import-from-derivation = false;
 
         substituters = [
-          # status: https://mirror.sjtu.edu.cn/
-          # Stopped working...
-          # "https://mirror.sjtu.edu.cn/nix-channels/store?priority=10"
-
           "https://cache.privatevoid.net?priority=2"
           "https://nix-community.cachix.org?priority=3"
         ];
@@ -63,14 +51,6 @@ in {
     };
 
     # Provide lix package to anyone who needs it
-    programs.direnv.nix-direnv.package =
-      lib.mkIf (
-        config.programs.direnv.enable
-        && config.programs.direnv.nix-direnv.enable
-      ) (
-        if cfg.withLix
-        then pkgs.lixPackageSets.latest.nix-direnv
-        else pkgs.nix-direnv
-      );
+    programs.direnv.nix-direnv.package = pkgs.lixPackageSets.latest.nix-direnv;
   };
 }
