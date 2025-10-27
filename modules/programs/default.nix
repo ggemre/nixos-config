@@ -1,5 +1,6 @@
 {
   ashell = import ./ashell;
+  bitwarden = import ./bitwarden;
   brave = import ./brave;
   dwl = import ./dwl;
   firefox = import ./firefox;

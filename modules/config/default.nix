@@ -1,6 +1,7 @@
 {
   bash = import ./bash;
   bat = import ./bat;
+  bitwarden = import ./bitwarden;
   brave = import ./brave;
   direnv = import ./direnv;
   firefox = import ./firefox;

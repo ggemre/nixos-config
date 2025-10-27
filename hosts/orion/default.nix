@@ -5,6 +5,7 @@
 
     self.nixosModules.config.bash
     self.nixosModules.config.bat
+    self.nixosModules.config.bitwarden
     self.nixosModules.config.brave
     self.nixosModules.config.direnv
     self.nixosModules.config.firefox
