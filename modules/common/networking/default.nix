@@ -1,7 +1,7 @@
 # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/networking/networkmanager.nix
 _: {
   # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
-  time.timeZone = "Asia/Phnom_Penh";
+  time.timeZone = "America/New_York";
 
   networking = {
     nameservers = [

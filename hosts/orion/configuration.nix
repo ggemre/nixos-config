@@ -31,5 +31,5 @@ in {
   # Most users should never change this value after the initial install, for any reason,
   # even if you've upgraded your system to a new NixOS release.
   # https://mynixos.com/nixpkgs/option/system.stateVersion
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 }

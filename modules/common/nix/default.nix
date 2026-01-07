@@ -33,8 +33,8 @@
         allow-import-from-derivation = false;
 
         substituters = [
-          "https://cache.privatevoid.net?priority=2"
-          "https://nix-community.cachix.org?priority=3"
+          "https://cache.privatevoid.net"
+          "https://nix-community.cachix.org"
         ];
         trusted-public-keys = [
           "cache.privatevoid.net:SErQ8bvNWANeAvtsOESUwVYr2VJynfuc9JRwlzTTkVg="
