@@ -1,6 +1,6 @@
 {
   description = "Optimized Nix flake for all my NixOS systems.";
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   outputs = inputs @ {
     self,
     nixpkgs,
