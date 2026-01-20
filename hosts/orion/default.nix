@@ -18,8 +18,9 @@
 
     self.nixosModules.desktop.onyx
 
-    self.nixosModules.profiles.hardware.apple-macbook-air-7
+    self.nixosModules.profiles.gaming
     self.nixosModules.profiles.graphical
+    self.nixosModules.profiles.hardware.apple-macbook-air-7
     self.nixosModules.profiles.laptop
   ];
 }
