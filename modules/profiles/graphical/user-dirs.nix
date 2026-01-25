@@ -2,7 +2,7 @@
   directories = {
     XDG_DOCUMENTS_DIR = "$HOME/docs";
     XDG_DOWNLOAD_DIR = "$HOME/tmp";
-    XDG_PICTURES_DIR = "$HOM/media/pictures";
+    XDG_PICTURES_DIR = "$HOME/media/pictures";
     XDG_DESKTOP_DIR = "$HOME/tmp/desktop";
     XDG_MUSIC_DIR = "$HOME/media/music";
     XDG_PUBLICSHARE_DIR = "$HOME/tmp/public";
