@@ -16,7 +16,7 @@
     self.nixosModules.config.starship
     self.nixosModules.config.yazi
 
-    self.nixosModules.desktop.onyx
+    self.nixosModules.desktop.amethyst
 
     self.nixosModules.profiles.gaming
     self.nixosModules.profiles.graphical
