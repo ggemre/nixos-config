@@ -15,7 +15,7 @@ in {
     enable = true;
     settings = {
       default_session = {
-        command = "${lib.getExe pkgs.uwsm} start -F /run/current-system/sw/bin/Hyprland";
+        command = "${lib.getExe pkgs.uwsm} start -F /run/current-system/sw/bin/start-hyprland";
         user = firstUser;
       };
     };
