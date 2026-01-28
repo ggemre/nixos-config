@@ -6,6 +6,7 @@
     ./hyprland
     ./hyprlock
     ./hyprsunset
+    ./mako
     ./wmenu
   ];
 }

@@ -33,6 +33,11 @@
         truncate_title_after_length = 45;
       };
 
+      system_info = {
+        indicators = [ "Cpu" "Memory" "Temperature" { Disk = "/"; } ];
+        temperature.sensor = "coretemp Package id 0";
+      };
+
       clock.format = "%a %d %b %l:%M %p";
 
       settings.lock_cmd = "${lib.getExe pkgs.hyprlock} &";
