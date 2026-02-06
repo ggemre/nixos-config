@@ -10,6 +10,7 @@ self.lib.forAllSystems (
     dwl = pkgs.callPackage ./dwl {};
     hello = pkgs.callPackage ./hello {};
     slstatus = pkgs.callPackage ./slstatus {};
+    webull-desktop = pkgs.callPackage ./webull-desktop {};
     zen-browser-unwrapped = pkgs.callPackage ./zen-browser {};
   }
 )
