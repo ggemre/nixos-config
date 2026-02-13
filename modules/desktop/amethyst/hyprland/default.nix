@@ -22,6 +22,7 @@ in {
         "${uwsm} app -- ${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
         "${uwsm} app -- ${lib.getExe config.services.hyprsunset.package}"
         "${uwsm} app -- ${lib.getExe config.services.mako.package}"
+        "${lib.getExe config.programs.hyprlauncher.package} -d"
       ];
       misc = {
         disable_hyprland_logo = true;

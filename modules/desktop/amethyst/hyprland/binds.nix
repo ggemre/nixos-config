@@ -12,7 +12,7 @@ in {
     bind = [
       "$mod, T, exec, ${uwsm} app -- ${lib.getExe config.programs.foot.package}"
       "$mod, B, exec, ${uwsm} app -- ${lib.getExe config.programs.firefox.package}"
-      "$mod, SPACE, exec, ${uwsm} app -- ${config.programs.wmenu.runner}"
+      "$mod, SPACE, exec, ${lib.getExe config.programs.hyprlauncher.package}"
       "$mod, Q, killactive"
       "$mod SHIFT, M, exit"
       "$mod, M, exec, ${uwsm} app -- ${lib.getExe config.programs.hyprlock.package}"
