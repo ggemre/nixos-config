@@ -21,15 +21,11 @@
           "Workspaces"
           "Tray"
         ];
-        center = [ "MediaPlayer" "WindowTitle" ];
+        center = [ "WindowTitle" ];
         right = [
           "SystemInfo"
           [ "Clock" "Privacy" "Settings" ]
         ];
-      };
-
-      media_player = {
-        max_title_length = 50;
       };
 
       window_title = {
