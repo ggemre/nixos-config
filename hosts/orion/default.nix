@@ -13,6 +13,7 @@
     self.nixosModules.config.git
     self.nixosModules.config.helix
     self.nixosModules.config.ripgrep
+    self.nixosModules.config.spotify
     self.nixosModules.config.starship
     self.nixosModules.config.yazi
 

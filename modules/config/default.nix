@@ -10,6 +10,7 @@
   git = import ./git;
   helix = import ./helix;
   ripgrep = import ./ripgrep;
+  spotify = import ./spotify;
   starship = import ./starship;
   yazi = import ./yazi;
   zen = import ./zen;
