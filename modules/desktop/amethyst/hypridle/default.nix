@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   self,
@@ -12,12 +13,6 @@
     enable = true;
 
     settings = {
-      general = {
-        lock_cmd = "pidof hyprlock || hyprlock";
-        before_sleep_cmd = "loginctl lock-session";
-        after_sleep_cmd = "hyprctl dispatch dpms on";
-      };
-
       listener = [
         {
           timeout = 300; # 5m
@@ -26,16 +21,12 @@
         }
         {
           timeout = 480; # 8m
-          on-timeout = "loginctl lock-session";
+          on-timeout = lib.getExe config.programs.hyprlock.package;
         }
         {
           timeout = 960; # 16m
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
-        }
-        {
-          timeout = 1800; # 30m
-          on-timeout = "systemctl suspend";
         }
       ];
     };

@@ -20,7 +20,6 @@ in {
       exec-once = [
         "${uwsm} app -- ${lib.getExe config.programs.ashell.package}"
         "${uwsm} app -- ${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
-        "${uwsm} app -- ${lib.getExe config.services.hypridle.package}"
         "${uwsm} app -- ${lib.getExe config.services.hyprsunset.package}"
         "${uwsm} app -- ${lib.getExe config.services.mako.package}"
       ];
