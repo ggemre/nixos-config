@@ -1,5 +1,6 @@
 _: {
   imports = [
+    ./bluetooth.nix
     ./environment.nix
     # ./plymouth.nix
     ./pointer-cursor.nix
