@@ -28,10 +28,10 @@
       url = "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz";
       sha256 = "sha256-zwVvxrdIzralnSbcpghA92tWu2DV2lwv89xZc8MTrbg=";
     }) {
-      system = stdenv.hostPlatform.system;
+      inherit (stdenv.hostPlatform) system;
     };
 in
-  stdenv.mkDerivation (finalAttrs: {
+  stdenv.mkDerivation (_: {
     pname = "webull-desktop";
     version = "9.3.0";
 

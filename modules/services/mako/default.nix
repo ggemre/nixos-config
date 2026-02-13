@@ -17,8 +17,8 @@
         else "false"
       else toString v;
 
-    globalSettings = lib.filterAttrs (n: v: !(lib.isAttrs v)) config;
-    sectionSettings = lib.filterAttrs (n: v: lib.isAttrs v) config;
+    globalSettings = lib.filterAttrs (_: v: !(lib.isAttrs v)) config;
+    sectionSettings = lib.filterAttrs (_: v: lib.isAttrs v) config;
 
     globalLines = lib.concatStringsSep "\n" (
       lib.mapAttrsToList (k: v: "${k}=${formatValue v}") globalSettings
