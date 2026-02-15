@@ -4,9 +4,7 @@
   pkgs,
   self,
   ...
-}: let
-  uwsm = lib.getExe pkgs.uwsm;
-in {
+}: {
   imports = [
     self.nixosModules.programs.hyprland
     ./binds.nix
@@ -18,10 +16,10 @@ in {
 
     settings = {
       exec-once = [
-        "${uwsm} app -- ${lib.getExe config.programs.ashell.package}"
-        "${uwsm} app -- ${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
-        "${uwsm} app -- ${lib.getExe config.services.hyprsunset.package}"
-        "${uwsm} app -- ${lib.getExe config.services.mako.package}"
+        "${lib.getExe config.programs.ashell.package}"
+        "${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
+        "${lib.getExe config.services.hyprsunset.package}"
+        "${lib.getExe config.services.mako.package}"
         "${lib.getExe config.programs.hyprlauncher.package} -d"
       ];
       misc = {

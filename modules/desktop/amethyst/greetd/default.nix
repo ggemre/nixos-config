@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: let
   # Find the first "normal" user for autologin.
@@ -15,7 +14,7 @@ in {
     enable = true;
     settings = {
       default_session = {
-        command = "${lib.getExe pkgs.uwsm} start -F /run/current-system/sw/bin/start-hyprland";
+        command = "/run/current-system/sw/bin/start-hyprland";
         user = firstUser;
       };
     };
