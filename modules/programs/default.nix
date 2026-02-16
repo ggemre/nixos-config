@@ -2,6 +2,7 @@
   ashell = import ./ashell;
   bitwarden = import ./bitwarden;
   brave = import ./brave;
+  discord = import ./discord;
   dwl = import ./dwl;
   firefox = import ./firefox;
   ghostty = import ./ghostty;

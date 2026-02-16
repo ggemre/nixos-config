@@ -1,6 +1,6 @@
-{pkgs, ...}: {
-  environment.systemPackages = [
-    pkgs.discord
-    pkgs.prismlauncher
+_: {
+  imports = [
+    ./discord.nix
+    ./minecraft.nix
   ];
 }
