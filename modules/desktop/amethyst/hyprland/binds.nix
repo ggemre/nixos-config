@@ -10,7 +10,7 @@
     bind = [
       "$mod, T, exec, ${lib.getExe config.programs.foot.package}"
       "$mod, B, exec, ${lib.getExe config.programs.firefox.package}"
-      "$mod, SPACE, exec, ${lib.getExe config.programs.hyprlauncher.package}"
+      # "$mod, SPACE, exec, ${lib.getExe config.programs.rofi.package}"
       "$mod, Q, killactive"
       "$mod SHIFT, M, exit"
       "$mod, M, exec, ${lib.getExe config.programs.hyprlock.package}"

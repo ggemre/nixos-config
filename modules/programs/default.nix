@@ -7,7 +7,6 @@
   ghostty = import ./ghostty;
   helix = import ./helix;
   hyprland = import ./hyprland;
-  hyprlauncher = import ./hyprlauncher;
   hyprlock = import ./hyprlock;
   niri = import ./niri;
   ripgrep = import ./ripgrep;

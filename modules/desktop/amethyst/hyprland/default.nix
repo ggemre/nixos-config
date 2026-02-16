@@ -20,7 +20,6 @@
         "${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
         "${lib.getExe config.services.hyprsunset.package}"
         "${lib.getExe config.services.mako.package}"
-        "${lib.getExe config.programs.hyprlauncher.package} -d"
       ];
       misc = {
         disable_hyprland_logo = true;
