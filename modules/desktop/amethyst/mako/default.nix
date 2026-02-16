@@ -13,7 +13,9 @@
     enable = true;
 
     settings = {
-      actions = true;
+      default-timeout = 5000;
+      on-button-left = "invoke-default-action";
+      on-button-right = "dismiss";
       anchor = "top-right";
       layer = "overlay";
       background-color = config.theme.colorsWithHashtag.base00;
