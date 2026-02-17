@@ -18,6 +18,7 @@
       exec-once = [
         "${lib.getExe config.programs.ashell.package}"
         "${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
+        "${lib.getExe config.services.hypridle.package}"
         "${lib.getExe config.services.hyprsunset.package}"
         "${lib.getExe config.services.mako.package}"
       ];
