@@ -10,15 +10,16 @@
   firstUser =
     lib.head (lib.attrNames normalUsers);
 in {
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "/run/current-system/sw/bin/start-hyprland";
-        user = firstUser;
-      };
-    };
+  services.getty = {
+    autologinUser = firstUser;
+    autologinOnce = true;
   };
 
-  security.pam.services.greetd.enable = true;
+  environment.loginShellInit = ''
+    if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
+      exec /run/current-system/sw/bin/start-hyprland
+    fi
+  '';
+
+  security.pam.services.getty.enable = true;
 }

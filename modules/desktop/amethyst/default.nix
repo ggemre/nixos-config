@@ -1,7 +1,7 @@
 {
   imports = [
     ./ashell
-    ./greetd
+    ./getty
     ./hypridle
     ./hyprland
     ./hyprlock
