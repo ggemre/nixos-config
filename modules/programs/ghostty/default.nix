@@ -22,6 +22,7 @@ in {
       default = {};
       description = "Settings to apply to the ghostty configuration.";
     };
+
     theme = lib.mkOption {
       type = lib.types.attrs;
       default = {};

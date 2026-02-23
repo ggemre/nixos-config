@@ -6,9 +6,7 @@
 }: let
   cfg = config.programs.helix;
   tomlFormat = pkgs.formats.toml {};
-
-  themeName = builtins.replaceStrings [ "-" ] [ "_" ] config.theme.name;
-  finalSettings = cfg.settings // lib.optionalAttrs cfg.theme.enable { theme = themeName; };
+  themeName = builtins.replaceStrings [ "-" ] [ "_" ] cfg.theme;
 in {
   options.programs.helix = {
     enable = lib.mkEnableOption "Whether to enable the helix text editor.";
@@ -22,21 +20,26 @@ in {
     };
 
     settings = lib.mkOption {
-      inherit (tomlFormat) type;
+      type = lib.types.attrs;
       default = {};
       description = "Settings for the helix editor.";
     };
 
-    theme.enable =
-      lib.mkEnableOption "consistent theming"
-      // {
-        default = true;
-      };
+    theme = lib.mkOption {
+      type = lib.types.str;
+      description = "Theme to apply to the helix theme.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
-    home.".config/helix/config.toml".source = tomlFormat.generate "helix.toml" finalSettings;
+
+    home.".config/helix/config.toml".source =
+      tomlFormat.generate "helix.toml"
+      (cfg.settings
+        // {
+          theme = themeName;
+        });
 
     environment.variables = lib.mkIf cfg.defaultEditor {
       EDITOR = lib.getExe cfg.package;
