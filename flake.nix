@@ -12,6 +12,7 @@
 
   outputs = inputs @ {
     nixpkgs,
+    nur,
     self,
     ...
   }: {
@@ -19,7 +20,6 @@
     nixosConfigurations = import ./hosts inputs;
     formatter = import ./nix/formatter inputs;
     devShells = import ./nix/shell inputs;
-    packages = import ./pkgs inputs;
     lib = import ./lib inputs;
   };
 }

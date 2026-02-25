@@ -1,11 +1,13 @@
 {
   nixpkgs,
+  nur,
   self,
   ...
 }:
 self.lib.forAllSystems (
   system: let
-    pkgs = import nixpkgs { inherit system; };
+    pkgs = nixpkgs.legacyPackages.${system};
+    nurPkgs = nur.legacyPackages.${system};
   in {
     default = pkgs.mkShell {
       name = "Flake dev shell";
@@ -14,7 +16,7 @@ self.lib.forAllSystems (
         pkgs.deadnix
         pkgs.just
         pkgs.nil
-        self.packages.${system}.alejandra-patched
+        nurPkgs.repos.ggemre.alejandra-spaced
       ];
     };
   }

@@ -1,4 +1,8 @@
-{self, ...}:
+{
+  nur,
+  self,
+  ...
+}:
 self.lib.forAllSystems (
-  system: self.packages.${system}.alejandra-patched
+  system: nur.legacyPackages.${system}.repos.ggemre.alejandra-spaced
 )
