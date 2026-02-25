@@ -1,7 +1,4 @@
-{
-  nixpkgs,
-  self,
-}: let
+{nixpkgs, ...}: let
   # Configure the flake's supported systems
   # I know it's just one for now, but the infrastructure is there to support more
   supportedSystems = [
@@ -15,23 +12,6 @@ in {
   forAllSystems = f:
     nixpkgs.lib.genAttrs supportedSystems
     f;
-
-  # Function to generate a NixOS configuration
-  mkHost = hostname:
-    nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit self;
-      };
-      modules = [
-        self.nixosModules.common
-        self.nixosModules.home
-        self.nixosModules.theme
-        {
-          config.networking.hostName = hostname;
-        }
-        ../hosts/${hostname}
-      ];
-    };
 
   # Basic color formatting functions for theming
   colors = {

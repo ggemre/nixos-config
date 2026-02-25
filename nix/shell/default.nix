@@ -1,6 +1,7 @@
 {
   nixpkgs,
   self,
+  ...
 }:
 self.lib.forAllSystems (
   system: let

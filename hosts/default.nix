@@ -1,3 +1,26 @@
-{self, ...}: {
-  orion = self.lib.mkHost "orion";
+{
+  nixpkgs,
+  self,
+  ...
+}: let
+  mkHost = system: hostname:
+    nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit self;
+      };
+      modules = [
+        self.nixosModules.common
+        self.nixosModules.home
+        self.nixosModules.theme
+        {
+          config = {
+            networking.hostName = hostname;
+            nixpkgs.hostPlatform = system;
+          };
+        }
+        ../hosts/${hostname}
+      ];
+    };
+in {
+  orion = mkHost "x86_64-linux" "orion";
 }

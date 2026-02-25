@@ -1,9 +1,18 @@
 {
   description = "Optimized Nix flake for all my NixOS systems.";
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nur = {
+      url = "github:nix-community/nur";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   outputs = inputs @ {
-    self,
     nixpkgs,
+    self,
     ...
   }: {
     nixosModules = import ./modules;
