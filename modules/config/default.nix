@@ -13,5 +13,4 @@
   spotify = import ./spotify;
   starship = import ./starship;
   yazi = import ./yazi;
-  zen = import ./zen;
 }
