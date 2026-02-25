@@ -1,10 +1,10 @@
 {
   config,
-  self,
+  selfModules,
   ...
 }: {
   imports = [
-    self.nixosModules.programs.helix
+    selfModules.programs.helix
   ];
 
   programs.helix = {

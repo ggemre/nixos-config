@@ -1,10 +1,10 @@
 {
   config,
-  self,
+  selfModules,
   ...
 }: {
   imports = [
-    self.nixosModules.programs.ghostty
+    selfModules.programs.ghostty
   ];
 
   programs.ghostty = {

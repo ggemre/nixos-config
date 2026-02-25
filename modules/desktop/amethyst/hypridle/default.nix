@@ -2,11 +2,11 @@
   config,
   lib,
   pkgs,
-  self,
+  selfModules,
   ...
 }: {
   imports = [
-    self.nixosModules.services.hypridle
+    selfModules.services.hypridle
   ];
 
   services.hypridle = {

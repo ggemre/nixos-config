@@ -1,6 +1,6 @@
-{self, ...}: {
+{selfModules, ...}: {
   imports = [
-    self.nixosModules.programs.wmenu
+    selfModules.programs.wmenu
   ];
   programs.wmenu = {
     enable = true;

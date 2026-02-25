@@ -1,6 +1,6 @@
-{self, ...}: {
+{selfModules, ...}: {
   imports = [
-    self.nixosModules.services.hyprsunset
+    selfModules.services.hyprsunset
   ];
 
   services.hyprsunset = {

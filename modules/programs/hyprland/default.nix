@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  self,
+  selfLib,
   ...
 }: let
   cfg = config.programs.hyprland;
@@ -27,6 +27,6 @@ in {
       withUWSM = true;
     };
 
-    environment.etc."xdg/hypr/hyprland.conf".text = self.lib.generators.hyprconf cfg.settings;
+    environment.etc."xdg/hypr/hyprland.conf".text = selfLib.generators.hyprconf cfg.settings;
   };
 }

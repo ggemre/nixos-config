@@ -2,11 +2,12 @@
   config,
   lib,
   pkgs,
-  self,
+  selfLib,
+  selfModules,
   ...
 }: {
   imports = [
-    self.nixosModules.programs.hyprland
+    selfModules.programs.hyprland
     ./binds.nix
     ./decorations.nix
   ];
@@ -24,7 +25,7 @@
       ];
       misc = {
         disable_hyprland_logo = true;
-        background_color = self.lib.colors.rgb config.theme.colors.base00;
+        background_color = selfLib.colors.rgb config.theme.colors.base00;
       };
       input = {
         kb_layout = "us";

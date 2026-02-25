@@ -2,11 +2,11 @@
   config,
   lib,
   pkgs,
-  self,
+  selfModules,
   ...
 }: {
   imports = [
-    self.nixosModules.programs.ashell
+    selfModules.programs.ashell
   ];
 
   programs.ashell = {

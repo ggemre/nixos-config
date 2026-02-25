@@ -6,7 +6,8 @@
   mkHost = system: hostname:
     nixpkgs.lib.nixosSystem {
       specialArgs = {
-        inherit self;
+        selfLib = self.lib;
+        selfModules = self.nixosModules;
       };
       modules = [
         self.nixosModules.common

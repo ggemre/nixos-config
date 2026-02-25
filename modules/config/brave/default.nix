@@ -1,10 +1,10 @@
 {
   config,
-  self,
+  selfModules,
   ...
 }: {
   imports = [
-    self.nixosModules.programs.brave
+    selfModules.programs.brave
   ];
 
   programs.brave = {

@@ -1,5 +1,5 @@
-{self, ...}: {
-  imports = [ self.nixosModules.programs.spotify ];
+{selfModules, ...}: {
+  imports = [ selfModules.programs.spotify ];
 
   programs.spotify.enable = true;
 }

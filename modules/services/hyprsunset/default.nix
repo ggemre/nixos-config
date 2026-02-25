@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  self,
+  selfLib,
   ...
 }: let
   cfg = config.services.hyprsunset;
@@ -22,7 +22,7 @@ in {
   config = lib.mkIf cfg.enable {
     environment = {
       systemPackages = [ cfg.package ];
-      etc."xdg/hypr/hyprsunset.conf".text = self.lib.generators.hyprconf cfg.settings;
+      etc."xdg/hypr/hyprsunset.conf".text = selfLib.generators.hyprconf cfg.settings;
     };
   };
 }

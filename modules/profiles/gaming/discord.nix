@@ -1,5 +1,5 @@
-{self, ...}: {
-  imports = [ self.nixosModules.programs.discord ];
+{selfModules, ...}: {
+  imports = [ selfModules.programs.discord ];
 
   programs.discord.enable = true;
 }

@@ -1,5 +1,5 @@
-{self, ...}: {
-  imports = [ self.nixosModules.programs.ripgrep ];
+{selfModules, ...}: {
+  imports = [ selfModules.programs.ripgrep ];
 
   programs.ripgrep.enable = true;
 }

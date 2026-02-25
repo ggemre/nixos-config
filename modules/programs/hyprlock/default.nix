@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  self,
+  selfLib,
   ...
 }: let
   cfg = config.programs.hyprlock;
@@ -15,6 +15,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.etc."xdg/hypr/hyprlock.conf".text = self.lib.generators.hyprconf cfg.settings;
+    environment.etc."xdg/hypr/hyprlock.conf".text = selfLib.generators.hyprconf cfg.settings;
   };
 }

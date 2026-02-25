@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  self,
+  selfLib,
   ...
 }: let
   cfg = config.services.hypridle;
@@ -15,6 +15,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.etc."xdg/hypr/hypridle.conf".text = self.lib.generators.hyprconf cfg.settings;
+    environment.etc."xdg/hypr/hypridle.conf".text = selfLib.generators.hyprconf cfg.settings;
   };
 }

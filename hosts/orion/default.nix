@@ -1,27 +1,27 @@
-{self, ...}: {
+{selfModules, ...}: {
   imports = [
     ./configuration.nix
     ./hardware.nix
 
-    self.nixosModules.config.bash
-    self.nixosModules.config.bat
-    self.nixosModules.config.bitwarden
-    self.nixosModules.config.brave
-    self.nixosModules.config.direnv
-    self.nixosModules.config.firefox
-    self.nixosModules.config.foot
-    self.nixosModules.config.git
-    self.nixosModules.config.helix
-    self.nixosModules.config.ripgrep
-    self.nixosModules.config.spotify
-    self.nixosModules.config.starship
-    self.nixosModules.config.yazi
+    selfModules.config.bash
+    selfModules.config.bat
+    selfModules.config.bitwarden
+    selfModules.config.brave
+    selfModules.config.direnv
+    selfModules.config.firefox
+    selfModules.config.foot
+    selfModules.config.git
+    selfModules.config.helix
+    selfModules.config.ripgrep
+    selfModules.config.spotify
+    selfModules.config.starship
+    selfModules.config.yazi
 
-    self.nixosModules.desktop.amethyst
+    selfModules.desktop.amethyst
 
-    self.nixosModules.profiles.gaming
-    self.nixosModules.profiles.graphical
-    self.nixosModules.profiles.hardware.apple-macbook-air-7
-    self.nixosModules.profiles.laptop
+    selfModules.profiles.gaming
+    selfModules.profiles.graphical
+    selfModules.profiles.hardware.apple-macbook-air-7
+    selfModules.profiles.laptop
   ];
 }

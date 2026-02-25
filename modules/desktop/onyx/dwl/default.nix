@@ -1,10 +1,10 @@
 {
   pkgs,
-  self,
+  selfModules,
   ...
 }: {
   imports = [
-    self.nixosModules.programs.dwl
+    selfModules.programs.dwl
   ];
 
   programs.dwl.enable = true;

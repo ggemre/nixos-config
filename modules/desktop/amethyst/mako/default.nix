@@ -2,11 +2,11 @@
   config,
   lib,
   pkgs,
-  self,
+  selfModules,
   ...
 }: {
   imports = [
-    self.nixosModules.services.mako
+    selfModules.services.mako
   ];
 
   services.mako = {

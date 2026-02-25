@@ -1,10 +1,11 @@
 {
   config,
-  self,
+  selfLib,
+  selfModules,
   ...
 }: {
   imports = [
-    self.nixosModules.programs.hyprlock
+    selfModules.programs.hyprlock
   ];
 
   programs.hyprlock = {
@@ -44,11 +45,11 @@
         dots_spacing = 0.15;
         placeholder_text = "Password...";
         fail_text = "Try again";
-        outer_color = self.lib.colors.rgb config.theme.colors.base03;
-        inner_color = self.lib.colors.rgb config.theme.colors.base00;
-        font_color = self.lib.colors.rgb config.theme.colors.base05;
-        fail_color = self.lib.colors.rgb config.theme.colors.base08;
-        check_color = self.lib.colors.rgb config.theme.colors.base0A;
+        outer_color = selfLib.colors.rgb config.theme.colors.base03;
+        inner_color = selfLib.colors.rgb config.theme.colors.base00;
+        font_color = selfLib.colors.rgb config.theme.colors.base05;
+        fail_color = selfLib.colors.rgb config.theme.colors.base08;
+        check_color = selfLib.colors.rgb config.theme.colors.base0A;
       };
     };
   };

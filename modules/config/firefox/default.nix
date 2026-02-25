@@ -1,6 +1,6 @@
-{self, ...}: {
+{selfModules, ...}: {
   imports = [
-    self.nixosModules.programs.firefox
+    selfModules.programs.firefox
     ./preferences.nix
     ./policies.nix
     ./user-chrome.nix
