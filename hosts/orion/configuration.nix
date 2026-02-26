@@ -4,8 +4,9 @@ in {
   theme.name = "catppuccin-mocha";
 
   programs = {
-    foot.enableBashIntegration = true;
     direnv.enableBashIntegration = true;
+    foot.enableBashIntegration = true;
+    helium.defaultBrowser = true;
   };
 
   users = {

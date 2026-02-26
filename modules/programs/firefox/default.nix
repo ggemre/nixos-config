@@ -31,7 +31,7 @@ in {
     defaultBrowser = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Set the default browser to Firefox.";
+      description = "Make Firefox the default browser.";
     };
   };
 

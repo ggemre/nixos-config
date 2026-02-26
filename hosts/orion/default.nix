@@ -6,7 +6,6 @@
     selfModules.config.bash
     selfModules.config.bat
     selfModules.config.bitwarden
-    selfModules.config.brave
     selfModules.config.direnv
     selfModules.config.firefox
     selfModules.config.foot

@@ -14,13 +14,25 @@ in {
     extraOpts = lib.mkOption {
       type = lib.types.attrs;
       default = {};
-      description = "Extra brave policy options.";
+      description = "Extra Brave policy options.";
+    };
+
+    initialPrefs = lib.mkOption {
+      type = lib.types.attrs;
+      default = {};
+      description = "Initial preferences are used to configure Helium for the first run.";
     };
 
     extensions = lib.mkOption {
       type = lib.types.nullOr (lib.types.listOf lib.types.str);
       default = null;
-      description = "List of chromium extensions to install.";
+      description = "List of extensions to install.";
+    };
+
+    defaultBrowser = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Make Brave the default browser.";
     };
   };
 
@@ -31,7 +43,15 @@ in {
 
     programs.chromium = {
       enable = true;
-      inherit (cfg) extraOpts extensions;
+      inherit (cfg) extraOpts initialPrefs extensions;
+    };
+
+    environment.variables = lib.mkIf cfg.defaultBrowser {
+      BROWSER = cfg.package;
+    };
+
+    common.mime = lib.mkIf cfg.defaultBrowser {
+      browser = "brave.desktop";
     };
   };
 }
