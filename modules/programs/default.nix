@@ -6,6 +6,7 @@
   dwl = import ./dwl;
   firefox = import ./firefox;
   ghostty = import ./ghostty;
+  helium = import ./helium;
   helix = import ./helix;
   hyprland = import ./hyprland;
   hyprlock = import ./hyprlock;

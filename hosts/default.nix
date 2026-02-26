@@ -1,5 +1,6 @@
 {
   nixpkgs,
+  nur,
   self,
   ...
 }: let
@@ -8,6 +9,7 @@
       specialArgs = {
         selfLib = self.lib;
         selfModules = self.nixosModules;
+        nurPkgs = nur.legacyPackages.${system}.repos;
       };
       modules = [
         self.nixosModules.common

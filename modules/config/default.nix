@@ -8,6 +8,7 @@
   foot = import ./foot;
   ghostty = import ./ghostty;
   git = import ./git;
+  helium = import ./helium;
   helix = import ./helix;
   ripgrep = import ./ripgrep;
   spotify = import ./spotify;
