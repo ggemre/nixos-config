@@ -21,7 +21,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.ashell
+      cfg.package
     ];
 
     home.".config/ashell/config.toml" = lib.mkIf (cfg.settings != {}) {

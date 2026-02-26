@@ -9,6 +9,8 @@ in {
   options.programs.brave = {
     enable = lib.mkEnableOption "Whether to enable the Brave browser.";
 
+    package = lib.mkPackageOption pkgs "brave" {};
+
     extraOpts = lib.mkOption {
       type = lib.types.attrs;
       default = {};
@@ -24,7 +26,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.brave
+      cfg.package
     ];
 
     programs.chromium = {
