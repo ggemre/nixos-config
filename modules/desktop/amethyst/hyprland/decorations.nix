@@ -11,6 +11,7 @@
       gaps_out = 5;
       border_size = 2;
       layout = "dwindle";
+      allow_tearing = false;
     };
     group = {
       "col.border_inactive" = selfLib.colors.rgb config.theme.colors.base03;

@@ -14,6 +14,7 @@
 
     initrd.kernelModules = [ "kvm-intel" "wl" "i915" ];
     kernelModules = [ "wl" ];
+    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
   };
 
