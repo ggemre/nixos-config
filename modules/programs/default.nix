@@ -1,17 +1,3 @@
-{
-  ashell = import ./ashell;
-  bitwarden = import ./bitwarden;
-  brave = import ./brave;
-  discord = import ./discord;
-  dwl = import ./dwl;
-  firefox = import ./firefox;
-  ghostty = import ./ghostty;
-  helium = import ./helium;
-  helix = import ./helix;
-  hyprland = import ./hyprland;
-  hyprlock = import ./hyprlock;
-  ripgrep = import ./ripgrep;
-  spotify = import ./spotify;
-  waybar = import ./waybar;
-  wmenu = import ./wmenu;
+{selfLib, ...}: {
+  imports = selfLib.collectModules ./.;
 }

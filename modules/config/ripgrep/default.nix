@@ -1,5 +1,3 @@
-{selfModules, ...}: {
-  imports = [ selfModules.programs.ripgrep ];
-
+_: {
   programs.ripgrep.enable = true;
 }

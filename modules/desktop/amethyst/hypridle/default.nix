@@ -2,13 +2,8 @@
   config,
   lib,
   pkgs,
-  selfModules,
   ...
 }: {
-  imports = [
-    selfModules.services.hypridle
-  ];
-
   services.hypridle = {
     enable = true;
 

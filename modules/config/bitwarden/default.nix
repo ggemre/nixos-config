@@ -1,5 +1,3 @@
-{selfModules, ...}: {
-  imports = [ selfModules.programs.bitwarden ];
-
+_: {
   programs.bitwarden.enable = true;
 }

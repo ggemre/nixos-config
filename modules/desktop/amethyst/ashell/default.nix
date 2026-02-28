@@ -2,13 +2,8 @@
   config,
   lib,
   pkgs,
-  selfModules,
   ...
 }: {
-  imports = [
-    selfModules.programs.ashell
-  ];
-
   programs.ashell = {
     enable = true;
 

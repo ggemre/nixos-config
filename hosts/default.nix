@@ -14,6 +14,8 @@
       modules = [
         self.nixosModules.common
         self.nixosModules.home
+        self.nixosModules.programs
+        self.nixosModules.services
         self.nixosModules.theme
         {
           config = {

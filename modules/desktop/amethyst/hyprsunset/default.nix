@@ -1,8 +1,4 @@
-{selfModules, ...}: {
-  imports = [
-    selfModules.services.hyprsunset
-  ];
-
+_: {
   services.hyprsunset = {
     enable = true;
 

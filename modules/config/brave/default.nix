@@ -1,12 +1,4 @@
-{
-  config,
-  selfModules,
-  ...
-}: {
-  imports = [
-    selfModules.programs.brave
-  ];
-
+{config, ...}: {
   programs.brave = {
     enable = true;
 

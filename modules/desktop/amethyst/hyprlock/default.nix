@@ -1,13 +1,8 @@
 {
   config,
   selfLib,
-  selfModules,
   ...
 }: {
-  imports = [
-    selfModules.programs.hyprlock
-  ];
-
   programs.hyprlock = {
     enable = true;
 

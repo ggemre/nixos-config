@@ -1,12 +1,4 @@
-{
-  pkgs,
-  selfModules,
-  ...
-}: {
-  imports = [
-    selfModules.programs.dwl
-  ];
-
+{pkgs, ...}: {
   programs.dwl.enable = true;
 
   environment.systemPackages = [

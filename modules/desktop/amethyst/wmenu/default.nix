@@ -1,11 +1,4 @@
-{
-  config,
-  selfModules,
-  ...
-}: {
-  imports = [
-    selfModules.programs.wmenu
-  ];
+{config, ...}: {
   programs.wmenu = {
     enable = true;
     flags = ''

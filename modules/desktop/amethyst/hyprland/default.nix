@@ -3,11 +3,9 @@
   lib,
   pkgs,
   selfLib,
-  selfModules,
   ...
 }: {
   imports = [
-    selfModules.programs.hyprland
     ./binds.nix
     ./decorations.nix
   ];

@@ -1,12 +1,4 @@
-{
-  config,
-  selfModules,
-  ...
-}: {
-  imports = [
-    selfModules.programs.helix
-  ];
-
+{config, ...}: {
   programs.helix = {
     enable = true;
     defaultEditor = true;

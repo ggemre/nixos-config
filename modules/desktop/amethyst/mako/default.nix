@@ -2,13 +2,8 @@
   config,
   lib,
   pkgs,
-  selfModules,
   ...
 }: {
-  imports = [
-    selfModules.services.mako
-  ];
-
   services.mako = {
     enable = true;
 

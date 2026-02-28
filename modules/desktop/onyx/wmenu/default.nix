@@ -1,7 +1,4 @@
-{selfModules, ...}: {
-  imports = [
-    selfModules.programs.wmenu
-  ];
+_: {
   programs.wmenu = {
     enable = true;
   };

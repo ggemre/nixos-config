@@ -1,5 +1,3 @@
-{selfModules, ...}: {
-  imports = [ selfModules.programs.discord ];
-
+_: {
   programs.discord.enable = true;
 }

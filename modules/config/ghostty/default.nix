@@ -1,12 +1,4 @@
-{
-  config,
-  selfModules,
-  ...
-}: {
-  imports = [
-    selfModules.programs.ghostty
-  ];
-
+{config, ...}: {
   programs.ghostty = {
     enable = true;
 

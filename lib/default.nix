@@ -13,6 +13,11 @@ in {
     nixpkgs.lib.genAttrs supportedSystems
     f;
 
+  # Function to collect modules in a directory into a list
+  collectModules = path:
+    nixpkgs.lib.mapAttrsToList (n: _: path + "/${n}")
+    (nixpkgs.lib.filterAttrs (_: type: type == "directory") (builtins.readDir path));
+
   # Basic color formatting functions for theming
   colors = {
     rgb = color: "rgb(${color})";

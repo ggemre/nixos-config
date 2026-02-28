@@ -1,6 +1,4 @@
-{selfModules, ...}: {
-  imports = [ selfModules.programs.helium ];
-
+_: {
   programs.helium = {
     enable = true;
 

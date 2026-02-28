@@ -1,5 +1,3 @@
-{selfModules, ...}: {
-  imports = [ selfModules.programs.spotify ];
-
+_: {
   programs.spotify.enable = true;
 }
