@@ -22,8 +22,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.variables = {
-      XDG_CURRENT_DESKTOP = "Hyprland";
-      XDG_SESSION_DESKTOP = "Hyprland";
+      XDG_CURRENT_DESKTOP = "mango";
+      XDG_SESSION_DESKTOP = "mango";
     };
 
     environment.etc = {
