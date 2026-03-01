@@ -1,0 +1,262 @@
+/* ----- Global -------------------------------------------------------------- */
+
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: JetBrainsMono Nerd Font, monospace;
+  font-size: 12.5px;
+}
+
+window#waybar {
+  background: @base00;
+  color: @base05;
+  border-bottom: 2px solid @base02;
+}
+
+/* subtle shadow on compositors that support it */
+window#waybar {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+/* spacing between modules */
+.modules-left > widget,
+.modules-center > widget,
+.modules-right > widget {
+  margin: 4px 4px;
+}
+
+/* ----- Shared module style ------------------------------------------------ */
+
+#battery,
+#clock,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#tray,
+#window,
+#taskbar,
+#workspaces {
+  background: @base01;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid @base02;
+  transition: all 120ms ease-in-out;
+}
+
+#battery:hover,
+#clock:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#backlight:hover,
+#network:hover,
+#tray:hover {
+  background: @base02;
+}
+
+/* ----- Left side ---------------------------------------------------------- */
+
+#workspaces {
+  padding: 4px 6px;
+}
+
+#workspaces button {
+  all: unset;
+  min-width: 18px;
+  padding: 2px 6px;
+  margin: 0 2px;
+  border-radius: 6px;
+  background: transparent;
+  color: @base04;
+  transition: all 120ms ease-in-out;
+}
+
+#workspaces button:hover {
+  background: @base02;
+  color: @base05;
+}
+
+#workspaces button.active {
+  background: linear-gradient(135deg, @base0D, @base0C);
+  color: @base00;
+}
+
+#workspaces button.urgent {
+  background: @base08;
+  color: @base00;
+}
+
+/* ----- Taskbar ------------------------------------------------------------ */
+
+#taskbar {
+  padding: 3px 6px;
+}
+
+#taskbar button {
+  all: unset;
+  margin: 0 3px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: transparent;
+  transition: background 120ms ease-in-out;
+}
+
+#taskbar button:hover {
+  background: @base02;
+}
+
+#taskbar button.active {
+  background: @base03;
+}
+
+/* icon-only taskbar but still visible focus */
+#taskbar image {
+  margin: 0 2px;
+}
+
+/* ----- Window title ------------------------------------------------------- */
+
+#window {
+  padding: 4px 12px;
+  font-weight: 600;
+  color: @base0D;
+  background: transparent;
+  border: none;
+}
+
+window#waybar.empty #window {
+  background: transparent;
+  color: @base03;
+}
+
+/* ----- Right side modules ------------------------------------------------- */
+
+/* Network */
+#network {
+  color: @base0D;
+}
+
+#network.disconnected {
+  color: @base08;
+}
+
+/* CPU */
+#cpu {
+  color: @base0E;
+}
+
+/* Memory */
+#memory {
+  color: @base0B;
+}
+
+/* Temperature */
+#temperature {
+  color: @base0A;
+}
+
+#temperature.critical {
+  background: @base08;
+  color: @base00;
+  border-color: @base08;
+}
+
+/* Backlight */
+#backlight {
+  color: @base0C;
+}
+
+/* Battery */
+#battery {
+  color: @base0B;
+}
+
+#battery.charging {
+  color: @base0D;
+}
+
+#battery.warning {
+  color: @base0A;
+  border-color: @base0A;
+}
+
+#battery.critical {
+  background: @base08;
+  color: @base00;
+  border-color: @base08;
+}
+
+/* Clock – slightly more prominent */
+#clock {
+  padding: 4px 14px;
+  font-weight: 600;
+  color: @base05;
+  background: linear-gradient(135deg, @base01, @base02);
+  border: 1px solid @base03;
+}
+
+/* Tray */
+#tray {
+  padding: 3px 8px;
+}
+
+#tray > .needs-attention {
+  background: @base09;
+  border-radius: 6px;
+}
+
+/* ----- Separators / visual rhythm --------------------------------------- */
+
+.modules-left,
+.modules-right {
+  padding: 2px 6px;
+}
+
+/* ----- Animations --------------------------------------------------------- */
+
+@keyframes blink-critical {
+  0% {
+    background: @base08;
+  }
+  50% {
+    background: @base02;
+  }
+  100% {
+    background: @base08;
+  }
+}
+
+#battery.critical,
+#temperature.critical {
+  animation: blink-critical 1.2s ease-in-out infinite;
+}
+
+/* ----- Tooltip ------------------------------------------------------------ */
+
+tooltip {
+  background: @base01;
+  border: 1px solid @base02;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+tooltip label {
+  color: @base05;
+}
+
+/* ----- Fine-tuning -------------------------------------------------------- */
+
+/* reduce visual noise for icons-only widgets */
+#tray,
+#taskbar,
+#workspaces {
+  background: @base01;
+}
+
+/* nicer visual grouping on the right side */
+.modules-right > widget:nth-last-child(1) #clock {
+  margin-right: 0;
+}
