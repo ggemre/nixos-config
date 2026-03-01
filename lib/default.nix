@@ -22,6 +22,7 @@ in {
   colors = {
     rgb = color: "rgb(${color})";
     rgba = color: alpha: "rgba(${color}${alpha})";
+    hexa = color: alpha: "0x${color}${alpha}";
   };
 
   # Functions for generating different configuration formats from nix attrs

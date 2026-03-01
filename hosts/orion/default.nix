@@ -17,7 +17,7 @@
     selfModules.config.starship
     selfModules.config.yazi
 
-    selfModules.desktop.amethyst
+    selfModules.desktop.topaz
 
     selfModules.profiles.gaming
     selfModules.profiles.graphical
