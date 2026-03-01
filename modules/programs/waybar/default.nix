@@ -21,12 +21,14 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.".config/waybar/config" = lib.mkIf (cfg.settings != {}) {
-      source = (pkgs.formats.json {}).generate "waybar-config.json" cfg.settings;
-    };
+    environment.etc = {
+      "xdg/waybar/config" = lib.mkIf (cfg.settings != {}) {
+        source = (pkgs.formats.json {}).generate "waybar-config.json" cfg.settings;
+      };
 
-    home.".config/waybar/style.css" = lib.mkIf (cfg.style != null) {
-      source = pkgs.writeText "waybar-style.css" cfg.style;
+      "xdg/waybar/style.css" = lib.mkIf (cfg.style != null) {
+        source = pkgs.writeText "waybar-style.css" cfg.style;
+      };
     };
   };
 }
