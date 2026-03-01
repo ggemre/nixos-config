@@ -89,5 +89,10 @@
       "NONE, btn_middle, togglemaximizescreen, 0"
       "SUPER, btn_right, moveresize, curresize"
     ];
+
+    gesturebind = [
+      "NONE, left, 3, viewtoleft"
+      "NONE, right, 3, viewtoright"
+    ];
   };
 }
