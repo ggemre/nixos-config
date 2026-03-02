@@ -5,7 +5,6 @@ _: {
 
     modules-left = [
       "ext/workspaces"
-      "wlr/taskbar"
       "dwl/window"
     ];
 
@@ -15,7 +14,7 @@ _: {
       "cpu"
       "memory"
       "temperature"
-      # "pulseaudio"
+      "pulseaudio"
       "backlight"
       "battery"
       "clock"
@@ -29,16 +28,6 @@ _: {
       on-scroll-up = "mmsg -d viewtoleft_have_client";
       on-scroll-down = "mmsg -d viewtoright_have_client";
       sort-by-id = true;
-    };
-
-    "wlr/taskbar" = {
-      format = "{icon}";
-      icon-size = 20;
-      all-outputs = false;
-      tooltip-format = "{title}";
-      markup = true;
-      on-click = "activate";
-      on-click-right = "close";
     };
 
     "dwl/window" = {
@@ -56,7 +45,7 @@ _: {
 
     cpu = {
       interval = 2;
-      format = "{load}%";
+      format = " {usage}%";
     };
 
     memory = {
@@ -76,12 +65,13 @@ _: {
       format = "{capacity}% {icon}";
     };
 
-    # pulseaudio = {
-    #   format = "{icon} {volume}%";
-    #   on-click = "pamixer -t";
-    #   on-scroll-up = "pamixer -i 2";
-    #   on-scroll-down = "pamixer -d 2";
-    #   scroll-step = 5;
-    # };
+    pulseaudio = {
+      format = "{icon} {volume}%";
+      format-muted = "[M]";
+      on-click = "pamixer -t";
+      on-scroll-up = "pamixer -i 2";
+      on-scroll-down = "pamixer -d 2";
+      scroll-step = 5;
+    };
   };
 }

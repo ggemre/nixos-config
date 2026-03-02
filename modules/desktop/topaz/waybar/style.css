@@ -32,12 +32,12 @@ window#waybar {
 #clock,
 #cpu,
 #memory,
+#pulseaudio,
 #temperature,
 #backlight,
 #network,
 #tray,
 #window,
-#taskbar,
 #workspaces {
   background: @base01;
   padding: 4px 10px;
@@ -50,6 +50,7 @@ window#waybar {
 #clock:hover,
 #cpu:hover,
 #memory:hover,
+#pulseaudio:hover,
 #temperature:hover,
 #backlight:hover,
 #network:hover,
@@ -87,34 +88,6 @@ window#waybar {
 #workspaces button.urgent {
   background: @base08;
   color: @base00;
-}
-
-/* ----- Taskbar ------------------------------------------------------------ */
-
-#taskbar {
-  padding: 3px 6px;
-}
-
-#taskbar button {
-  all: unset;
-  margin: 0 3px;
-  padding: 3px 6px;
-  border-radius: 6px;
-  background: transparent;
-  transition: background 120ms ease-in-out;
-}
-
-#taskbar button:hover {
-  background: @base02;
-}
-
-#taskbar button.active {
-  background: @base03;
-}
-
-/* icon-only taskbar but still visible focus */
-#taskbar image {
-  margin: 0 2px;
 }
 
 /* ----- Window title ------------------------------------------------------- */
@@ -162,6 +135,11 @@ window#waybar.empty #window {
   background: @base08;
   color: @base00;
   border-color: @base08;
+}
+
+/* Pulseaudio */
+#pulseaudio {
+  color: @base05;
 }
 
 /* Backlight */
@@ -251,7 +229,6 @@ tooltip label {
 
 /* reduce visual noise for icons-only widgets */
 #tray,
-#taskbar,
 #workspaces {
   background: @base01;
 }
