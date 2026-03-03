@@ -8,12 +8,14 @@
     bind = [
       # General
       "SUPER, R, reload_config"
-      "SUPER, M, quit"
+      "SUPER, M, spawn, ${lib.getExe config.programs.hyprlock.package}"
+      "SUPER+SHIFT, M, quit"
       "SUPER, Q, killclient"
 
       # Apps
       "SUPER, T, spawn, ${lib.getExe config.programs.foot.package}"
       "SUPER, B, spawn, ${lib.getExe config.programs.helium.package}"
+      "SUPER, G, spawn, ${lib.getExe pkgs.grim}"
 
       # Swap focus
       "SUPER, TAB, focusstack, next"

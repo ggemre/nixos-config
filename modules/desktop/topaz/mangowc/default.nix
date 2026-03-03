@@ -20,7 +20,8 @@
       tap_to_click = 0;
 
       exec-once = [
-        "${lib.getExe config.programs.waybar.package}"
+        (lib.getExe config.programs.waybar.package)
+        (lib.getExe config.services.hypridle.package)
         "${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
       ];
     };
