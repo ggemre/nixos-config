@@ -15,10 +15,11 @@
       # Apps
       "SUPER, T, spawn, ${lib.getExe config.programs.foot.package}"
       "SUPER, B, spawn, ${lib.getExe config.programs.helium.package}"
-      "SUPER, G, spawn, ${lib.getExe pkgs.grim}"
+      "SUPER, S, spawn, ${lib.getExe pkgs.grim}"
 
       # Swap focus
       "SUPER, TAB, focusstack, next"
+      "SUPER+SHIFT, TAB, focusstack, prev"
       "SUPER, LEFT, focusdir, left"
       "SUPER, DOWN, focusdir, down"
       "SUPER, UP, focusdir, up"
@@ -42,9 +43,9 @@
       "SUPER, V, togglefloating"
       "SUPER, A, togglemaximizescreen"
       "SUPER, F, togglefullscreen"
-      "SUPER+SHIFT, S, minimized"
-      "SUPER, I, restore_minimized"
-      "SUPER, S, toggle_scratchpad"
+      # "SUPER+SHIFT, S, minimized"
+      # "SUPER, I, restore_minimized"
+      # "SUPER, S, toggle_scratchpad"
 
       # Switch tag
       "SUPER, 1, view, 1, 0"

@@ -4,10 +4,10 @@
   ...
 }: {
   programs.mangowc.settings = {
-    gappih = 5;
-    gappiv = 5;
-    gappoh = 5;
-    gappov = 10;
+    gappih = 3;
+    gappiv = 3;
+    gappoh = 3;
+    gappov = 3;
 
     scratchpadcolor = selfLib.colors.hexa config.theme.colors.base0E "FF";
     rootcolor = selfLib.colors.hexa config.theme.colors.base00 "FF";
@@ -16,5 +16,9 @@
     border_radius = 6;
     bordercolor = selfLib.colors.hexa config.theme.colors.base03 "FF";
     focuscolor = selfLib.colors.hexa config.theme.colors.base0D "FF";
+    maximizescreencolor = selfLib.colors.hexa config.theme.colors.base03 "FF";
+    globalcolor = selfLib.colors.hexa config.theme.colors.base06 "FF";
+
+    animations = 0;
   };
 }
