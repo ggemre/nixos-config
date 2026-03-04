@@ -3,7 +3,7 @@
   selfLib,
   ...
 }: {
-  programs.mangowc.settings = {
+  programs.mangowm.settings = {
     gappih = 3;
     gappiv = 3;
     gappoh = 3;

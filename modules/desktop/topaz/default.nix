@@ -3,7 +3,7 @@
     ./getty
     ./hypridle
     ./hyprlock
-    ./mangowc
+    ./mangowm
     ./waybar
   ];
 }

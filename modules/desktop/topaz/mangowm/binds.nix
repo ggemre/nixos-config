@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  programs.mangowc.settings = {
+  programs.mangowm.settings = {
     bind = [
       # General
       "SUPER, R, reload_config"

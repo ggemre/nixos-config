@@ -9,7 +9,7 @@
     ./decorations.nix
   ];
 
-  programs.mangowc = {
+  programs.mangowm = {
     enable = true;
 
     settings = {
