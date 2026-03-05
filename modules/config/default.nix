@@ -10,8 +10,8 @@
   git = import ./git;
   helium = import ./helium;
   helix = import ./helix;
-  ripgrep = import ./ripgrep;
   spotify = import ./spotify;
   starship = import ./starship;
+  utils = import ./utils;
   yazi = import ./yazi;
 }
