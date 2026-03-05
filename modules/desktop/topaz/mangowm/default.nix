@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  nurPkgs,
   pkgs,
   ...
 }: {
@@ -11,6 +12,7 @@
 
   programs.mangowm = {
     enable = true;
+    package = nurPkgs.ggemre.mangowm;
 
     settings = {
       no_border_when_single = 0;
