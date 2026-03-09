@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  selfLib,
   ...
 }: let
   cfg = config.programs.mangowm;
@@ -38,7 +37,7 @@ in {
     };
 
     environment.etc = {
-      "mango/config.conf".text = selfLib.generators.hyprconf cfg.settings;
+      "mango/config.conf".text = lib.generators.toKeyValue { listsAsDuplicateKeys = true; } cfg.settings;
 
       "mango/autostart.sh" = lib.mkIf (cfg.autostart != "") {
         text = cfg.autostart;
