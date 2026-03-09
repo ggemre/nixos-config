@@ -15,7 +15,6 @@
       # Apps
       "SUPER, T, spawn, ${lib.getExe config.programs.foot.package}"
       "SUPER, B, spawn, ${lib.getExe config.programs.helium.package}"
-      "SUPER, S, spawn, ${lib.getExe pkgs.grim}"
 
       # Swap focus
       "SUPER, TAB, focusstack, next"
@@ -87,9 +86,12 @@
       "NONE, XF86KbdBrightnessUp, spawn, ${lib.getExe pkgs.brightnessctl} -d smc::kbd_backlight s 5%+"
     ];
 
+    bindr = [
+      "SUPER, S, spawn, ${lib.getExe pkgs.grim}"
+    ];
+
     mousebind = [
       "SUPER, btn_left, moveresize, curmove"
-      "NONE, btn_middle, togglemaximizescreen, 0"
       "SUPER, btn_right, moveresize, curresize"
     ];
 
