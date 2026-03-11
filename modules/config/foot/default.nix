@@ -7,7 +7,7 @@
         pad = "4x4 center";
       };
       scrollback.lines = 5000;
-      colors = {
+      colors-dark = {
         foreground = config.theme.colors.base05;
         background = config.theme.colors.base00;
         regular0 = config.theme.colors.base00;
