@@ -29,6 +29,10 @@
     "browser.newtabpage.activity-stream.feeds.discoverystreamfeed" = false;
     "browser.newtabpage.activity-stream.showSponsored" = false;
     "browser.newtabpage.activity-stream.default.sites" = "";
+    # GPU acceleration
+    "gfx.webrender.all" = true;
+    "layers.acceleration.force-enabled" = true;
+    "nglayout.initialpaint.delay" = 0;
     # Geolocation settings.
     "geo.provider.network.url" = "https://location.services.mozilla.com/v1/geolocate?key=%MOZILA_API_KEY%";
     "geo.provider.use_gpsd" = false;
@@ -113,7 +117,20 @@
     "network.http.max-urgent-start-excessive-connections-per-host" = 5;
     "network.predictor.enabled" = false;
     # Disable AI
+    "browser.ai.control.default" = "blocked";
+    "browser.ai.control.linkPreviewKeyPoints" = "blocked";
+    "browser.ai.control.pdfjsAltText" = "blocked";
+    "browser.ai.control.sidebarChatbot" = "blocked";
+    "browser.ai.control.smartTabGroups" = "blocked";
+    "browser.ai.control.translations" = "blocked";
     "browser.ml.enable" = false;
     "browser.ml.chat.enabled" = false;
+    "browser.ml.chat.page" = false;
+    "browser.ml.linkPreview.enabled" = false;
+    "browser.tabs.groups.smart.enabled" = false;
+    "browser.tabs.groups.smart.userEnabled" = false;
+    "browser.translations.enable" = false;
+    "extensions.ml.enabled" = false;
+    "pdfjs.enableAltText" = false;
   };
 }
