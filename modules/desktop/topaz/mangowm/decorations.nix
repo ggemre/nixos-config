@@ -19,6 +19,6 @@
     maximizescreencolor = selfLib.colors.hexa config.theme.colors.base03 "FF";
     globalcolor = selfLib.colors.hexa config.theme.colors.base06 "FF";
 
-    animations = 0;
+    animations = false;
   };
 }

@@ -7,16 +7,18 @@
     # "x86_64-darwin"
     # "aarch64-darwin"
   ];
+
+  inherit (nixpkgs) lib;
 in {
   # Function to generate attributes for each supported system
   forAllSystems = f:
-    nixpkgs.lib.genAttrs supportedSystems
+    lib.genAttrs supportedSystems
     f;
 
   # Function to collect modules in a directory into a list
   collectModules = path:
-    nixpkgs.lib.mapAttrsToList (n: _: path + "/${n}")
-    (nixpkgs.lib.filterAttrs (_: type: type == "directory") (builtins.readDir path));
+    lib.mapAttrsToList (n: _: path + "/${n}")
+    (lib.filterAttrs (_: type: type == "directory") (builtins.readDir path));
 
   # Basic color formatting functions for theming
   colors = {
@@ -27,6 +29,7 @@ in {
 
   # Functions for generating different configuration formats from nix attrs
   generators = {
-    hyprconf = import ./generators/hyprconf.nix { inherit (nixpkgs) lib; };
+    toHyprConf = import ./generators/hyprconf.nix { inherit lib; };
+    toMangoConf = import ./generators/mangoconf.nix { inherit lib; };
   };
 }

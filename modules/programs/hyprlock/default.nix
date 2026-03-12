@@ -15,6 +15,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.etc."xdg/hypr/hyprlock.conf".text = selfLib.generators.hyprconf cfg.settings;
+    environment.etc."xdg/hypr/hyprlock.conf".text = selfLib.generators.toHyprConf cfg.settings;
   };
 }

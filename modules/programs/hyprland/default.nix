@@ -27,6 +27,6 @@ in {
       withUWSM = true;
     };
 
-    environment.etc."xdg/hypr/hyprland.conf".text = selfLib.generators.hyprconf cfg.settings;
+    environment.etc."xdg/hypr/hyprland.conf".text = selfLib.generators.toHyprConf cfg.settings;
   };
 }

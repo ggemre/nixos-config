@@ -15,11 +15,12 @@
     package = nurPkgs.ggemre.mangowm;
 
     settings = {
-      no_border_when_single = 0;
-      focus_on_activate = 1;
-      mouse_natural_scrolling = 0;
-      disable_trackpad = 0;
-      tap_to_click = 0;
+      no_border_when_single = false;
+      focus_on_activate = true;
+      mouse_natural_scrolling = false;
+      disable_trackpad = false;
+      tap_to_click = false;
+      prefer_scroller_overspread = true;
 
       exec-once = [
         (lib.getExe config.programs.waybar.package)
