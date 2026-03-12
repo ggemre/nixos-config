@@ -36,7 +36,4 @@
       fallback = true;
     };
   };
-
-  # Provide lix package to anyone who needs it
-  programs.direnv.nix-direnv.package = pkgs.lixPackageSets.latest.nix-direnv;
 }
