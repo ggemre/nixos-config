@@ -12,7 +12,6 @@
     selfModules.config.firefox
     selfModules.config.foot
     selfModules.config.git
-    selfModules.config.helium
     selfModules.config.helix
     selfModules.config.spotify
     selfModules.config.starship

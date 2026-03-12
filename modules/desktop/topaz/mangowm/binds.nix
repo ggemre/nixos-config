@@ -14,7 +14,7 @@
 
       # Apps
       "SUPER, T, spawn, ${lib.getExe config.programs.foot.package}"
-      "SUPER, B, spawn, ${lib.getExe config.programs.helium.package}"
+      "SUPER, B, spawn, ${lib.getExe config.programs.firefox.package}"
 
       # Swap focus
       "SUPER, TAB, focusstack, next"

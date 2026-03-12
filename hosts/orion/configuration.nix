@@ -6,7 +6,7 @@ in {
   programs = {
     direnv.enableBashIntegration = true;
     foot.enableBashIntegration = true;
-    helium.defaultBrowser = true;
+    firefox.defaultBrowser = true;
   };
 
   users = {
