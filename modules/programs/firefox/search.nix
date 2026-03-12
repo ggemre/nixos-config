@@ -17,7 +17,7 @@
       _name = e.name;
       _loadPath = "[user]";
       _metaData = {
-        alias = e.alias;
+        inherit (e) alias;
         order = i + 1;
       };
       _urls = [
