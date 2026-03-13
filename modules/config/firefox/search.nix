@@ -21,6 +21,11 @@ _: {
         url = "https://github.com/search?q={searchTerms}";
         alias = "@gh";
       }
+      {
+        name = "NUR";
+        url = "https://searchix.ovh/packages/nur/search?query={searchTerms}";
+        alias = "@nur";
+      }
     ];
 
     default = "Brave";
