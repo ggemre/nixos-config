@@ -28,7 +28,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home = {
-      ".mozilla/firefox/profiles.ini".text = ''
+      ".config/mozilla/firefox/profiles.ini".text = ''
         [Profile0]
         Name=main
         IsRelative=1
@@ -40,7 +40,7 @@ in {
         Version=2
       '';
 
-      ".mozilla/firefox/main/chrome/userChrome.css" = lib.mkIf (cfg.userChrome != "") (
+      ".config/mozilla/firefox/main/chrome/userChrome.css" = lib.mkIf (cfg.userChrome != "") (
         let
           key =
             if builtins.isString cfg.userChrome

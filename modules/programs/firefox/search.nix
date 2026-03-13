@@ -109,6 +109,6 @@ in {
   };
 
   config = lib.mkIf (config.programs.firefox.enable && (cfg.engines != [])) {
-    home.".mozilla/firefox/main/search.json.mozlz4".source = cfg.file;
+    home.".config/mozilla/firefox/main/search.json.mozlz4".source = cfg.file;
   };
 }
