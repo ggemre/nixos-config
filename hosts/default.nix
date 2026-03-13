@@ -21,6 +21,10 @@
           config = {
             networking.hostName = hostname;
             nixpkgs.hostPlatform = system;
+            nix.registry = {
+              nixpkgs.flake = nixpkgs;
+              nur.flake = nur;
+            };
           };
         }
         ../hosts/${hostname}
