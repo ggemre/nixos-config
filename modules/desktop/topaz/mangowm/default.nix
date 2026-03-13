@@ -20,7 +20,7 @@
       mouse_natural_scrolling = false;
       disable_trackpad = false;
       tap_to_click = false;
-      prefer_scroller_overspread = true;
+      scroller_prefer_overspread = true;
 
       exec-once = [
         (lib.getExe config.programs.waybar.package)
