@@ -3,6 +3,7 @@
   bat = import ./bat;
   bitwarden = import ./bitwarden;
   brave = import ./brave;
+  btop = import ./btop;
   direnv = import ./direnv;
   firefox = import ./firefox;
   foot = import ./foot;

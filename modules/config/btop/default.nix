@@ -1,0 +1,50 @@
+{config, ...}: {
+  programs.btop = {
+    enable = true;
+
+    theme = {
+      "theme[main_bg]" = config.theme.colorsWithHashtag.base00;
+      "theme[main_fg]" = config.theme.colorsWithHashtag.base05;
+      "theme[title]" = config.theme.colorsWithHashtag.base05;
+      "theme[hi_fg]" = config.theme.colorsWithHashtag.base0D;
+      "theme[selected_bg]" = config.theme.colorsWithHashtag.base03;
+      "theme[selected_fg]" = config.theme.colorsWithHashtag.base0D;
+      "theme[inactive_fg]" = config.theme.colorsWithHashtag.base02;
+      "theme[graph_text]" = config.theme.colorsWithHashtag.base06;
+      "theme[meter_bg]" = config.theme.colorsWithHashtag.base03;
+      "theme[proc_misc]" = config.theme.colorsWithHashtag.base06;
+      "theme[cpu_box]" = config.theme.colorsWithHashtag.base0E;
+      "theme[mem_box]" = config.theme.colorsWithHashtag.base0B;
+      "theme[net_box]" = config.theme.colorsWithHashtag.base04;
+      "theme[proc_box]" = config.theme.colorsWithHashtag.base0D;
+      "theme[div_line]" = config.theme.colorsWithHashtag.base01;
+      "theme[temp_start]" = config.theme.colorsWithHashtag.base0B;
+      "theme[temp_mid]" = config.theme.colorsWithHashtag.base0A;
+      "theme[temp_end]" = config.theme.colorsWithHashtag.base08;
+      "theme[cpu_start]" = config.theme.colorsWithHashtag.base0C;
+      "theme[cpu_mid]" = config.theme.colorsWithHashtag.base0E;
+      "theme[cpu_end]" = config.theme.colorsWithHashtag.base07;
+      "theme[free_start]" = config.theme.colorsWithHashtag.base0E;
+      "theme[free_mid]" = config.theme.colorsWithHashtag.base07;
+      "theme[free_end]" = config.theme.colorsWithHashtag.base0D;
+      "theme[cached_start]" = config.theme.colorsWithHashtag.base0F;
+      "theme[cached_mid]" = config.theme.colorsWithHashtag.base0D;
+      "theme[cached_end]" = config.theme.colorsWithHashtag.base07;
+      "theme[available_start]" = config.theme.colorsWithHashtag.base09;
+      "theme[available_mid]" = config.theme.colorsWithHashtag.base04;
+      "theme[available_end]" = config.theme.colorsWithHashtag.base08;
+      "theme[used_start]" = config.theme.colorsWithHashtag.base0B;
+      "theme[used_mid]" = config.theme.colorsWithHashtag.base0C;
+      "theme[used_end]" = config.theme.colorsWithHashtag.base0D;
+      "theme[download_start]" = config.theme.colorsWithHashtag.base09;
+      "theme[download_mid]" = config.theme.colorsWithHashtag.base04;
+      "theme[download_end]" = config.theme.colorsWithHashtag.base08;
+      "theme[upload_start]" = config.theme.colorsWithHashtag.base0B;
+      "theme[upload_mid]" = config.theme.colorsWithHashtag.base0C;
+      "theme[upload_end]" = config.theme.colorsWithHashtag.base0D;
+      "theme[process_start]" = config.theme.colorsWithHashtag.base0F;
+      "theme[process_mid]" = config.theme.colorsWithHashtag.base07;
+      "theme[process_end]" = config.theme.colorsWithHashtag.base0E;
+    };
+  };
+}
