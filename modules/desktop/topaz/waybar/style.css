@@ -4,19 +4,14 @@
   border: none;
   border-radius: 0;
   min-height: 0;
-  font-family: JetBrainsMono Nerd Font, monospace;
-  font-size: 12.5px;
+  font-family: SansSerif;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 window#waybar {
   background: @base00;
   color: @base05;
-  border-bottom: 2px solid @base02;
-}
-
-/* subtle shadow on compositors that support it */
-window#waybar {
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
 
 /* spacing between modules */
@@ -24,6 +19,10 @@ window#waybar {
 .modules-center > widget,
 .modules-right > widget {
   margin: 4px 4px;
+}
+
+.modules-left {
+  background: transparent;
 }
 
 /* ----- Shared module style ------------------------------------------------ */
@@ -39,11 +38,7 @@ window#waybar {
 #tray,
 #window,
 #workspaces {
-  background: @base01;
   padding: 4px 10px;
-  border-radius: 8px;
-  border: 1px solid @base02;
-  transition: all 120ms ease-in-out;
 }
 
 #battery:hover,
@@ -55,39 +50,28 @@ window#waybar {
 #backlight:hover,
 #network:hover,
 #tray:hover {
-  background: @base02;
+  /* background: @base02; */
 }
 
 /* ----- Left side ---------------------------------------------------------- */
 
 #workspaces {
-  padding: 4px 6px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
 }
 
 #workspaces button {
-  all: unset;
-  min-width: 18px;
-  padding: 2px 6px;
-  margin: 0 2px;
-  border-radius: 6px;
-  background: transparent;
-  color: @base04;
-  transition: all 120ms ease-in-out;
-}
-
-#workspaces button:hover {
-  background: @base02;
+  padding: 0;
+  margin: 0;
   color: @base05;
 }
 
-#workspaces button.active {
-  background: linear-gradient(135deg, @base0D, @base0C);
-  color: @base00;
-}
-
-#workspaces button.urgent {
-  background: @base08;
-  color: @base00;
+#workspaces button:hover {
+  background: transparent;
+  color: @base06;
+  box-shadow: none;
+  border: none;
 }
 
 /* ----- Window title ------------------------------------------------------- */
@@ -105,84 +89,11 @@ window#waybar.empty #window {
   color: @base03;
 }
 
-/* ----- Right side modules ------------------------------------------------- */
-
-/* Network */
-#network {
-  color: @base0D;
-}
-
-#network.disconnected {
-  color: @base08;
-}
-
-/* CPU */
-#cpu {
-  color: @base0E;
-}
-
-/* Memory */
-#memory {
-  color: @base0B;
-}
-
-/* Temperature */
-#temperature {
-  color: @base0A;
-}
-
-#temperature.critical {
-  background: @base08;
-  color: @base00;
-  border-color: @base08;
-}
-
-/* Pulseaudio */
-#pulseaudio {
-  color: @base05;
-}
-
-/* Backlight */
-#backlight {
-  color: @base0C;
-}
-
-/* Battery */
-#battery {
-  color: @base0B;
-}
-
-#battery.charging {
-  color: @base0D;
-}
-
-#battery.warning {
-  color: @base0A;
-  border-color: @base0A;
-}
-
-#battery.critical {
-  background: @base08;
-  color: @base00;
-  border-color: @base08;
-}
-
-/* Clock – slightly more prominent */
-#clock {
-  padding: 4px 14px;
-  font-weight: 600;
-  color: @base05;
-  background: linear-gradient(135deg, @base01, @base02);
-  border: 1px solid @base03;
-}
-
-/* Tray */
 #tray {
   padding: 3px 8px;
 }
 
 #tray > .needs-attention {
-  background: @base09;
   border-radius: 6px;
 }
 
@@ -226,12 +137,6 @@ tooltip label {
 }
 
 /* ----- Fine-tuning -------------------------------------------------------- */
-
-/* reduce visual noise for icons-only widgets */
-#tray,
-#workspaces {
-  background: @base01;
-}
 
 /* nicer visual grouping on the right side */
 .modules-right > widget:nth-last-child(1) #clock {

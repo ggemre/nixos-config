@@ -13,9 +13,8 @@ _: {
       "network"
       "cpu"
       "memory"
-      "temperature"
+      "disk"
       "pulseaudio"
-      "backlight"
       "battery"
       "clock"
     ];
@@ -28,19 +27,42 @@ _: {
       on-scroll-up = "mmsg -d viewtoleft_have_client";
       on-scroll-down = "mmsg -d viewtoright_have_client";
       sort-by-id = true;
+      format-icons = {
+        default = "";
+        active = "";
+      };
     };
 
     "dwl/window" = {
-      format = "[{layout}]{title}";
+      format = "{layout}{title}";
+      rewrite = {
+        "CT(.*)" = "󰕫 $1";
+        "RT(.*)" = " $1";
+        "VS(.*)" = "󰕯 $1";
+        "VT(.*)" = "󰹫 $1";
+        "VG(.*)" = "󱢈 $1";
+        "VK(.*)" = "󰕵 $1";
+        "TG(.*)" = "󰕮 $1";
+        "S(.*)" = "󰕬 $1";
+        "T(.*)" = " $1";
+        "G(.*)" = "󰕰 $1";
+        "M(.*)" = "󱟱 $1";
+        "K(.*)" = " $1";
+      };
     };
 
     tray = {
       icon-size = 20;
     };
 
+    network = {
+      format = "{icon} {essid}";
+      format-icons = [ "󰤟" "󰤢" "󰤥" "󰤨" ];
+      format-disconnected = "󰤮";
+    };
+
     clock = {
-      format = "{:%H:%M}";
-      format-alt = "{:L%A, %b %d}";
+      format = "{:L%a, %b %d %I:%M %p}";
     };
 
     cpu = {
@@ -49,12 +71,12 @@ _: {
     };
 
     memory = {
-      format = "{}%";
+      format = " {percentage}%";
     };
 
-    temperature = {
-      critical-threshold = 90;
-      format = "{icon} {temperatureC}°C";
+    disk = {
+      format = "󱛟 {percentage_used}%";
+      path = "/";
     };
 
     battery = {
@@ -62,16 +84,25 @@ _: {
         warning = 30;
         critical = 15;
       };
-      format = "{capacity}% {icon}";
+      format = "{icon} {capacity}%";
+      format-icons = {
+        default = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+        charging = [ "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰂋" "󰂅" ];
+      };
     };
 
     pulseaudio = {
       format = "{icon} {volume}%";
-      format-muted = "[M]";
-      on-click = "pamixer -t";
-      on-scroll-up = "pamixer -i 2";
-      on-scroll-down = "pamixer -d 2";
-      scroll-step = 5;
+      on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+      on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.03+";
+      on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.03-";
+      scroll-step = 1;
+      format-icons = {
+        headphone = "";
+        default = [ "" "" "" ];
+      };
+      format-muted = "";
+      format-bluetooth = "󰂰";
     };
   };
 }
