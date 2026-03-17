@@ -15,6 +15,10 @@
     initrd.kernelModules = [ "kvm-intel" "wl" "i915" ];
     kernelModules = [ "wl" ];
     extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+
+    extraModprobeConfig = ''
+      options cfg80211 ieee80211_regdom="US"
+    '';
   };
 
   hardware = {
@@ -37,6 +41,8 @@
         pkgs.driversi686Linux.intel-media-driver
       ];
     };
+
+    wirelessRegulatoryDatabase = true;
   };
 
   services = {
