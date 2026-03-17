@@ -13,7 +13,7 @@ _: {
     networkmanager = {
       enable = true;
       wifi = {
-        powersave = true;
+        powersave = false;
         backend = "iwd";
         macAddress = "random";
       };
