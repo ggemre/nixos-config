@@ -12,11 +12,7 @@ _: {
 
     networkmanager = {
       enable = true;
-      wifi = {
-        powersave = false;
-        backend = "iwd";
-        macAddress = "random";
-      };
+      wifi.powersave = false;
     };
   };
 }
