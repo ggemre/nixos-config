@@ -9,7 +9,6 @@
     settings = {
       general = {
         hide_cursor = true;
-        grace = 2;
         ignore_empty_input = true;
       };
       background = {
@@ -19,7 +18,7 @@
       };
       label = [
         {
-          text = "$TIME";
+          text = "$TIME12";
           font_size = 30;
           position = "0, 160";
           halign = "center";
