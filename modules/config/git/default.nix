@@ -15,8 +15,7 @@
 
       alias = {
         s = "status";
-        ls = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate";
-        ll = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat";
+        ls = "log --pretty=format:'%C(yellow)%h %Creset%cd %Cblue[%cn] %Creset%s %Cred%d' --date='format-local:%Y-%m-%d %H:%M'";
       };
     };
   };
