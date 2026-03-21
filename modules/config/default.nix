@@ -9,7 +9,6 @@
   foot = import ./foot;
   ghostty = import ./ghostty;
   git = import ./git;
-  helium = import ./helium;
   helix = import ./helix;
   spotify = import ./spotify;
   starship = import ./starship;
