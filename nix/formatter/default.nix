@@ -1,8 +1,8 @@
 {
-  nur,
+  aux-nixpkgs,
   self,
   ...
 }:
 self.lib.forAllSystems (
-  system: nur.legacyPackages.${system}.repos.ggemre.alejandra-spaced
+  system: aux-nixpkgs.legacyPackages.${system}.alejandra-spaced
 )

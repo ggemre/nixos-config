@@ -4,15 +4,15 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nur = {
-      url = "github:nix-community/nur";
+    aux-nixpkgs = {
+      url = "github:ggemre/aux-nixpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = inputs @ {
     nixpkgs,
-    nur,
+    aux-nixpkgs,
     self,
     ...
   }: {

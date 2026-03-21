@@ -1,16 +1,19 @@
 {
+  aux-nixpkgs,
   nixpkgs,
-  nur,
   self,
   ...
 }: let
   mkHost = system: hostname:
     nixpkgs.lib.nixosSystem {
+      inherit system;
+
       specialArgs = {
         selfLib = self.lib;
         selfModules = self.nixosModules;
-        nurPkgs = nur.legacyPackages.${system}.repos;
+        auxpkgs = aux-nixpkgs.legacyPackages.${system};
       };
+
       modules = [
         self.nixosModules.common
         self.nixosModules.home
@@ -21,10 +24,6 @@
           config = {
             networking.hostName = hostname;
             nixpkgs.hostPlatform = system;
-            nix.registry = {
-              nixpkgs.flake = nixpkgs;
-              nur.flake = nur;
-            };
           };
         }
         ../hosts/${hostname}

@@ -1,7 +1,7 @@
 {
+  auxpkgs,
   config,
   lib,
-  nurPkgs,
   pkgs,
   ...
 }: {
@@ -12,7 +12,7 @@
 
   programs.mangowm = {
     enable = true;
-    package = nurPkgs.ggemre.mangowm;
+    package = auxpkgs.mangowm;
 
     settings = {
       no_border_when_single = false;

@@ -1,13 +1,13 @@
 {
+  aux-nixpkgs,
   nixpkgs,
-  nur,
   self,
   ...
 }:
 self.lib.forAllSystems (
   system: let
     pkgs = nixpkgs.legacyPackages.${system};
-    nurPkgs = nur.legacyPackages.${system}.repos;
+    auxpkgs = aux-nixpkgs.legacyPackages.${system};
   in {
     default = pkgs.mkShell {
       name = "Flake dev shell";
@@ -16,7 +16,7 @@ self.lib.forAllSystems (
         pkgs.deadnix
         pkgs.just
         pkgs.nil
-        nurPkgs.ggemre.alejandra-spaced
+        auxpkgs.alejandra-spaced
       ];
     };
   }
