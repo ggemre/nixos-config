@@ -30,6 +30,7 @@ window#waybar {
 #battery,
 #clock,
 #cpu,
+#disk,
 #memory,
 #pulseaudio,
 #temperature,
