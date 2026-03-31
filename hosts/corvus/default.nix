@@ -11,6 +11,6 @@
 
     # Include any desired profiles
     selfModules.profiles.hardware.raspberry-pi-4
-    selfModules.profiles.server
+    selfModules.profiles.headless
   ];
 }
