@@ -1,28 +1,30 @@
+HOSTNAME := `hostname`
+
 default:
   just --list
 
 [linux]
 [doc('Activate {{host}} without adding to boot list')]
 [group('build')]
-test host:
+test host=HOSTNAME:
   sudo nixos-rebuild test --flake .#{{host}}
 
 [linux]
 [doc('Rebuild, activate, and boot list {{host}}')]
 [group('build')]
-switch host:
+switch host=HOSTNAME:
   sudo nixos-rebuild switch --flake .#{{host}}
 
 [linux]
 [doc('Build {{host}} to `./result`')]
 [group('build')]
-build host:
+build host=HOSTNAME:
   nixos-rebuild build --flake .#{{host}}
 
 [linux]
 [doc('Add new generation of {{host}} to boot list without activation')]
 [group('build')]
-boot host:
+boot host=HOSTNAME:
   sudo nixos-rebuild boot --flake .#{{host}}
 
 [doc('Build an iso to ./result/iso')]
@@ -63,7 +65,7 @@ gc:
 
 [doc('Clear boot entries besides current profile for {{host}}')]
 [group('system')]
-prune host:
+prune host=HOSTNAME:
   sudo nix profile wipe-history --profile /nix/var/nix/profiles/system
   sudo /run/current-system/bin/switch-to-configuration boot # update boot menu
   sudo rm /nix/var/nix/profiles/system-*
