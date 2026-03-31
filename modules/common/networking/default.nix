@@ -4,15 +4,17 @@ _: {
   time.timeZone = "America/New_York";
 
   networking = {
-    nameservers = [
-      # Cloudflare
-      "1.1.1.1"
-      "1.0.0.1"
-    ];
+    dhcpcd.enable = true;
+    useDHCP = false;
 
     networkmanager = {
       enable = true;
       wifi.powersave = false;
+      insertNameservers = [
+        # Cloudflare
+        "1.1.1.1"
+        "1.0.0.1"
+      ];
     };
   };
 }
