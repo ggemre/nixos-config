@@ -17,4 +17,5 @@
   };
 
   hardware.deviceTree.filter = "bcm2711-rpi-*.dtb";
+  powerManagement.cpuFreqGovernor = "ondemand";
 }
