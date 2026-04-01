@@ -12,7 +12,7 @@
 
   programs.mangowm = {
     enable = true;
-    package = auxpkgs.mangowm;
+    package = auxpkgs.mangowm-wlonly;
 
     settings = {
       no_border_when_single = false;
