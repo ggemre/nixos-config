@@ -7,6 +7,7 @@
 in {
   imports = [
     ./search.nix
+    ./settings.nix
   ];
 
   options.programs.firefox = {

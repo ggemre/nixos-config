@@ -1,11 +1,13 @@
 {config, ...}: {
-  programs.firefox.preferences = {
+  programs.firefox.settings = {
     # General settings
     "general.smoothScroll" = true;
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     "browser.download.folderList" = 2;
     "browser.download.useDownloadDir" = true;
     "browser.in-content.dark-mode" = true;
+    "browser.tabs.inTitlebar" = 0;
+    "browser.toolbars.bookmarks.visibility" = "never";
     "browser.theme.content-theme" =
       if config.theme.variant == "dark"
       then 0
@@ -29,6 +31,7 @@
     "browser.newtabpage.activity-stream.feeds.discoverystreamfeed" = false;
     "browser.newtabpage.activity-stream.showSponsored" = false;
     "browser.newtabpage.activity-stream.default.sites" = "";
+    "browser.newtabpage.activity-stream.showWeather" = false;
     # GPU acceleration
     "gfx.webrender.all" = true;
     "layers.acceleration.force-enabled" = true;

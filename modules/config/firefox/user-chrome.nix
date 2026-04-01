@@ -75,6 +75,9 @@
     }
     .browser-titlebar { background-color: var(--uc-highlight-colour) !important; }
     .titlebar-buttonbox-container { display: none !important; }
-    .titlebar-spacer { display:none !important; }
+    .titlebar-spacer { display: none !important; }
+    #firefox-view-button { display: none !important; }
+    #tabbrowser-tabs { border-inline-start: 0 !important; }
+    #alltabs-button { display: none !important; }
   '';
 }
