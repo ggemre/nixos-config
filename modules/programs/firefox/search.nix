@@ -3,11 +3,10 @@
 {
   config,
   lib,
+  name,
   pkgs,
   ...
 }: let
-  cfg = config.programs.firefox.search;
-
   toId = name:
     builtins.replaceStrings [ " " ] [ "-" ] (lib.toLower name);
 
@@ -26,19 +25,17 @@
         }
       ];
     })
-    cfg.engines;
+    config.engines;
 
   settings = {
     version = 13;
     engines = formattedEnginesList;
 
-    metaData = lib.optionalAttrs (cfg.default != null) {
-      defaultEngineId = toId cfg.default;
+    metaData = lib.optionalAttrs (config.default != null) {
+      defaultEngineId = toId config.default;
       defaultEngineIdHash = "@hash@";
     };
   };
-
-  profile = "main";
 
   # I am the user and I consent to what I'm doing.
   disclaimer =
@@ -50,8 +47,8 @@
     + "to accordingly.";
 
   defaultPayload =
-    if cfg.default != null
-    then profile + (toId cfg.default) + disclaimer
+    if config.default != null
+    then name + (toId config.default) + disclaimer
     else null;
 
   file =
@@ -71,7 +68,7 @@
       fi
     '';
 in {
-  options.programs.firefox.search = {
+  options = {
     default = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
@@ -79,7 +76,6 @@ in {
     };
 
     engines = lib.mkOption {
-      # type = lib.types.listOf lib.types.attrs;
       type = lib.types.listOf (lib.types.submodule {
         options = {
           name = lib.mkOption { type = lib.types.str; };
@@ -103,12 +99,8 @@ in {
     file = lib.mkOption {
       type = lib.types.path;
       default = file;
+      internal = true;
       readOnly = true;
-      description = "Auto-generated search.json.mozlz4 file.";
     };
-  };
-
-  config = lib.mkIf (config.programs.firefox.enable && (cfg.engines != [])) {
-    home.".config/mozilla/firefox/main/search.json.mozlz4".source = cfg.file;
   };
 }

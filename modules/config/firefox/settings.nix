@@ -1,5 +1,5 @@
 {config, ...}: {
-  programs.firefox.settings = {
+  programs.firefox.profiles.main.settings = {
     # General settings
     "general.smoothScroll" = true;
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;

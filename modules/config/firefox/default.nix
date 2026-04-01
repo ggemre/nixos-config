@@ -8,5 +8,6 @@ _: {
 
   programs.firefox = {
     enable = true;
+    profiles.main.isDefault = true;
   };
 }

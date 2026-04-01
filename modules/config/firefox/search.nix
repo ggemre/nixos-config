@@ -1,5 +1,5 @@
 _: {
-  programs.firefox.search = {
+  programs.firefox.profiles.main.search = {
     engines = [
       {
         name = "Brave";

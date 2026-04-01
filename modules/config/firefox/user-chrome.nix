@@ -1,5 +1,5 @@
 {config, ...}: {
-  programs.firefox.userChrome = ''
+  programs.firefox.profiles.main.userChrome = ''
     :root {
       --uc-identity-colour-blue: ${config.theme.colorsWithHashtag.base0D};
       --uc-identity-colour-turquoise: ${config.theme.colorsWithHashtag.base0C};
