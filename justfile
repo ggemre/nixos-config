@@ -1,4 +1,4 @@
-HOSTNAME := `hostname`
+HOSTNAME := `uname -n`
 
 default:
   just --list
