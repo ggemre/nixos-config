@@ -23,6 +23,7 @@
     selfModules.desktop.topaz
 
     # Include any desired profiles
+    selfModules.profiles.gaming
     selfModules.profiles.graphical
     selfModules.profiles.hardware.apple-macbook-air-7
     selfModules.profiles.laptop
