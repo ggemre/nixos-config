@@ -26,6 +26,8 @@
       scroller_prefer_overspread = true;
       edge_scroller_pointer_focus = false;
 
+      windowrule = "isterm:1,appid:foot";
+
       exec-once = [
         (lib.getExe config.programs.waybar.package)
         (lib.getExe config.services.hypridle.package)
