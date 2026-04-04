@@ -1,6 +1,4 @@
-{pkgs, ...}: let
-  user = "gge";
-in {
+{pkgs, ...}: {
   theme.name = "catppuccin-mocha";
 
   programs = {
@@ -9,15 +7,16 @@ in {
     firefox.defaultBrowser = true;
   };
 
-  users = {
-    # mutableUsers = false;
-    users."${user}" = {
-      home = "/home/${user}";
-      description = user;
+  users.users = {
+    root.hashedPassword = "!"; # Disable root
+
+    gge = {
+      home = "/home/gge";
       shell = pkgs.bash;
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ];
       manageHome = true;
+      initialHashedPassword = "$y$j9T$uW/lC4wXpVfuOG7CqYtav.$DWSN2WtizNn7gHWE58c1s60zdp61YbZzV4ywAFHqHH2";
     };
   };
 
