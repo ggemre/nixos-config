@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775092095,
-        "narHash": "sha256-9OhI18qJ4Cw6Ql2ddq61BoTaeOoS8sdGJ9ALjK1VHvQ=",
+        "lastModified": 1775431012,
+        "narHash": "sha256-hMCrYt/ZFHYhgOlmx/3U9CQpbUAqllNBM8xILvn5dQ8=",
         "owner": "ggemre",
         "repo": "aux-nixpkgs",
-        "rev": "4674e60935b661e2bdad508ce52b6807aeb9669a",
+        "rev": "92c8323f74ad2befdb83e21c947b7786a1b7979a",
         "type": "github"
       },
       "original": {
