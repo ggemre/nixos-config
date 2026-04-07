@@ -5,8 +5,8 @@
 
     config = {
       user = {
-        email = "ggemre+github@proton.me";
         name = "ggemre";
+        email = "80432807+ggemre@users.noreply.github.com";
       };
 
       init.defaultBranch = "main";
