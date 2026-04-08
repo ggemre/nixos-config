@@ -10,6 +10,7 @@
             ESP = {
               size = "500M";
               type = "EF00";
+              label = "BOOT";
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -19,6 +20,7 @@
             };
             luks = {
               size = "100%";
+              label = "NIXOS";
               content = {
                 type = "luks";
                 name = "crypt";
