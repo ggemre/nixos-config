@@ -14,7 +14,6 @@
     selfModules.config.foot
     selfModules.config.git
     selfModules.config.helix
-    selfModules.config.spotify
     selfModules.config.starship
     selfModules.config.utils
     selfModules.config.yazi

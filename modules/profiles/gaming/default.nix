@@ -1,6 +1,6 @@
 _: {
   imports = [
-    ./discord.nix
+    # ./discord.nix
     ./minecraft.nix
   ];
 }
