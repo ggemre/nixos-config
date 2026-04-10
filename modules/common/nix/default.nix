@@ -18,6 +18,7 @@
       sandbox = true;
       warn-dirty = false;
       allow-import-from-derivation = false;
+      keep-derivations = false;
 
       substituters = [
         "https://nix-community.cachix.org"
@@ -32,10 +33,6 @@
 
       http-connections = 64;
       max-substitution-jobs = 32;
-
-      # Fallback quickly if substituters are not available
-      connect-timeout = 5;
-      fallback = true;
     };
   };
 }
