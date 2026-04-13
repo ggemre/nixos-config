@@ -8,17 +8,15 @@ Public so I can easily clone it and so you can have a reference
 
 My primary goal was creating something extremely simple while avoiding unecessary abstraction and indirection.
 
-No Nix “footguns” used:
-* NO overlays!
-* NO importing from derivations!
-* NO `with` usage!
-* NO `rec` usage!
-* NO stylix, home-manager, or any other janky dependencies!
-* NO channels!
-* NO flake-utils!
-* NO impurities or imperative design!
+Written with paranoia toward patterns that I find risky/fragile:
 
-All while remaining as functional and powerful as I need it to be.
+* No import from derivation (slow & hard to debug)
+* No `with` or `rec` (footgun keywords)
+* No stylix or home-manager (fragile bloat)
+* No channels (outdated)
+* No overlays (unnecessary for my use case)
+* No flake-utils (extra unnecessary)
+* No imperative design (impure)
 
 ## Credit
 
