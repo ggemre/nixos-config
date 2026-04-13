@@ -53,11 +53,6 @@
   nixpkgs.config.permittedInsecurePackages = [ config.boot.kernelPackages.broadcom_sta.name ];
 
   warnings = [
-    ''
-      Installing ${config.boot.kernelPackages.broadcom_sta.name}, which is marked as insecure.
-      Known issues:
-      - CVE-2019-9501: heap buffer overflow, potentially allowing remote code execution by sending specially-crafted WiFi packets
-      - CVE-2019-9502: heap buffer overflow, potentially allowing remote code execution by sending specially-crafted WiFi packets
-    ''
+    "Installing ${config.boot.kernelPackages.broadcom_sta.name}, which is marked as insecure (CVE-2019-9501)."
   ];
 }
