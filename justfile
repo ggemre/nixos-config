@@ -60,16 +60,15 @@ history:
 [doc('Remove week old generations and unused derivations')]
 [group('system')]
 gc:
-  sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than 7d
-  sudo nix store gc --debug
+  nix-collect-garbage --delete-older-than 7d
+  sudo nix-collect-garbage --delete-older-than 7d
 
-[doc('Clear boot entries besides current profile for {{host}}')]
+[doc('Remove everything not used by the current generation')]
 [group('system')]
-prune host=HOSTNAME:
-  sudo nix profile wipe-history --profile /nix/var/nix/profiles/system
-  sudo /run/current-system/bin/switch-to-configuration boot # update boot menu
-  sudo rm /nix/var/nix/profiles/system-*
-  sudo nixos-rebuild boot --flake .#{{host}}
+prune:
+  nix-collect-garbage --delete-old
+  sudo nix-collect-garbage --delete-old
+  sudo /run/current-system/bin/switch-to-configuration boot
 
 [doc('Manually optimize the nix store')]
 [group('system')]
