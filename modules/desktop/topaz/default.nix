@@ -4,6 +4,7 @@
     ./hypridle
     ./hyprlock
     ./mangowm
+    ./plymouth
     ./waybar
   ];
 }
