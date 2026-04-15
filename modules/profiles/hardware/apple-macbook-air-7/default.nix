@@ -53,6 +53,6 @@
   nixpkgs.config.permittedInsecurePackages = [ config.boot.kernelPackages.broadcom_sta.name ];
 
   warnings = [
-    "Installing ${config.boot.kernelPackages.broadcom_sta.name}, which is marked as insecure (CVE-2019-9501)."
+    "Using ${config.boot.kernelPackages.broadcom_sta.name}, which is marked as insecure (CVE-2019-9501 & CVE-2019-9502)."
   ];
 }
