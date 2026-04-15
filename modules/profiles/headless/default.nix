@@ -1,5 +1,3 @@
-_: {
-  imports = [
-    ./ssh.nix
-  ];
+{selfLib, ...}: {
+  imports = selfLib.collectModules ./.;
 }

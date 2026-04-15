@@ -1,6 +1,3 @@
-_: {
-  imports = [
-    # ./discord.nix
-    ./minecraft.nix
-  ];
+{selfLib, ...}: {
+  imports = selfLib.collectModules ./.;
 }
