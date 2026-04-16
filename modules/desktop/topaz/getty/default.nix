@@ -12,6 +12,9 @@ in {
   services.getty = {
     autologinUser = firstUser;
     autologinOnce = true;
+
+    greetingLine = "";
+    helpLine = "";
   };
 
   environment.loginShellInit = ''
