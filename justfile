@@ -27,11 +27,6 @@ build host=HOSTNAME:
 boot host=HOSTNAME:
   sudo nixos-rebuild boot --flake .#{{host}}
 
-[doc('Build an iso to ./result/iso')]
-[group('build')]
-iso image:
-  nix build .#nixosConfigurations.{{image}}.config.system.build.isoImage # this took 38mins on my MacBook Air, leave this cmd to the GitHub runners
-
 [doc('Update all inputs (i.e. recreate the lock file from scratch)')]
 [group('flake')]
 update:
@@ -46,11 +41,6 @@ fmt:
 [group('flake')]
 clean:
   rm -rf result
-
-[doc('Open a shell for developing this flake')]
-[group('flake')]
-shell:
-  nix develop -c $SHELL
 
 [doc('Show all versions of the current profile')]
 [group('system')]
