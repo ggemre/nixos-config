@@ -18,6 +18,7 @@
       no_border_when_single = false;
       focus_on_activate = true;
 
+      enable_hotarea = false;
       mouse_natural_scrolling = false;
       disable_trackpad = false;
       tap_to_click = false;
