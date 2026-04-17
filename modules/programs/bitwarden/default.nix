@@ -8,7 +8,7 @@
 in {
   options.programs.bitwarden = {
     enable = lib.mkEnableOption "Whether to enable bitwarden.";
-    package = lib.mkPackageOption pkgs "bitwarden-desktop" {};
+    package = lib.mkPackageOption pkgs "bitwarden-cli" {};
   };
 
   config = lib.mkIf cfg.enable {
