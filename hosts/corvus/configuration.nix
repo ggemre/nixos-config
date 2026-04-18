@@ -10,7 +10,6 @@
     shell = pkgs.bash;
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-    manageHome = true;
     initialHashedPassword = "$y$j9T$p6v03DwnOcmlqc/TlqFsl.$/Lym/5bE8UMRiu7Hyemq.xWEcqKsKA9k2XFkhkwM26D";
   };
 
