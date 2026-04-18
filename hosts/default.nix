@@ -31,5 +31,6 @@
     };
 in {
   corvus = mkHost "aarch64-linux" "corvus";
+  lupus = mkHost "x86_64-linux" "lupus";
   orion = mkHost "x86_64-linux" "orion";
 }
