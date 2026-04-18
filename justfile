@@ -27,6 +27,12 @@ build host=HOSTNAME:
 boot host=HOSTNAME:
   sudo nixos-rebuild boot --flake .#{{host}}
 
+[linux]
+[doc('Build virtual machine {{host}} to `./result`')]
+[group('build')]
+vm host:
+  nixos-rebuild build-vm --flake .#{{host}}
+
 [doc('Update all inputs (i.e. recreate the lock file from scratch)')]
 [group('flake')]
 update:
@@ -41,6 +47,7 @@ fmt:
 [group('flake')]
 clean:
   rm -rf result
+  rm -f *.qcow2
 
 [doc('Show all versions of the current profile')]
 [group('system')]
