@@ -11,4 +11,6 @@ _: {
 
     rtkit.enable = true;
   };
+
+  users.users.root.hashedPassword = "!"; # Disable root
 }
