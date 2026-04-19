@@ -19,6 +19,7 @@
       warn-dirty = false;
       allow-import-from-derivation = false;
       keep-derivations = false;
+      use-xdg-base-directories = true;
 
       substituters = [
         "https://nix-community.cachix.org"

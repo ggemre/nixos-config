@@ -21,6 +21,6 @@ _: {
     NIXOS_OZONE_WL = 1;
 
     # Free up home
-    XCOMPOSECACHE = "/tmp/.compose-cache";
+    # XCOMPOSECACHE = "/tmp/.compose-cache";
   };
 }
