@@ -58,13 +58,11 @@ history:
 [group('system')]
 gc:
   sudo nix-collect-garbage --delete-older-than 7d
-  nix-collect-garbage --delete-older-than 7d
 
 [doc('Remove everything not used by the current generation')]
 [group('system')]
 prune:
   sudo nix-collect-garbage --delete-old
-  nix-collect-garbage --delete-old
   sudo /run/current-system/bin/switch-to-configuration boot
 
 [doc('Manually optimize the nix store')]
