@@ -27,7 +27,10 @@ in {
   # Generate a list of public keys for my workstations
   # Uses GitHub, but you can easily migrate to CodeBerg
   pubkeys = let
-    keysFile = builtins.readFile (builtins.fetchurl "https://github.com/ggemre.keys");
+    keysFile = builtins.readFile (builtins.fetchurl {
+      url = "https://github.com/ggemre.keys";
+      sha256 = "sha256-/6AAl/wauClt+WtkuEZw3MX+tEnIQZ1XqN4yjCHnUYU=";
+    });
   in
     lib.strings.splitString "\n" (lib.strings.trim keysFile);
 
