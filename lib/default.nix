@@ -24,6 +24,13 @@ in {
     hexa = color: alpha: "0x${color}${alpha}";
   };
 
+  # Generate a list of public keys for my workstations
+  # Uses GitHub, but you can easily migrate to CodeBerg
+  pubkeys = let
+    keysFile = builtins.readFile (builtins.fetchurl "https://github.com/ggemre.keys");
+  in
+    lib.strings.splitString "\n" (lib.strings.trim keysFile);
+
   # Functions for generating different configuration formats from nix attrs
   generators = {
     toHyprConf = import ./generators/hyprconf.nix { inherit lib; };
