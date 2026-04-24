@@ -16,6 +16,8 @@
       if config.theme.variant == "dark"
       then 0
       else 1;
+    "widget.use-xdg-desktop-portal.file-picker" = 1;
+    "widget.use-xdg-desktop-portal.mime-handler" = 1;
     # Startup settings
     "browser.aboutConfig.showWarning" = false;
     "browser.startup.page" = 0;
