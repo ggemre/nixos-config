@@ -1,11 +1,8 @@
 {nixpkgs, ...}: let
   # Configure the flake's supported systems
-  # I know it's just one for now, but the infrastructure is there to support more
   supportedSystems = [
     "x86_64-linux"
     "aarch64-linux"
-    # "x86_64-darwin"
-    # "aarch64-darwin"
   ];
 
   inherit (nixpkgs) lib;
