@@ -9,7 +9,6 @@
   nix = {
     package = pkgs.lixPackageSets.latest.lix;
     channel.enable = false;
-    gc.automatic = false;
 
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
