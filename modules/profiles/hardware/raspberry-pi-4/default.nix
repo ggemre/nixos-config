@@ -10,10 +10,12 @@ _: {
         "reset-raspberrypi"
         "genet"
       ];
-      systemd.tpm2.enable = false;
+      # systemd.tpm2.enable = false;
     };
   };
 
-  hardware.deviceTree.filter = "bcm2711-rpi-*.dtb";
+  # FIXME: what makes Ethernet work?
+  # hardware.deviceTree.filter = "bcm2711-rpi-*.dtb";
+  hardware.enableAllHardware = true;
   powerManagement.cpuFreqGovernor = "ondemand";
 }
