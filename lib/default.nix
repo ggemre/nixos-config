@@ -8,9 +8,7 @@
   inherit (nixpkgs) lib;
 in {
   # Function to generate attributes for each supported system
-  forAllSystems = f:
-    lib.genAttrs supportedSystems
-    f;
+  forAllSystems = lib.genAttrs supportedSystems;
 
   # Function to collect modules in a directory into a list
   collectModules = path:
