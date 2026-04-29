@@ -10,6 +10,7 @@ _: {
 
     modules-right = [
       "tray"
+      "idle_inhibitor"
       "network"
       "cpu"
       "memory"
@@ -55,14 +56,19 @@ _: {
       icon-size = 20;
     };
 
+    idle_inhibitor = {
+      format = "{icon}";
+      format-icons = {
+        activated = "󰅶";
+        deactivated = "󰾫";
+      };
+      timeout = 60;
+    };
+
     network = {
       format = "{icon} {essid}";
       format-icons = [ "󰤟" "󰤢" "󰤥" "󰤨" ];
       format-disconnected = "󰤮";
-    };
-
-    clock = {
-      format = "{:L%a, %b %d %I:%M %p}";
     };
 
     cpu = {
@@ -79,18 +85,6 @@ _: {
       path = "/";
     };
 
-    battery = {
-      states = {
-        warning = 30;
-        critical = 15;
-      };
-      format = "{icon} {capacity}%";
-      format-icons = {
-        default = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
-        charging = [ "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰂋" "󰂅" ];
-      };
-    };
-
     pulseaudio = {
       format = "{icon} {volume}%";
       on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
@@ -103,6 +97,22 @@ _: {
       };
       format-muted = "";
       format-bluetooth = "󰂰";
+    };
+
+    battery = {
+      states = {
+        warning = 30;
+        critical = 15;
+      };
+      format = "{icon} {capacity}%";
+      format-icons = {
+        default = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+        charging = [ "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰂋" "󰂅" ];
+      };
+    };
+
+    clock = {
+      format = "{:L%a, %b %d %I:%M %p}";
     };
   };
 }

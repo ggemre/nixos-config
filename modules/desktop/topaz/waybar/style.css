@@ -14,7 +14,6 @@ window#waybar {
   color: @base05;
 }
 
-/* spacing between modules */
 .modules-left > widget,
 .modules-center > widget,
 .modules-right > widget {
@@ -25,12 +24,11 @@ window#waybar {
   background: transparent;
 }
 
-/* ----- Shared module style ------------------------------------------------ */
-
 #battery,
 #clock,
 #cpu,
 #disk,
+#idle_inhibitor,
 #memory,
 #pulseaudio,
 #temperature,
@@ -139,7 +137,6 @@ tooltip label {
 
 /* ----- Fine-tuning -------------------------------------------------------- */
 
-/* nicer visual grouping on the right side */
 .modules-right > widget:nth-last-child(1) #clock {
   margin-right: 0;
 }
