@@ -26,7 +26,7 @@ in {
 
   hardware.deviceTree.name = "broadcom/bcm2711-rpi-4-b.dtb";
 
-  boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.enable = true;
   systemd.repart = {
     enable = true;
     partitions."30-root".Type = "root";

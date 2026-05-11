@@ -3,12 +3,11 @@
   selfLib,
   ...
 }: {
-  # TODO: move from profile to here
-  # boot.loader = {
-  #   grub.enable = false;
-  #   generic-extlinux-compatible.enable = true;
-  #   timeout = 0;
-  # };
+  boot.loader = {
+    grub.enable = false;
+    generic-extlinux-compatible.enable = true;
+    timeout = 0;
+  };
 
   users.users.dme = {
     home = "/home/dme";
