@@ -3,11 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    aux-nixpkgs = {
-      url = "github:ggemre/aux-nixpkgs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    aux-nixpkgs.url = "github:ggemre/aux-nixpkgs";
   };
 
   outputs = inputs @ {
