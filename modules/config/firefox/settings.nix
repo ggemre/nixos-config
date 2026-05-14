@@ -6,7 +6,7 @@
     "browser.download.folderList" = 2;
     "browser.download.useDownloadDir" = true;
     "browser.in-content.dark-mode" = true;
-    "browser.tabs.inTitlebar" = 0;
+    "browser.tabs.inTitlebar" = 1;
     "browser.toolbars.bookmarks.visibility" = "never";
     "browser.theme.content-theme" =
       if config.theme.variant == "dark"
