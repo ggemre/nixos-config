@@ -20,6 +20,7 @@ in {
     rgb = color: "rgb(${color})";
     rgba = color: alpha: "rgba(${color}${alpha})";
     hexa = color: alpha: "0x${color}${alpha}";
+    u32 = color: alpha: import ./hex2dec.nix { inherit lib; } "${color}${alpha}";
   };
 
   # Generate a list of public keys for my workstations
@@ -36,5 +37,6 @@ in {
   generators = {
     toHyprConf = import ./generators/hyprconf.nix { inherit lib; };
     toMangoConf = import ./generators/mangoconf.nix { inherit lib; };
+    toZon = import ./generators/zon.nix {};
   };
 }
