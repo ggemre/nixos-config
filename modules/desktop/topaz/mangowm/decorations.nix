@@ -13,12 +13,12 @@
     rootcolor = selfLib.colors.hexa config.theme.colors.base00 "FF";
 
     borderpx = 2;
-    # border_radius = 6;
+    border_radius = 6;
     bordercolor = selfLib.colors.hexa config.theme.colors.base03 "FF";
     focuscolor = selfLib.colors.hexa config.theme.colors.base0D "FF";
     maximizescreencolor = selfLib.colors.hexa config.theme.colors.base03 "FF";
     globalcolor = selfLib.colors.hexa config.theme.colors.base06 "FF";
 
-    animations = false;
+    animations = true;
   };
 }
