@@ -9,11 +9,11 @@
     mOnTertiary = config.theme.colorsWithHashtag.base01;
     mOnHover = config.theme.colorsWithHashtag.base01;
     mOutline = config.theme.colorsWithHashtag.base03;
-    mPrimary = config.theme.colorsWithHashtag.base0E;
-    mSecondary = config.theme.colorsWithHashtag.base09;
+    mPrimary = config.theme.colorsWithHashtag.base0D;
+    mSecondary = config.theme.colorsWithHashtag.base04;
     mShadow = config.theme.colorsWithHashtag.base01;
     mSurface = config.theme.colorsWithHashtag.base00;
-    mHover = config.theme.colorsWithHashtag.base0C;
+    mHover = config.theme.colorsWithHashtag.base0E;
     mSurfaceVariant = config.theme.colorsWithHashtag.base02;
     mTertiary = config.theme.colorsWithHashtag.base0C;
   };

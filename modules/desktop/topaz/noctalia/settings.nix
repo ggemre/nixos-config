@@ -93,16 +93,6 @@
         ];
         left = [
           {
-            colorizeSystemIcon = "none";
-            colorizeSystemText = "none";
-            customIconPath = "";
-            enableColorization = false;
-            icon = "rocket";
-            iconColor = "none";
-            id = "Launcher";
-            useDistroLogo = false;
-          }
-          {
             clockColor = "none";
             customFont = "";
             formatHorizontal = "h:mm AP ddd, MMM dd";
@@ -177,7 +167,7 @@
             displayMode = "onhover";
             iconColor = "none";
             id = "Volume";
-            middleClickCommand = "pwvucontrol || pavucontrol";
+            middleClickCommand = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             textColor = "none";
           }
           {
@@ -202,7 +192,7 @@
             colorizeSystemText = "none";
             customIconPath = "";
             enableColorization = false;
-            icon = "noctalia";
+            icon = "snowflake";
             id = "ControlCenter";
             useDistroLogo = false;
           }
