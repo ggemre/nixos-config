@@ -8,7 +8,7 @@
     bind = [
       # General
       "SUPER, R, reload_config"
-      "SUPER, M, spawn, ${lib.getExe config.programs.hyprlock.package}"
+      "SUPER, M, spawn, ${lib.getExe config.programs.noctalia.package} ipc call lockScreen lock"
       "SUPER+SHIFT, M, quit"
       "SUPER, Q, killclient"
 

@@ -2,7 +2,6 @@
   auxpkgs,
   config,
   lib,
-  pkgs,
   ...
 }: {
   imports = [
@@ -30,8 +29,7 @@
       windowrule = "isterm:1,appid:foot";
 
       exec-once = [
-        "${lib.getExe config.programs.noctalia.package}"
-        "${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
+        (lib.getExe config.programs.noctalia.package)
       ];
     };
   };
