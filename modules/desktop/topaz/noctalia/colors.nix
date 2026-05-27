@@ -7,7 +7,7 @@
     mOnSurface = config.theme.colorsWithHashtag.base05;
     mOnSurfaceVariant = config.theme.colorsWithHashtag.base06;
     mOnTertiary = config.theme.colorsWithHashtag.base01;
-    mOnHover = config.theme.colorsWithHashtag.base0C;
+    mOnHover = config.theme.colorsWithHashtag.base01;
     mOutline = config.theme.colorsWithHashtag.base03;
     mPrimary = config.theme.colorsWithHashtag.base0E;
     mSecondary = config.theme.colorsWithHashtag.base09;
