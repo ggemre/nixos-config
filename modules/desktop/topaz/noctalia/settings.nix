@@ -319,7 +319,6 @@
       animationDisabled = false;
       animationSpeed = 1;
       autoStartAuth = false;
-      # avatarImage = "/home/gge/.face";
       boxRadiusRatio = 1;
       clockFormat = "hh\\nmm";
       clockStyle = "custom";
@@ -566,7 +565,7 @@
       fontDefaultScale = 1;
       fontFixed = "monospace";
       fontFixedScale = 1;
-      panelBackgroundOpacity = 0.93;
+      panelBackgroundOpacity = 1;
       panelsAttachedToBar = true;
       scrollbarAlwaysVisible = true;
       settingsPanelMode = "attached";
