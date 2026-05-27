@@ -11,6 +11,7 @@
       "SUPER, M, spawn, ${lib.getExe config.programs.noctalia.package} ipc call lockScreen lock"
       "SUPER+SHIFT, M, quit"
       "SUPER, Q, killclient"
+      "SUPER, P, spawn, ${lib.getExe config.programs.noctalia.package} ipc call sessionMenu toggle"
 
       # Apps
       "SUPER, T, spawn, ${lib.getExe config.programs.foot.package}"
