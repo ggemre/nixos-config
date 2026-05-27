@@ -166,6 +166,12 @@
           {
             displayMode = "onhover";
             iconColor = "none";
+            id = "Network";
+            textColor = "none";
+          }
+          {
+            displayMode = "onhover";
+            iconColor = "none";
             id = "Volume";
             middleClickCommand = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             textColor = "none";
