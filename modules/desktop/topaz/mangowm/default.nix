@@ -12,7 +12,7 @@
 
   programs.mangowm = {
     enable = true;
-    package = auxpkgs.mangowm-wlonly;
+    package = auxpkgs.mangowm;
 
     settings = {
       no_border_when_single = false;
@@ -30,8 +30,7 @@
       windowrule = "isterm:1,appid:foot";
 
       exec-once = [
-        (lib.getExe config.programs.waybar.package)
-        (lib.getExe config.services.hypridle.package)
+        "${lib.getExe config.programs.noctalia.package}"
         "${lib.getExe pkgs.wbg} --stretch $(find $XDG_PICTURES_DIR/wallpapers -type f | shuf -n 1)"
       ];
     };
