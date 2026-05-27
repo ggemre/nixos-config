@@ -15,6 +15,7 @@
       # Apps
       "SUPER, T, spawn, ${lib.getExe config.programs.foot.package}"
       "SUPER, B, spawn, ${lib.getExe config.programs.firefox.package}"
+      "SUPER, SPACE, spawn, ${lib.getExe config.programs.noctalia.package} ipc call launcher toggle"
 
       # Swap focus
       "SUPER, TAB, focusstack, next"
