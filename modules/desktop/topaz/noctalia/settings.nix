@@ -2,8 +2,8 @@
   programs.noctalia.settings = {
     appLauncher = {
       autoPasteClipboard = false;
-      customLaunchPrefix = "";
-      customLaunchPrefixEnabled = false;
+      customLaunchPrefixEnabled = true;
+      customLaunchPrefix = "mmsg dispatch spawn,";
       density = "default";
       enableClipboardHistory = false;
       enableSessionSearch = true;
@@ -70,6 +70,24 @@
       widgets = {
         center = [
           {
+            compactMode = false;
+            hideMode = "hidden";
+            hideWhenIdle = false;
+            id = "MediaMini";
+            maxWidth = 145;
+            panelShowAlbumArt = true;
+            scrollingMode = "hover";
+            showAlbumArt = true;
+            showArtistFirst = true;
+            showProgressRing = true;
+            showVisualizer = false;
+            textColor = "none";
+            useFixedWidth = false;
+            visualizerType = "linear";
+          }
+        ];
+        left = [
+          {
             characterCount = 2;
             colorizeIcons = false;
             emptyColor = "secondary";
@@ -91,14 +109,15 @@
             unfocusedIconsOpacity = 1;
           }
         ];
-        left = [
+        right = [
           {
-            clockColor = "none";
-            customFont = "";
-            formatHorizontal = "h:mm AP ddd, MMM dd";
-            formatVertical = "h mm - dd MM";
-            id = "Clock";
-            useCustomFont = false;
+            blacklist = [];
+            chevronColor = "none";
+            colorizeIcons = false;
+            drawerEnabled = true;
+            hidePassive = false;
+            id = "Tray";
+            pinned = [];
           }
           {
             compactMode = true;
@@ -123,33 +142,6 @@
             usePadding = false;
           }
           {
-            compactMode = false;
-            hideMode = "hidden";
-            hideWhenIdle = false;
-            id = "MediaMini";
-            maxWidth = 145;
-            panelShowAlbumArt = true;
-            scrollingMode = "hover";
-            showAlbumArt = true;
-            showArtistFirst = true;
-            showProgressRing = true;
-            showVisualizer = false;
-            textColor = "none";
-            useFixedWidth = false;
-            visualizerType = "linear";
-          }
-        ];
-        right = [
-          {
-            blacklist = [];
-            chevronColor = "none";
-            colorizeIcons = false;
-            drawerEnabled = true;
-            hidePassive = false;
-            id = "Tray";
-            pinned = [];
-          }
-          {
             defaultSettings = {
               monitorOrder = [];
             };
@@ -166,12 +158,6 @@
           {
             displayMode = "onhover";
             iconColor = "none";
-            id = "Network";
-            textColor = "none";
-          }
-          {
-            displayMode = "onhover";
-            iconColor = "none";
             id = "Volume";
             middleClickCommand = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             textColor = "none";
@@ -184,8 +170,14 @@
             textColor = "none";
           }
           {
+            displayMode = "onhover";
+            iconColor = "none";
+            id = "Network";
+            textColor = "none";
+          }
+          {
             deviceNativePath = "__default__";
-            displayMode = "graphic-clean";
+            displayMode = "icon-hover";
             hideIfIdle = false;
             hideIfNotDetected = true;
             id = "Battery";
@@ -198,9 +190,18 @@
             colorizeSystemText = "none";
             customIconPath = "";
             enableColorization = false;
-            icon = "snowflake";
+            icon = "toggle-right-filled";
             id = "ControlCenter";
             useDistroLogo = false;
+          }
+          {
+            clockColor = "none";
+            customFont = "";
+            formatHorizontal = "ddd MMM dd, h:mm AP";
+            formatVertical = "h mm - dd MM";
+            id = "Clock";
+            tooltipFormat = "HH:mm ddd, MMM dd";
+            useCustomFont = false;
           }
         ];
       };
