@@ -29,7 +29,7 @@
       windowrule = "isterm:1,appid:foot";
 
       exec-once = [
-        # (lib.getExe config.programs.noctalia.package)
+        (lib.getExe config.services.swayidle.package)
       ];
     };
   };

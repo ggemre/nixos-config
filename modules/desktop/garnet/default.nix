@@ -2,5 +2,6 @@
   imports = [
     ./getty
     ./mangowm
+    ./swayidle
   ];
 }

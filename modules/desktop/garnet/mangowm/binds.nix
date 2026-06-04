@@ -8,15 +8,12 @@
     bind = [
       # General
       "SUPER, R, reload_config"
-      "SUPER, M, spawn, ${lib.getExe config.programs.noctalia.package} ipc call lockScreen lock"
       "SUPER+SHIFT, M, quit"
       "SUPER, Q, killclient"
-      "SUPER, P, spawn, ${lib.getExe config.programs.noctalia.package} ipc call sessionMenu toggle"
 
       # Apps
       "SUPER, T, spawn, ${lib.getExe config.programs.foot.package}"
       "SUPER, B, spawn, ${lib.getExe config.programs.firefox.package}"
-      "SUPER, SPACE, spawn, ${lib.getExe config.programs.noctalia.package} ipc call launcher toggle"
 
       # Swap focus
       "SUPER, TAB, focusstack, next"
