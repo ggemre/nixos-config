@@ -56,7 +56,7 @@ in {
       }
       // lib.mapAttrs' (
         name: value:
-          lib.nameValuePair "noctalia/plugins/${name}/settings.json" {
+          lib.nameValuePair ".config/noctalia/plugins/${name}/settings.json" {
             source = jsonFormat.generate "${name}-settings" value;
           }
       )
