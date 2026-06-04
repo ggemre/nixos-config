@@ -142,9 +142,9 @@
             usePadding = false;
           }
           {
-            defaultSettings = {
-              monitorOrder = [];
-            };
+            id = "plugin:privacy-indicator";
+          }
+          {
             id = "plugin:mangowc-layout-switcher";
           }
           {
