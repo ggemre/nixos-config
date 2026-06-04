@@ -18,7 +18,7 @@
     selfModules.config.yazi
 
     # Set a desktop environment
-    selfModules.desktop.topaz
+    selfModules.desktop.garnet
 
     # Include any desired profiles
     selfModules.profiles.gaming

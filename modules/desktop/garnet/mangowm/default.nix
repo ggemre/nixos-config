@@ -1,0 +1,36 @@
+{
+  auxpkgs,
+  config,
+  lib,
+  ...
+}: {
+  imports = [
+    ./binds.nix
+    ./decorations.nix
+  ];
+
+  programs.mangowm = {
+    enable = true;
+    package = auxpkgs.mangowm;
+
+    settings = {
+      no_border_when_single = false;
+      focus_on_activate = true;
+
+      enable_hotarea = false;
+      mouse_natural_scrolling = false;
+      disable_trackpad = false;
+      tap_to_click = false;
+      click_method = 2; # 1 finger left click, 2 finger right click
+
+      scroller_prefer_overspread = true;
+      edge_scroller_pointer_focus = false;
+
+      windowrule = "isterm:1,appid:foot";
+
+      exec-once = [
+        # (lib.getExe config.programs.noctalia.package)
+      ];
+    };
+  };
+}

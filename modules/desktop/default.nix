@@ -1,5 +1,6 @@
 {
-  amethyst = ./amethyst; # Purple-encrusted Hyprland and Hypr-ecosystem workstation setup
-  onyx = ./onyx; # Barebones dwl setup for functionality and perfomance
-  topaz = ./topaz; # MangoWC environment for practical work and development
+  amethyst = ./amethyst; # Hyprland and Hypr-ecosystem - usability
+  garnet = ./garnet; # MangoWM and bare essentials - lightweight
+  onyx = ./onyx; # DWL - lightweight
+  topaz = ./topaz; # MangoWM and Noctalia shell - usability
 }
