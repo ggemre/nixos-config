@@ -14,6 +14,7 @@
       # Apps
       "SUPER, T, spawn, ${lib.getExe config.programs.foot.package}"
       "SUPER, B, spawn, ${lib.getExe config.programs.firefox.package}"
+      "SUPER, S, spawn, ${lib.getExe pkgs.grim}"
 
       # Swap focus
       "SUPER, TAB, focusstack, next"
@@ -65,15 +66,25 @@
       "SUPER+SHIFT, 8, tag, 8, 0"
       "SUPER+SHIFT, 9, tag, 9, 0"
 
+      # Move window
+      "SUPER+CTRL, LEFT, smartmovewin, left"
+      "SUPER+CTRL, DOWN, smartmovewin, down"
+      "SUPER+CTRL, UP, smartmovewin, up"
+      "SUPER+CTRL, RIGHT, smartmovewin, right"
+      "SUPER+CTRL, H, smartmovewin, left"
+      "SUPER+CTRL, J, smartmovewin, down"
+      "SUPER+CTRL, K, smartmovewin, up"
+      "SUPER+CTRL, L, smartmovewin, right"
+
       # Resize window
-      "SUPER+ALT, LEFT, resizewin, -40, +0"
-      "SUPER+ALT, DOWN, resizewin, +0, +40"
-      "SUPER+ALT, UP, resizewin, +0, -40"
-      "SUPER+ALT, RIGHT, resizewin, +40, +0"
-      "SUPER+ALT, H, resizewin, -40, +0"
-      "SUPER+ALT, J, resizewin, +0, +40"
-      "SUPER+ALT, K, resizewin, +0, -40"
-      "SUPER+ALT, L, resizewin, +40, +0"
+      "SUPER+ALT, LEFT, smartresizewin, left"
+      "SUPER+ALT, DOWN, smartresizewin, down"
+      "SUPER+ALT, UP, smartresizewin, up"
+      "SUPER+ALT, RIGHT, smartresizewin, right"
+      "SUPER+ALT, H, smartresizewin, left"
+      "SUPER+ALT, J, smartresizewin, down"
+      "SUPER+ALT, K, smartresizewin, up"
+      "SUPER+ALT, L, smartresizewin, right"
 
       # Media controls
       "NONE, XF86AudioLowerVolume, spawn, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.03-"
@@ -83,10 +94,6 @@
       "NONE, XF86MonBrightnessUp, spawn, ${lib.getExe pkgs.brightnessctl} -d intel_backlight s 5%+"
       "NONE, XF86KbdBrightnessDown, spawn, ${lib.getExe pkgs.brightnessctl} -d smc::kbd_backlight s 5%-"
       "NONE, XF86KbdBrightnessUp, spawn, ${lib.getExe pkgs.brightnessctl} -d smc::kbd_backlight s 5%+"
-    ];
-
-    bindr = [
-      "SUPER, S, spawn, ${lib.getExe pkgs.grim}"
     ];
 
     mousebind = [

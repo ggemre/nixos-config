@@ -10,7 +10,7 @@
     gappov = 3;
 
     scratchpadcolor = selfLib.colors.hexa config.theme.colors.base0E "FF";
-    rootcolor = selfLib.colors.hexa config.theme.colors.base00 "FF";
+    rootcolor = selfLib.colors.hexa config.theme.colors.base01 "FF";
 
     borderpx = 2;
     border_radius = 0;
