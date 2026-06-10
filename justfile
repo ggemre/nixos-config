@@ -70,3 +70,8 @@ prune:
 optimise:
   nix-store --optimise
 
+[doc('Repair and verify the nix store')]
+[group('system')]
+repair:
+  nix-store --verify --check-contents --repair
+
