@@ -14,7 +14,7 @@
       },
       "original": {
         "owner": "ggemre",
-        "ref": "main",
+        "ref": "stable",
         "repo": "aux-nixpkgs",
         "type": "github"
       }
