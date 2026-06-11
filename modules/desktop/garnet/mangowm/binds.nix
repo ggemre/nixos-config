@@ -77,14 +77,14 @@
       "SUPER+CTRL, L, smartmovewin, right"
 
       # Resize window
-      "SUPER+ALT, LEFT, smartresizewin, left"
-      "SUPER+ALT, DOWN, smartresizewin, down"
-      "SUPER+ALT, UP, smartresizewin, up"
-      "SUPER+ALT, RIGHT, smartresizewin, right"
-      "SUPER+ALT, H, smartresizewin, left"
-      "SUPER+ALT, J, smartresizewin, down"
-      "SUPER+ALT, K, smartresizewin, up"
-      "SUPER+ALT, L, smartresizewin, right"
+      "SUPER+ALT, LEFT, resizewin, -40, +0"
+      "SUPER+ALT, DOWN, resizewin, +0, +40"
+      "SUPER+ALT, UP, resizewin, +0, -40"
+      "SUPER+ALT, RIGHT, resizewin, +40, +0"
+      "SUPER+ALT, H, resizewin, -40, +0"
+      "SUPER+ALT, J, resizewin, +0, +40"
+      "SUPER+ALT, K, resizewin, +0, -40"
+      "SUPER+ALT, L, resizewin, +40, +0"
 
       # Media controls
       "NONE, XF86AudioLowerVolume, spawn, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.03-"
