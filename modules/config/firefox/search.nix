@@ -2,6 +2,11 @@ _: {
   programs.firefox.profiles.main.search = {
     engines = [
       {
+        name = "NoAI DuckDuckGo";
+        url = "https://noai.duckduckgo.com/?q={searchTerms}&ia=web";
+        alias = "@noai";
+      }
+      {
         name = "Brave";
         url = "https://search.brave.com/search?q={searchTerms}&source=web";
         alias = "@brave";
@@ -23,6 +28,6 @@ _: {
       }
     ];
 
-    default = "Brave";
+    default = "NoAI DuckDuckGo";
   };
 }
