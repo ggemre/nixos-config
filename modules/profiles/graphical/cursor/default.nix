@@ -31,13 +31,11 @@ in {
 
     size = lib.mkOption {
       type = lib.types.int;
-      default = 25;
+      default = 24;
       description = "The cursor size.";
     };
 
-    dotIcons = {
-      enable = lib.mkEnableOption "~/.icons config generation";
-    };
+    enableDotIcons = lib.mkEnableOption "~/.icons config generation";
   };
 
   config = lib.mkIf (cfg.package != null && cfg.name != null) {
@@ -58,7 +56,7 @@ in {
         ".local/share/icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
         ".local/share/icons/${cfg.name}".source = "${cfg.package}/share/icons/${cfg.name}";
       }
-      // lib.optionalAttrs cfg.dotIcons.enable {
+      // lib.optionalAttrs cfg.enableDotIcons {
         ".icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
         ".icons/${cfg.name}".source = "${cfg.package}/share/icons/${cfg.name}";
       };
