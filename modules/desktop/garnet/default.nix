@@ -3,5 +3,6 @@
     ./getty
     ./mangowm
     ./swayidle
+    ./swaylock
   ];
 }

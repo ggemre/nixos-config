@@ -15,6 +15,7 @@
       "SUPER, T, spawn, ${lib.getExe config.programs.foot.package}"
       "SUPER, B, spawn, ${lib.getExe config.programs.firefox.package}"
       "SUPER, S, spawn, ${lib.getExe pkgs.grim}"
+      "SUPER, M, spawn, ${lib.getExe config.programs.swaylock.package}"
 
       # Swap focus
       "SUPER, TAB, focusstack, next"

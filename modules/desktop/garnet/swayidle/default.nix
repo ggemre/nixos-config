@@ -14,9 +14,18 @@
         resume = "${lib.getExe pkgs.brightnessctl} --restore && ${lib.getExe pkgs.brightnessctl} --device=tpacpi::kbd_backlight --restore";
       }
       {
+        timeout = 420; # 7m
+        command = "${lib.getExe config.programs.swaylock.package}";
+      }
+      {
         timeout = 600; # 10m
         command = "${lib.getExe' config.programs.mangowc.package "mmsg"} dispatch disable_monitor";
         resume = "${lib.getExe' config.programs.mangowc.package "mmsg"} dispatch enable_monitor";
+      }
+      {
+        # NOTE: It's possible suspend isn't working rn
+        timeout = 1800; # 30m
+        command = "${lib.getExe' pkgs.systemd "systemctl"} suspend";
       }
     ];
   };
