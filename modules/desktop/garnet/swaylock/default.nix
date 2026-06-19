@@ -48,7 +48,7 @@
       separator-color = config.theme.colors.base02;
 
       # highlights while typing
-      key-hl-color = config.theme.colors.base0D;
+      key-hl-color = config.theme.colors.base0E;
       bs-hl-color = config.theme.colors.base09;
       caps-lock-key-hl-color = config.theme.colors.base0A;
       caps-lock-bs-hl-color = config.theme.colors.base09;
