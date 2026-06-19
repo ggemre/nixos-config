@@ -1,3 +1,6 @@
+# TODO: a lot of useless vestigial lines in this file.
+# I don't remember where I initially got this stuff but it's gone through years of iterations
+# and is now barely maintanable.
 {config, ...}: {
   programs.firefox.profiles.main.settings = {
     # General settings
@@ -6,7 +9,7 @@
     "browser.download.folderList" = 2;
     "browser.download.useDownloadDir" = true;
     "browser.in-content.dark-mode" = true;
-    "browser.tabs.inTitlebar" = 1;
+    "browser.tabs.inTitlebar" = 0;
     "browser.toolbars.bookmarks.visibility" = "never";
     "browser.theme.content-theme" =
       if config.theme.variant == "dark"

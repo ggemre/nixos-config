@@ -1,3 +1,6 @@
+# TODO: a lot of useless vestigial lines in this file.
+# I don't remember where I initially got this stuff but it's gone through years of iterations
+# and is now barely maintanable.
 {config, ...}: {
   programs.firefox.profiles.main.userChrome = ''
     :root {
@@ -20,19 +23,21 @@
       --lwt-text-color: var(--uc-inverted-colour) !important;
       --toolbar-field-color: var(--uc-inverted-colour) !important;
       --toolbar-field-focus-color: var(--uc-inverted-colour) !important;
-      --toolbar-field-focus-background-color: var(--uc-highlight-colour) !important;
-      --toolbar-field-focus-border-color: transparent !important;
+      --toolbar-field-background-color-focus: var(--uc-highlight-colour) !important;
+      --toolbar-field-border-color-focus: transparent !important;
       --toolbar-field-background-color: var(--lwt-frame) !important;
       --lwt-toolbar-field-highlight: var(--uc-inverted-colour) !important;
       --lwt-toolbar-field-highlight-text: var(--uc-highlight-colour) !important;
       --urlbar-popup-url-color: var(--uc-accent-colour) !important;
       --lwt-tab-text: var(--lwt-text-colour) !important;
       --lwt-selected-tab-background-color: var(--uc-highlight-colour) !important;
-      --toolbar-bgcolor: var(--lwt-frame) !important;
+      --toolbar-background-color: var(--lwt-frame) !important;
       --toolbar-color: var(--lwt-text-color) !important;
       --toolbarseparator-color: var(--uc-accent-colour) !important;
       --toolbarbutton-hover-background: var(--uc-highlight-colour) !important;
       --toolbarbutton-active-background: var(--toolbarbutton-hover-background) !important;
+      --toolbox-background-color: var(--uc-base-colour) !important;
+      --toolbox-background-color-inactive: var(--uc-muted-colour) !important);
       --lwt-sidebar-background-color: var(--lwt-frame) !important;
       --sidebar-background-color: var(--lwt-sidebar-background-color) !important;
       --urlbar-box-bgcolor: var(--uc-highlight-colour) !important;
