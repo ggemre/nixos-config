@@ -22,11 +22,6 @@
         command = "${lib.getExe' config.programs.mangowc.package "mmsg"} dispatch disable_monitor";
         resume = "${lib.getExe' config.programs.mangowc.package "mmsg"} dispatch enable_monitor";
       }
-      {
-        # NOTE: It's possible suspend isn't working rn
-        timeout = 1800; # 30m
-        command = "${lib.getExe' pkgs.systemd "systemctl"} suspend";
-      }
     ];
   };
 }
