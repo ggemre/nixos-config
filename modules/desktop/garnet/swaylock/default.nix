@@ -16,7 +16,7 @@
       line-uses-ring = false;
 
       # background
-      color = config.theme.colors.base00;
+      color = "#000000";
 
       # text
       text-color = config.theme.colors.base05;
@@ -28,7 +28,7 @@
       # main ring
       ring-color = config.theme.colors.base0D;
       ring-clear-color = config.theme.colors.base0C;
-      ring-ver-color = config.theme.colors.base0B;
+      ring-ver-color = config.theme.colors.base0E;
       ring-wrong-color = config.theme.colors.base08;
       ring-caps-lock-color = config.theme.colors.base0A;
 
