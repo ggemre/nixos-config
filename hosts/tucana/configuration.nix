@@ -16,7 +16,10 @@
   };
 
   boot.loader = {
-    grub.enable = true;
+    grub = {
+      enable = true;
+      device = "/dev/sda";
+    };
     timeout = 0; # mash spacebar to select a previous generation
   };
 

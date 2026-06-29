@@ -18,6 +18,7 @@
 
     # Include any desired profiles
     selfModules.profiles.graphical
+    selfModules.profiles.hardware.hp-pavilion-g6
     selfModules.profiles.laptop
   ];
 }
