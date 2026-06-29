@@ -31,6 +31,7 @@ boot host=HOSTNAME:
 [doc('Build virtual machine {{host}} to `./result`')]
 [group('build')]
 vm host:
+  # Port forward 22->2222 with QEMU_NET_OPTS="hostfwd=tcp::2222-:22"
   nixos-rebuild build-vm --flake .#{{host}}
 
 [doc('Update all inputs (i.e. recreate the lock file from scratch)')]

@@ -7,5 +7,8 @@
     selfModules.config.bash
     selfModules.config.git
     selfModules.config.helix
+
+    # Include any desired profiles
+    selfModules.profiles.headless
   ];
 }
