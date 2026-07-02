@@ -10,6 +10,7 @@
       "SUPER, R, reload_config"
       "SUPER+SHIFT, M, quit"
       "SUPER, Q, killclient"
+      "SUPER, N, switch_layout"
 
       # Apps
       "SUPER, T, spawn, ${lib.getExe config.programs.foot.package}"

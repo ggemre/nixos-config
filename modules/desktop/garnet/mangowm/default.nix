@@ -33,6 +33,7 @@
         "isterm:1,appid:foot"
       ];
 
+      circle_layout = "fair,scroller,tile";
       tagrule = [
         "id:1,layout_name:fair"
         "id:2,layout_name:fair"
