@@ -17,6 +17,7 @@
     settings = {
       no_border_when_single = false;
       focus_on_activate = true;
+      xwayland_persistence = false;
 
       enable_hotarea = false;
       mouse_natural_scrolling = false;
@@ -28,7 +29,21 @@
       scroller_prefer_overspread = true;
       edge_scroller_pointer_focus = false;
 
-      windowrule = "isterm:1,appid:foot";
+      windowrule = [
+        "isterm:1,appid:foot"
+      ];
+
+      tagrule = [
+        "id:1,layout_name:fair"
+        "id:2,layout_name:fair"
+        "id:3,layout_name:fair"
+        "id:4,layout_name:fair"
+        "id:5,layout_name:fair"
+        "id:6,layout_name:fair"
+        "id:7,layout_name:fair"
+        "id:8,layout_name:fair"
+        "id:9,layout_name:fair"
+      ];
 
       exec-once = [
         (lib.getExe config.services.swayidle.package)
