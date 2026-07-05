@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  theme.name = "catppuccin-mocha";
+  theme.name = "greenscreen";
 
   programs = {
     foot.enableBashIntegration = true;
