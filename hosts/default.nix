@@ -14,6 +14,7 @@
       };
 
       modules = [
+        ../hosts/${hostname}
         self.nixosModules.common
         self.nixosModules.home
         self.nixosModules.programs
@@ -25,12 +26,26 @@
             nixpkgs.hostPlatform = system;
           };
         }
+      ];
+    };
+
+  mkImage = system: hostname:
+    nixpkgs.lib.nixosSystem {
+      inherit system;
+
+      modules = [
         ../hosts/${hostname}
+        {
+          config.nixpkgs.hostPlatform = system;
+        }
       ];
     };
 in {
-  corvus = mkHost "aarch64-linux" "corvus";
-  lupus = mkHost "x86_64-linux" "lupus";
-  orion = mkHost "x86_64-linux" "orion";
-  tucana = mkHost "x86_64-linux" "tucana";
+  corvus = mkHost "aarch64-linux" "corvus"; # rpi4 server
+  lupus = mkHost "x86_64-linux" "lupus"; # testbed VM
+  orion = mkHost "x86_64-linux" "orion"; # main laptop
+  tucana = mkHost "x86_64-linux" "tucana"; # backup laptop
+
+  octantis = mkImage "aarch64-linux" "octantis"; # cd-dvd installer
+  polaris = mkImage "x86_64-linux" "polaris"; # sd-image installer
 }
