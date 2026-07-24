@@ -1,5 +1,4 @@
 {
-  aux-nixpkgs,
   nixpkgs,
   self,
   ...
@@ -11,7 +10,7 @@
       specialArgs = {
         selfLib = self.lib;
         selfModules = self.nixosModules;
-        auxpkgs = aux-nixpkgs.legacyPackages.${system};
+        selfPkgs = self.packages.${system};
       };
 
       modules = [

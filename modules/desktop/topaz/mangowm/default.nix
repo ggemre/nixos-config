@@ -1,7 +1,7 @@
 {
-  auxpkgs,
   config,
   lib,
+  selfPkgs,
   ...
 }: {
   imports = [
@@ -11,7 +11,7 @@
 
   programs.mangowm = {
     enable = true;
-    package = auxpkgs.mangowm;
+    package = selfPkgs.mango;
 
     settings = {
       no_border_when_single = false;
