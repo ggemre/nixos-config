@@ -18,7 +18,6 @@
   libxcb-wm,
   lcms2,
   validatePkgConfig,
-  testers,
   wayland-scanner,
 }:
 stdenv.mkDerivation (finalAttrs: {
@@ -33,7 +32,7 @@ stdenv.mkDerivation (finalAttrs: {
   };
 
   strictDeps = true;
-  depsBuildBuild = [pkg-config];
+  depsBuildBuild = [ pkg-config ];
 
   nativeBuildInputs = [
     meson
@@ -64,7 +63,7 @@ stdenv.mkDerivation (finalAttrs: {
     changelog = "https://github.com/wlrfx/scenefx/releases/tag/${finalAttrs.version}";
     license = lib.licenses.mit;
     mainProgram = "scenefx";
-    pkgConfigModules = ["scenefx-${lib.versions.majorMinor finalAttrs.version}"];
+    pkgConfigModules = [ "scenefx-${lib.versions.majorMinor finalAttrs.version}" ];
     platforms = lib.platforms.all;
   };
 })

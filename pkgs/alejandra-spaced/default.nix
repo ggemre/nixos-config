@@ -1,4 +1,4 @@
-{ alejandra }:
+{alejandra}:
 alejandra.overrideAttrs (old: {
   patches =
     (old.patches or [])

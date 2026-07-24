@@ -74,7 +74,7 @@ in
       ];
 
     passthru = {
-      providedSessions = ["mango"];
+      providedSessions = [ "mango" ];
     };
 
     meta = {
