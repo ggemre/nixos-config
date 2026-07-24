@@ -46,6 +46,6 @@ in {
   orion = mkHost "x86_64-linux" "orion"; # main laptop
   tucana = mkHost "x86_64-linux" "tucana"; # backup laptop
 
-  octantis = mkImage "aarch64-linux" "octantis"; # cd-dvd installer
-  polaris = mkImage "x86_64-linux" "polaris"; # sd-image installer
+  octantis = mkImage "aarch64-linux" "octantis"; # sd-image installer
+  polaris = mkImage "x86_64-linux" "polaris"; # cd-dvd installer
 }
