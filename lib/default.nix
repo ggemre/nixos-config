@@ -32,6 +32,13 @@ in {
   in
     lib.strings.splitString "\n" (lib.strings.trim keysFile);
 
+  # Returns the first normal user found on a system
+  # Meant to be used on single user systems only
+  getPrimaryUser = users: let
+    normalUsers = lib.filterAttrs (_: u: u.isNormalUser or false) users;
+  in
+    lib.head (lib.attrNames normalUsers);
+
   # Functions for generating different configuration formats from nix attrs
   generators = {
     toHyprConf = import ./generators/hyprconf.nix { inherit lib; };

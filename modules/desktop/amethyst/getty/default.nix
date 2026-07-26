@@ -1,16 +1,12 @@
 {
   config,
-  lib,
+  selfLib,
   ...
 }: let
-  # Find the first "normal" user for autologin.
-  normalUsers =
-    lib.filterAttrs (_: u: u.isNormalUser or false) config.users.users;
-  firstUser =
-    lib.head (lib.attrNames normalUsers);
+  user = selfLib.getPrimaryUser config.users.users;
 in {
   services.getty = {
-    autologinUser = firstUser;
+    autologinUser = user;
     autologinOnce = true;
   };
 
