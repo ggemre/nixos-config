@@ -10,7 +10,7 @@
     ./decorations.nix
   ];
 
-  programs.mangowm = {
+  programs.mango = {
     enable = true;
     package = selfPkgs.mango;
 

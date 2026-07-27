@@ -1,7 +1,7 @@
 {
   imports = [
     ./getty
-    ./mangowm
+    ./mango
     ./swayidle
     ./swaylock
   ];

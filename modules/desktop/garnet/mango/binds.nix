@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  programs.mangowm.settings = {
+  programs.mango.settings = {
     bind = [
       # General
       "SUPER, R, reload_config"

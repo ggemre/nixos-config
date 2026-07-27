@@ -5,7 +5,7 @@
 }: let
   color = hexcode: (selfLib.colors.hexa config.theme.colors."base${hexcode}" "FF");
 in {
-  programs.mangowm.settings = {
+  programs.mango.settings = {
     gappih = 3;
     gappiv = 3;
     gappoh = 3;

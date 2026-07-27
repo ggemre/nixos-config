@@ -1,17 +1,12 @@
 {
   config,
   lib,
-  pkgs,
   selfLib,
   ...
 }: let
-  cfg = config.programs.mangowm;
+  cfg = config.programs.mango;
 in {
-  options.programs.mangowm = {
-    # TODO: rm these once nixpkgs module is renamed
-    enable = lib.mkEnableOption "Whether to enable MangoWM.";
-    package = lib.mkPackageOption pkgs "mangowc" {};
-
+  options.programs.mango = {
     settings = lib.mkOption {
       type = lib.types.attrs;
       default = {};
@@ -26,12 +21,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # TODO: rm once nixpkgs module is renamed
-    programs.mangowc = {
-      enable = true;
-      inherit (cfg) package;
-    };
-
     environment.variables = {
       XDG_CURRENT_DESKTOP = "mango";
       XDG_SESSION_DESKTOP = "mango";
