@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  selfPkgs,
   ...
 }: {
   imports = [
@@ -11,7 +10,6 @@
 
   programs.mango = {
     enable = true;
-    package = selfPkgs.mango;
 
     settings = {
       no_border_when_single = false;

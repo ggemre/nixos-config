@@ -9,9 +9,6 @@
   jsonFormat = pkgs.formats.json {};
 in {
   options.programs.noctalia = {
-    enable = lib.mkEnableOption "Whether to enable the Noctalia shell.";
-    package = lib.mkPackageOption pkgs "noctalia-shell" {};
-
     settings = lib.mkOption {
       type = lib.types.attrs;
       default = {};
@@ -38,8 +35,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ cfg.package ];
-
     home =
       {
         ".config/noctalia/settings.json" = lib.mkIf (cfg.settings != {}) {
