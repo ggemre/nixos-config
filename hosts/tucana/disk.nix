@@ -23,7 +23,7 @@
             };
             root = {
               size = "100%";
-              label = "ROOT";
+              label = "NIXOS";
               content = {
                 type = "filesystem";
                 format = "ext4";

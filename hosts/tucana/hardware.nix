@@ -16,7 +16,7 @@
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-partlabel/ROOT";
+    device = "/dev/disk/by-partlabel/NIXOS";
     fsType = "ext4";
   };
 
