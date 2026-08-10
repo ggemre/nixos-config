@@ -27,9 +27,28 @@
     })
     config.engines;
 
+  # Hide sponsored engines
+  formattedHiddenEnginesList = formattedEnginesList ++ [
+    {
+      id = "google";
+      _name = "Google";
+      _metaData.hidden = true;
+    }
+    {
+      id = "bing";
+      _name = "Bing";
+      _metaData.hidden = true;
+    }
+    {
+      id = "perplexity";
+      _name = "Perplexity";
+      _metaData.hidden = true;
+    }
+  ];
+
   settings = {
     version = 13;
-    engines = formattedEnginesList;
+    engines = formattedHiddenEnginesList;
 
     metaData = lib.optionalAttrs (config.default != null) {
       defaultEngineId = toId config.default;
