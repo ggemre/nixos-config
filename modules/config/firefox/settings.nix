@@ -21,6 +21,7 @@
       else 1;
     "widget.use-xdg-desktop-portal.file-picker" = 1;
     "widget.use-xdg-desktop-portal.mime-handler" = 1;
+    "extensions.autoDisableScopes" = 0;
     # Startup settings
     "browser.aboutConfig.showWarning" = false;
     "browser.startup.page" = 0;
