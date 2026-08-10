@@ -28,7 +28,7 @@
     )
     // {
       General = {
-        StartWithLastProfile = 1;
+        StartWithLastProfile = 0;
       };
     };
 
