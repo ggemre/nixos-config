@@ -19,8 +19,8 @@
       }
       {
         timeout = 600; # 10m
-        command = "${lib.getExe' config.programs.mangowc.package "mmsg"} dispatch disable_monitor";
-        resume = "${lib.getExe' config.programs.mangowc.package "mmsg"} dispatch enable_monitor";
+        command = "${lib.getExe' config.programs.mango.package "mmsg"} dispatch disable_monitor";
+        resume = "${lib.getExe' config.programs.mango.package "mmsg"} dispatch enable_monitor";
       }
     ];
   };
