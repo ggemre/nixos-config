@@ -140,5 +140,7 @@
     "browser.translations.enable" = false;
     "extensions.ml.enabled" = false;
     "pdfjs.enableAltText" = false;
+    # Privacy settings
+    # "privacy.resistFingerprinting" = true; # Forces light mode
   };
 }

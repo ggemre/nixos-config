@@ -9,5 +9,6 @@ self.lib.forAllSystems (
   in {
     alejandra-spaced = pkgs.callPackage ./alejandra-spaced {};
     mango = pkgs.callPackage ./mango {};
+    mozilla-addons = pkgs.callPackage ./mozilla-addons {};
   }
 )

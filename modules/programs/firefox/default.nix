@@ -48,6 +48,19 @@
       '')
       prefs
     );
+
+  mkExtensionFiles = profile:
+    lib.listToAttrs (
+      map (
+        extension:
+          lib.nameValuePair
+          ".config/mozilla/firefox/${profile.name}/extensions/${extension.addonId}.xpi"
+          {
+            source = "${extension}/share/mozilla/extensions/${extension.addonId}.xpi";
+          }
+      )
+      profile.extensions.packages
+    );
 in {
   options.programs.firefox = {
     profiles = lib.mkOption {
@@ -77,6 +90,16 @@ in {
                 type = lib.types.lines;
                 default = "";
                 description = "User chrome css for Firefox.";
+              };
+
+              extensions = lib.mkOption {
+                type = lib.types.submodule {
+                  options.packages = lib.mkOption {
+                    type = lib.types.listOf lib.types.package;
+                    default = [];
+                    description = "Firefox extensions to install for this profile.";
+                  };
+                };
               };
 
               search = lib.mkOption {
@@ -112,6 +135,8 @@ in {
       ++ lib.flip lib.mapAttrsToList cfg.profiles (
         _: profile:
           lib.mkMerge [
+            (mkExtensionFiles profile)
+
             {
               ".config/mozilla/firefox/${profile.name}/chrome/userChrome.css" = lib.mkIf (profile.userChrome != "") {
                 text = profile.userChrome;
