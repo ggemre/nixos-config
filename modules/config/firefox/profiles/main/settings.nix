@@ -38,10 +38,6 @@
     "browser.newtabpage.activity-stream.showSponsored" = false;
     "browser.newtabpage.activity-stream.default.sites" = "";
     "browser.newtabpage.activity-stream.showWeather" = false;
-    # GPU acceleration
-    "gfx.webrender.all" = true;
-    "layers.acceleration.force-enabled" = true;
-    "nglayout.initialpaint.delay" = 0;
     # Geolocation settings.
     "geo.provider.network.url" = "https://location.services.mozilla.com/v1/geolocate?key=%MOZILA_API_KEY%";
     "geo.provider.use_gpsd" = false;
@@ -61,7 +57,6 @@
     "datareporting.policy.dataSubmissionEnabled" = false;
     "datareporting.healthreport.uploadEnabled" = false;
     "toolkit.telemetry.enabled" = false;
-    "toolkit.telemtry.unified" = false;
     "toolkit.telemetry.unified" = false;
     "toolkit.telemetry.server" = "data:,";
     "toolkit.telemetry.archive.enabled" = false;
@@ -108,23 +103,6 @@
     "dom.security.https_only_mode_send_http_background_request" = false;
     # UI features
     "extensions.pocket.enabled" = false;
-    # Firefox amnesia
-    "browser.history_expire_days" = 30;
-    "browser.history_expire_days_min" = 30;
-    "browser.history_expire_sites" = 30;
-    # Performance optimization
-    "content.notify.interval" = 100000;
-    "browser.cache.jsbc_compression_level" = 3;
-    "media.memory_cache_max_size" = 65536;
-    "media.cache_readahead_limit" = 7200;
-    "media.cache_resume_threshold" = 3600;
-    "image.mem.decode_bytes_at_a_time" = 32768;
-    "network.buffer.cache.size" = 262144;
-    "network.buffer.cache.count" = 128;
-    "network.http.max-connections" = 1800;
-    "network.http.max-persistent-connections-per-server" = 10;
-    "network.http.max-urgent-start-excessive-connections-per-host" = 5;
-    "network.predictor.enabled" = false;
     # Disable AI
     "browser.ai.control.default" = "blocked";
     "browser.ai.control.linkPreviewKeyPoints" = "blocked";
