@@ -1,88 +1,9 @@
-# TODO: a lot of useless vestigial lines in this file.
-# I don't remember where I initially got this stuff but it's gone through years of iterations
-# and is now barely maintanable.
-{config, ...}: {
-  programs.firefox.profiles.youtube.userChrome = ''
-    :root {
-      --uc-identity-colour-blue: ${config.theme.colorsWithHashtag.base0D};
-      --uc-identity-colour-turquoise: ${config.theme.colorsWithHashtag.base0C};
-      --uc-identity-colour-green: ${config.theme.colorsWithHashtag.base0B};
-      --uc-identity-colour-yellow: ${config.theme.colorsWithHashtag.base0A};
-      --uc-identity-colour-orange: ${config.theme.colorsWithHashtag.base09};
-      --uc-identity-colour-red: ${config.theme.colorsWithHashtag.base08};
-      --uc-identity-colour-pink: ${config.theme.colorsWithHashtag.base0F};
-      --uc-identity-colour-purple: ${config.theme.colorsWithHashtag.base0E};
-      --uc-base-colour: ${config.theme.colorsWithHashtag.base08};
-      --uc-highlight-colour: ${config.theme.colorsWithHashtag.base08};
-      --uc-inverted-colour: ${config.theme.colorsWithHashtag.base05};
-      --uc-muted-colour: ${config.theme.colorsWithHashtag.base04};
-      --uc-accent-colour: ${config.theme.colorsWithHashtag.base0D};
+{config, ...}: let
+  sharedUserChrome = import ../shared/user-chrome.nix { inherit config; };
+in {
+  programs.firefox.profiles.youtube.userChrome =
+    sharedUserChrome
+    ++ ''
 
-      --lwt-frame: var(--uc-base-colour) !important;
-      --lwt-accent-color: var(--lwt-frame) !important;
-      --lwt-text-color: var(--uc-inverted-colour) !important;
-      --toolbar-field-color: var(--uc-inverted-colour) !important;
-      --toolbar-field-focus-color: var(--uc-inverted-colour) !important;
-      --toolbar-field-background-color-focus: var(--uc-highlight-colour) !important;
-      --toolbar-field-border-color-focus: transparent !important;
-      --toolbar-field-background-color: var(--lwt-frame) !important;
-      --lwt-toolbar-field-highlight: var(--uc-inverted-colour) !important;
-      --lwt-toolbar-field-highlight-text: var(--uc-highlight-colour) !important;
-      --urlbar-popup-url-color: var(--uc-accent-colour) !important;
-      --lwt-tab-text: var(--lwt-text-colour) !important;
-      --lwt-selected-tab-background-color: var(--uc-highlight-colour) !important;
-      --toolbar-background-color: var(--lwt-frame) !important;
-      --toolbar-color: var(--lwt-text-color) !important;
-      --toolbarseparator-color: var(--uc-accent-colour) !important;
-      --toolbarbutton-hover-background: var(--uc-highlight-colour) !important;
-      --toolbarbutton-active-background: var(--toolbarbutton-hover-background) !important;
-      --toolbox-background-color: var(--uc-base-colour) !important;
-      --toolbox-background-color-inactive: var(--uc-muted-colour) !important);
-      --lwt-sidebar-background-color: var(--lwt-frame) !important;
-      --sidebar-background-color: var(--lwt-sidebar-background-color) !important;
-      --urlbar-box-bgcolor: var(--uc-highlight-colour) !important;
-      --urlbar-box-text-color: var(--uc-muted-colour) !important;
-      --urlbar-box-hover-bgcolor: var(--uc-highlight-colour) !important;
-      --urlbar-box-hover-text-color: var(--uc-inverted-colour) !important;
-      --urlbar-box-focus-bgcolor: var(--uc-highlight-colour) !important;
-    }
-    .identity-color-blue {
-      --identity-tab-color: var(--uc-identity-colour-blue) !important;
-      --identity-icon-color: var(--uc-identity-colour-blue) !important;
-    }
-    .identity-color-turquoise {
-      --identity-tab-color: var(--uc-identity-colour-turquoise) !important;
-      --identity-icon-color: var(--uc-identity-colour-turquoise) !important;
-    }
-    .identity-color-green {
-      --identity-tab-color: var(--uc-identity-colour-green) !important;
-      --identity-icon-color: var(--uc-identity-colour-green) !important;
-    }
-    .identity-color-yellow {
-      --identity-tab-color: var(--uc-identity-colour-yellow) !important;
-      --identity-icon-color: var(--uc-identity-colour-yellow) !important;
-    }
-    .identity-color-orange {
-      --identity-tab-color: var(--uc-identity-colour-orange) !important;
-      --identity-icon-color: var(--uc-identity-colour-orange) !important;
-    }
-    .identity-color-red {
-      --identity-tab-color: var(--uc-identity-colour-red) !important;
-      --identity-icon-color: var(--uc-identity-colour-red) !important;
-    }
-    .identity-color-pink {
-      --identity-tab-color: var(--uc-identity-colour-pink) !important;
-      --identity-icon-color: var(--uc-identity-colour-pink) !important;
-    }
-    .identity-color-purple {
-      --identity-tab-color: var(--uc-identity-colour-purple) !important;
-      --identity-icon-color: var(--uc-identity-colour-purple) !important;
-    }
-    .browser-titlebar { background-color: var(--uc-highlight-colour) !important; }
-    .titlebar-buttonbox-container { display: none !important; }
-    .titlebar-spacer { display: none !important; }
-    #firefox-view-button { display: none !important; }
-    #tabbrowser-tabs::before { border-inline-start: 0 !important; }
-    #alltabs-button { display: none !important; }
-  '';
+    '';
 }
