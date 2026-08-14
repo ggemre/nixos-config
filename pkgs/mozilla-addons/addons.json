@@ -1,0 +1,26 @@
+{
+  "ublock-origin": {
+    "addonId": "uBlock0@raymondhill.net",
+    "slug": "ublock-origin",
+    "version": "1.73.0",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4940584/ublock_origin-1.73.0.xpi",
+    "hash": "sha256-vMxRp3MVCvSvbh/WLHv963I4t5/yOBuZj6ny449keGo=",
+    "meta": {
+      "homepage": "https://github.com/gorhill/uBlock#ublock-origin",
+      "description": "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.",
+      "license": "gpl3"
+    }
+  },
+  "sponsorblock": {
+    "addonId": "sponsorBlocker@ajay.app",
+    "slug": "sponsorblock",
+    "version": "6.1.7",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4897574/sponsorblock-6.1.7.xpi",
+    "hash": "sha256-DVDhYyxvFe4VpUPmcOHFcpdGBaXAJiKRbgjgJoA9+D8=",
+    "meta": {
+      "homepage": "https://sponsor.ajay.app",
+      "description": "Easily skip YouTube video sponsors. When you visit a YouTube video, the extension will check the database for reported sponsors and automatically skip known sponsors. You can also report sponsors in videos. Other browsers: https://sponsor.ajay.app",
+      "license": "lgpl3"
+    }
+  }
+}

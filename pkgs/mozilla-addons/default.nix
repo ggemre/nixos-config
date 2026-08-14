@@ -3,23 +3,23 @@
   stdenv,
   fetchurl,
 }: let
+  addons = builtins.fromJSON (builtins.readFile ./addons.json);
+
   buildMozillaXpiAddon = {
     pname,
-    version,
     addonId,
+    version,
     url,
-    sha256,
+    hash,
     meta ? {},
   }:
-  # Thank you @rycee for the inspiration and function for packaging xpi files
-  # https://github.com/nix-community/nur-combined/blob/19e3ae8433ef84ff0f6ac29185ad0081c0726516/repos/rycee/lib/mozilla.nix#L21-L40
     stdenv.mkDerivation {
       name = "${pname}-${version}";
 
       inherit meta;
 
       src = fetchurl {
-        inherit url sha256;
+        inherit url hash;
       };
 
       preferLocalBuild = true;
@@ -31,34 +31,25 @@
 
       buildCommand = ''
         mkdir -p "$out/share/mozilla/extensions"
+
         install -v -m644 "$src" \
           "$out/share/mozilla/extensions/${addonId}.xpi"
       '';
     };
-in {
-  ublock-origin = buildMozillaXpiAddon {
-    pname = "ublock-origin";
-    version = "1.73.0";
-    addonId = "uBlock0@raymondhill.net";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4940584/ublock_origin-1.73.0.xpi";
-    sha256 = "bccc51a773150af4af6e1fd62c7bfdeb7238b79ff2381b998fa9f2e38f64786a";
-    meta = {
-      homepage = "https://github.com/gorhill/uBlock#ublock-origin";
-      description = "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.";
-      license = lib.licenses.gpl3;
-    };
-  };
-
-  sponsorblock = buildMozillaXpiAddon {
-    pname = "sponsorblock";
-    version = "6.1.7";
-    addonId = "sponsorBlocker@ajay.app";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4897574/sponsorblock-6.1.7.xpi";
-    sha256 = "0d50e1632c6f15ee15a543e670e1c572974605a5c02622916e08e026803df83f";
-    meta = {
-      homepage = "https://sponsor.ajay.app";
-      description = "Easily skip YouTube video sponsors. When you visit a YouTube video, the extension will check the database for reported sponsors and automatically skip known sponsors. You can also report sponsors in videos. Other browsers: https://sponsor.ajay.app";
-      license = lib.licenses.lgpl3;
-    };
-  };
-}
+in
+  lib.mapAttrs
+  (
+    pname: addon:
+      buildMozillaXpiAddon {
+        inherit pname;
+        inherit
+          (addon)
+          addonId
+          version
+          url
+          hash
+          meta
+          ;
+      }
+  )
+  addons
