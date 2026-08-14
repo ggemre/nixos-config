@@ -19,7 +19,6 @@
   gdk-pixbuf,
   alsa-lib,
 }:
-
 stdenv.mkDerivation (finalAttrs: {
   pname = "mangobar";
   version = "0.1.1";
