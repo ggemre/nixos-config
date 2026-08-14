@@ -1,3 +1,5 @@
+# Currently only checks for version mismatch, but good enough to not change.
+
 import base64
 import json
 import hashlib
