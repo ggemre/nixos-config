@@ -8,7 +8,7 @@ self.lib.forAllSystems (
     pkgs = import nixpkgs { inherit system; };
   in {
     alejandra-spaced = pkgs.callPackage ./alejandra-spaced {};
-    mangobar = pkgs.callPackage ./mangobar {};
+    mangobar = pkgs.callPackage ./mangobar {}; # TODO: rm once upstream
     mozilla-addons = pkgs.callPackage ./mozilla-addons {};
   }
 )

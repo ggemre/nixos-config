@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  selfPkgs,
   ...
 }: let
   cfg = config.programs.mangobar;
@@ -9,7 +10,7 @@ in {
   options.programs.mangobar = {
     enable = lib.mkEnableOption "Whether to enable Mangobar.";
 
-    package = lib.mkPackageOption pkgs "mangobar" {};
+    package = lib.mkPackageOption selfPkgs "mangobar" {};
 
     settings = lib.mkOption {
       type = lib.types.attrs;
