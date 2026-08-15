@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  selfPkgs,
   ...
 }: {
   imports = [
@@ -46,9 +45,9 @@
       ];
 
       exec-once = [
+        (lib.getExe config.programs.mangobar.package)
         (lib.getExe config.services.swayidle.package)
         (lib.getExe pkgs.wayland-pipewire-idle-inhibit)
-        (lib.getExe selfPkgs.mangobar)
       ];
     };
   };
