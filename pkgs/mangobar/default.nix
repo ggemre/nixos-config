@@ -21,13 +21,13 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "mangobar";
-  version = "0.1.1";
+  version = builtins.substring 0 7 finalAttrs.src.rev;
 
   src = fetchFromGitHub {
     owner = "mangowm";
     repo = "mangobar";
-    tag = finalAttrs.version;
-    hash = "sha256-Dj0OGJ4pJPb9phFkPaH5D4MdjcYVOjivIXeifW41hGA=";
+    rev = "9f142e1aacd9f0eea17a7ea77a6e09936d3e973b";
+    hash = "sha256-0GCdav19xqKXXa4goid6DuoNyCTwhDv/NHsPoK6gjGE=";
   };
 
   __structuredAttrs = true;

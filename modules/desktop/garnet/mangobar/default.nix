@@ -21,7 +21,7 @@
         "memory"
         "custom/disk"
         "pulseaudio"
-        "custom/battery"
+        "battery"
         "clock"
       ];
 
@@ -66,10 +66,8 @@
         on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       };
 
-      "custom/battery" = {
-        exec = "cat /sys/class/power_supply/BAT0/capacity";
-        format = "BAT {}% |";
-        interval = 60;
+      battery = {
+        format = "BAT {percent}% |";
       };
 
       clock = {
