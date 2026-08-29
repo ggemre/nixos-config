@@ -2,9 +2,9 @@
   "ublock-origin": {
     "addonId": "uBlock0@raymondhill.net",
     "slug": "ublock-origin",
-    "version": "1.73.0",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4940584/ublock_origin-1.73.0.xpi",
-    "hash": "sha256-vMxRp3MVCvSvbh/WLHv963I4t5/yOBuZj6ny449keGo=",
+    "version": "1.74.0",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4981431/ublock_origin-1.74.0.xpi",
+    "hash": "sha256-F1dW10RoybpFhj9/wzPTvmcPgtWwZjFOkVgU3VR9FlI=",
     "meta": {
       "homepage": "https://github.com/gorhill/uBlock#ublock-origin",
       "description": "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.",

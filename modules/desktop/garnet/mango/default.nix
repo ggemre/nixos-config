@@ -21,7 +21,7 @@
       mouse_natural_scrolling = false;
       disable_trackpad = false;
       tap_to_click = false;
-      click_method = 2; # 1 finger left click, 2 finger right click
+      trackpad_click_method = 2; # 1 finger left click, 2 finger right click
       cursor_hide_timeout = 60; # 60s
 
       scroller_prefer_overspread = true;

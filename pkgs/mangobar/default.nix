@@ -26,8 +26,8 @@ stdenv.mkDerivation (finalAttrs: {
   src = fetchFromGitHub {
     owner = "mangowm";
     repo = "mangobar";
-    rev = "613145b3893871e96018aa126e16fc9964b7782c";
-    hash = "sha256-1bIj5uwFhUgIsvooWogNL8fW31l9jYEipMyUQDTtavw=";
+    rev = "92fb0e7822d989e98543472f36effadbbda04550";
+    hash = "sha256-XFHPXRQ+xtzdCyif7/w5SulHg9e4MmzCo6znLjgZWUQ=";
   };
 
   __structuredAttrs = true;
