@@ -6,20 +6,20 @@
   color = hexcode: (selfLib.colors.hexa config.theme.colors."base${hexcode}" "FF");
 in {
   programs.mango.settings = {
-    gappih = 3;
-    gappiv = 3;
-    gappoh = 3;
-    gappov = 3;
+    gap_inner_horizontal = 3;
+    gap_inner_vertical = 3;
+    gap_outer_horizontal = 3;
+    gap_outer_vertical = 3;
 
-    scratchpadcolor = color "0E";
-    rootcolor = color "01";
+    scratchpad_color = color "0E";
+    root_color = color "01";
 
-    borderpx = 2;
+    border_px = 2;
     border_radius = 0;
-    bordercolor = color "03";
-    focuscolor = color "0D";
-    maximizescreencolor = color "03";
-    globalcolor = color "06";
+    border_color = color "03";
+    focus_color = color "0D";
+    maximized_screen_color = color "03";
+    global_color = color "06";
 
     animations = false;
   };

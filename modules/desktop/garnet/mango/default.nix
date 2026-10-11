@@ -27,12 +27,12 @@
       scroller_prefer_overspread = true;
       edge_scroller_pointer_focus = false;
 
-      windowrule = [
-        "isterm:1,appid:foot"
+      window_rule = [
+        "is_term:1,app_id:foot"
       ];
 
       circle_layout = "fair,scroller,tile";
-      tagrule = [
+      tag_rule = [
         "id:1,layout_name:fair"
         "id:2,layout_name:fair"
         "id:3,layout_name:fair"
@@ -44,7 +44,7 @@
         "id:9,layout_name:fair"
       ];
 
-      exec-once = [
+      exec_once = [
         (lib.getExe config.programs.mangobar.package)
         (lib.getExe config.services.swayidle.package)
         (lib.getExe pkgs.wayland-pipewire-idle-inhibit)
