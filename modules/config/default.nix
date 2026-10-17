@@ -10,6 +10,7 @@
   ghostty = import ./ghostty;
   git = import ./git;
   helix = import ./helix;
+  keepassxc = import ./keepassxc;
   spotify = import ./spotify;
   starship = import ./starship;
   utils = import ./utils;
