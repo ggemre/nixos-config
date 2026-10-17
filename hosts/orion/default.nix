@@ -7,13 +7,13 @@
     # Configure programs & services
     selfModules.config.bash
     selfModules.config.bat
-    selfModules.config.bitwarden
     selfModules.config.btop
     selfModules.config.direnv
     selfModules.config.firefox
     selfModules.config.foot
     selfModules.config.git
     selfModules.config.helix
+    selfModules.config.keepassxc
     selfModules.config.starship
     selfModules.config.utils
     selfModules.config.yazi
