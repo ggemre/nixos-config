@@ -7,7 +7,8 @@
   };
 
   nix = {
-    package = pkgs.lixPackageSets.latest.lix;
+    # TODO: reenable when mimalloc ref fixed
+    # package = pkgs.lixPackageSets.latest.lix;
     channel.enable = false;
 
     settings = {

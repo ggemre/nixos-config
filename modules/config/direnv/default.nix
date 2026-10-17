@@ -4,7 +4,8 @@
     silent = true;
     nix-direnv = {
       enable = true;
-      package = pkgs.lixPackageSets.latest.nix-direnv;
+      # TODO: reenable when mimalloc ref fixed
+      # package = pkgs.lixPackageSets.latest.nix-direnv;
     };
   };
 }
